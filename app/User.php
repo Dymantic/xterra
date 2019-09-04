@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
@@ -38,6 +39,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $dates = ['retired_on'];
+
     public static function register($user_data)
     {
         return static::create([
@@ -45,5 +48,33 @@ class User extends Authenticatable
             'email' => $user_data['email'],
             'password' => Hash::make($user_data['password']),
         ]);
+    }
+
+    public function resetPassword($password)
+    {
+        $this->password = Hash::make($password);
+        return $this->save();
+    }
+
+    public function retire()
+    {
+        $this->retired_on = Carbon::now();
+        $this->save();
+    }
+
+    public function isRetired()
+    {
+        return !! $this->retired_on;
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'is_retired' => $this->isRetired(),
+            'retired_date' => $this->retired_on ? $this->retired_on->format('j M, Y') : ''
+        ];
     }
 }

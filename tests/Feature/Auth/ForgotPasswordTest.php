@@ -44,11 +44,4 @@ class ForgotPasswordTest extends TestCase
         Notification::assertNothingSent();
     }
 
-    /**
-     *@test
-     */
-    public function reset_password_with_link()
-    {
-
-    }
 }

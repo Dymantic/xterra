@@ -9,6 +9,12 @@ use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
+
+    public function index()
+    {
+        return User::all();
+    }
+
     public function store()
     {
         request()->validate([
@@ -18,5 +24,10 @@ class UsersController extends Controller
         ]);
 
         return User::register(request()->only('name', 'email', 'password'));
+    }
+
+    public function destroy(User $user)
+    {
+        $user->retire();
     }
 }
