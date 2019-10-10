@@ -20,17 +20,20 @@ class UpdateCategoryTest extends TestCase
         $this->withoutExceptionHandling();
 
         $category = factory(Category::class)->create([
-            'title' => ['en' => 'test title', 'zh' => 'zh test title']
+            'title' => ['en' => 'test title', 'zh' => 'zh test title'],
+            'description' => ['en' => 'test description', 'zh' => 'zh test description'],
         ]);
 
         $response = $this->asAdmin()->postJson("/admin/categories/{$category->id}", [
-            'title' => ['en' => 'new title', 'zh' => 'zh new title']
+            'title' => ['en' => 'new title', 'zh' => 'zh new title'],
+            'description' => ['en' => 'new description', 'zh' => 'zh new description']
         ]);
         $response->assertStatus(200);
 
         $this->assertDatabaseHas('categories', [
             'id' => $category->id,
             'title' => json_encode(['en' => 'new title', 'zh' => 'zh new title']),
+            'description' => json_encode(['en' => 'new description', 'zh' => 'zh new description']),
         ]);
     }
 

@@ -23,6 +23,7 @@ class UpdateTranslationTest extends TestCase
 
         $response = $this->asAdmin()->postJson("/admin/translations/{$translation->id}", [
             'title' => 'new title',
+            'author_name' => 'new name',
             'intro' => 'test introduction',
             'description' => 'test description',
             'body' => 'test body',
@@ -34,6 +35,7 @@ class UpdateTranslationTest extends TestCase
             'id' => $translation->id,
             'language' => 'en',
             'title' => 'new title',
+            'author_name' => 'new name',
             'intro' => 'test introduction',
             'description' => 'test description',
             'body' => 'test body',

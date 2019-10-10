@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Blog\Article;
 use App\Blog\Translation;
+use App\Rules\UnusedTranslation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\Rule;
@@ -11,10 +12,15 @@ use Illuminate\Validation\Rule;
 class TranslationsController extends Controller
 {
 
+    public function show(Translation $translation)
+    {
+        return $translation->toArray();
+    }
+
     public function store(Article $article)
     {
         $data = request()->validate([
-            'lang' => ['required', Rule::in(['en', 'zh'])],
+            'lang' => ['required', Rule::in(['en', 'zh']), new UnusedTranslation($article)],
             'title' => ['required'],
         ]);
 
@@ -28,7 +34,7 @@ class TranslationsController extends Controller
             'tags' => 'array'
         ]);
 
-        $translation->update(request()->only('title', 'intro', 'description', 'body'));
+        $translation->update(request()->only('title', 'intro', 'description', 'body', 'author_name'));
 
         $translation->setTags(request('tags'));
     }

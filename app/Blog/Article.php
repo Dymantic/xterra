@@ -5,10 +5,16 @@ namespace App\Blog;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 
-class Article extends Model
+class Article extends Model implements HasMedia
 {
-    use Sluggable;
+    use Sluggable, HasMediaTrait;
+
+    const TITLE_IMAGES = 'title_images';
 
     public function sluggable()
     {
@@ -41,8 +47,8 @@ class Article extends Model
     public function addTranslation($lang, $title, $author)
     {
         return $this->translations()->create([
-            'language' => $lang,
-            'title' => $title,
+            'language'    => $lang,
+            'title'       => $title,
             'author_name' => $author->name,
         ]);
     }
@@ -50,5 +56,58 @@ class Article extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function titleImage($conversion = '')
+    {
+        $image = $this->getFirstMedia(static::TITLE_IMAGES);
+
+        return $image ? $image->getUrl($conversion) : '/images/default.jpg';
+    }
+
+    public function setTitleImage($file)
+    {
+        $this->clearMediaCollection(static::TITLE_IMAGES);
+
+        return $this->addMedia($file)
+                    ->toMediaCollection(static::TITLE_IMAGES);
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_CROP, 400, 300)
+            ->keepOriginalImageFormat()
+            ->optimize()
+            ->performOnCollections(static::TITLE_IMAGES);
+
+        $this->addMediaConversion('web')
+             ->fit(Manipulations::FIT_CROP, 1200, 800)
+             ->keepOriginalImageFormat()
+             ->optimize()
+             ->performOnCollections(static::TITLE_IMAGES);
+
+        $this->addMediaConversion('banner')
+             ->fit(Manipulations::FIT_CROP, 1800, 900)
+             ->keepOriginalImageFormat()
+             ->optimize()
+             ->performOnCollections(static::TITLE_IMAGES);
+    }
+
+    public function toArray()
+    {
+        return [
+            'id'           => $this->id,
+            'categories'   => $this->categories->map->toArray()->all(),
+            'translations' => $this->translations->toArray(),
+            'slug'         => $this->slug,
+            'title_image' => [
+                'thumb' => $this->titleImage('thumb'),
+                'web' => $this->titleImage('web'),
+                'banner' => $this->titleImage('banner'),
+                'original' => $this->titleImage(),
+            ]
+
+        ];
     }
 }

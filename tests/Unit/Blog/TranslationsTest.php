@@ -4,6 +4,7 @@
 namespace Tests\Unit\Blog;
 
 
+use App\Blog\Article;
 use App\Blog\Translation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
@@ -14,7 +15,7 @@ class TranslationsTest extends TestCase
     use RefreshDatabase;
 
     /**
-     *@test
+     * @test
      */
     public function publish_a_translation()
     {
@@ -28,7 +29,7 @@ class TranslationsTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function a_previously_unpublished_translation_will_update_slug_on_update()
     {
@@ -44,7 +45,7 @@ class TranslationsTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function a_previously_published_translation_wont_update_slug()
     {
@@ -60,7 +61,7 @@ class TranslationsTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function retracting_a_translation()
     {
@@ -76,7 +77,7 @@ class TranslationsTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function translation_is_live_if_published_and_published_on_date_is_past()
     {
@@ -89,7 +90,7 @@ class TranslationsTest extends TestCase
 
         $unpublished_old = factory(Translation::class)->state('unpublished')->create([
             'first_published_on' => Carbon::today()->subYear(),
-            'published_on' => Carbon::today()->subYear(),
+            'published_on'       => Carbon::today()->subYear(),
         ]);
 
         $published_future = factory(Translation::class)->state('published')->create([
@@ -105,6 +106,79 @@ class TranslationsTest extends TestCase
         $this->assertFalse($unpublished_old->isLive());
         $this->assertFalse($published_future->isLive());
         $this->assertFalse($unpublished_future->isLive());
+
+
+    }
+
+    /**
+     *@test
+     */
+    public function has_live_scope()
+    {
+        $live = factory(Translation::class)->state('live')->create();
+        $scheduled = factory(Translation::class)->state('scheduled')->create();
+        $draft_past = factory(Translation::class)->state('draft')->create(['published_on' => Carbon::yesterday()]);
+        $draft_future = factory(Translation::class)->state('draft')->create(['published_on' => Carbon::tomorrow()]);
+
+        $fetched = Translation::live()->get();
+
+        $this->assertCount(1, $fetched);
+
+        $this->assertEquals($live->id, $fetched[0]->id);
+
+    }
+
+    /**
+     * @test
+     */
+    public function presents_an_array_with_correct_data()
+    {
+        $article = factory(Article::class)->create();
+        $translation = factory(Translation::class)->create([
+            'article_id' => $article->id,
+            'language'           => 'en',
+            'title'              => 'test title',
+            'intro'              => 'test intro',
+            'description'        => 'test description',
+            'body'               => 'test body',
+            'first_published_on' => Carbon::today()->subMonth(),
+            'published_on'       => Carbon::today(),
+            'is_published'       => true,
+            'author_name'        => 'test author'
+        ]);
+
+        $translation->setTags(['tag one', 'tag two', 'tag three']);
+
+        $expected = [
+            'id'              => $translation->id,
+            'article_id'      => $translation->article->id,
+            'language'        => 'en',
+            'title'           => 'test title',
+            'slug'            => 'test-title',
+            'full_slug'       => $translation->article->slug . '/' . 'test-title',
+            'intro'           => 'test intro',
+            'description'     => 'test description',
+            'body'            => 'test body',
+            'first_published' => Carbon::today()->subMonth()->format('j M, Y'),
+            'publish_date'    => Carbon::today()->format('j M, Y'),
+            'is_published'    => true,
+            'is_live'         => true,
+            'author_name'     => 'test author',
+            'tags'            => [
+                ['id' => 1, 'tag_name' => 'tag one', 'slug' => 'tag-one'],
+                ['id' => 2, 'tag_name' => 'tag two', 'slug' => 'tag-two'],
+                ['id' => 3, 'tag_name' => 'tag three', 'slug' => 'tag-three'],
+            ],
+            'title_image' => [
+                'thumb' => $article->titleImage('thumb'),
+                'web' => $article->titleImage('web'),
+                'banner' => $article->titleImage('banner'),
+            ],
+            'categories' => $article->categories->map->toArray()->all(),
+
+        ];
+
+        $this->assertEquals($expected, $translation->toArray());
 
 
     }

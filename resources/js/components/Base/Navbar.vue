@@ -4,6 +4,40 @@
             <router-link to="/">Xterra</router-link>
         </div>
         <div class="flex justify-end items-center">
+            <dropdown-menu v-cloak
+                           name="Blog"
+                           class="text-white h-12 flex items-center h-16 mr-4">
+                <div slot="dropdown_content"
+                     class="pt-3">
+                    <router-link to="/articles"
+                                 class="text-black no-underline hover:text-indigo-500 pb-3 block">Articles
+                    </router-link>
+                    <router-link to="/categories"
+                                 class="text-black no-underline hover:text-indigo-500 pb-3 block">Categories
+                    </router-link>
+                    <router-link to="/tags"
+                                 class="text-black no-underline hover:text-indigo-500 pb-3 block">Tags
+                    </router-link>
+
+                </div>
+            </dropdown-menu>
+            <dropdown-menu v-cloak
+                           name="Comments"
+                           class="text-white h-12 flex items-center h-16 mr-4">
+                <div slot="dropdown_content"
+                     class="pt-3">
+                    <router-link to="/comments-review"
+                                 class="text-black no-underline hover:text-indigo-500 pb-3 block">Review Recent
+                    </router-link>
+                    <router-link to="/flagged-comments"
+                                 class="text-black no-underline hover:text-indigo-500 pb-3 block">Flagged
+                    </router-link>
+
+                </div>
+            </dropdown-menu>
+            <router-link to="/slider"
+                         class="mr-4">Slider
+            </router-link>
             <router-link to="/users"
                          class="mr-4">Users
             </router-link>

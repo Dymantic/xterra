@@ -1,5 +1,5 @@
-window.axios = require('axios');
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+import axios from "axios";
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import Vue from "vue";
 import Vuex from "vuex";
@@ -7,17 +7,24 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.config.ignoredElements = [
+    'trix-editor',
+];
 
 
 //routes
-import topRoutes from "./routes/top";
 import userRoutes from "./routes/users";
 import profileRoutes from "./routes/profile";
+import blogRoutes from "./routes/articles";
+import sliderRoutes from "./routes/slider";
+import commentRoutes from "./routes/comments";
 
 const routes = [
-    ...topRoutes,
     ...userRoutes,
-    ...profileRoutes
+    ...profileRoutes,
+    ...blogRoutes,
+    ...sliderRoutes,
+    ...commentRoutes,
 ];
 
 const router = new VueRouter({routes});
@@ -25,11 +32,17 @@ const router = new VueRouter({routes});
 //stores
 import profileModule from "./stores/profile";
 import usersModule from "./stores/users";
+import articlesModule from "./stores/articles";
+import sliderModule from "./stores/slider";
+import commentsModule from "./stores/comments";
 
 const store = new Vuex.Store({
     modules: {
         profile: profileModule,
-        users: usersModule
+        users: usersModule,
+        articles: articlesModule,
+        slider: sliderModule,
+        comments: commentsModule,
     }
 });
 
@@ -51,5 +64,11 @@ const app = new Vue({
     mounted() {
         this.$store.dispatch('profile/fetchProfile').catch(notify.error);
         this.$store.dispatch('users/fetchUsers').catch(notify.error);
+        this.$store.dispatch('articles/fetchAll').catch(notify.error);
+        this.$store.dispatch('articles/fetchCategories').catch(notify.error);
+        this.$store.dispatch('articles/fetchAllTags').catch(notify.error);
+        this.$store.dispatch('slider/fetch').catch(notify.error);
+        this.$store.dispatch('comments/hydrate');
     }
 });
+

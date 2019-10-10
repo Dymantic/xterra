@@ -9,10 +9,19 @@ use Illuminate\Validation\Rule;
 
 class ArticlesController extends Controller
 {
+
+    public function index()
+    {
+        return Article::with('categories', 'translations', 'translations.tags')
+                      ->latest()
+                      ->get()
+            ->map->toArray();
+    }
+
     public function store()
     {
         request()->validate([
-            'lang' => ['required', Rule::in(['en', 'zh'])],
+            'lang'  => ['required', Rule::in(['en', 'zh'])],
             'title' => ['required']
         ]);
 

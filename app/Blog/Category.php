@@ -11,7 +11,7 @@ class Category extends Model
 
     protected $guarded = [];
 
-    protected $casts = ['title' => 'array'];
+    protected $casts = ['title' => 'array', 'description' => 'array'];
 
     public function sluggable()
     {
@@ -25,6 +25,20 @@ class Category extends Model
     public function getSluggableTitleAttribute()
     {
         return $this->title['en'] ?? '';
+    }
+
+    public static function createNew($attributes)
+    {
+        return static::create([
+            'title' => [
+                'en' => $attributes['title']['en'],
+                'zh' => $attributes['title']['zh'] ?? "",
+            ],
+            'description' => [
+                'en' => $attributes['description']['en'] ?? "",
+                'zh' => $attributes['description']['zh'] ?? "",
+            ]
+        ]);
     }
 
     public function articles()

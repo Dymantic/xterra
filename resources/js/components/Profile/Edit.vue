@@ -44,23 +44,31 @@
             };
         },
 
-        mounted() {
-            const interval = window.setInterval(() => {
-                if(this.$store.state.profile.fetched) {
-                    this.setFormData();
-                    this.ready = true;
-                    window.clearInterval(interval);
-                } else {
-                    console.log('waiting');
-                }
-            }, 150);
+        computed: {
+            profile_fetched() {
+                return this.$store.state.profile.fetched;
+            }
+        },
 
+        watch: {
+            profile_fetched(fetched) {
+                if(fetched && (!this.ready)) {
+                    this.setFormData();
+                }
+            }
+        },
+
+        mounted() {
+            if(this.profile_fetched && (!this.ready)) {
+                this.setFormData();
+            }
         },
 
         methods: {
             setFormData() {
                 this.formData.name = this.$store.state.profile.name;
                 this.formData.email = this.$store.state.profile.email;
+                this.ready = true;
             },
 
             submit() {

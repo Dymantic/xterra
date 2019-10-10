@@ -11,5 +11,9 @@ $factory->define(\App\Blog\Category::class, function (Faker $faker) {
             'en' => $faker->words(3, true),
             'zh' => $faker->words(3, true),
         ],
+        'description' => [
+            'en' => $faker->paragraph,
+            'zh' => $faker->paragraph,
+        ],
     ];
 });

@@ -17,10 +17,15 @@ class PublishedTranslationsController extends Controller
         $translation = Translation::findOrFail(request("translation_id"));
 
         $translation->publish(request('publish_date'));
+
+        return $translation->fresh();
     }
 
     public function destroy(Translation $translation)
     {
+
         $translation->retract();
+
+        return $translation->fresh();
     }
 }

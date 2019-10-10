@@ -14,7 +14,8 @@ $factory->define(\App\Blog\Translation::class, function (Faker $faker) {
         'title'       => $faker->sentence,
         'intro'       => $faker->paragraph,
         'description' => $faker->paragraph,
-        'body'        => $faker->paragraphs(3, true)
+        'body'        => $faker->paragraphs(3, true),
+        'author_name' => $faker->name,
     ];
 });
 
@@ -47,6 +48,42 @@ $factory->state(\App\Blog\Translation::class, 'published',  function (Faker $fak
         'first_published_on' => \Illuminate\Support\Carbon::yesterday(),
         'published_on' => \Illuminate\Support\Carbon::yesterday(),
         'is_published' => true,
+    ];
+});
+
+$factory->state(\App\Blog\Translation::class, 'en',  function (Faker $faker) {
+    return [
+        'language' => 'en',
+    ];
+});
+
+$factory->state(\App\Blog\Translation::class, 'zh',  function (Faker $faker) {
+    return [
+        'language' => 'zh',
+    ];
+});
+
+$factory->state(\App\Blog\Translation::class, 'live',  function (Faker $faker) {
+    return [
+        'first_published_on' => \Illuminate\Support\Carbon::yesterday(),
+        'published_on' => \Illuminate\Support\Carbon::yesterday(),
+        'is_published' => true,
+    ];
+});
+
+$factory->state(\App\Blog\Translation::class, 'scheduled',  function (Faker $faker) {
+    return [
+        'first_published_on' => \Illuminate\Support\Carbon::yesterday(),
+        'published_on' => \Illuminate\Support\Carbon::tomorrow()->addDays(5),
+        'is_published' => true,
+    ];
+});
+
+$factory->state(\App\Blog\Translation::class, 'draft',  function (Faker $faker) {
+    return [
+        'first_published_on' => \Illuminate\Support\Carbon::yesterday(),
+        'published_on' => \Illuminate\Support\Carbon::tomorrow()->addDays(5),
+        'is_published' => false,
     ];
 });
 

@@ -29,6 +29,7 @@ class PublishTranslationTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertTrue($translation->fresh()->published_on->isToday());
+        $this->assertEquals($translation->fresh()->toArray(), $response->decodeResponseJson());
     }
 
     /**

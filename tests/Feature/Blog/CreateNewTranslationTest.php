@@ -5,6 +5,7 @@ namespace Tests\Feature\Blog;
 
 
 use App\Blog\Article;
+use App\Blog\Translation;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -30,6 +31,8 @@ class CreateNewTranslationTest extends TestCase
                 'title'    => 'test title zh',
             ]);
         $response->assertStatus(201);
+        $new_translation = $article->fresh()->translations()->where('language', 'zh')->first();
+        $this->assertEquals($new_translation->toArray(), $response->decodeResponseJson());
 
         $this->assertDatabaseHas('translations', [
             'article_id'  => $article->id,
@@ -54,6 +57,29 @@ class CreateNewTranslationTest extends TestCase
     public function the_lang_must_be_a_recognized_value()
     {
         $this->assertFieldIsInvalid(['lang' => 'not-a-valid-lang']);
+    }
+
+    /**
+     *@test
+     */
+    public function the_language_can_not_already_be_used_for_article()
+    {
+        $article = factory(Article::class)->create();
+        $author = factory(User::class)->create();
+        factory(Translation::class)->create([
+            'article_id' => $article->id,
+            'language' => 'en'
+        ]);
+
+        $response = $this
+            ->actingAs($author)
+            ->postJson("/admin/articles/{$article->id}/translations", [
+                'lang' => 'en',
+                'title'    => 'a new en title',
+            ]);
+        $response->assertStatus(422);
+        $response->assertJsonValidationErrors('lang');
+
     }
 
     /**

@@ -27,5 +27,6 @@ class RetractTranslationTest extends TestCase
         $response->assertStatus(200);
 
         $this->assertFalse($translation->fresh()->is_published);
+        $this->assertEquals($translation->fresh()->toArray(), $response->decodeResponseJson());
     }
 }

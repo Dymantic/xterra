@@ -20,6 +20,10 @@ class CreateCategoryTest extends TestCase
             'title' => [
                 'en' => 'test category',
                 'zh' => 'zh test category'
+            ],
+            'description' => [
+                'en' => 'test description',
+                'zh' => 'zh test description'
             ]
         ]);
         $response->assertStatus(201);
@@ -28,6 +32,10 @@ class CreateCategoryTest extends TestCase
             'title' => json_encode([
                 'en' => 'test category',
                 'zh' => 'zh test category'
+            ]),
+            'description' => json_encode([
+                'en' => 'test description',
+                'zh' => 'zh test description'
             ]),
             'slug' => 'test-category'
         ]);
@@ -79,6 +87,7 @@ class CreateCategoryTest extends TestCase
         $this->assertDatabaseHas('categories', [
             'title' => json_encode([
                 'en' => 'test category',
+                'zh' => ''
             ]),
             'slug' => 'test-category'
         ]);

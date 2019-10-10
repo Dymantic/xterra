@@ -11,9 +11,25 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group([
+    'prefix'     => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect']
+    ],
+    function () {
+        Route::get('/', 'PagesController@home');
+
+        Route::get('blog/{article_slug}/{translation_slug}', 'PagesController@article');
+
+        Route::get('categories/{slug}', 'PagesController@category');
+
+        Route::get('tags/{slug}', 'PagesController@tag');
 });
+
+
+Route::get('translations/{translation}/comments', 'CommentsController@index');
+Route::post('translations/{translation}/comments', 'CommentsController@store');
+Route::post('comments/{comment}/replies', 'RepliesController@store');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::view('login', 'auth.login')->name('login');
@@ -36,18 +52,43 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('users', 'UsersController@store');
     Route::delete('users/{user}', 'UsersController@destroy');
 
+    Route::get('categories', 'CategoriesController@index');
     Route::post('categories', 'CategoriesController@store');
     Route::post('categories/{category}', 'CategoriesController@update');
     Route::delete('categories/{category}', 'CategoriesController@destroy');
 
+    Route::get('articles', 'ArticlesController@index');
     Route::post('articles', 'ArticlesController@store');
     Route::post('articles/{article}/categories', 'ArticleCategoriesController@update');
     Route::post('articles/{article}/translations', 'TranslationsController@store');
+    Route::post('articles/{article}/title-image', 'ArticleTitleImageController@store');
 
+    Route::get('search/articles', 'ArticleSearchController@index');
+
+    Route::get('translations/{translation}', 'TranslationsController@show');
     Route::post('translations/{translation}', 'TranslationsController@update');
+    Route::post('translations/{translation}/images', 'TranslationBodyImagesController@store');
 
     Route::post('published-translations', 'PublishedTranslationsController@store');
     Route::delete('published-translations/{translation}', 'PublishedTranslationsController@destroy');
+
+    Route::get('site-settings/slide-count', 'SlideCountSettingController@show');
+    Route::post('site-settings/slide-count', 'SlideCountSettingController@update');
+
+    Route::get('slider/slides', 'SlidesController@index');
+    Route::post('slider/slides', 'SlidesController@store');
+    Route::delete('slider/{position}', 'SlidesController@destroy');
+
+    Route::get('comments', 'CommentsController@index');
+    Route::delete('comments/{comment}', 'CommentsController@destroy');
+
+    Route::get('replies', 'RepliesController@index');
+    Route::delete('replies/{reply}', 'RepliesController@destroy');
+
+    Route::get('tags', 'TagsController@index');
+    Route::delete('tags', 'TagsController@destroy');
+
+    Route::get('tags/{tag}/translations', 'TagTranslationsController@index');
 });
 
 Route::group([

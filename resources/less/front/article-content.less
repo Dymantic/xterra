@@ -1,0 +1,32 @@
+.aspect-16-9 {
+    position: relative;
+    padding-bottom: 56.25%;
+
+    & > *:first-child {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.article-content {
+    blockquote {
+        @apply p-4 border-l-8 border-red-700 bg-grey-200 mx-8 type-b7;
+    }
+
+    div.highlight {
+    @apply px-4 border-l-8 border-red-700 type-b6;
+    }
+
+    figcaption {
+        @apply font-bold;
+    }
+
+    a {
+        @apply text-red-700 underline;
+    }
+
+    a:hover {
+        @apply text-red-500;
+    }
+}

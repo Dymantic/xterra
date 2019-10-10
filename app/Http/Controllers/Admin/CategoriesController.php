@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 class CategoriesController extends Controller
 {
 
+    public function index()
+    {
+        return Category::withCount('articles')->get();
+    }
+
     public function store()
     {
         request()->validate([
@@ -16,7 +21,7 @@ class CategoriesController extends Controller
             'title.en' => ['required']
         ]);
 
-        return Category::create(['title' => request('title')]);
+        return Category::createNew(request()->only('title', 'description'));
     }
 
     public function update(Category $category)
@@ -26,7 +31,7 @@ class CategoriesController extends Controller
             'title.en' => ['required']
         ]);
 
-        $category->update(['title' => request('title')]);
+        $category->update(['title' => request('title'), 'description' => request('description')]);
     }
 
     public function destroy(Category $category)

@@ -30,7 +30,7 @@
 </div>
 
 {{--<div class="main-footer"></div>--}}
-<script src="{{ mix('js/app.js') }}"></script>
+{{--<script src="{{ mix('js/app.js') }}"></script>--}}
 {{--@include('admin.partials.flash')--}}
 @yield('bodyscripts')
 @if(session()->has('flash-message'))

@@ -2,7 +2,7 @@
     <div :class="notificationClasses"
          class="fixed alert-box mx-auto max-w-sm w-full rounded shadow leading-normal border bg-white">
         <div>
-            <header class="text-white text-center font-bold py-3">{{ title }}</header>
+            <header :class="backgroundClasses" class="text-white text-center font-bold py-3">{{ title }}</header>
             <p class="p-8 text-center">{{ message }}</p>
             <p v-if="status === 'error'" class="text-center">Refresh the page, and try again.</p>
         </div>
@@ -30,9 +30,17 @@
             notificationClasses() {
                 return {
                     'in-active': !this.show,
-                    'error': this.status === 'error',
-                    'success': this.status === 'success',
-                    'warning': this.status === 'warning'
+                    'error border border-red-500': this.status === 'error',
+                    'success border border-green-500': this.status === 'success',
+                    'warning border border-orange-500': this.status === 'warning'
+                };
+            },
+
+            backgroundClasses() {
+                return {
+                    'bg-red-500 border border-red-500': this.status === 'error',
+                    'bg-green-500 border border-green-500': this.status === 'success',
+                    'bg-orange-500 border border-orange-500': this.status === 'warning'
                 };
             }
         },
@@ -123,27 +131,4 @@
         pointer-events: none;
     }
 
-    .alert-box.error {
-        @apply .border-red-400;
-    }
-
-    .alert-box.success {
-        @apply .border-green-400;
-    }
-
-    .alert-box.warning {
-        @apply .border-orange-600;
-    }
-
-    .alert-box.error header {
-        @apply .bg-red-400;
-    }
-
-    .alert-box.success header {
-        @apply .bg-green-400;
-    }
-
-    .alert-box.warning header {
-        @apply .bg-orange-600;
-    }
 </style>
