@@ -36,7 +36,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto my-12">
-            <p class="px-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Related Articles</p>
+            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Related Articles</p>
             <div class="article-simple-grid">
                 @foreach($article['related_posts'] as $post)
                     @include('front.blog.post-index-card', ['post' => $post])
@@ -45,7 +45,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto mt-20">
-            <p class="px-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Comment</p>
+            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Comment</p>
             <page-comments :translation-id="{{ $article['id'] }}"></page-comments>
         </div>
 
