@@ -18,4 +18,5 @@ mix.js('resources/js/app.js', 'public/js')
    .less('resources/less/front.less', 'public/css')
     .options({
         postCss: [tailwindcss('./tailwind.config.js')]
-    });
+    })
+    .version();
