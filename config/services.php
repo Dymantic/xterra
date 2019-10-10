@@ -34,4 +34,8 @@ return [
         'secret' => env('SPARKPOST_SECRET'),
     ],
 
+    'facebook' => [
+        'app_id' => env('FB_APP_ID'),
+    ]
+
 ];
