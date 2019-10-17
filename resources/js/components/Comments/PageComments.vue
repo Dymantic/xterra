@@ -18,7 +18,7 @@
                 </button>
             </div>
         </div>
-        <div>
+        <div class="comments-content">
             <comment v-for="comment in comments"
                      :key="comment.id"
                      :comment="comment"
