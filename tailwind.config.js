@@ -25,7 +25,7 @@ module.exports = {
             },
             colors: {
                 'red-500': '#E5282D',
-                'red-700': '#7F0000',
+                'red-700': '#BA0C2F',
                 'grey-700': '#2E2D2F',
                 'grey-500': '#727071',
                 'grey-200': '#EFEEEE',
@@ -34,6 +34,9 @@ module.exports = {
             }
         }
     },
-    variants: {},
+    variants: {
+        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+    },
     plugins: []
 };

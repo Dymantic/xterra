@@ -11,6 +11,7 @@
 |
 */
 
+Route::view('type-test', 'type-test');
 
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),

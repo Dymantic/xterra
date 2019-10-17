@@ -215,7 +215,7 @@ class Translation extends Model implements HasMedia
             'description'     => $this->description,
             'body'            => $this->body,
             'first_published' => $this->first_published_on ? $this->first_published_on->format('j M, Y') : null,
-            'publish_date'    => $this->published_on ? $this->published_on->format('j M, Y') : null,
+            'publish_date'    => $this->published_on ? $this->published_on->format('m/d/Y') : null,
             'is_published'    => $this->is_published,
             'is_live'         => $this->isLive(),
             'author_name'     => $this->author_name,

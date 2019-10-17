@@ -29,18 +29,18 @@
 
         <div class="max-w-2xl mx-auto mt-8 px-4">
             <p class="type-b4 text-grey-500">Tags:</p>
-            <div class="flex justify-around">
+            <div class="">
                 @foreach($article['tags'] as $tag)
-                    <a class="uppercase text-grey-500 hover:text-red-500 type-b6" href="/tags/{{ $tag['slug'] }}">{{ $tag['tag_name'] }}</a>
+                    <a class="inline-block uppercase text-grey-500 hover:text-red-500 type-b6 mr-6 mb-6 whitespace-no-wrap" href="/tags/{{ $tag['slug'] }}">{{ $tag['tag_name'] }}</a>
                 @endforeach
             </div>
         </div>
 
         <div class="max-w-4xl mx-auto my-12">
             <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Related Articles</p>
-            <div class="article-simple-grid">
+            <div class="whitespace-no-wrap  overflow-auto px-4 md:flex justify-around">
                 @foreach($article['related_posts'] as $post)
-                    @include('front.blog.post-index-card', ['post' => $post])
+                    @include('front.blog.related-article-card', ['post' => $post])
                 @endforeach
             </div>
         </div>

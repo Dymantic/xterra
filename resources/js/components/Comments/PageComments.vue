@@ -14,7 +14,7 @@
                  class="w-full border p-2"></div>
             <div class="flex justify-end">
                 <button @click="postComment"
-                        class="bg-red-500 mt-4 py-2 px-4 text-white type-b4">Post it
+                        class="bg-red-700 mt-4 py-1 px-2 text-white type-b4">Post it
                 </button>
             </div>
         </div>
