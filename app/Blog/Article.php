@@ -76,7 +76,7 @@ class Article extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 400, 300)
+            ->fit(Manipulations::FIT_CROP, 450, 300)
             ->keepOriginalImageFormat()
             ->optimize()
             ->performOnCollections(static::TITLE_IMAGES);

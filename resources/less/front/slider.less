@@ -3,10 +3,27 @@
   max-height: 100vh;
 
   @media screen and (max-width: 640px) {
-    height: 100vw;
+    height: 120vw;
   }
 }
 
-.slideshow .flickity-page-dots .dot {
-  @apply bg-white;
+.slideshow {
+    .flickity-page-dots .dot {
+    @apply bg-white;
+    }
+
+    .flickity-button.flickity-prev-next-button {
+        background: none;
+        @apply text-white h-24 w-24;
+
+        @media screen and (max-width: 640px) {
+            @apply hidden;
+        }
+    }
+
+    .flickity-button.flickity-prev-next-button:hover {
+        @apply text-red-500;
+    }
+
+
 }

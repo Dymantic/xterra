@@ -4,14 +4,15 @@
             <div class="w-full h-full slideshow-slide relative">
                 <img src="{{ $slide['banner'] }}" class="w-full h-full object-cover object-center opacity-0" style="transition: 3s;"
                      alt="">
-                <div class="absolute bg-tinted bottom-0 left-0 w-full  flex px-8 py-4">
-                    <p class="w-full sm:w-2/5 leading-tight type-h1 text-white uppercase sm:mr-4 sm:pr-4 sm:border-r sm:border-white">
-                        <a href="{{ localUrl('/blog/' . $slide['slug']) }}">
+                <a href="{{ localUrl('/blog/' . $slide['slug']) }}">
+                    <div class="absolute bg-tinted bottom-0 left-0 w-full  flex px-8 py-4">
+                        <p class="w-full sm:w-2/5 leading-tight type-h1 text-white uppercase sm:mr-4 sm:pr-4 sm:border-r sm:border-white">
                             {{ $slide['title'] }}
-                        </a>
-                    </p>
-                    <p class="hidden sm:block flex-1 type-b1 text-white">{{ $slide['intro'] }}</p>
-                </div>
+                        </p>
+                        <p class="hidden sm:block flex-1 type-b1 text-white">{{ $slide['intro'] }}</p>
+                    </div>
+                </a>
+
             </div>
         @endforeach
     </div>

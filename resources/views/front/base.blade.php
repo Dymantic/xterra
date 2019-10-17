@@ -9,9 +9,9 @@
     <link rel="alternate" hreflang="{{ app()->getLocale() === 'en' ? 'zh' : 'en' }}" href="{{ url(transUrl(Request::path())) }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,400i,600,700|Source+Serif+Pro" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,400i,600,700|Source+Serif+Pro" rel="stylesheet">--}}
 
-{{--    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,600|Source+Serif+Pro" rel="stylesheet">--}}
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,600|Source+Serif+Pro" rel="stylesheet">
 
 
 

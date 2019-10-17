@@ -23,6 +23,7 @@ function initSlideShow() {
             setGallerySize: false,
             selectedAttraction: 0.03,
             autoPlay: 6000,
+            arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z',
         }));
 }
 

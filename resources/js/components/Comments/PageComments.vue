@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-2xl mx-auto mt-20 p-8">
+    <div class="max-w-2xl mx-auto mt-8 p-8">
         <div :class="{'opacity-50': !ready}"
              @click="init">
             <span class="text-sm uppercase font-light text-gray-600 block mb-1">{{ name }}</span>

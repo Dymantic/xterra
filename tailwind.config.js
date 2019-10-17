@@ -2,7 +2,11 @@ module.exports = {
     theme: {
         extend: {
             height: {
+                1: "0.2rem",
                 '80': '20rem',
+            },
+            leading: {
+                tight: '1.2'
             },
             maxHeight: {
                 '48': '12rem',
