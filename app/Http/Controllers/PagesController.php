@@ -12,6 +12,7 @@ class PagesController extends Controller
 {
     public function home()
     {
+        $page = request('page', 1);
         return view('front.blog.index', [
             'categories' => Category::all()->map(function($cat) {
                 return [
@@ -20,8 +21,9 @@ class PagesController extends Controller
                 ];
             })->all(),
             'slideshow' => Slider::presentFor(app()->getLocale()),
-            'posts'  => app('live-posts')->for(app()->getLocale())->getPage(request('page', 1)),
+            'posts'  => app('live-posts')->for(app()->getLocale())->getPage($page),
             'page_title' => trans('blog-index.latest_articles'),
+            'page' => $page,
         ]);
     }
 

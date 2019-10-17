@@ -1,7 +1,7 @@
 @extends('front.base')
 
 @section('content')
-    @if($slideshow ?? false)
+    @if(($slideshow ?? false) && ($page === 1))
         @include('front.partials.slide-show')
     @endif
     @include('front.partials.categories-nav')
