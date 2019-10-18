@@ -67,6 +67,7 @@
         </div>
         <div class="absolute bottom-0 w-full h-16 flex justify-between px-4 bg-white shadow-top">
             <div class="flex items-center">
+                <a class="btn btn-link mr-4" :href="`/admin/pages/previews/${translation.id}`" target="_blank">Preview</a>
                 <publish-button :is-published="translation.is_published"
                                 :translation-id="translation_id"
                                 @translation-updated="updateTranslation"

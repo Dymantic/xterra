@@ -98,5 +98,7 @@ Route::group([
     'namespace'  => 'Admin\Pages'
 ], function () {
     Route::view("dashboard", "admin.spa-base");
+
+    Route::get('previews/{translation}', 'TranslationPreviewController@show');
 });
 
