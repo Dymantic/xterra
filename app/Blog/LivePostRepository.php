@@ -37,7 +37,7 @@ class LivePostRepository
 
     public function getPost(Article $article)
     {
-        $translation = $article->translations()->where('language', $this->lang)->first();
+        $translation = $article->translations()->live()->where('language', $this->lang)->first();
 
         if(!$translation) {
             return null;

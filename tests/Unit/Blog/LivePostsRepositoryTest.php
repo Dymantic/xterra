@@ -104,6 +104,19 @@ class LivePostsRepositoryTest extends TestCase
     /**
      *@test
      */
+    public function get_null_if_translation_not_live()
+    {
+        $article = factory(Article::class)->create();
+        $translation = factory(Translation::class)->state('draft')->create(['article_id' => $article->id, 'language' => 'en']);
+
+        $post = app('live-posts')->for('en')->getPost($article);
+
+        $this->assertNull($post);
+    }
+
+    /**
+     *@test
+     */
     public function get_posts_with_a_given_tag()
     {
         $tag = factory(Tag::class)->create();
