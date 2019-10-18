@@ -21,7 +21,10 @@
         <div class="my-20 max-w-4xl mx-auto">
             <p class="text-xl font-bold">Recent Articles</p>
             <p v-if="articles.length === 0">There are currently no articles associated with this category.</p>
-            <article-index-card v-for="article in articles" :key="article.id" :article="article" :filters="filters"></article-index-card>
+            <router-link :to="`/articles/${article.id}`" v-for="article in articles" :key="article.id">
+                <article-index-card :article="article" :filters="filters"></article-index-card>
+            </router-link>
+
         </div>
     </div>
 </template>
