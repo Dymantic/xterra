@@ -227,4 +227,12 @@
         height: calc(100% - 4rem);
         overflow: auto;
     }
+
+
+</style>
+
+<style lang="css">
+    .main-container iframe {
+        pointer-events: none;
+    }
 </style>
