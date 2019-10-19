@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
+    use CanBeFlagged;
+
     protected $fillable = ['author', 'fb_id', 'body'];
 
     public function translation()
@@ -22,6 +24,12 @@ class Comment extends Model
     {
         return $this->replies()->create($data);
     }
+
+    public function flagged()
+    {
+        return $this->morphOne(FlaggedComment::class, 'flaggable');
+    }
+
 
     public function safeDelete()
     {
@@ -41,6 +49,7 @@ class Comment extends Model
             'timestamp'         => $this->created_at->timestamp,
             'created_at'        => $this->created_at->format('j M, Y'),
             'translation_title' => $this->translation->title,
+
         ];
     }
 
@@ -54,7 +63,8 @@ class Comment extends Model
             'replies'    => $this->replies->map->toArray()->all(),
             'time_ago'   => $this->created_at->diffForHumans(),
             'timestamp'  => $this->created_at->timestamp,
-            'created_at' => $this->created_at->format('j M, Y')
+            'created_at' => $this->created_at->format('j M, Y'),
+            'is_flagged' => !! $this->flagged()->count(),
         ];
     }
 }

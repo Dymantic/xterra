@@ -8,6 +8,7 @@ export default {
     state: {
         comments: [],
         replies: [],
+        flagged: [],
         start_date: subDays(new Date(), 14),
         end_date: new Date(),
     },
@@ -68,6 +69,7 @@ export default {
         hydrate({dispatch}) {
             dispatch('fetchComments').catch(notify.error);
             dispatch('fetchReplies').catch(notify.error);
+            dispatch('fetchFlagged').catch(notify.error);
         },
 
         fetchComments({state, getters}) {
@@ -92,6 +94,17 @@ export default {
             });
         },
 
+        fetchFlagged({state}) {
+            return new Promise((resolve, reject) => {
+               axios.get("/admin/flagged-comments")
+                   .then(({data}) => {
+                       state.flagged = data;
+                       resolve();
+                   })
+                   .catch(() => reject({message: 'Unable to fetch flagged comments'}));
+            });
+        },
+
         deleteComment({dispatch}, id) {
             return new Promise((resolve, reject) => {
                axios.delete(`/admin/comments/${id}`)
@@ -112,6 +125,28 @@ export default {
                      })
                      .catch(() => reject({message: 'Unable to delete reply'}));
             });
-        }
+        },
+
+        dismissFlag({dispatch}, flaggable_id) {
+            return new Promise((resolve, reject) => {
+               axios.delete(`/admin/rejected-flags/${flaggable_id}`)
+                   .then(() => {
+                       dispatch('fetchFlagged').catch(notify.error);
+                       resolve();
+                   })
+                   .catch(() => reject({message: 'Unable to dismiss flag'}));
+            });
+        },
+
+        removeFlaggedComment({dispatch}, flaggable_id) {
+            return new Promise((resolve, reject) => {
+                axios.delete(`/admin/enforced-flags/${flaggable_id}`)
+                     .then(() => {
+                         dispatch('fetchFlagged').catch(notify.error);
+                         resolve();
+                     })
+                     .catch(() => reject({message: 'Unable to delete flagged comment'}));
+            });
+        },
     }
 }

@@ -10,7 +10,7 @@ class CommentsController extends Controller
 
     public function index(Translation $translation)
     {
-        return $translation->comments()->with('replies')->latest()->get()->map->toArray();
+        return $translation->comments()->with('replies', 'flagged', 'replies.flagged')->latest()->get()->map->toArray();
     }
 
     public function store(Translation $translation)

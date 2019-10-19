@@ -31,6 +31,8 @@ Route::group([
 Route::get('translations/{translation}/comments', 'CommentsController@index');
 Route::post('translations/{translation}/comments', 'CommentsController@store');
 Route::post('comments/{comment}/replies', 'RepliesController@store');
+Route::post('flagged-comments', 'FlaggedCommentsController@store');
+Route::post('flagged-replies', 'FlaggedRepliesController@store');
 
 Route::group(['prefix' => 'admin', 'namespace' => 'Auth'], function () {
     Route::view('login', 'auth.login')->name('login');
@@ -85,6 +87,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::get('replies', 'RepliesController@index');
     Route::delete('replies/{reply}', 'RepliesController@destroy');
+
+    Route::get('flagged-comments', 'FlaggedCommentsController@index');
+    Route::delete('rejected-flags/{flagged}', 'RejectedFlagsController@destroy');
+    Route::delete('enforced-flags/{flagged}', 'EnforcedFlagsController@destroy');
 
     Route::get('tags', 'TagsController@index');
     Route::delete('tags', 'TagsController@destroy');

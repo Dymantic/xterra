@@ -5,7 +5,10 @@
             <p class="text-sm text-gray-700 ml-8">{{ comment.time_ago }}</p>
         </div>
         <div v-html="comment.body"></div>
-        <div class="flex justify-end">
+        <div class="flex justify-end items-center">
+            <button @click="$emit('flag-comment', comment)" class="mr-4">
+                <svg :class="{'text-red-500': comment.is_flagged, 'text-grey-500': !comment.is_flagged}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hover:text-red-500 fill-current h-4"><path d="M4 16v5a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1h8.5a1 1 0 0 1 .7.3l.71.7H21a1 1 0 0 1 .9 1.45L19.11 10l2.77 5.55A1 1 0 0 1 21 17h-8.5a1 1 0 0 1-.7-.3l-.71-.7H4zm7-12H4v10h7.5a1 1 0 0 1 .7.3l.71.7h6.47l-2.27-4.55a1 1 0 0 1 0-.9L19.38 5H13v4a1 1 0 0 1-2 0V4z"/></svg>
+            </button>
             <button class="" @click="showReplyBox">
                 <svg class="text-grey-500 hover:text-red-500 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M19 16.685S16.775 6.953 8 6.953V2.969L1 9.542l7 6.69v-4.357c4.763-.001 8.516.421 11 4.81z"/></svg>
             </button>
@@ -24,9 +27,12 @@
         </div>
         <div>
             <div v-for="reply in comment.replies" :key="reply.id" class="pl-8 mb-6">
-                <div class="flex">
+                <div class="flex align-items-center">
                     <p class="text-sm text-gray-700">{{ reply.author }}</p>
                     <p class="text-sm text-gray-700 ml-8">{{ reply.time_ago }}</p>
+                    <button @click="$emit('flag-reply', reply)" class="ml-4">
+                        <svg :class="{'text-red-500': reply.is_flagged, 'text-grey-500': !reply.is_flagged}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="hover:text-red-500 fill-current h-3"><path d="M4 16v5a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1h8.5a1 1 0 0 1 .7.3l.71.7H21a1 1 0 0 1 .9 1.45L19.11 10l2.77 5.55A1 1 0 0 1 21 17h-8.5a1 1 0 0 1-.7-.3l-.71-.7H4zm7-12H4v10h7.5a1 1 0 0 1 .7.3l.71.7h6.47l-2.27-4.55a1 1 0 0 1 0-.9L19.38 5H13v4a1 1 0 0 1-2 0V4z"/></svg>
+                    </button>
                 </div>
                 <div v-html="reply.body"></div>
             </div>
