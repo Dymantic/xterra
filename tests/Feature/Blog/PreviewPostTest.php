@@ -28,4 +28,17 @@ class PreviewPostTest extends TestCase
 
         $this->assertArraySubset($translation->toArray(), $response_data['article']);
     }
+
+    /**
+     *@test
+     */
+    public function a_translation_cannot_be_previewed_by_a_guest()
+    {
+        $translation = factory(Translation::class)->state('draft')->create();
+
+        $response = $this->asGuest()->get("/admin/pages/previews/{$translation->id}");
+        $response->assertStatus(302);
+
+        $response->assertRedirect("/admin/login");
+    }
 }

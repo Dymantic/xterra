@@ -160,7 +160,7 @@ class TranslationsTest extends TestCase
             'description'     => 'test description',
             'body'            => 'test body',
             'first_published' => Carbon::today()->subMonth()->format('j M, Y'),
-            'publish_date'    => Carbon::today()->format('j M, Y'),
+            'publish_date'    => Carbon::today()->format('m/d/Y'),
             'is_published'    => true,
             'is_live'         => true,
             'author_name'     => 'test author',
