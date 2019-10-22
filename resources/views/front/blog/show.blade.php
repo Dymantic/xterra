@@ -45,9 +45,13 @@
             </div>
         </div>
 
+        @if(!$in_requested_lang)
+            <foreign-language-alert lang="{{ app()->getLocale() }}"></foreign-language-alert>
+        @endif
+
         <div class="max-w-4xl mx-auto mt-20">
             <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Comment</p>
-            <page-comments :translation-id="{{ $article['id'] }}"></page-comments>
+            <page-comments :translation-id="{{ $article['id'] }}" lang="{{ app()->getLocale() }}"></page-comments>
         </div>
 
     </div>

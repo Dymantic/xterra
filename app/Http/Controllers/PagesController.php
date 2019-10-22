@@ -62,14 +62,24 @@ class PagesController extends Controller
     public function article($article_slug)
     {
         $article = Article::where('slug', $article_slug)->firstOrFail();
+        $available_translations = $article->liveTranslations();
+
+        if($available_translations->count() === 0) {
+            abort(404);
+        }
+
+        $lang = $available_translations->contains(app()->getLocale()) ? app()->getLocale() : $available_translations->first();
+
+
         return view('front.blog.show', [
-            'article' => app('live-posts')->for(app()->getLocale())->getPost($article),
+            'article' => app('live-posts')->for($lang)->getPost($article),
             'categories' => Category::all()->map(function($cat) {
                 return [
                     'slug' => $cat->slug,
                     'name' => $cat->title[app()->getLocale()]
                 ];
             })->all(),
+            'in_requested_lang' => $lang === app()->getLocale(),
         ]);
     }
 }

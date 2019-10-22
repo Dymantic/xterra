@@ -2,6 +2,7 @@
     <div class="max-w-2xl mx-auto mt-8 p-8">
         <div :class="{'opacity-50': !ready}"
              @click="init">
+            <p v-if="post_error" class="text-red-500 my-6">{{ trans('comments.error') }}</p>
             <span class="text-sm uppercase font-light text-gray-600 block mb-1">{{ name }}</span>
             <div id="toolbar">
                 <button class="ql-bold">Bold</button>
@@ -14,8 +15,7 @@
                  class="w-full border p-2"></div>
             <div class="flex justify-end">
                 <button @click="postComment"
-                        class="bg-red-700 mt-4 py-1 px-2 text-white type-b4">Post it
-                </button>
+                        class="bg-red-700 mt-4 py-1 px-2 text-white type-b4">{{ trans("comments.button_post") }}</button>
             </div>
         </div>
         <div class="comments-content">
@@ -34,24 +34,20 @@
         <modal :show="showFlagForm" @close="clearFlagging">
             <div class="p-8 max-w-md">
                 <div v-if="flagging.is_flagged">
-                    <p class="my-6">This comment has already been flagged and is awaiting review.</p>
+                    <p class="my-6">{{ trans('flagging.done') }}</p>
                     <div class="flex justify-end mt-6">
                         <button @click="clearFlagging"
-                                class="bg-grey-700 py-1 px-2 text-white hover:bg-grey-500">Okay
-                        </button>
+                                class="bg-grey-700 py-1 px-2 text-white hover:bg-grey-500">{{ trans('flagging.button_okay') }}</button>
                     </div>
                 </div>
                 <div v-else>
-                    <p class="text-lg font-bold mb-6">Flag comment by {{ flagging.comment_author }}</p>
-                    <p v-if="flagging_failed" class="mb-6 text-red-700 font-bold text-lg">Failed to flag comment. Please
-                        refresh and try again.</p>
+                    <p class="text-lg font-bold mb-6">{{ trans('flagging.title') }} {{ flagging.comment_author }}</p>
+                    <p v-if="flagging_failed" class="mb-6 text-red-700 font-bold text-lg">{{ trans('flagging.error')}}</p>
                     <div class="bg-grey-200 p-2 h-24 overflow-auto" v-html="flagging.body"></div>
-                    <p class="my-6">Tell us why this comment offends you, and we will review and delete it if we agree
-                        it
-                        does not meet our standards.</p>
+                    <p class="my-6">{{ trans('flagging.instruction') }}</p>
                     <form @submit.prevent="submitFlag">
                         <div class="my-4" :class="{'border-b border-red-400': formErrors.reason}">
-                            <label class="font-bold" for="reason">I find this offensive because...</label>
+                            <label class="font-bold" for="reason">{{ trans('flagging.label') }}</label>
                             <span class="text-xs text-red-400" v-show="formErrors.reason">{{ formErrors.reason }}</span>
                             <input autocomplete="off" type="text" name="reason" v-model="flagging.reason"
                                    class="border w-full pl-1" id="reason">
@@ -59,10 +55,10 @@
                         <div class="flex justify-end mt-6">
                             <button type="button"
                                     @click="clearFlagging"
-                                    class="bg-white text-grey-500 mr-4 hover:text-black">Cancel
+                                    class="bg-white text-grey-500 mr-4 hover:text-black">{{ trans('flagging.button_cancel') }}
                             </button>
                             <button type="submit" :disabled="awaiting_flag || (flagging.reason === '')"
-                                    class="bg-grey-700 py-1 px-2 text-white hover:bg-grey-500">Yes, flag it.
+                                    class="bg-grey-700 py-1 px-2 text-white hover:bg-grey-500">{{ trans('flagging.button_confirm') }}
                             </button>
                         </div>
                     </form>
@@ -77,6 +73,7 @@
     import Quill from "quill";
     import Comment from "./Comment";
     import Modal from "@dymantic/modal";
+    import {trans} from "./translations";
 
     export default {
 
@@ -85,16 +82,17 @@
             Modal,
         },
 
-        props: ['translation-id'],
+        props: ['translation-id', 'lang'],
 
         data() {
             return {
                 comments: [],
                 comment_text: '',
                 ready: false,
-                name: 'Anonymous',
+                name: trans('comments.default_name', this.lang),
                 fb_id: '',
                 quill: null,
+                post_error: false,
                 showFlagForm: false,
                 flagging: {
                     flaggable_id: null,
@@ -109,6 +107,12 @@
                 awaiting_flag: false,
                 flagging_failed: false,
             };
+        },
+
+        computed: {
+          safe_lang() {
+              return ['en', 'zh'].includes(this.lang) ? this.lang : 'en';
+          }
         },
 
         mounted() {
@@ -128,6 +132,11 @@
         },
 
         methods: {
+
+            trans(path) {
+              return trans(path, this.safe_lang);
+            },
+
             init() {
                 if (this.ready) {
                     return;
@@ -185,13 +194,15 @@
                     return;
                 }
 
+                this.post_error = false;
+
                 axios.post(`/translations/${this.translationId}/comments`, {
                     author: this.name,
                     fb_id: this.fb_id,
                     body: this.quill.root.innerHTML,
                 })
                      .then(({data}) => this.onPosted(data))
-                     .catch(console.log);
+                     .catch(() => this.post_error = true);
             },
 
             onPosted(comments) {

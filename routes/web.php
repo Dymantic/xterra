@@ -20,7 +20,7 @@ Route::group([
     function () {
         Route::get('/', 'PagesController@home');
 
-        Route::get('blog/{article_slug}/{translation_slug}', 'PagesController@article');
+        Route::get('blog/{article_slug}/{translation_slug?}', 'PagesController@article');
 
         Route::get('categories/{slug}', 'PagesController@category');
 

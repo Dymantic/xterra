@@ -44,6 +44,11 @@ class Article extends Model implements HasMedia
         return $this->hasMany(Translation::class);
     }
 
+    public function liveTranslations()
+    {
+        return $this->translations()->live()->pluck('language');
+    }
+
     public function addTranslation($lang, $title, $author)
     {
         return $this->translations()->create([
@@ -110,4 +115,6 @@ class Article extends Model implements HasMedia
 
         ];
     }
+
+
 }

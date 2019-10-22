@@ -46,4 +46,30 @@ class ArticlesTest extends TestCase
 
         $this->assertNotEquals($articleA->slug, $articleB->slug);
     }
+
+    /**
+     *@test
+     */
+    public function article_can_be_queried_for_live_translations()
+    {
+        $both = factory(Article::class)->create();
+        factory(Translation::class)->states(['live', 'en'])->create(['article_id' => $both->id]);
+        factory(Translation::class)->states(['live', 'zh'])->create(['article_id' => $both->id]);
+
+        $en_only = factory(Article::class)->create();
+        factory(Translation::class)->states(['live', 'en'])->create(['article_id' => $en_only->id]);
+
+        $zh_only = factory(Article::class)->create();
+        factory(Translation::class)->states(['live', 'zh'])->create(['article_id' => $zh_only->id]);
+
+        $none = factory(Article::class)->create();
+        factory(Translation::class)->states(['draft', 'en'])->create(['article_id' => $none->id]);
+        factory(Translation::class)->states(['scheduled', 'zh'])->create(['article_id' => $none->id]);
+
+
+        $this->assertEquals(collect(['en', 'zh']), $both->liveTranslations());
+        $this->assertEquals(collect(['en']), $en_only->liveTranslations());
+        $this->assertEquals(collect(['zh']), $zh_only->liveTranslations());
+        $this->assertEquals(collect([]), $none->liveTranslations());
+    }
 }
