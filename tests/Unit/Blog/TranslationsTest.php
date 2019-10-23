@@ -111,7 +111,7 @@ class TranslationsTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function has_live_scope()
     {
@@ -135,7 +135,7 @@ class TranslationsTest extends TestCase
     {
         $article = factory(Article::class)->create();
         $translation = factory(Translation::class)->create([
-            'article_id' => $article->id,
+            'article_id'         => $article->id,
             'language'           => 'en',
             'title'              => 'test title',
             'intro'              => 'test intro',
@@ -150,31 +150,34 @@ class TranslationsTest extends TestCase
         $translation->setTags(['tag one', 'tag two', 'tag three']);
 
         $expected = [
-            'id'              => $translation->id,
-            'article_id'      => $translation->article->id,
-            'language'        => 'en',
-            'title'           => 'test title',
-            'slug'            => 'test-title',
-            'full_slug'       => $translation->article->slug . '/' . 'test-title',
-            'intro'           => 'test intro',
-            'description'     => 'test description',
-            'body'            => 'test body',
-            'first_published' => Carbon::today()->subMonth()->format('j M, Y'),
-            'publish_date'    => Carbon::today()->format('m/d/Y'),
-            'is_published'    => true,
-            'is_live'         => true,
-            'author_name'     => 'test author',
-            'tags'            => [
+            'id'                        => $translation->id,
+            'article_id'                => $translation->article->id,
+            'language'                  => 'en',
+            'title'                     => 'test title',
+            'slug'                      => 'test-title',
+            'full_slug'                 => $translation->article->slug . '/' . 'test-title',
+            'canonical_url'             => '/en/blog/' . $article->slug,
+            'intro'                     => 'test intro',
+            'description'               => 'test description',
+            'body'                      => 'test body',
+            'first_published'           => Carbon::today()->subMonth()->format('j M, Y'),
+            'publish_date'              => Carbon::today()->format('m/d/Y'),
+            'publish_date_formatted'    => Carbon::today()->format('Y-m-d'),
+            'first_published_formatted' => Carbon::today()->subMonth()->format('Y-m-d'),
+            'is_published'              => true,
+            'is_live'                   => true,
+            'author_name'               => 'test author',
+            'tags'                      => [
                 ['id' => 1, 'tag_name' => 'tag one', 'slug' => 'tag-one'],
                 ['id' => 2, 'tag_name' => 'tag two', 'slug' => 'tag-two'],
                 ['id' => 3, 'tag_name' => 'tag three', 'slug' => 'tag-three'],
             ],
-            'title_image' => [
-                'thumb' => $article->titleImage('thumb'),
-                'web' => $article->titleImage('web'),
+            'title_image'               => [
+                'thumb'  => $article->titleImage('thumb'),
+                'web'    => $article->titleImage('web'),
                 'banner' => $article->titleImage('banner'),
             ],
-            'categories' => $article->categories->map->toArray()->all(),
+            'categories'                => $article->categories->map->toArray()->all(),
 
         ];
 

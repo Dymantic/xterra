@@ -24,6 +24,8 @@ class PagesController extends Controller
             'posts'  => app('live-posts')->for(app()->getLocale())->getPage($page),
             'page_title' => trans('blog-index.latest_articles'),
             'page' => $page,
+            'seo_title' => trans('seo.home.title'),
+            'seo_description' => trans('seo.home.description'),
         ]);
     }
 
@@ -38,7 +40,9 @@ class PagesController extends Controller
                     'name' => $cat->title[app()->getLocale()]
                 ];
             })->all(),
-            'page_title' => $category->title[app()->getLocale()]
+            'page_title' => $category->title[app()->getLocale()],
+            'seo_title' => $category->title[app()->getLocale()] . trans('seo.category.title'),
+            'seo_description' => $category->description[app()->getLocale()],
         ]);
     }
 
@@ -56,6 +60,8 @@ class PagesController extends Controller
             })->all(),
             'tag_title' => $tag->tag_name,
             'all_tags' => Tag::inUse()->get()->map->toArrayWithCount(),
+            'seo_title' => strtoupper($tag->tag_name) . trans('seo.tags.title'),
+            'seo_description' => trans('seo.tags.description'),
         ]);
     }
 

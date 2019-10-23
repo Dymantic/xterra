@@ -89,6 +89,7 @@ class LivePostsRepositoryTest extends TestCase
     {
         $article = factory(Article::class)->create();
         $translation = factory(Translation::class)->state('live')->create(['article_id' => $article->id, 'language' => 'en']);
+        $alt = factory(Translation::class)->state('live')->create(['article_id' => $article->id, 'language' => 'zh']);
 
         $post = app('live-posts')->for('en')->getPost($article);
 
@@ -96,9 +97,11 @@ class LivePostsRepositoryTest extends TestCase
 
         $expected = $translation->toArray();
         $expected['related_posts'] = $translation->related('en')->map->toArray();
+        $expected['alternatives'] = [
+            ['lang' => 'zh-TW', 'url' => url('zh/blog/' . $alt->fullSlug)],
+        ];
 
         $this->assertEquals($expected, $post);
-        $this->assertNull($doesnt_exist);
     }
 
     /**

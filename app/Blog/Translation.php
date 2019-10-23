@@ -205,27 +205,30 @@ class Translation extends Model implements HasMedia
     public function toArray()
     {
         return [
-            'id'              => $this->id,
-            'article_id'      => $this->article_id,
-            'language'        => $this->language,
-            'title'           => $this->title,
-            'slug'            => $this->slug,
-            'full_slug'       => "{$this->article->slug}/{$this->slug}",
-            'intro'           => $this->intro,
-            'description'     => $this->description,
-            'body'            => $this->body,
-            'first_published' => $this->first_published_on ? $this->first_published_on->format('j M, Y') : null,
-            'publish_date'    => $this->published_on ? $this->published_on->format('m/d/Y') : null,
-            'is_published'    => $this->is_published,
-            'is_live'         => $this->isLive(),
-            'author_name'     => $this->author_name,
-            'tags'            => $this->tags->map->toArray()->all(),
-            'title_image'     => [
+            'id'                        => $this->id,
+            'article_id'                => $this->article_id,
+            'language'                  => $this->language,
+            'title'                     => $this->title,
+            'slug'                      => $this->slug,
+            'canonical_url'             => "/{$this->language}/blog/{$this->article->slug}",
+            'full_slug'                 => $this->fullSlug,
+            'intro'                     => $this->intro,
+            'description'               => $this->description,
+            'body'                      => $this->body,
+            'first_published'           => $this->first_published_on ? $this->first_published_on->format('j M, Y') : null,
+            'publish_date'              => $this->published_on ? $this->published_on->format('m/d/Y') : null,
+            'publish_date_formatted'    => $this->published_on ? $this->published_on->format('Y-m-d') : null,
+            'first_published_formatted' => $this->first_published_on ? $this->first_published_on->format('Y-m-d') : null,
+            'is_published'              => $this->is_published,
+            'is_live'                   => $this->isLive(),
+            'author_name'               => $this->author_name,
+            'tags'                      => $this->tags->map->toArray()->all(),
+            'title_image'               => [
                 'thumb'  => $this->article->titleImage('thumb') ?? '/images/default.jpg',
                 'web'    => $this->article->titleImage('web'),
                 'banner' => $this->article->titleImage('banner'),
             ],
-            'categories'      => $this->article->categories->map->toArray()->all(),
+            'categories'                => $this->article->categories->map->toArray()->all(),
         ];
     }
 

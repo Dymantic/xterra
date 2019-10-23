@@ -1,5 +1,16 @@
 @extends('front.base')
 
+@section('title')
+    {{ $seo_title ?? '' }}
+@endsection
+
+@section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => $seo_title ?? '',
+        'ogDescription' => $seo_description ?? '',
+    ])
+@endsection
+
 @section('content')
     @if(($slideshow ?? false) && ($page === 1))
         @include('front.partials.slide-show')

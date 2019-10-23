@@ -43,8 +43,17 @@ class LivePostRepository
             return null;
         }
 
+
         $result = $translation->toArray();
         $result['related_posts'] = $translation->related(app()->getLocale())->map->toArray();
+
+        $alternatives = $article->translations()->live()->where('language', '!=', $this->lang)->get();
+        $result['alternatives'] = $alternatives->map(function($trans) {
+            return [
+                'lang' => $trans->language === 'zh' ? 'zh-TW' : $trans->language,
+                'url' => url("{$trans->language}/blog/{$trans->fullSlug}"),
+            ];
+        })->values()->all();
 
         return $result;
     }

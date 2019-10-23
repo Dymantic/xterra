@@ -1,8 +1,26 @@
 @extends('front.base')
 
+@section('title')
+    {{ $article['title'] }}
+@endsection
+
 @section('head')
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <link rel="canonical" href="{{ url($article['canonical_url']) }}" />
+
+    @foreach($article['alternatives'] as $trans)
+        <link rel="alternate" hreflang="{{ $trans['lang'] }}"
+              href="{{ $trans['url'] }}" />
+    @endforeach
+
+    @include('front.partials.og-meta', [
+        'ogTitle' => $article['title'],
+        'ogDescription' => $article['description'],
+    ])
 @endsection
+
+
 
 @section('content')
     @include('front.partials.categories-nav')
@@ -58,5 +76,5 @@
 
 
 
-
+    @include('front.partials.article-rich-snippet')
 @endsection
