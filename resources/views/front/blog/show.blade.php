@@ -9,12 +9,15 @@
 
     <link rel="canonical" href="{{ url($article['canonical_url']) }}" />
 
+    @if($article['alternatives'] ?? false)
     @foreach($article['alternatives'] as $trans)
         <link rel="alternate" hreflang="{{ $trans['lang'] }}"
               href="{{ $trans['url'] }}" />
     @endforeach
+    @endif
 
     @include('front.partials.og-meta', [
+        'ogImage' => $article['title_image']['share'],
         'ogTitle' => $article['title'],
         'ogDescription' => $article['description'],
     ])

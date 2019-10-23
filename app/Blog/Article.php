@@ -97,6 +97,12 @@ class Article extends Model implements HasMedia
              ->keepOriginalImageFormat()
              ->optimize()
              ->performOnCollections(static::TITLE_IMAGES);
+
+        $this->addMediaConversion('share')
+             ->fit(Manipulations::FIT_CROP, 1200, 630)
+             ->keepOriginalImageFormat()
+             ->optimize()
+             ->performOnCollections(static::TITLE_IMAGES);
     }
 
     public function toArray()

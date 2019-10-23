@@ -16,6 +16,7 @@ class TranslationPreviewController extends Controller
 
         return view('front.blog.show', [
             'article' => $preview,
+            'in_requested_lang' => true,
             'categories' => Category::all()->map(function($cat) {
                 return [
                     'slug' => $cat->slug,

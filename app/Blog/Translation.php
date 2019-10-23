@@ -227,6 +227,7 @@ class Translation extends Model implements HasMedia
                 'thumb'  => $this->article->titleImage('thumb') ?? '/images/default.jpg',
                 'web'    => $this->article->titleImage('web'),
                 'banner' => $this->article->titleImage('banner'),
+                'share'  => $this->article->titleImage('share'),
             ],
             'categories'                => $this->article->categories->map->toArray()->all(),
         ];
