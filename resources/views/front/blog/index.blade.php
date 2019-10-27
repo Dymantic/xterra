@@ -25,7 +25,7 @@
 
     @if($tag_title ?? false)
         <div class="my-16 text-center">
-            <p class="type-b4 text-grey-500">Tag</p>
+            <p class="type-b4 text-grey-500">{{ trans('blog-index.tag') }}</p>
             <h1 class="type-h4 px-4 uppercase">{{ $tag_title }}</h1>
         </div>
     @endif
@@ -57,6 +57,6 @@
     </div>
 
     @if($all_tags ?? false)
-    <tag-browser :tags="{{ $all_tags }}" class="px-4"></tag-browser>
+    <tag-browser lang="{{ app()->getLocale() }}" :tags="{{ $all_tags }}" class="px-4"></tag-browser>
     @endif
 @endsection

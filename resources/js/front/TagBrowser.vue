@@ -3,12 +3,10 @@
         <div class="flex justify-center mb-8">
             <button @click="showAll = false"
                     :class="{'text-grey-500': showAll, 'text-black underline': !showAll}"
-                    class="focus:outline-none hover:text-red-500 type-b4 mx-4">Popular Tags
-            </button>
+                    class="focus:outline-none hover:text-red-500 type-b4 mx-4">{{ popular_tags_title }}</button>
             <button @click="showAll = true"
                     :class="{'text-grey-500': !showAll, 'text-black underline': showAll}"
-                    class="focus:outline-none hover:text-red-500 type-b4 mx-4">All Tags
-            </button>
+                    class="focus:outline-none hover:text-red-500 type-b4 mx-4">{{ all_tags_title }}</button>
         </div>
         <div class="h-80 overflow-scroll">
             <div class="flex flex-wrap justify-around">
@@ -24,7 +22,7 @@
 
 <script type="text/babel">
     export default {
-        props: ['tags'],
+        props: ['tags', 'lang'],
 
         data() {
             return {
@@ -51,6 +49,28 @@
                 }
 
                 return this.tags.sort((a, b) => b.translations_count - a.translations_count).slice(0, 12);
+            },
+
+            safe_lang() {
+                return ['en', 'zh'].includes(this.lang) ? this.lang : 'en';
+            },
+
+            all_tags_title() {
+                const trans = {
+                    en: 'All Tags',
+                    zh: '所有標籤'
+                };
+
+                return trans[this.safe_lang];
+            },
+
+            popular_tags_title() {
+                const trans = {
+                    en: 'Popular Tags',
+                    zh: '熱門標籤'
+                };
+
+                return trans[this.safe_lang];
             }
         }
     }

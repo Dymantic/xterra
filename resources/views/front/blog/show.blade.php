@@ -49,7 +49,7 @@
         <div class="h-1 bg-grey-300 max-w-4xl mx-auto"></div>
 
         <div class="max-w-2xl mx-auto mt-8 px-4">
-            <p class="type-b4 text-grey-500">Tags:</p>
+            <p class="type-b4 text-grey-500">{{ trans('blog-show.tags.title') }}:</p>
             <div class="">
                 @foreach($article['tags'] as $tag)
                     <a class="inline-block uppercase text-grey-500 hover:text-red-500 type-b6 mr-6 mb-6 whitespace-no-wrap" href="/tags/{{ $tag['slug'] }}">{{ $tag['tag_name'] }}</a>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto my-12">
-            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Related Articles</p>
+            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">{{ trans('blog-show.related.title') }}</p>
             <div class="whitespace-no-wrap  overflow-auto px-4 md:flex justify-around">
                 @foreach($article['related_posts'] as $post)
                     @include('front.blog.related-article-card', ['post' => $post])
@@ -71,7 +71,7 @@
         @endif
 
         <div class="max-w-4xl mx-auto mt-20">
-            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">Comment</p>
+            <p class="mx-2 type-h2 pl-4 leading-none border-l-4 border-red-700 uppercase mb-4">{{ trans('blog-show.comments.title') }}</p>
             <page-comments :translation-id="{{ $article['id'] }}" lang="{{ app()->getLocale() }}"></page-comments>
         </div>
 
@@ -79,5 +79,8 @@
 
 
 
+@endsection
+
+@section('bodyscripts')
     @include('front.partials.article-rich-snippet')
 @endsection

@@ -27,15 +27,15 @@
                 showModal: false,
                 title: {
                     en: 'Pardon the interruption',
-                    zh: 'Doyba Gi',
+                    zh: '尚未發佈英文版',
                 },
                 message: {
                     en: 'Unfortunately we do not yet have an English translation for this article yet.',
-                    zh: 'Wo men mayo Zhongwen',
+                    zh: '抱歉，本篇文章尚未發佈英文版',
                 },
                 button: {
                     en: 'Okay',
-                    zh: 'Mei Guanxi',
+                    zh: '好的',
                 }
             };
         },

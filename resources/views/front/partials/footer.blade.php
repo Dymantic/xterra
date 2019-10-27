@@ -1,5 +1,5 @@
 <footer class="bg-grey-700 px-8 py-12 text-white flex flex-col items-center">
-    <p class="uppercase type-h2 text-center">Follow xterra taiwan</p>
+    <p class="uppercase type-h2 text-center">{{ trans('footer.follow') }}</p>
     <div class="flex justify-center my-4">
         <a target="_blank" href="https://facebook.com/xterrataiwan" rel="noreferrer nofollow" class="text-white hover:text-red-500 mx-4">
             @include('svg.social-icons.facebook', ['classes' => 'fill-current h-5'])
