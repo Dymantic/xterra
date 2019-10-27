@@ -69,7 +69,7 @@
 
         methods: {
 
-            trans() {
+            trans(path) {
                 return trans(path, this.safe_lang);
             },
 
