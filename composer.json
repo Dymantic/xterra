@@ -14,7 +14,8 @@
         "laravel/framework": "6.0.*",
         "laravel/tinker": "^1.0",
         "mcamara/laravel-localization": "^1.4",
-        "spatie/laravel-medialibrary": "^7.0.0"
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "spatie/laravel-sitemap": "^5.5"
     },
     "require-dev": {
         "ext-json": "*",
