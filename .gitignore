@@ -26,3 +26,4 @@ yarn-error.log
 .smithy.yaml
 /imports
 /imports/*
+.smithy.yaml
