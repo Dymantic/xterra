@@ -27,4 +27,10 @@ class ArticlesController extends Controller
 
         return Article::makeWithTranslation(request('lang'), request('title'), auth()->user());
     }
+
+    public function destroy(Article $article)
+    {
+        $article->translations->each->delete();
+        $article->delete();
+    }
 }

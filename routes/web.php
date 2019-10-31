@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::get('articles', 'ArticlesController@index');
     Route::post('articles', 'ArticlesController@store');
+    Route::delete('articles/{article}', 'ArticlesController@destroy');
     Route::post('articles/{article}/categories', 'ArticleCategoriesController@update');
     Route::post('articles/{article}/translations', 'TranslationsController@store');
     Route::post('articles/{article}/title-image', 'ArticleTitleImageController@store');
