@@ -16,7 +16,7 @@
         </p>
         <div class="h-1 bg-red-700 mx-4"></div>
         <div class="px-6 flex justify-between my-2 leading-tight">
-            <p class="type-b6"><span class="type-b5 mr-1 inline-block">by </span> {{ ' ' . $post['author_name'] }}</p>
+            <p class="type-b6"><span class="type-b5 mr-1 inline-block">by </span> {{ $post['author_name'] }}</p>
             <p>{{ $post['publish_date'] }}</p>
         </div>
         <p class="py-4 px-6 leading-tight">{{ $post['intro'] }}</p>
