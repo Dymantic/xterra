@@ -38,8 +38,14 @@
         <div class="flex justify-between items-center px-4 border-b-2 border-grey-300 mb-16">
             <p class="type-b5 my-2">by {{ $article['author_name'] }} on {{ $article['publish_date'] }}</p>
             <div class="flex">
-            @include('svg.social-icons.twitter', ['classes' => 'fill-current text-red-700 hover:text-red-500 h-6 mr-4'])
-            @include('svg.social-icons.facebook', ['classes' => 'fill-current text-red-700 hover:text-red-500 h-6'])
+                <a href="https://twitter.com/intent/tweet?text={{ urlencode($article['title'] . ' ' . Request::url()) }}">
+                    @include('svg.social-icons.twitter', ['classes' => 'fill-current text-red-700 hover:text-red-500 h-6 mr-4'])
+                </a>
+
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(Request::url()) }}">
+                    @include('svg.social-icons.facebook', ['classes' => 'fill-current text-red-700 hover:text-red-500 h-6'])
+                </a>
+
             </div>
 
         </div>

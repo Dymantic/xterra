@@ -1,6 +1,6 @@
 <div class="fixed top-0 w-full h-16 bg-grey-700 flex justify-between items-center px-4">
     <div class="flex items-center">
-        <a href="/en">
+        <a href="{{ localUrl("/") }}">
             <img src="/images/logos/nav_logo.svg"
                  alt="Xterra Logo" class="h-8">
         </a>
