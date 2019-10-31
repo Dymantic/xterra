@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     @section('title')
-        <title>XTerra | Admin </title>
+        <title>XTERRA Taiwan Blog | Admin </title>
     @show
     <link rel="stylesheet"
           href="{{ mix('css/app.css') }}"/>
