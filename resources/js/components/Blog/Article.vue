@@ -3,7 +3,7 @@
         <section class="max-w-4xl mx-auto flex justify-between items-center py-8">
             <h1 class="flex-1 text-5xl font-bold">Article #{{ article_id }}</h1>
             <div class="flex justify-end items-center">
-
+                <delete-article-button :article-id="article_id"></delete-article-button>
             </div>
         </section>
         <div v-if="article"
@@ -76,6 +76,7 @@
     import CategoriesForm from "./CategoriesForm";
     import TranslationStatus from "./TranslationStatus";
     import AddTranslation from "./AddTranslation";
+    import DeleteArticleButton from "./DeleteArticleButton";
 
     export default {
         components: {
@@ -83,6 +84,7 @@
             CategoriesForm,
             TranslationStatus,
             AddTranslation,
+            DeleteArticleButton,
         },
 
         data() {

@@ -237,6 +237,17 @@ export default {
                     })
                     .catch(() => reject({message: 'Unable to delete selected tags'}));
             });
+        },
+
+        deleteArticle({dispatch}, id) {
+            return new Promise((resolve, reject) => {
+               axios.delete(`/admin/articles/${id}`)
+                   .then(() => {
+                       dispatch('fetchAll').catch(notify.error);
+                       resolve();
+                   })
+                   .catch(() => reject({message: 'Unable to delete article'}));
+            });
         }
     }
 }
