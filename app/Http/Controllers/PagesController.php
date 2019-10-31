@@ -32,6 +32,7 @@ class PagesController extends Controller
     public function category($slug)
     {
         $category = Category::where('slug', $slug)->firstOrFail();
+        $cat_name = $category->title[app()->getLocale()];
         return view('front.blog.index', [
             'posts' => app('live-posts')->for(app()->getLocale())->withCategory($category)->getPage(request('page', 1)),
             'categories' => Category::all()->map(function($cat) {
@@ -40,8 +41,8 @@ class PagesController extends Controller
                     'name' => $cat->title[app()->getLocale()]
                 ];
             })->all(),
-            'page_title' => $category->title[app()->getLocale()],
-            'seo_title' => $category->title[app()->getLocale()] . trans('seo.category.title'),
+            'page_title' => $cat_name,
+            'seo_title' => trans('seo.category.title', ['category' => $cat_name]),
             'seo_description' => $category->description[app()->getLocale()],
         ]);
     }
@@ -60,8 +61,8 @@ class PagesController extends Controller
             })->all(),
             'tag_title' => $tag->tag_name,
             'all_tags' => Tag::inUse()->get()->map->toArrayWithCount(),
-            'seo_title' => strtoupper($tag->tag_name) . trans('seo.tags.title'),
-            'seo_description' => trans('seo.tags.description'),
+            'seo_title' => trans('seo.tags.title', ['tag' => $tag->tag_name]),
+            'seo_description' => trans('seo.tags.description', ['tag' => $tag->tag_name]),
         ]);
     }
 

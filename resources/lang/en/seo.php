@@ -2,14 +2,14 @@
 
 return [
     'home' => [
-        'title' => 'XTERRA TAIWAN BLOG',
-        'description' => 'The latest news and views from the team here at XTERRA Taiwan'
+        'title' => 'XTERRA Taiwan BLOG',
+        'description' => 'The latest news and views from the team at XTERRA Taiwan'
     ],
     'tags' => [
-        'title' => ' | XTERRA TAIWAN',
-        'description' => 'Catch up on all the articles we have tagged as ',
+        'title' => ':TAG | XTERRA Taiwan',
+        'description' => 'Browse through XTERRA’s latest articles tagged as :TAG',
     ],
     'category' => [
-        'title' => ' | XTERRA TAIWAN',
+        'title' => ':CATEGORY | XTERRA Taiwan',
     ]
 ];
