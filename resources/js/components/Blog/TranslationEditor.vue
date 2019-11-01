@@ -1,13 +1,14 @@
 <template>
     <div v-if="ready"
          class="main-container flex justify-between">
-        <div class="flex-1 p-8 editor-panel article-content">
-            <p class="text-3xl font-bold">{{ formData.title }}</p>
+        <div class="flex-1 px-8 pb-8 editor-panel article-content flex flex-col">
+            <p class="text-3xl mt-6 font-bold">{{ formData.title }}</p>
             <wysiwyg v-model="formData.body"
                      :image-upload-path="`/admin/translations/${translation_id}/images`"
                      v-slot:default="{document}"
                      :max-image-file-size="30"
-                     class="max-w-3xl mx-auto">
+                     :sticky="true"
+                     class="max-w-3xl mx-auto flex-1">
                 <video-embed :trix="document"></video-embed>
                 <insert-highlight :trix="document"></insert-highlight>
 
