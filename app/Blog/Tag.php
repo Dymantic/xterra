@@ -30,6 +30,20 @@ class Tag extends Model
                      ->having('translations_count', '>', 0);
     }
 
+    public function scopeForLang($query, $lang)
+    {
+        return $query->whereHas('translations', function($q) use ($lang) {
+            $q->where('language', $lang);
+        });
+    }
+
+    public function scopeForChinese($query)
+    {
+        return $query->whereHas('translations', function($q) {
+            $q->where('language', 'zh');
+        });
+    }
+
     public function toArray()
     {
         return [

@@ -51,4 +51,35 @@ class TagTest extends TestCase
             $this->assertTrue($tag->translations_count > 0);
         });
     }
+
+    /**
+     *@test
+     */
+    public function tags_can_be_scoped_to_english()
+    {
+        $for_enA = Tag::create(['tag_name' => 'tag one']);
+        $for_enB = Tag::create(['tag_name' => 'tag two']);
+        $for_zh = Tag::create(['tag_name' => 'tag three']);
+
+        $en = factory(Translation::class)->state('en')->create();
+        $zh = factory(Translation::class)->state('zh')->create();
+
+        $en->tags()->attach($for_enA->id);
+        $en->tags()->attach($for_enB->id);
+        $zh->tags()->attach($for_zh->id);
+
+        $result_en = Tag::forLang('en')->get();
+        $result_zh = Tag::forLang('zh')->get();
+
+        $this->assertCount(2, $result_en);
+        $this->assertContains($for_enA->id, $result_en->pluck('id')->all());
+        $this->assertContains($for_enB->id, $result_en->pluck('id')->all());
+        $this->assertNotContains($for_zh->id, $result_en->pluck('id')->all());
+
+        $this->assertCount(1, $result_zh);
+        $this->assertNotContains($for_enA->id, $result_zh->pluck('id')->all());
+        $this->assertNotContains($for_enB->id, $result_zh->pluck('id')->all());
+        $this->assertContains($for_zh->id, $result_zh->pluck('id')->all());
+    }
+
 }
