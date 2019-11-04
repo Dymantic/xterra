@@ -30,14 +30,17 @@ class TagTest extends TestCase
         $usedA = Tag::create(['tag_name' => 'tag one']);
         $usedB = Tag::create(['tag_name' => 'tag two']);
         $unused = Tag::create(['tag_name' => 'tag three']);
+        $un_published = Tag::create(['tag_name' => 'tag four']);
 
-        $translationA = factory(Translation::class)->create();
-        $translationB = factory(Translation::class)->create();
-        $translationC = factory(Translation::class)->create();
+        $translationA = factory(Translation::class)->state('live')->create();
+        $translationB = factory(Translation::class)->state('live')->create();
+        $translationC = factory(Translation::class)->state('live')->create();
+        $translationD = factory(Translation::class)->state('draft')->create();
 
         $translationA->tags()->attach($usedA->id);
         $translationB->tags()->attach($usedA->id);
         $translationC->tags()->attach($usedB->id);
+        $translationD->tags()->attach($un_published->id);
 
         $used_tags = Tag::inUse()->get();
 
@@ -45,6 +48,7 @@ class TagTest extends TestCase
         $this->assertTrue($used_tags->contains($usedA));
         $this->assertTrue($used_tags->contains($usedB));
         $this->assertFalse($used_tags->contains($unused));
+        $this->assertFalse($used_tags->contains($un_published));
 
 
         $used_tags->each(function($tag) {

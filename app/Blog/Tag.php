@@ -26,8 +26,11 @@ class Tag extends Model
     public function scopeInUse($query)
     {
         return $query->withCount('translations')
-                     ->groupBy('tag_name')
-                     ->having('translations_count', '>', 0);
+            ->whereHas('translations', function($q) {
+                $q->live();
+            });
+//                     ->groupBy('tag_name')
+//                     ->having('translations_count', '>', 0);
     }
 
     public function scopeForLang($query, $lang)
