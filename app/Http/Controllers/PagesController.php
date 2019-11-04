@@ -60,7 +60,7 @@ class PagesController extends Controller
                 ];
             })->all(),
             'tag_title' => $tag->tag_name,
-            'all_tags' => Tag::inUse()->forLang(app()->getLocale())->get()->map->toArrayWithCount(),
+            'all_tags' => Tag::forLang(app()->getLocale())->inUse()->get()->map->toArrayWithCount(),
             'seo_title' => trans('seo.tags.title', ['tag' => $tag->tag_name]),
             'seo_description' => trans('seo.tags.description', ['tag' => $tag->tag_name]),
         ]);
