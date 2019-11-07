@@ -16,3 +16,19 @@ const app = new Vue({
 
 initSlideShow();
 initTagRevealer();
+
+
+window.addEventListener('load', () => {
+    if (!document.querySelector('.article-content')) {
+        return;
+    }
+
+    document.querySelectorAll('.article-content a')
+            .forEach(link => {
+                const url = new URL(link.href, window.location.origin);
+                if (url.host !== window.location.host) {
+                    link.target = "_blank";
+                    link.rel = "noopener noreferrer";
+                }
+            })
+});
