@@ -5,6 +5,7 @@ namespace App\Blog;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -105,7 +106,10 @@ class Translation extends Model implements HasMedia
 
     public function attachImage($file)
     {
-        return $this->addMedia($file)->toMediaCollection(static::BODY_IMAGES);
+        return $this
+            ->addMedia($file)
+            ->usingFileName(Str::random(10))
+            ->toMediaCollection(static::BODY_IMAGES);
     }
 
     public function registerMediaConversions(Media $media = null)

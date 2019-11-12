@@ -5,6 +5,7 @@ namespace App\Blog;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
@@ -75,16 +76,17 @@ class Article extends Model implements HasMedia
         $this->clearMediaCollection(static::TITLE_IMAGES);
 
         return $this->addMedia($file)
+                    ->usingFileName(Str::random(10))
                     ->toMediaCollection(static::TITLE_IMAGES);
     }
 
     public function registerMediaConversions(Media $media = null)
     {
         $this->addMediaConversion('thumb')
-            ->fit(Manipulations::FIT_CROP, 450, 300)
-            ->keepOriginalImageFormat()
-            ->optimize()
-            ->performOnCollections(static::TITLE_IMAGES);
+             ->fit(Manipulations::FIT_CROP, 450, 300)
+             ->keepOriginalImageFormat()
+             ->optimize()
+             ->performOnCollections(static::TITLE_IMAGES);
 
         $this->addMediaConversion('web')
              ->fit(Manipulations::FIT_CROP, 1200, 800)
@@ -112,10 +114,10 @@ class Article extends Model implements HasMedia
             'categories'   => $this->categories->map->toArray()->all(),
             'translations' => $this->translations->toArray(),
             'slug'         => $this->slug,
-            'title_image' => [
-                'thumb' => $this->titleImage('thumb'),
-                'web' => $this->titleImage('web'),
-                'banner' => $this->titleImage('banner'),
+            'title_image'  => [
+                'thumb'    => $this->titleImage('thumb'),
+                'web'      => $this->titleImage('web'),
+                'banner'   => $this->titleImage('banner'),
                 'original' => $this->titleImage(),
             ]
 
