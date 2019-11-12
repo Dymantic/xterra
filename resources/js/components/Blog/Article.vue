@@ -23,9 +23,7 @@
                                   class="w-80"
                                   v-if="article"
                     ></image-upload>
-                    <p class="text-sm text-gray-600 w-80 mt-4">Click above to upload the cover image for the
-                                                               article. The image must be at least 1800px wide,
-                                                               under 15MB and either a PNG or JPG</p>
+                    <p class="text-sm text-gray-600 w-80 mt-4">Click above to upload the cover image for the article. The image must be at least 1800px wide, under 15MB and either a PNG or JPG</p>
 
                 </div>
                 <div class="w-1/2 p-4 bg-white ml-4">

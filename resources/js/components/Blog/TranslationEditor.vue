@@ -43,7 +43,7 @@
                 <div class="my-4"
                      :class="{'border-b border-red-400': formErrors.intro}">
                     <label class="form-label text-gray-800"
-                           for="intro">Intro</label>
+                           for="intro">Introduction</label>
                     <span class="text-xs text-red-400"
                           v-show="formErrors.intro">{{ formErrors.intro }}</span>
                     <textarea name="intro"
@@ -54,7 +54,7 @@
                 <div class="my-4"
                      :class="{'border-b border-red-400': formErrors.description}">
                     <label class="form-label text-gray-800"
-                           for="description">Description</label>
+                           for="description">Description (for seo)</label>
                     <span class="text-xs text-red-400"
                           v-show="formErrors.description">{{ formErrors.description }}</span>
                     <textarea name="description"
@@ -68,7 +68,8 @@
         </div>
         <div class="absolute bottom-0 w-full h-16 flex justify-between px-4 bg-white shadow-top">
             <div class="flex items-center">
-                <a class="btn btn-link mr-4" :href="`/admin/pages/previews/${translation.id}`" target="_blank">Preview</a>
+                <a class="btn btn-link mr-4" :href="`/admin/pages/previews/${translation.id}`"
+                   target="_blank">Preview</a>
                 <publish-button :is-published="translation.is_published"
                                 :translation-id="translation_id"
                                 @translation-updated="updateTranslation"
@@ -96,6 +97,7 @@
     import TranslationTagger from "./TranslationTagger";
     import VideoEmbed from "./EmbedVideo";
     import InsertHighlight from "./InsertHighlight";
+    import {notify} from "../Messaging/notify";
 
     function timeSince(time, now) {
         if (!time) {
@@ -135,7 +137,9 @@
                     intro: '',
                     description: '',
                     author_name: '',
-                }
+                },
+                update_now_interval: null,
+                save_routine_interval: null,
             };
         },
 
@@ -148,7 +152,14 @@
                     }
                     this.is_dirty = true;
                 }
-            }
+            },
+
+            '$route': function () {
+                this.ready = false;
+                this.is_dirty = false;
+                this.shutDownIntervals();
+                this.fetchTranslation();
+            },
         },
 
         computed: {
@@ -174,25 +185,42 @@
         },
 
         mounted() {
-            this.$store.dispatch('articles/getTranslationById', this.translation_id)
-                .then(translation => {
-                    this.setForm(translation);
-                    this.translation = translation;
-                })
-                .catch(console.log)
-                .then(() => {
-                    this.ready = true;
-                    window.setInterval(this.updateNow, 1000);
-                    window.setInterval(this.saveRoutine, 15000);
-                });
+            this.fetchTranslation();
         },
 
         methods: {
+
+            fetchTranslation() {
+                this.$store.dispatch('articles/getTranslationById', this.translation_id)
+                    .then(translation => {
+                        this.setForm(translation);
+                        this.translation = translation;
+                    })
+                    .catch(() => notify.error({message: 'Unable to fetch translation data'}))
+                    .then(() => {
+                        this.ready = true;
+                        this.startUpIntervals();
+                    });
+            },
+
             setForm({title, intro, description, body, author_name, tags}) {
                 this.formData = {
                     title, intro, description, body, author_name,
                     tags: tags.map(t => t.tag_name),
                 };
+            },
+
+            startUpIntervals() {
+                this.update_now_interval = window.setInterval(this.updateNow, 1000);
+                this.save_routine_interval = window.setInterval(this.saveRoutine, 15000);
+            },
+
+            shutDownIntervals() {
+                window.clearInterval(this.update_now_interval);
+                window.clearInterval(this.save_routine_interval);
+
+                this.update_now_interval = null;
+                this.save_routine_interval = null;
             },
 
             save() {
