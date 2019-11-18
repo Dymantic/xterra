@@ -35,7 +35,7 @@
                 <h1 class="type-h1 my-4">{{ $article['title'] }}</h1>
             </div>
         </div>
-        <div class="flex justify-between items-center px-4 border-b-2 border-grey-300 mb-16">
+        <div class="flex justify-between items-center px-4 border-b-2 border-grey-300 mb-10">
             <p class="type-b5 my-2">by {{ $article['author_name'] }} on {{ $article['publish_date'] }}</p>
             <div class="flex">
                 <a href="https://twitter.com/intent/tweet?text={{ urlencode($article['title'] . ' ' . Request::url()) }}">
