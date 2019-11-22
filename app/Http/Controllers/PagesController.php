@@ -87,6 +87,7 @@ class PagesController extends Controller
                 ];
             })->all(),
             'in_requested_lang' => $lang === app()->getLocale(),
+            'lang' => $lang,
         ]);
     }
 }
