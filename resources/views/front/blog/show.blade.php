@@ -72,10 +72,6 @@
             </div>
         </div>
 
-        <div class="hidden language-for">
-            <p>Loc: {{ app()->getLocale() }}</p>
-            <p>Lang: {{ $lang }}</p>
-        </div>
 
         @if(!$in_requested_lang)
             <foreign-language-alert lang="{{ app()->getLocale() }}"></foreign-language-alert>
