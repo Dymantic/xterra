@@ -122,6 +122,7 @@
         opacity: 1;
         transition: .2s ease-in-out;
         visibility: visible;
+        z-index: 9999;
     }
 
     .alert-box.in-active {
