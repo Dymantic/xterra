@@ -224,9 +224,9 @@
             },
 
             save() {
-                this.$store.dispatch('articles/saveTranslation', {id: this.translation_id, formData: this.formData})
+                this.$store.dispatch('articles/saveTranslation', {id: this.translation.id, formData: this.formData})
                     .then(() => this.is_dirty = false)
-                    .catch(notify.error({message: 'There was an issue saving your content'}))
+                    .catch(() => notify.error({message: 'There was an issue saving your content'}))
                     .then(() => this.last_saved_at = new Date());
             },
 

@@ -30,7 +30,7 @@ class TranslationsController extends Controller
     public function update(Translation $translation)
     {
         request()->validate([
-            'title' => ['required', Rule::unique('translations', 'title')->ignore($translation->id)],
+            'title' => ['required', Rule::unique('translations')->ignore($translation->id)],
             'tags' => 'array'
         ]);
 
