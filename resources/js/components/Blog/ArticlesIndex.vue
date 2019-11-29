@@ -3,8 +3,7 @@
         <section class="max-w-4xl mx-auto flex justify-between items-center py-8">
             <h1 class="flex-1 text-5xl font-bold">Articles</h1>
             <div class="flex justify-end items-center">
-                <create-new-article @article-created="articleCreated"
-                                    @create-article-error="createArticleError"
+                <create-new-article @create-article-error="createArticleError"
                 ></create-new-article>
             </div>
         </section>
@@ -154,10 +153,6 @@
 
                 this.filters.categories = this.filters.categories
                                               .filter(cat => cat.id !== category_id);
-            },
-
-            articleCreated(article) {
-                console.log(article);
             },
 
             createArticleError() {

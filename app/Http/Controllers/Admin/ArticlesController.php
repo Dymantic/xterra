@@ -30,7 +30,6 @@ class ArticlesController extends Controller
 
     public function destroy(Article $article)
     {
-        $article->translations->each->delete();
-        $article->delete();
+        $article->safeDelete();
     }
 }

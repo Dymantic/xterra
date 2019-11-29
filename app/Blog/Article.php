@@ -2,6 +2,7 @@
 
 namespace App\Blog;
 
+use App\Slider\Slide;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
@@ -40,6 +41,13 @@ class Article extends Model implements HasMedia
         return $article;
     }
 
+    public function safeDelete()
+    {
+        $this->slides->each->delete();
+        $this->translations->each->delete();
+        $this->delete();
+    }
+
     public function translations()
     {
         return $this->hasMany(Translation::class);
@@ -62,6 +70,11 @@ class Article extends Model implements HasMedia
     public function categories()
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function slides()
+    {
+        return $this->hasMany(Slide::class);
     }
 
     public function titleImage($conversion = '')

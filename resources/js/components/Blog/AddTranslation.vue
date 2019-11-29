@@ -20,7 +20,7 @@
                            id="title">
                 </div>
                 <div class="flex justify-end mt-6">
-                    <button @click="showModal = false" class="text-gray-600 mr-6">Cancel</button>
+                    <button type="button" @click="showModal = false" class="text-gray-600 mr-6">Cancel</button>
                     <button :disabled="waiting" type="submit" class="btn btn-dark">Add Translation</button>
                 </div>
             </form>
@@ -30,6 +30,7 @@
 
 <script type="text/babel">
     import Modal from "@dymantic/modal";
+    import {notify} from "../Messaging/notify";
 
     export default {
 
@@ -61,7 +62,22 @@
                     title: this.formData.title,
                 })
                     .then(({id}) => this.$router.push(`/translations/${id}/edit`))
-                    .catch(console.log);
+                    .catch(this.onSubmitError)
+                    .then(() => this.waiting = false);
+            },
+
+            onSubmitError({status, data}) {
+                if (status === 422) {
+                    return this.handleValidationError(data)
+                }
+                notify.error({message: 'Unable to add translation'});
+            },
+
+            handleValidationError({errors}) {
+                if (errors.title) {
+                    return this.formErrors.title = errors.title[0];
+                }
+                notify.error({message: 'Unable to add translation'});
             }
         }
     }

@@ -1,13 +1,12 @@
 <template>
-    <div>
+    <div v-if="article">
         <section class="max-w-4xl mx-auto flex justify-between items-center py-8">
-            <h1 class="flex-1 text-5xl font-bold">Article #{{ article_id }}</h1>
+            <h1 class="flex-1 text-5xl font-bold">Article #{{ article.id }}</h1>
             <div class="flex justify-end items-center">
-                <delete-article-button :article-id="article_id"></delete-article-button>
+                <delete-article-button :article-id="article.id"></delete-article-button>
             </div>
         </section>
-        <div v-if="article"
-             class="max-w-4xl mx-auto p-8 bg-white mb-20">
+        <div class="max-w-4xl mx-auto p-8 bg-white mb-20">
             <div class="max-w-4xl mx-auto flex justify-between">
                 <div class="w-1/2 mr-4 bg-white p-4">
                     <p class="uppercase tracking-wide text-gray-800 mb-8">Cover Image</p>
@@ -22,6 +21,7 @@
                                   @image-uploaded="uploadedImage"
                                   class="w-80"
                                   v-if="article"
+                                  :key="article.id"
                     ></image-upload>
                     <p class="text-sm text-gray-600 w-80 mt-4">Click above to upload the cover image for the article. The image must be at least 1800px wide, under 15MB and either a PNG or JPG</p>
 
@@ -29,9 +29,8 @@
                 <div class="w-1/2 p-4 bg-white ml-4">
                     <div class="flex justify-between items-center mb-8">
                         <p class="uppercase tracking-wide text-gray-800">Categories</p>
-                        <categories-form :article-id="article_id"
+                        <categories-form :article-id="article.id"
                                          :initial-categories="current_category_ids"
-                                         @categories-set="getArticle"
                         ></categories-form>
                     </div>
 
@@ -47,7 +46,7 @@
             <div class="flex justify-between items-center border-gray-300 border-b mt-12 mb-8 mx-4">
                 <p class="uppercase tracking-wide text-gray-800">Translations</p>
                 <add-translation v-if="missing_translation"
-                                 :article-id="article_id"
+                                 :article-id="article.id"
                                  :language="missing_translation"></add-translation>
             </div>
 
@@ -87,17 +86,18 @@
 
         data() {
             return {
-                article: null,
             };
         },
 
         mounted() {
-            this.getArticle();
+            if(!this.article) {
+                this.$store.dispatch('articles/fetchAll');
+            }
         },
 
         computed: {
-            article_id() {
-                return this.$route.params.id;
+            article() {
+                return this.$store.getters['articles/article'](this.$route.params.id);
             },
 
             title_image() {
@@ -109,7 +109,7 @@
             },
 
             image_upload_url() {
-                return `/admin/articles/${this.article_id}/title-image`;
+                return `/admin/articles/${this.article.id}/title-image`;
             },
 
             current_category_ids() {
@@ -128,7 +128,7 @@
         methods: {
 
             getArticle() {
-                this.$store.dispatch('articles/fetchArticle', this.article_id)
+                this.$store.dispatch('articles/fetchArticle', this.article.id)
                     .then(article => this.article = article)
                     .catch(notify.error);
             },

@@ -1,5 +1,16 @@
-import axios from "axios";
 import {notify} from "../components/Messaging/notify";
+import {sortByStringProp} from "../sorting";
+import {
+    addArticleTranslation,
+    createArticle, deleteArticle,
+    fetchArticles,
+    searchArticles,
+    setArticleCategories
+} from "../apis/articles";
+import {addCategory, fetchCategories, removeCategory, updateCategory} from "../apis/categories";
+import {getTranslationById, publishTranslation, retractTranslation, saveTranslation} from "../apis/translations";
+import {deleteTags, fetchTags, translationsForTag} from "../apis/tags";
+
 
 export default {
 
@@ -13,7 +24,7 @@ export default {
 
     getters: {
         article: state => id => {
-            return state.articles.find(art => parseInt(art.id) === id);
+            return state.articles.find(art => parseInt(art.id) === parseInt(id));
         },
 
         categoryById: state => id => state.categories.find(cat => parseInt(cat.id) === parseInt(id)),
@@ -24,18 +35,7 @@ export default {
         },
 
         tagsByName: state => {
-            return state.tags.sort((a,b) => {
-                const nameA = a.tag_name.toUpperCase();
-                const nameB = b.tag_name.toUpperCase();
-                if(nameA < nameB) {
-                    return -1;
-                }
-
-                if(nameA > nameB) {
-                    return 1;
-                }
-                return 0;
-            });
+            return state.tags.sort(sortByStringProp('tag_name'));
         },
 
         tagsByCount: state => state.tags.sort((a,b) => b.translations_count - a.translations_count),
@@ -43,211 +43,126 @@ export default {
         tagById: state => id => state.tags.find(tag => parseInt(tag.id) === parseInt(id)),
     },
 
+    mutations: {
+        setArticles(state, articles) {
+            state.articles = articles;
+        },
+
+        setCategories(state, categories) {
+            state.categories = categories;
+        },
+
+        setTags(state, tags) {
+            state.tags = tags;
+        }
+
+    },
+
     actions: {
 
-        fetchAll({state}, page = 1) {
+        fetchAll({commit}, page = 1) {
 
-            return new Promise((resolve, reject) => {
-                axios.get(`/admin/articles?page=${page}`)
-                     .then(({data}) => {
-                         state.articles = data;
-                         resolve();
-                     })
-                     .catch(() => reject({message: `Unable to fetch page ${page} of articles`}));
-            });
+            return fetchArticles(page)
+                .then(articles => commit('setArticles', articles));
         },
 
-        fetchArticle({state, dispatch}, id) {
-            let article = state.articles.find(art => art.id == id);
-
-            if (article) {
-                return Promise.resolve(article);
-            }
-
-            return new Promise((resolve, reject) => {
-                dispatch('fetchAll')
-                    .then(() => {
-                        article = state.articles.find(art => art.id == id);
-                        if (article) {
-                            resolve(article);
-                        } else {
-                            reject({message: `Article #${id} not found`});
-                        }
-                    })
-                    .catch(() => reject({message: 'There was an error fetching articles.'}));
-            });
-        },
-
-        fetchCategories({state}) {
-            return new Promise((resolve, reject) => {
-                axios.get("/admin/categories")
-                     .then(({data}) => {
-                         state.categories = data;
-                         resolve();
-                     })
-                     .catch(() => reject({message: 'Unable to fetch categories'}));
-            });
+        fetchCategories({commit}) {
+            return fetchCategories()
+                .then(categories => commit('setCategories', categories))
         },
 
         setCategories({state, dispatch}, {article_id, category_ids}) {
-            return new Promise((resolve, reject) => {
-                axios.post(`/admin/articles/${article_id}/categories`, {category_ids})
-                     .then(() => {
-                         resolve();
-                     })
-                     .catch(({response}) => reject(response));
-            });
+            return setArticleCategories(article_id, category_ids);
         },
 
-        createArticle({state, dispatch}, formData) {
-            return new Promise((resolve, reject) => {
-                axios.post("/admin/articles", formData)
-                     .then(({data}) => {
-                         dispatch('fetchAll').catch(() => {
-                         });
-                         resolve(data);
-                     })
-                     .catch(({response}) => reject(response));
-            });
-        },
-
-        getTranslationById({}, id) {
-            return new Promise((resolve, reject) => {
-                axios.get(`/admin/translations/${id}`)
-                     .then(({data}) => resolve(data))
-                     .catch(({response}) => reject(response));
-            });
-        },
-
-        saveTranslation({}, {id, formData}) {
-            return new Promise((resolve, reject) => {
-                axios.post(`/admin/translations/${id}`, formData)
-                     .then(() => resolve())
-                     .catch(({response}) => reject(response));
-            });
-        },
-
-        addTranslation({dispatch}, {article_id, lang, title}) {
-            return new Promise((resolve, reject) => {
-                axios.post(`/admin/articles/${article_id}/translations`, {lang, title})
-                     .then(({data}) => {
-                         dispatch('fetchAll').catch(() => {
-                         });
-                         resolve(data);
-                     })
-                     .catch(({response}) => reject(response));
-            });
-        },
-
-        publishTranslation({dispatch}, formData) {
-            return new Promise((resolve, reject) => {
-                axios.post("/admin/published-translations", formData)
-                     .then(({data}) => {
-                         dispatch('fetchAll').catch(() => {
-                         });
-                         resolve(data);
-                     })
-                     .catch(({response}) => reject(response));
-            });
-
-        },
-
-        retractTranslation({dispatch}, id) {
-            return new Promise((resolve, reject) => {
-                axios.delete(`/admin/published-translations/${id}`)
-                     .then(({data}) => {
-                         dispatch('fetchAll').catch(() => {
-                         });
-                         resolve(data);
-                     })
-                     .catch(({response}) => reject(response));
-            });
-
-        },
-
-        addCategory({dispatch}, formData) {
-            return new Promise((resolve, reject) => {
-                axios.post("/admin/categories", formData)
-                     .then(() => {
-                         dispatch('fetchCategories').catch(() => {
-                         });
-                         resolve({message: 'Category has been successfully added.'});
-                     })
-                     .catch(({response}) => reject(response));
-            })
-        },
-
-        updateCategory({dispatch}, {id, formData}) {
-            return new Promise((resolve, reject) => {
-                axios.post(`/admin/categories/${id}`, formData)
-                     .then(() => {
-                         dispatch('fetchCategories').catch(() => {
-                         });
-                         resolve({message: 'Category has been successfully updated.'});
-                     })
-                     .catch(({response}) => reject(response));
-            })
-        },
-
-        removeCategory({dispatch}, id) {
-            return new Promise((resolve, reject) => {
-                axios.delete(`/admin/categories/${id}`)
-                     .then(() => {
-                         dispatch('fetchCategories');
-                         resolve({message: 'Category has been removed.'});
-                     })
-                     .catch(() => reject());
-            });
+        createArticle({dispatch}, formData) {
+            return createArticle(formData)
+                .then(article => {
+                    dispatch('fetchAll').catch(() => notify.error);
+                    return article;
+                });
         },
 
         searchArticles({}, title) {
-            return new Promise((resolve, reject) => {
-                axios.get(`/admin/search/articles?query=${title}`)
-                     .then(({data}) => resolve(data))
-                     .catch(() => reject({message: 'Unable to search articles'}));
-            });
-
-        },
-
-        fetchAllTags({state}) {
-            return new Promise((resolve, reject) => {
-               axios.get("/admin/tags")
-                   .then(({data}) => {
-                       state.tags = data;
-                       resolve();
-                   })
-                   .catch(() => reject({message: 'Unable to fetch tags'}));
-            });
-        },
-
-        fetchTranslationsForTag({}, tag_id) {
-            return new Promise((resolve, reject) => {
-               axios.get(`/admin/tags/${tag_id}/translations`)
-                   .then(({data}) => resolve(data))
-                   .catch(() => reject({message: 'Unable to get tagged articles.'}));
-            });
-        },
-
-        deleteTags({dispatch}, tag_ids) {
-            return new Promise((resolve, reject) => {
-                axios.delete("/admin/tags", {data: {tag_ids}})
-                    .then(() => {
-                        dispatch('fetchAllTags').catch(notify.error);
-                        resolve({message: 'The tags have been deleted.'});
-                    })
-                    .catch(() => reject({message: 'Unable to delete selected tags'}));
-            });
+            return searchArticles(title);
         },
 
         deleteArticle({dispatch}, id) {
-            return new Promise((resolve, reject) => {
-               axios.delete(`/admin/articles/${id}`)
-                   .then(() => {
-                       dispatch('fetchAll').catch(notify.error);
-                       resolve();
-                   })
-                   .catch(() => reject({message: 'Unable to delete article'}));
-            });
-        }
+            return deleteArticle(id)
+                .then(() => dispatch('fetchAll').catch(notify.error));
+        },
+
+        getTranslationById({}, id) {
+            return getTranslationById(id);
+        },
+
+        saveTranslation({}, {id, formData}) {
+            return saveTranslation(id, formData);
+        },
+
+        addTranslation({dispatch}, {article_id, lang, title}) {
+            return addArticleTranslation(article_id, lang, title)
+                .then(translation => {
+                    dispatch('fetchAll').catch(() => notify.error);
+                    return translation;
+                });
+        },
+
+        publishTranslation({dispatch}, formData) {
+            return publishTranslation(formData)
+                .then(translation => {
+                    dispatch('fetchAll').catch(notify.error);
+                    return translation;
+                });
+        },
+
+        retractTranslation({dispatch}, id) {
+            return retractTranslation(id)
+                .then(translation => {
+                    dispatch('fetchAll').catch(notify.error);
+                    return translation;
+                })
+        },
+
+        addCategory({dispatch}, formData) {
+            return addCategory(formData)
+                .then(message => {
+                    dispatch('fetchCategories').catch(notify.error);
+                    return message;
+                });
+        },
+
+        updateCategory({dispatch}, {id, formData}) {
+            return updateCategory(id, formData)
+                .then(message => {
+                    dispatch('fetchCategories').catch(notify.error);
+                    return message;
+                });
+        },
+
+        removeCategory({dispatch}, id) {
+            return removeCategory(id)
+                .then(message => {
+                    dispatch('fetchCategories').catch(notify.error);
+                    return message;
+                });
+        },
+
+        fetchAllTags({commit}) {
+            return fetchTags()
+                .then(tags => commit('setTags', tags));
+        },
+
+        fetchTranslationsForTag({}, tag_id) {
+            return translationsForTag(tag_id);
+        },
+
+        deleteTags({dispatch}, tag_ids) {
+            return deleteTags(tag_ids)
+                .then(message => {
+                    dispatch('fetchAllTags').catch(notify.error);
+                    return message;
+                });
+        },
     }
 }

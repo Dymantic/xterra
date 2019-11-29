@@ -99,7 +99,9 @@
                             .catch(notify.error);
                         this.showForm = false;
                     })
-                    .catch(console.log)
+                    .catch(({status, data}) => {
+                        notify.error({message: 'Unable to set categories'});
+                    })
                     .then(() => this.waiting = false);
             }
         }
