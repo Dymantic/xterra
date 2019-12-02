@@ -13,7 +13,7 @@
                 <a v-for="tag in show_tags"
                    :key="tag.id"
                    class="block w-40 sm:w-48 type-b6 hover:text-red-500 my-3 text-center uppercase"
-                   :href="`/en/tags/${tag.slug}`">{{ tag.tag_name }}</a>
+                   :href="`/${safe_lang}/tags/${tag.slug}`">{{ tag.tag_name }}</a>
             </div>
         </div>
 
