@@ -58,7 +58,7 @@
             <p class="type-b4 text-grey-500">{{ trans('blog-show.tags.title') }}:</p>
             <div class="">
                 @foreach($article['tags'] as $tag)
-                    <a class="inline-block uppercase text-grey-500 hover:text-red-500 type-b6 mr-6 mb-6 whitespace-no-wrap" href="/tags/{{ $tag['slug'] }}">{{ $tag['tag_name'] }}</a>
+                    <a class="inline-block uppercase text-grey-500 hover:text-red-500 type-b6 mr-6 mb-6 whitespace-no-wrap" href="/tags/{{ $tag['id'] }}/{{ $tag['slug'] }}">{{ $tag['tag_name'] }}</a>
                 @endforeach
             </div>
         </div>

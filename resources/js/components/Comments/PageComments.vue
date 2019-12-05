@@ -43,15 +43,19 @@
                 <div v-else>
                     <p class="text-lg font-bold mb-6">{{ trans('flagging.title') }} {{ flagging.comment_author }}</p>
                     <p v-if="flagging_failed" class="mb-6 text-red-700 font-bold text-lg">{{ trans('flagging.error')}}</p>
-                    <div class="bg-grey-200 p-2 h-24 overflow-auto" v-html="flagging.body"></div>
-                    <p class="my-6">{{ trans('flagging.instruction') }}</p>
+
                     <form @submit.prevent="submitFlag">
-                        <div class="my-4" :class="{'border-b border-red-400': formErrors.reason}">
-                            <label class="font-bold" for="reason">{{ trans('flagging.label') }}</label>
-                            <span class="text-xs text-red-400" v-show="formErrors.reason">{{ formErrors.reason }}</span>
-                            <input autocomplete="off" type="text" name="reason" v-model="flagging.reason"
-                                   class="border w-full pl-1" id="reason">
+                        <div class="max-h-48 overflow-auto">
+                            <div class="bg-grey-200 p-2 h-12 lg:h-24 overflow-auto" v-html="flagging.body"></div>
+                            <p class="my-6">{{ trans('flagging.instruction') }}</p>
+                            <div class="my-4" :class="{'border-b border-red-400': formErrors.reason}">
+                                <label class="font-bold" for="reason">{{ trans('flagging.label') }}</label>
+                                <span class="text-xs text-red-400" v-show="formErrors.reason">{{ formErrors.reason }}</span>
+                                <input autocomplete="off" type="text" name="reason" v-model="flagging.reason"
+                                       class="border w-full pl-1" id="reason">
+                            </div>
                         </div>
+
                         <div class="flex justify-end mt-6">
                             <button type="button"
                                     @click="clearFlagging"

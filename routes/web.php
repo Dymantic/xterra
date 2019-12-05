@@ -22,7 +22,7 @@ Route::group([
 
         Route::get('categories/{slug}', 'PagesController@category');
 
-        Route::get('tags/{slug}', 'PagesController@tag');
+        Route::get('tags/{tag}/{slug?}', 'PagesController@tag');
 });
 
 

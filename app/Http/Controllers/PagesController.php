@@ -47,9 +47,8 @@ class PagesController extends Controller
         ]);
     }
 
-    public function tag($slug)
+    public function tag(Tag $tag)
     {
-        $tag = Tag::where('slug', $slug)->firstOrFail();
 
         return view('front.blog.index', [
             'posts' => app('live-posts')->for(app()->getLocale())->taggedAs($tag)->getPage(request('page', 1)),
