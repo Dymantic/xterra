@@ -17,7 +17,7 @@
     @endif
 
     @include('front.partials.og-meta', [
-        'ogImage' => $article['title_image']['share'],
+        'ogImage' => url($article['title_image']['share']),
         'ogTitle' => $article['title'],
         'ogDescription' => $article['description'],
     ])
