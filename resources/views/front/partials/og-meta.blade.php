@@ -1,4 +1,4 @@
-<meta name="og:image" content="{{ $ogImage ?? url('/images/XTERRA_FB_page.jpg') }}"/>
+<meta name="og:image" content="{{ $ogImage ?? url('/images/XTERRA_FB_Page.jpg') }}"/>
 <meta name="og:url" content="{{ Request::url() }}"/>
 <meta name="og:title" content="{{ $ogTitle }}"/>
 <meta name="og:site_name" content="XTERRA TAIWAN Blog"/>
