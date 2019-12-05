@@ -36,6 +36,10 @@ return [
 
     'facebook' => [
         'app_id' => env('FB_APP_ID'),
+    ],
+
+    'google' => [
+        'analytics_id' => env('GA_TRACKING_ID')
     ]
 
 ];
