@@ -20,6 +20,14 @@ class Reply extends Model
         return $this->morphOne(FlaggedComment::class, 'flaggable');
     }
 
+    public function safeDelete()
+    {
+        if($this->flagged) {
+            $this->flagged->delete();
+        }
+        return $this->delete();
+    }
+
     public function asInfoForReview()
     {
         return [

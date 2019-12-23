@@ -24,6 +24,6 @@ class RepliesController extends Controller
 
     public function destroy(Reply $reply)
     {
-        $reply->delete();
+        $reply->safeDelete();
     }
 }

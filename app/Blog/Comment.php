@@ -33,6 +33,9 @@ class Comment extends Model
 
     public function safeDelete()
     {
+        if($this->flagged) {
+            $this->flagged->delete();
+        }
         $this->replies->each->delete();
         $this->delete();
     }
