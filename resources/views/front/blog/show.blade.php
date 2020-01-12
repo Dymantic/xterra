@@ -31,8 +31,8 @@
         <div class="mt-0 sm:mt-12 relative">
             <img src="{{ $article['title_image']['web'] }}" class="w-full"
                  alt="">
-            <div class="bg-grey-700 sm:bg-tinted text-white sm:absolute bottom-0 w-full py-4 sm:py-2 px-4">
-                <h1 class="type-h1 my-4">{{ $article['title'] }}</h1>
+            <div class="bg-grey-700 sm:bg-tinted text-white sm:absolute bottom-0 w-full py-2 md:py-4  px-4">
+                <h1 class="type-h1 my-0 md:my-4">{{ $article['title'] }}</h1>
             </div>
         </div>
         <div class="flex justify-between items-center px-4 border-b-2 border-grey-300 mb-10">
