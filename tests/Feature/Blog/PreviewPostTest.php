@@ -24,9 +24,13 @@ class PreviewPostTest extends TestCase
         $response = $this->asAdmin()->get("/admin/pages/previews/{$translation->id}");
         $response->assertStatus(200);
 
-        $response_data = $response->original->getData();
+        $response_data = $response->original->getData()['article'];
+        $translation_data = $translation->toArray();
 
-        $this->assertArraySubset($translation->toArray(), $response_data['article']);
+        collect($translation_data)->each(function($value, $key) use ($response_data) {
+           $this->assertArrayHasKey($key, $response_data);
+           $this->assertEquals($value, $response_data[$key]);
+        });
     }
 
     /**
