@@ -95,6 +95,14 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::delete('tags', 'TagsController@destroy');
 
     Route::get('tags/{tag}/translations', 'TagTranslationsController@index');
+
+    Route::post('events', 'EventsController@store');
+    Route::post('events/{event}/general-info', 'EventGeneralInfoController@update');
+
+    Route::post('events/{event}/races', 'EventRacesController@store');
+
+    Route::post('races/{race}', 'EventRacesController@update');
+    Route::delete('races/{race}', 'EventRacesController@delete');
 });
 
 Route::group([
