@@ -39,6 +39,11 @@ class ActivityInfo
         return new self(array_merge($data, ['is_race' => true]));
     }
 
+    public static function forActivity($data): self
+    {
+        return new self(array_merge($data, ['is_race' => false]));
+    }
+
     public function toArray(): array
     {
         return [

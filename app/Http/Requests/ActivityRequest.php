@@ -34,4 +34,14 @@ class ActivityRequest extends FormRequest
             'category',
         ]));
     }
+
+    public function activityInfo(): ActivityInfo
+    {
+        return ActivityInfo::forActivity($this->all([
+            'name',
+            'distance',
+            'description',
+            'category',
+        ]));
+    }
 }

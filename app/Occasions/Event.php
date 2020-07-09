@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class Event extends Model
 {
+    use HasSchedule;
+
     protected $fillable = [
         'name',
         'slug',
@@ -55,7 +57,12 @@ class Event extends Model
         return $this->hasMany(Activity::class);
     }
 
-    public function addRace(ActivityInfo $info)
+    public function addRace(ActivityInfo $info): Activity
+    {
+        return $this->activities()->create($info->toArray());
+    }
+
+    public function addActivity(ActivityInfo $info): Activity
     {
         return $this->activities()->create($info->toArray());
     }
