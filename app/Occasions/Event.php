@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Event extends Model
 {
-    use HasSchedule;
+    use HasSchedule, HasFees, HasPrizes, HasTravelRoutes;
 
     protected $fillable = [
         'name',

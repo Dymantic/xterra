@@ -109,6 +109,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('events/{event}/schedule', 'EventScheduleController@update');
     Route::delete('events/{event}/schedule', 'EventScheduleController@destroy');
+
+    Route::post('events/{event}/fees', 'EventFeesController@update');
+    Route::delete('events/{event}/fees', 'EventFeesController@destroy');
+
+    Route::post('events/{event}/prizes', 'EventPrizesController@update');
+    Route::delete('events/{event}/prizes', 'EventPrizesController@destroy');
+
+    Route::post('events/{event}/travel-routes', 'EventTravelRoutesController@store');
+    Route::post('travel-routes/{route}', 'EventTravelRoutesController@update');
+    Route::delete('travel-routes/{route}', 'EventTravelRoutesController@delete');
 });
 
 Route::group([
