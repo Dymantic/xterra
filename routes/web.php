@@ -119,6 +119,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('events/{event}/travel-routes', 'EventTravelRoutesController@store');
     Route::post('travel-routes/{route}', 'EventTravelRoutesController@update');
     Route::delete('travel-routes/{route}', 'EventTravelRoutesController@delete');
+
+    Route::post('events/{event}/accommodation', 'EventAccommodationsController@store');
+    Route::post('accommodations/{accommodation}', 'EventAccommodationsController@update');
+    Route::delete('accommodations/{accommodation}', 'EventAccommodationsController@delete');
 });
 
 Route::group([
