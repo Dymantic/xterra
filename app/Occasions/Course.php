@@ -4,6 +4,7 @@ namespace App\Occasions;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -40,6 +41,17 @@ class Course extends Model implements HasMedia
 
         $this->gpx_filename = $path;
         $this->gpx_disk = self::GPX_DISK;
+        $this->save();
+    }
+
+    public function clearGPXFile()
+    {
+        if(Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
+            Storage::disk($this->gpx_disk)->delete($this->gpx_filename);
+        }
+
+        $this->gpx_filename = null;
+        $this->gpx_disk = null;
         $this->save();
     }
 

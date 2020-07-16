@@ -59,6 +59,24 @@ class EventCoursesTest extends TestCase
     /**
      *@test
      */
+    public function can_clear_gpx_file()
+    {
+        Storage::fake('admin_uploads');
+
+        $course = factory(Course::class)->create();
+        $course->setGPXFile(UploadedFile::fake()->create('test_course.gpx'));
+        $filepath = $course->gpx_filename;
+
+        $course->clearGPXFile();
+
+        Storage::disk('admin_uploads')->assertMissing($filepath);
+        $this->assertNull($course->fresh()->gpx_filename);
+        $this->assertNull($course->fresh()->gpx_disk);
+    }
+
+    /**
+     *@test
+     */
     public function add_image_to_course()
     {
         Storage::fake('media');

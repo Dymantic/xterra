@@ -16,4 +16,9 @@ class CourseGPXFileController extends Controller
 
         $course->setGPXFile(request('gpx_file'));
     }
+
+    public function destroy(Course $course)
+    {
+        $course->clearGPXFile();
+    }
 }

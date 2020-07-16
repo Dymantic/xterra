@@ -3,11 +3,15 @@
 namespace App\Occasions;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Event extends Model
 {
     use HasActivities, HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation, HasCourses;
+
+    const TRAVEL_GUIDE_DISK = 'admin_uploads';
 
     protected $fillable = [
         'name',
@@ -62,6 +66,26 @@ class Event extends Model
     public function retract()
     {
         $this->is_public = false;
+        $this->save();
+    }
+
+    public function setTravelGuide(UploadedFile $file)
+    {
+        $path = $file->store('travel', self::TRAVEL_GUIDE_DISK);
+
+        $this->travel_guide = $path;
+        $this->travel_guide_disk = self::TRAVEL_GUIDE_DISK;
+        $this->save();
+    }
+
+    public function clearTravelGuide()
+    {
+        if (Storage::disk($this->travel_guide_disk)->exists($this->travel_guide)) {
+            Storage::disk($this->travel_guide_disk)->delete($this->travel_guide);
+        }
+
+        $this->travel_guide = null;
+        $this->travel_guide_disk = null;
         $this->save();
     }
 }

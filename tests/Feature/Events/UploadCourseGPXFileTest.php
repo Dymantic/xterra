@@ -45,6 +45,14 @@ class UploadCourseGPXFileTest extends TestCase
     /**
      *@test
      */
+    public function the_upload_must_be_a_file()
+    {
+        $this->assertUploadIsInvalid(['gpx_file' => 'not-a-file']);
+    }
+
+    /**
+     *@test
+     */
     public function the_gpx_file_must_be_a_valid_gpx_file()
     {
         $this->assertUploadIsInvalid(['gpx_file' => UploadedFile::fake()->create('not-a-gpx-file.txt')]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Occasions\Course;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\Models\Media;
 
 class CourseImagesController extends Controller
 {
@@ -15,5 +16,12 @@ class CourseImagesController extends Controller
         ]);
 
         $course->addImage(request('image'));
+    }
+
+    public function destroy(Course $course, Media $media)
+    {
+        if($media->model->is($course)) {
+            $media->delete();
+        }
     }
 }

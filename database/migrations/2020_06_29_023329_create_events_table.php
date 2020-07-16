@@ -27,6 +27,8 @@ class CreateEventsTable extends Migration
             $table->string('registration_link')->nullable();
             $table->json('overview');
             $table->string('results_link')->nullable();
+            $table->string('travel_guide')->nullable();
+            $table->string('travel_guide_disk')->nullable();
             $table->timestamps();
         });
     }

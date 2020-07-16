@@ -6,7 +6,9 @@ use App\DatePresenter;
 use App\Occasions\Event;
 use App\Occasions\GeneralEventInfo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
 
@@ -88,5 +90,40 @@ class EventsTest extends TestCase
         $event->retract();
 
         $this->assertFalse($event->fresh()->is_public);
+    }
+
+    /**
+     *@test
+     */
+    public function can_set_a_travel_guide_on_event()
+    {
+        Storage::fake('admin_uploads');
+        $event = factory(Event::class)->create();
+        $guide = UploadedFile::fake()->create('test_doc.pdf');
+
+        $event->setTravelGuide($guide);
+
+        Storage::disk('admin_uploads')->assertExists($guide->hashName('travel'));
+
+        $this->assertEquals($guide->hashName('travel'), $event->fresh()->travel_guide);
+        $this->assertEquals('admin_uploads', $event->fresh()->travel_guide_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function can_clear_a_travel_guide()
+    {
+        Storage::fake('admin_uploads');
+        $event = factory(Event::class)->create();
+        $guide = UploadedFile::fake()->create('test_doc.pdf');
+
+        $event->setTravelGuide($guide);
+
+        $event->clearTravelGuide();
+
+        Storage::disk('admin_uploads')->assertMissing($guide->hashName('travel'));
+        $this->assertNull($event->fresh()->travel_guide);
+        $this->assertNull($event->fresh()->travel_guide_disk);
     }
 }

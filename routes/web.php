@@ -120,6 +120,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('travel-routes/{route}', 'EventTravelRoutesController@update');
     Route::delete('travel-routes/{route}', 'EventTravelRoutesController@delete');
 
+    Route::post('events/{event}/travel-guide', 'EventTravelGuideController@store');
+    Route::delete('events/{event}/travel-guide', 'EventTravelGuideController@destroy');
+
     Route::post('events/{event}/accommodation', 'EventAccommodationsController@store');
     Route::post('accommodations/{accommodation}', 'EventAccommodationsController@update');
     Route::delete('accommodations/{accommodation}', 'EventAccommodationsController@delete');
@@ -128,8 +131,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('courses/{course}', 'EventCoursesController@update');
 
     Route::post('courses/{course}/gpx-file', 'CourseGPXFileController@store');
+    Route::delete('courses/{course}/gpx-file', 'CourseGPXFileController@destroy');
 
     Route::post('courses/{course}/images', 'CourseImagesController@store');
+    Route::delete('courses/{course}/images/{media}', 'CourseImagesController@destroy');
 
     Route::post('published-events', 'PublishedEventsController@store');
 });
