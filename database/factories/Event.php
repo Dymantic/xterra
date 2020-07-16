@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 
 $factory->define(Event::class, function (Faker $faker) {
     return [
+        'slug' => \Illuminate\Support\Str::uuid()->toString(),
         'name' => ['en' => $faker->words(3, true), 'zh' => $faker->words(3, true)],
         'location' => ['en' => $faker->city, 'zh' => $faker->city],
         'venue_name' => ['en' => $faker->words(3, true), 'zh' => $faker->words(3, true)],
@@ -30,4 +31,12 @@ $factory->state(Event::class, 'empty', [
     'start' => null,
     'end' => null,
     'registration_link' => null,
+]);
+
+$factory->state(Event::class, 'private', [
+    'is_public' => false,
+]);
+
+$factory->state(Event::class, 'public', [
+    'is_public' => true,
 ]);

@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class Event extends Model
 {
-    use HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation;
+    use HasActivities, HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation, HasCourses;
 
     protected $fillable = [
         'name',
@@ -23,11 +23,12 @@ class Event extends Model
     ];
 
     protected $casts = [
-        'name' => 'array',
-        'location' => 'array',
-        'venue_name' => 'array',
+        'name'          => 'array',
+        'location'      => 'array',
+        'venue_name'    => 'array',
         'venue_address' => 'array',
-        'overview' => 'array',
+        'overview'      => 'array',
+        'is_public'     => 'boolean'
     ];
 
     protected $dates = ['start', 'end'];
@@ -35,15 +36,15 @@ class Event extends Model
     public static function createWithName($name): Event
     {
         return static::create([
-            'name' => [
+            'name'          => [
                 'en' => $name['en'] ?? '',
                 'zh' => $name['zh'] ?? '',
             ],
-            'slug' => Str::uuid()->toString(),
-            'location' => ['en' => '', 'zh' => ''],
-            'venue_name' => ['en' => '', 'zh' => ''],
+            'slug'          => Str::uuid()->toString(),
+            'location'      => ['en' => '', 'zh' => ''],
+            'venue_name'    => ['en' => '', 'zh' => ''],
             'venue_address' => ['en' => '', 'zh' => ''],
-            'overview' => ['en' => '', 'zh' => ''],
+            'overview'      => ['en' => '', 'zh' => ''],
         ]);
     }
 
@@ -52,18 +53,15 @@ class Event extends Model
         $this->update($info->toArray());
     }
 
-    public function activities()
+    public function publish()
     {
-        return $this->hasMany(Activity::class);
+        $this->is_public = true;
+        $this->save();
     }
 
-    public function addRace(ActivityInfo $info): Activity
+    public function retract()
     {
-        return $this->activities()->create($info->toArray());
-    }
-
-    public function addActivity(ActivityInfo $info): Activity
-    {
-        return $this->activities()->create($info->toArray());
+        $this->is_public = false;
+        $this->save();
     }
 }

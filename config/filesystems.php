@@ -62,6 +62,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'admin_uploads' => [
+            'driver' => 'local',
+            'root' => public_path('admin_uploads'),
+            'url' => env('APP_URL') . '/admin_uploads',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

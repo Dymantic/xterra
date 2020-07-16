@@ -63,4 +63,30 @@ class EventsTest extends TestCase
         $this->assertEquals('https://test.test/registration', $event->registration_link);
 
     }
+
+    /**
+     *@test
+     */
+    public function can_publish_an_event()
+    {
+        $event = factory(Event::class)->state('private')->create();
+        $this->assertFalse($event->fresh()->is_public);
+
+        $event->publish();
+
+        $this->assertTrue($event->fresh()->is_public);
+    }
+
+    /**
+     *@test
+     */
+    public function can_retract_an_event()
+    {
+        $event = factory(Event::class)->state('public')->create();
+        $this->assertTrue($event->fresh()->is_public);
+
+        $event->retract();
+
+        $this->assertFalse($event->fresh()->is_public);
+    }
 }

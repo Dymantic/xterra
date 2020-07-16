@@ -17,6 +17,7 @@ class CreateEventsTable extends Migration
             $table->id();
             $table->json('name');
             $table->uuid('slug')->nullable();
+            $table->boolean('is_public')->default(0);
             $table->json('location');
             $table->json('venue_name');
             $table->json('venue_address');

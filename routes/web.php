@@ -123,6 +123,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('events/{event}/accommodation', 'EventAccommodationsController@store');
     Route::post('accommodations/{accommodation}', 'EventAccommodationsController@update');
     Route::delete('accommodations/{accommodation}', 'EventAccommodationsController@delete');
+
+    Route::post('events/{event}/courses', 'EventCoursesController@store');
+    Route::post('courses/{course}', 'EventCoursesController@update');
+
+    Route::post('courses/{course}/gpx-file', 'CourseGPXFileController@store');
+
+    Route::post('courses/{course}/images', 'CourseImagesController@store');
+
+    Route::post('published-events', 'PublishedEventsController@store');
 });
 
 Route::group([

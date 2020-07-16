@@ -1,0 +1,97 @@
+<?php
+
+
+namespace Tests\Unit\Events;
+
+
+use App\Occasions\Course;
+use App\Occasions\CourseInfo;
+use App\Occasions\Event;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Spatie\MediaLibrary\Models\Media;
+use Tests\TestCase;
+
+class EventCoursesTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /**
+     *@test
+     */
+    public function add_a_course_to_an_event()
+    {
+        $event = factory(Event::class)->create();
+
+        $course_info = new CourseInfo([
+            'name'        => ['en' => "test name", 'zh' => "zh test name"],
+            'distance'    => ['en' => "test distance", 'zh' => "zh test distance"],
+            'description' => ['en' => "test description", 'zh' => "zh test description"],
+        ]);
+
+        $course = $event->addCourse($course_info);
+
+        $this->assertInstanceOf(Course::class, $course);
+        $this->assertEquals(['en' => "test name", 'zh' => "zh test name"], $course->name);
+        $this->assertEquals(['en' => "test distance", 'zh' => "zh test distance"], $course->distance);
+        $this->assertEquals(['en' => "test description", 'zh' => "zh test description"], $course->description);
+    }
+
+    /**
+     *@test
+     */
+    public function can_set_gpx_file_for_a_course()
+    {
+        Storage::fake('admin_uploads');
+
+        $course = factory(Course::class)->create();
+        $file = UploadedFile::fake()->create('test_course.gpx');
+
+        $course->setGPXFile($file);
+
+        Storage::disk('admin_uploads')->assertExists($file->hashName('gpx'));
+        $this->assertEquals($file->hashName('gpx'), $course->gpx_filename);
+        $this->assertEquals('admin_uploads', $course->gpx_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function add_image_to_course()
+    {
+        Storage::fake('media');
+        $course = factory(Course::class)->create();
+
+        $image = $course->addImage(UploadedFile::fake()->image('test_pic.jpg'));
+
+        $this->assertInstanceOf(Media::class, $image);
+        $this->assertTrue($course->getFirstMedia(Course::IMAGES)->is($image));
+
+        $this->assertTrue($image->fresh()->hasGeneratedConversion('thumb'));
+        $this->assertTrue($image->fresh()->hasGeneratedConversion('web'));
+
+        Storage::disk('media')->assertExists(Str::after($image->getUrl(), '/media'));
+        Storage::disk('media')->assertExists(Str::after($image->getUrl('thumb'), '/media'));
+        Storage::disk('media')->assertExists(Str::after($image->getUrl('web'), '/media'));
+    }
+
+    /**
+     *@test
+     */
+    public function order_position_of_course_images()
+    {
+        Storage::fake('media');
+        $course = factory(Course::class)->create();
+
+        $imageA = $course->addImage(UploadedFile::fake()->image('test_picA.jpg'));
+        $imageB = $course->addImage(UploadedFile::fake()->image('test_picB.jpg'));
+        $imageC = $course->addImage(UploadedFile::fake()->image('test_picC.jpg'));
+        $imageD = $course->addImage(UploadedFile::fake()->image('test_picD.jpg'));
+
+        $course->setImagePositions([$imageC->id, $imageB->id, $imageD->id, $imageA->id]);
+
+        $this->assertSame(0, $imageC->fresh()->getCustomProperty('position'));
+    }
+}
