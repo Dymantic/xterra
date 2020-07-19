@@ -135,8 +135,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('courses/{course}/images', 'CourseImagesController@store');
     Route::delete('courses/{course}/images/{media}', 'CourseImagesController@destroy');
+    Route::post('courses/{course}/images-order', 'CourseImagesOrderController@update');
 
     Route::post('published-events', 'PublishedEventsController@store');
+
+    Route::post('events/{event}/youtube-videos', 'EventYoutubeVideosController@store');
+
+    Route::post('embeddable-videos/{video}', 'EmbeddableVideosController@update');
+    Route::delete('embeddable-videos/{video}', 'EmbeddableVideosController@delete');
+
+    Route::post('galleries', 'GalleriesController@store');
+    Route::post('galleries/{gallery}', 'GalleriesController@update');
+    Route::delete('galleries/{gallery}', 'GalleriesController@delete');
+    Route::post('galleries/{gallery}/images', 'GalleryImagesController@store');
+    Route::delete('galleries/{gallery}/images/{image}', 'GalleryImagesController@delete');
+    Route::post('galleries/{gallery}/image-order', 'GalleryImagesOrderController@update');
 });
 
 Route::group([

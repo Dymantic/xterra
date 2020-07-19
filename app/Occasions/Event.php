@@ -2,6 +2,7 @@
 
 namespace App\Occasions;
 
+use App\Media\EmbeddableVideo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -87,5 +88,22 @@ class Event extends Model
         $this->travel_guide = null;
         $this->travel_guide_disk = null;
         $this->save();
+    }
+
+    public function embeddableVideos()
+    {
+        return $this->morphMany(EmbeddableVideo::class, 'videoed');
+    }
+
+    public function attachYoutubeVideo(string $video_id, array $title): EmbeddableVideo
+    {
+        return $this->embeddableVideos()->create([
+            'platform' => EmbeddableVideo::YOUTUBE,
+            'video_id' => $video_id,
+            'title' => [
+                'en' => $title['en'] ?? '',
+                'zh' => $title['zh'] ?? '',
+            ],
+        ]);
     }
 }
