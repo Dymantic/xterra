@@ -150,6 +150,31 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('galleries/{gallery}/images', 'GalleryImagesController@store');
     Route::delete('galleries/{gallery}/images/{image}', 'GalleryImagesController@delete');
     Route::post('galleries/{gallery}/image-order', 'GalleryImagesOrderController@update');
+
+    Route::post('coaches', 'CoachesController@store');
+    Route::post('coaches/{coach}', 'CoachesController@update');
+    Route::delete('coaches/{coach}', 'CoachesController@delete');
+
+    Route::post('published-coaches', 'PublishedCoachesController@store');
+    Route::delete('published-coaches/{coach}', 'PublishedCoachesController@destroy');
+
+    Route::post('coaches/{coach}/youtube-videos', 'CoachYoutubeVideosController@store');
+
+    Route::post('coaches/{coach}/profile-pic', 'CoachProfilePicController@store');
+    Route::delete('coaches/{coach}/profile-pic', 'CoachProfilePicController@destroy');
+
+    Route::post('ambassadors', 'AmbassadorsController@store');
+    Route::post('ambassadors/{ambassador}', 'AmbassadorsController@update');
+    Route::delete('ambassadors/{ambassador}', 'AmbassadorsController@delete');
+
+    Route::post('published-ambassadors', 'PublishedAmbassadorsController@store');
+    Route::delete('published-ambassadors/{ambassador}', 'PublishedAmbassadorsController@destroy');
+
+    Route::post('ambassadors/{ambassador}/youtube-videos', 'AmbassadorYoutubeVideosController@store');
+
+    Route::post('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@store');
+    Route::delete('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@destroy');
+
 });
 
 Route::group([

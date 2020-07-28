@@ -13,7 +13,7 @@ $factory->define(EmbeddableVideo::class, function (Faker $faker) {
         'videoed_type' => Event::class,
         'platform' => $faker->word,
         'video_id' => Str::random(10),
-        'title' => ['en' => $faker->sentence, 'zh' => $faker->sentence],
+        'title' => new \App\Translation(['en' => $faker->sentence, 'zh' => $faker->sentence]),
     ];
 });
 

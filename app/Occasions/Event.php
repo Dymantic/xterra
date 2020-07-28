@@ -2,7 +2,9 @@
 
 namespace App\Occasions;
 
+use App\HasEmbeddedVideos;
 use App\Media\EmbeddableVideo;
+use App\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -10,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Event extends Model
 {
-    use HasActivities, HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation, HasCourses;
+    use HasActivities, HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation, HasCourses, HasEmbeddedVideos;
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
 
@@ -90,20 +92,4 @@ class Event extends Model
         $this->save();
     }
 
-    public function embeddableVideos()
-    {
-        return $this->morphMany(EmbeddableVideo::class, 'videoed');
-    }
-
-    public function attachYoutubeVideo(string $video_id, array $title): EmbeddableVideo
-    {
-        return $this->embeddableVideos()->create([
-            'platform' => EmbeddableVideo::YOUTUBE,
-            'video_id' => $video_id,
-            'title' => [
-                'en' => $title['en'] ?? '',
-                'zh' => $title['zh'] ?? '',
-            ],
-        ]);
-    }
 }
