@@ -16,6 +16,8 @@ function initSlideShow() {
     }
 
     const images = document.querySelectorAll('.slideshow-slide > img');
+    const first_images = document.querySelector('.slideshow-slide:first-child').querySelectorAll('img');
+    [...first_images].forEach(i => i.style.opacity = "1");
 
     awaitImages(images)
         .then(() => [...images].forEach(i => i.style.opacity = "1"))
