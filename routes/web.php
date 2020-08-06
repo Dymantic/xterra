@@ -187,6 +187,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('promotions/{promotion}/image', 'PromotionImageController@store');
     Route::delete('promotions/{promotion}/image', 'PromotionImageController@destroy');
 
+    Route::post('pages', 'PagesController@store');
+    Route::post('pages/{page}', 'PagesController@update');
+    Route::delete('pages/{page}', 'PagesController@delete');
+
+    Route::post('pages/{page}/images', 'PageImagesController@store');
+
+    Route::post('published-pages', 'PublishedPagesController@store');
+    Route::delete('published-pages/{page}', 'PublishedPagesController@destroy');
+
 });
 
 Route::group([
