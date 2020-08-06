@@ -113,6 +113,12 @@ class Article extends Model implements HasMedia
              ->optimize()
              ->performOnCollections(static::TITLE_IMAGES);
 
+        $this->addMediaConversion('banner_mobile')
+             ->fit(Manipulations::FIT_CROP, 900, 900)
+             ->keepOriginalImageFormat()
+             ->optimize()
+             ->performOnCollections(static::TITLE_IMAGES);
+
         $this->addMediaConversion('share')
              ->fit(Manipulations::FIT_CROP, 1200, 630)
              ->keepOriginalImageFormat()

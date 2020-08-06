@@ -174,6 +174,7 @@ class SliderTest extends TestCase
                 'title'    => $translationC->title,
                 'intro'    => $translationC->intro,
                 'banner'   => $imgC->getUrl('banner'),
+                'banner_mobile'   => $imgC->getUrl('banner_mobile'),
                 'slug'     => $translationC->fullSlug,
             ],
             [
@@ -181,6 +182,7 @@ class SliderTest extends TestCase
                 'title'    => $translationA->title,
                 'intro'    => $translationA->intro,
                 'banner'   => $imgA->getUrl('banner'),
+                'banner_mobile'   => $imgA->getUrl('banner_mobile'),
                 'slug'     => $translationA->fullSlug,
             ],
             [
@@ -188,6 +190,7 @@ class SliderTest extends TestCase
                 'title'    => $translationD->title,
                 'intro'    => $translationD->intro,
                 'banner'   => $imgE->getUrl('banner'),
+                'banner_mobile'   => $imgE->getUrl('banner_mobile'),
                 'slug'     => $translationD->fullSlug,
             ],
             [
@@ -195,6 +198,7 @@ class SliderTest extends TestCase
                 'title'    => $translationB->title,
                 'intro'    => $translationB->intro,
                 'banner'   => $imgB->getUrl('banner'),
+                'banner_mobile'   => $imgB->getUrl('banner_mobile'),
                 'slug'     => $translationB->fullSlug,
             ],
             [
@@ -202,6 +206,7 @@ class SliderTest extends TestCase
                 'title'    => $translationE->title,
                 'intro'    => $translationE->intro,
                 'banner'   => $imgG->getUrl('banner'),
+                'banner_mobile'   => $imgG->getUrl('banner_mobile'),
                 'slug'     => $translationE->fullSlug,
             ],
         ];
@@ -212,6 +217,7 @@ class SliderTest extends TestCase
                 'title'    => $translationG->title,
                 'intro'    => $translationG->intro,
                 'banner'   => $imgC->getUrl('banner'),
+                'banner_mobile'   => $imgC->getUrl('banner_mobile'),
                 'slug'     => $translationG->fullSlug,
             ],
             [
@@ -219,6 +225,7 @@ class SliderTest extends TestCase
                 'title'    => $translationF->title,
                 'intro'    => $translationF->intro,
                 'banner'   => $imgA->getUrl('banner'),
+                'banner_mobile'   => $imgA->getUrl('banner_mobile'),
                 'slug'     => $translationF->fullSlug,
             ],
             [
@@ -226,6 +233,7 @@ class SliderTest extends TestCase
                 'title'    => $translationI->title,
                 'intro'    => $translationI->intro,
                 'banner'   => $imgE->getUrl('banner'),
+                'banner_mobile'   => $imgE->getUrl('banner_mobile'),
                 'slug'     => $translationI->fullSlug,
             ],
             [
@@ -233,6 +241,7 @@ class SliderTest extends TestCase
                 'title'    => $translationH->title,
                 'intro'    => $translationH->intro,
                 'banner'   => $imgD->getUrl('banner'),
+                'banner_mobile'   => $imgD->getUrl('banner_mobile'),
                 'slug'     => $translationH->fullSlug,
             ],
             [
@@ -240,6 +249,7 @@ class SliderTest extends TestCase
                 'title'    => $translationJ->title,
                 'intro'    => $translationJ->intro,
                 'banner'   => $imgF->getUrl('banner'),
+                'banner_mobile'   => $imgF->getUrl('banner_mobile'),
                 'slug'     => $translationJ->fullSlug,
             ],
         ];

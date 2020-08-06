@@ -78,6 +78,7 @@ class Slider
                         'title'    => $translation->title,
                         'intro'    => $translation->intro,
                         'banner'   => $translation->article->titleImage('banner'),
+                        'banner_mobile'   => $translation->article->titleImage('banner_mobile'),
                         'slug'     => $translation->fullSlug
                     ];
                 })->all();
