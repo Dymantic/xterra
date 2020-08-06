@@ -2,7 +2,7 @@
     <div class="relative slide-container">
         @foreach($slideshow as $slide)
             <div class="w-full h-full slideshow-slide relative">
-                <img  src="{{ $slide['banner'] }}" class="w-full h-full object-cover object-center opacity-0" style="transition: 3s;" srcset="{{ $slide['banner_mobile'] }} 900w, {{ $slide['banner'] }} 1800w"
+                <img  src="{{ $slide['banner'] }}" class="w-full h-full object-cover object-center opacity-0" style="transition: 3s;" srcset="{{ $slide['banner_mobile'] ?? $slide['banner'] }} 900w, {{ $slide['banner'] }} 1800w"
                      alt="">
 {{--                <img src="{{ $slide['banner_mobile'] }}" class="md:hidden w-full h-full object-cover object-center opacity-0" style="transition: 3s;"--}}
 {{--                     alt="">--}}
