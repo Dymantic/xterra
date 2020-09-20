@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Occasions\Course;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class CourseImagesOrderController extends Controller
 {

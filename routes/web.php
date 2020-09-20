@@ -96,8 +96,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::get('tags/{tag}/translations', 'TagTranslationsController@index');
 
+    Route::get('events', 'EventsController@index');
     Route::post('events', 'EventsController@store');
     Route::post('events/{event}/general-info', 'EventGeneralInfoController@update');
+    Route::post('events/{event}/overview', 'EventOverviewController@update');
+
+    Route::get('events/activity-categories', 'EventActivityCategoriesController@index');
 
     Route::post('events/{event}/races', 'EventRacesController@store');
     Route::post('races/{race}', 'EventRacesController@update');
@@ -129,6 +133,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('events/{event}/courses', 'EventCoursesController@store');
     Route::post('courses/{course}', 'EventCoursesController@update');
+    Route::delete('courses/{course}', 'EventCoursesController@delete');
 
     Route::post('courses/{course}/gpx-file', 'CourseGPXFileController@store');
     Route::delete('courses/{course}/gpx-file', 'CourseGPXFileController@destroy');
@@ -144,6 +149,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('embeddable-videos/{video}', 'EmbeddableVideosController@update');
     Route::delete('embeddable-videos/{video}', 'EmbeddableVideosController@delete');
 
+    Route::post('events/{event}/galleries', 'EventGalleriesController@store');
+    Route::delete('events/{event}/galleries/{gallery}', 'EventGalleriesController@destroy');
+
+    Route::post('events/{event}/banner-image', 'EventBannerImageController@store');
+    Route::delete('events/{event}/banner-image', 'EventBannerImageController@destroy');
+
+    Route::post('events/{event}/card-image', 'EventCardImageController@store');
+    Route::delete('events/{event}/card-image', 'EventCardImageController@destroy');
+
+    Route::get('galleries', 'GalleriesController@index');
     Route::post('galleries', 'GalleriesController@store');
     Route::post('galleries/{gallery}', 'GalleriesController@update');
     Route::delete('galleries/{gallery}', 'GalleriesController@delete');
@@ -175,6 +190,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@store');
     Route::delete('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@destroy');
 
+    Route::get('promotions', 'PromotionsController@index');
     Route::post('promotions', 'PromotionsController@store');
     Route::post('promotions/{promotion}', 'PromotionsController@update');
     Route::delete('promotions/{promotion}', 'PromotionsController@delete');
@@ -195,6 +211,35 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('published-pages', 'PublishedPagesController@store');
     Route::delete('published-pages/{page}', 'PublishedPagesController@destroy');
+
+    Route::get('campaigns', 'CampaignsController@index');
+    Route::post('campaigns', 'CampaignsController@store');
+    Route::post('campaigns/{campaign}', 'CampaignsController@update');
+
+    Route::post('campaigns/{campaign}/narrative', 'CampaignNarrativeController@update');
+
+    Route::post('campaigns/{campaign}/title-image', 'CampaignTitleImageController@store');
+    Route::delete('campaigns/{campaign}/title-image', 'CampaignTitleImageController@destroy');
+
+    Route::post('campaigns/{campaign}/narrative-images', 'CampaignNarrativeImagesController@store');
+
+    Route::post('campaigns/{campaign}/event', 'CampaignEventController@update');
+    Route::post('campaigns/{campaign}/promotion', 'CampaignPromotionController@update');
+
+    Route::post('campaigns/{campaign}/articles', 'CampaignArticlesController@store');
+    Route::delete('campaigns/{campaign}/articles/{article}', 'CampaignArticlesController@destroy');
+
+    Route::get('content-cards', 'ContentCardController@index');
+    Route::post('content-cards', 'ContentCardController@store');
+    Route::post('content-cards/{card}', 'ContentCardController@update');
+    Route::delete('content-cards/{card}', 'ContentCardController@delete');
+
+    Route::post('content-cards/{card}/image', 'ContentCardImageController@store');
+    Route::delete('content-cards/{card}/image', 'ContentCardImageController@destroy');
+
+    Route::post('article-content-cards', 'ArticleContentCardsController@store');
+    Route::post('event-content-cards', 'EventContentCardsController@store');
+    Route::post('promotion-content-cards', 'PromotionContentCardsController@store');
 
 });
 

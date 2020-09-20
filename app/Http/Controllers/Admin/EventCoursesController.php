@@ -19,4 +19,9 @@ class EventCoursesController extends Controller
     {
         $course->update($request->courseInfo()->toArray());
     }
+
+    public function delete(Course $course)
+    {
+        $course->delete();
+    }
 }

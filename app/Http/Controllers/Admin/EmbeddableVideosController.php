@@ -12,7 +12,7 @@ class EmbeddableVideosController extends Controller
 {
     public function update(EmbeddableVideo $video, EmbeddableVideoRequest $request)
     {
-        $video->updateTitle($request->videoTitle());
+        $video->updateInfo($request->video_id, $request->videoTitle());
     }
 
     public function delete(EmbeddableVideo $video)

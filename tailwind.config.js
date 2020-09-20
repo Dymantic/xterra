@@ -1,43 +1,51 @@
 module.exports = {
     theme: {
         extend: {
+            spacing: {
+                42: "10.5rem",
+                100: "25rem",
+                "60": "15rem",
+            },
             height: {
                 1: "0.2rem",
-                '80': '20rem',
+                "80": "20rem",
             },
             leading: {
-                tight: '1.2'
+                tight: "1.2",
+            },
+            lineHeight: {
+                zero: "0",
             },
             maxHeight: {
-                '48': '12rem',
+                "48": "12rem",
             },
             width: {
-                '80': '20rem',
-                '120': '30rem',
+                "80": "20rem",
+                "120": "30rem",
             },
             boxShadow: {
-                top: '0 3px 6px rgba(0,0,0,.4)',
+                top: "0 3px 6px rgba(0,0,0,.4)",
             },
             fontFamily: {
-                'heading': ['Barlow Condensed', 'sans-serif'],
-                'body': ['Source Sans Pro', 'sans-serif'],
-                'body-serif': ['Source Serif Pro', 'serif']
+                heading: ["Barlow Condensed", "sans-serif"],
+                body: ["Source Sans Pro", "sans-serif"],
+                "body-serif": ["Source Serif Pro", "serif"],
             },
             colors: {
-                'red-500': '#E5282D',
-                'red-700': '#BA0C2F',
-                'grey-700': '#2E2D2F',
-                'grey-500': '#727071',
-                'grey-200': '#EFEEEE',
-                'grey-300': '#EEEDED',
-                'tinted': 'rgba(0,0,0,0.4)',
-                'tinted-dark': 'rgba(0,0,0,0.7)',
-            }
-        }
+                "red-500": "#E5282D",
+                "red-700": "#BA0C2F",
+                "grey-700": "#2E2D2F",
+                "grey-500": "#727071",
+                "grey-200": "#EFEEEE",
+                "grey-300": "#EEEDED",
+                tinted: "rgba(0,0,0,0.4)",
+                "tinted-dark": "rgba(0,0,0,0.7)",
+            },
+        },
     },
     variants: {
-        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
-        opacity: ['responsive', 'hover', 'focus', 'group-hover'],
+        textColor: ["responsive", "hover", "focus", "group-hover"],
+        opacity: ["responsive", "hover", "focus", "group-hover"],
     },
-    plugins: []
+    plugins: [],
 };

@@ -28,6 +28,8 @@ class CreateGalleryTest extends TestCase
             'title'       => json_encode(['en' => "test title", 'zh' => "zh test title"]),
             'description' => json_encode(['en' => "test description", 'zh' => "zh test description"]),
         ]);
+
+        $this->assertNotNull($response->decodeResponseJson('id'));
     }
 
     /**

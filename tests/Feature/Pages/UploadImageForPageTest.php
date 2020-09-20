@@ -31,7 +31,7 @@ class UploadImageForPageTest extends TestCase
         $response->assertSuccessful();
 
         $this->assertCount(1, $page->getMedia(Page::CONTENT_IMAGES));
-        $image = $page->getFirstMedia();
+        $image = $page->getFirstMedia(Page::CONTENT_IMAGES);
 
         Storage::disk('media')->assertExists(Str::after($image->getUrl(), '/media'));
     }

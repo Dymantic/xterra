@@ -36,5 +36,6 @@ class Activity extends Model
         'name' => 'array',
         'distance' => 'array',
         'description' => 'array',
+        'is_race' => 'boolean'
     ];
 }

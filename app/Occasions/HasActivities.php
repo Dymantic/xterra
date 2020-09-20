@@ -20,4 +20,9 @@ trait HasActivities
     {
         return $this->activities()->create($info->toArray());
     }
+
+    public function listCategories(): array
+    {
+        return $this->activities->map(fn (Activity $activity) => $activity->category)->values()->all();
+    }
 }

@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class PromotionsController extends Controller
 {
+
+    public function index()
+    {
+        return Promotion::latest()->get()->map->toArray()->values()->all();
+    }
+
     public function store(PromotionRequest $request)
     {
-        Promotion::new($request->promotionInfo());
+        return Promotion::new($request->promotionInfo());
     }
 
     public function update(Promotion $promotion, PromotionRequest $request)

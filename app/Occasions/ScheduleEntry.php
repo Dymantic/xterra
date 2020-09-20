@@ -13,5 +13,5 @@ class ScheduleEntry extends Model
         'position',
     ];
 
-    protected $casts = ['item' => 'array'];
+    protected $casts = ['item' => 'array', 'time_of_day' => 'array'];
 }

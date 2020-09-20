@@ -2,17 +2,21 @@
 
 namespace App\Blog;
 
+use App\Media\Cardable;
+use App\Media\ContentCardInfo;
 use App\Slider\Slide;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
 
-class Article extends Model implements HasMedia
+class Article extends Model implements HasMedia, Cardable
 {
     use Sluggable, HasMediaTrait;
 
@@ -144,4 +148,24 @@ class Article extends Model implements HasMedia
     }
 
 
+    public function cardInfo(): ContentCardInfo
+    {
+        $this->load('translations');
+        $en = $this->translations->first(fn($t) => $t->language === 'en');
+        $zh = $this->translations->first(fn($t) => $t->language === 'zh');
+        $title_image = $this->getFirstMedia(self::TITLE_IMAGES);
+
+        return new ContentCardInfo([
+            'category' => [
+                'en' => Lang::get('content-cards.blog', [], 'en'),
+                'zh' => Lang::get('content-cards.blog', [], 'zh'),
+            ],
+            'title' => [
+                'en' => $en ? $en->title : '',
+                'zh' => $zh ? $zh->title : '',
+            ],
+            'link' => "/blog/{$this->slug}/",
+            'image_path' => $title_image ? Storage::disk('media')->path(Str::after($title_image->getUrl(), "/media/")) : '',
+        ]);
+    }
 }

@@ -37,6 +37,7 @@ class Course extends Model implements HasMedia
 
     public function setGPXFile(UploadedFile $file)
     {
+        $this->clearGPXFile();
         $path = $file->store('gpx', self::GPX_DISK);
 
         $this->gpx_filename = $path;
@@ -53,6 +54,15 @@ class Course extends Model implements HasMedia
         $this->gpx_filename = null;
         $this->gpx_disk = null;
         $this->save();
+    }
+
+    public function getGPXFileUrl(): string
+    {
+        if(Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
+            return sprintf("/%s/%s", $this->gpx_disk, $this->gpx_filename);
+        }
+
+        return '';
     }
 
     public function addImage(UploadedFile $file): Media
@@ -89,5 +99,24 @@ class Course extends Model implements HasMedia
     {
         $image->setCustomProperty('position', $position);
         $image->save();
+    }
+
+    public function toArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'distance' => $this->distance,
+            'description' => $this->description,
+            'gallery' => $this->getMedia(self::IMAGES)->map(fn (Media $image) => [
+                'id' => $image->id,
+                'thumb' => $image->getUrl('thumb'),
+                'web' => $image->getUrl('web'),
+                'original' => $image->getUrl(),
+                'position' => $image->getCustomProperty('position')
+            ])->sortBy('position')->values()->all(),
+            'gpx_file' => $this->getGPXFileUrl(),
+
+        ];
     }
 }

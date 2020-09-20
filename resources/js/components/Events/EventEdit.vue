@@ -1,0 +1,157 @@
+<template>
+    <page v-if="pageEvent">
+        <page-header :title="page_title">
+            <router-link :to="`/events/${pageEvent.id}`"
+                >&larr; Back</router-link
+            >
+        </page-header>
+        <div class="flex">
+            <div class="w-64 h-64 pt-6 sticky top-0">
+                <div>
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/general`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >General Info</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/images`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Images</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/overview`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Writeup</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/activities`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Activities & Races</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/courses`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Courses</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/prizes`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Prizes</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/fees`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Fees</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/schedule`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Schedule</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/accommodation`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Accommodation</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/travel-routes`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Travel</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/galleries`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Galleries</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
+                        :to="`/events/${pageEvent.id}/edit/videos`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Videos</router-link
+                    >
+                </div>
+            </div>
+            <div class="flex-1">
+                <router-view></router-view>
+            </div>
+        </div>
+    </page>
+</template>
+
+<script type="text/babel">
+import { notify } from "../Messaging/notify";
+
+export default {
+    data() {
+        return {};
+    },
+
+    computed: {
+        page_title() {
+            return this.pageEvent
+                ? `Edit ${this.pageEvent.name.en}`
+                : "Edit event";
+        },
+
+        pageEvent() {
+            return this.$store.state.events.current_page_event;
+        },
+    },
+
+    mounted() {
+        this.$store.dispatch("events/getCurrentPage", this.$route.params.id);
+
+        this.$store
+            .dispatch("events/fetchCategories")
+            .catch(() =>
+                notify.error({ message: "Unable to get event categories" })
+            );
+    },
+
+    methods: {},
+};
+</script>

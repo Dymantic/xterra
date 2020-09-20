@@ -77,6 +77,23 @@ class EventCoursesTest extends TestCase
     /**
      *@test
      */
+    public function can_get_url_for_gpx_file()
+    {
+        Storage::fake('admin_uploads');
+
+        $course = factory(Course::class)->create();
+        $file = UploadedFile::fake()->create('test_course.gpx');
+
+        $course->setGPXFile($file);
+
+        $expected = "/{$course->fresh()->gpx_disk}/{$course->fresh()->gpx_filename}";
+
+        $this->assertSame($expected, $course->getGPXFileUrl());
+    }
+
+    /**
+     *@test
+     */
     public function add_image_to_course()
     {
         Storage::fake('media');

@@ -18,7 +18,7 @@ class CreateScheduleEntriesTable extends Migration
             $table->unsignedInteger('event_id');
             $table->tinyInteger('position');
             $table->tinyInteger('day_of_event');
-            $table->string('time_of_day');
+            $table->json('time_of_day');
             $table->json('item');
             $table->timestamps();
         });

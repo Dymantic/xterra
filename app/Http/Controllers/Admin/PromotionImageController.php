@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Shop\Promotion;
 use Illuminate\Http\Request;
 
-class PromotionImageController extends Controller
+class
+PromotionImageController extends Controller
 {
     public function store(Promotion $promotion)
     {
@@ -14,7 +15,9 @@ class PromotionImageController extends Controller
             'image' => ['required', 'image'],
         ]);
 
-        $promotion->setImage(request('image'));
+        $image = $promotion->setImage(request('image'));
+
+        return ['src' => $image->getUrl()];
     }
 
     public function destroy(Promotion $promotion)

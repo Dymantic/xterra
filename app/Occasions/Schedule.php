@@ -28,8 +28,35 @@ class Schedule
         $this->entries->push([
             'day_of_event' => $day,
             'item' => ['en' => $entry['item']['en'] ?? '', 'zh' => $entry['item']['zh'] ?? ''],
-            'time_of_day' => $entry['time_of_day'],
+            'time_of_day' => ['en' => $entry['time_of_day']['en'] ?? '', 'zh' => $entry['time_of_day']['zh'] ?? ''],
             'position' => $entry['position'],
         ]);
+    }
+
+    public static function forEvent(Event $event): self
+    {
+        $schedule = new self([]);
+        $days = $event->scheduleEntries->each(fn (ScheduleEntry $entry) => $schedule->addEntry($entry->day_of_event, [
+            'item' => $entry->item,
+            'time_of_day' => $entry->time_of_day,
+            'position' => $entry->position,
+        ]));
+
+        return $schedule;
+
+    }
+
+    public function toArray(): array
+    {
+        return $this->entries->groupBy('day_of_event')->map(function($entries, $day) {
+            return [
+                'day' => $day,
+                'entries' => $entries->map(fn ($entry) => [
+                    'item' => $entry['item'],
+                    'time_of_day' => $entry['time_of_day'],
+                    'position' => $entry['position'],
+                ])->values()->all(),
+            ];
+        })->values()->all();
     }
 }

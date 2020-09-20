@@ -10,9 +10,15 @@ use Illuminate\Http\Request;
 
 class GalleriesController extends Controller
 {
+
+    public function index()
+    {
+        return Gallery::latest()->get()->map->toArray();
+    }
+
     public function store(GalleryRequest $request)
     {
-        Gallery::create($request->galleryInfo()->toArray());
+        return Gallery::create($request->galleryInfo()->toArray());
     }
 
     public function update(Gallery $gallery, GalleryRequest $request)

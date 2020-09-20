@@ -3,11 +3,14 @@
 namespace Tests\Unit\Events;
 
 use App\DatePresenter;
+use App\Occasions\Activity;
 use App\Occasions\Event;
 use App\Occasions\GeneralEventInfo;
+use App\Translation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Tests\TestCase;
@@ -125,5 +128,88 @@ class EventsTest extends TestCase
         Storage::disk('admin_uploads')->assertMissing($guide->hashName('travel'));
         $this->assertNull($event->fresh()->travel_guide);
         $this->assertNull($event->fresh()->travel_guide_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function can_get_a_travel_guide_url()
+    {
+        Storage::fake('admin_uploads');
+        $event = factory(Event::class)->create();
+        $guide = UploadedFile::fake()->create('test_doc.pdf');
+
+        $event->setTravelGuide($guide);
+        $event->refresh();
+
+        $expected = sprintf("/%s/%s", $event->travel_guide_disk, $event->travel_guide);
+
+        $this->assertSame($expected, $event->getTravelGuideUrl());
+
+    }
+
+    /**
+     *@test
+     */
+    public function can_update_the_event_overview()
+    {
+        $event = factory(Event::class)->create();
+        $overview = new Translation(['en' => 'test overview', 'zh' => 'zh test overview']);
+
+        $event->setOverview($overview);
+
+        $this->assertSame("test overview", $event->overview->in("en"));
+        $this->assertSame("zh test overview", $event->overview->in("zh"));
+    }
+
+    /**
+     *@test
+     */
+    public function can_list_activity_categories_in_event()
+    {
+        $event = factory(Event::class)->create();
+        $cycling = factory(Activity::class)->state('race')->create([
+            'category' => Activity::CYCLE,
+            'event_id' => $event->id,
+        ]);
+        $run = factory(Activity::class)->state('race')->create([
+            'category' => Activity::RUN,
+            'event_id' => $event->id,
+        ]);
+        $seminar = factory(Activity::class)->state('activity')->create([
+            'category' => Activity::SEMINAR,
+            'event_id' => $event->id,
+        ]);
+        $lifestyle = factory(Activity::class)->state('activity')->create([
+            'category' => Activity::LIFESTYLE,
+            'event_id' => $event->id,
+        ]);
+
+        $expected = [Activity::CYCLE, Activity::RUN, Activity::SEMINAR, Activity::LIFESTYLE];
+
+        $this->assertSame($expected, $event->listCategories());
+
+
+    }
+
+    /**
+     *@test
+     */
+    public function an_event_is_cardable()
+    {
+        Storage::fake('media');
+        $event = factory(Event::class)->create();
+        $image = $event->setCardImage(UploadedFile::fake()->image('test.png'));
+
+        $cardInfo = $event->cardInfo();
+
+        $this->assertSame($event->name['en'], $cardInfo->title->in('en'));
+        $this->assertSame($event->name['zh'], $cardInfo->title->in('zh'));
+
+        $this->assertSame(Lang::get('content-cards.event', [], 'en'), $cardInfo->category->in('en'));
+        $this->assertSame(Lang::get('content-cards.event', [], 'en'), $cardInfo->category->in('zh'));
+
+        $this->assertSame("/events/{$event->slug}", $cardInfo->link);
+        $this->assertStringContainsString($image->getUrl(), $cardInfo->image_path);
     }
 }

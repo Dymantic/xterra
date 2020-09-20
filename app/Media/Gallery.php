@@ -2,6 +2,7 @@
 
 namespace App\Media;
 
+use App\Translation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
@@ -21,15 +22,15 @@ class Gallery extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'title'       => 'array',
-        'description' => 'array',
+        'title'       => Translation::class,
+        'description' => Translation::class,
     ];
 
     public function addImage(UploadedFile $file): Media
     {
         return $this->addMedia($file)
-            ->usingFileName($file->hashName())
-            ->toMediaCollection(self::IMAGES);
+                    ->usingFileName($file->hashName())
+                    ->toMediaCollection(self::IMAGES);
     }
 
     public function registerMediaConversions(Media $media = null)
@@ -48,14 +49,30 @@ class Gallery extends Model implements HasMedia
     public function setOrder(array $image_ids)
     {
         collect($image_ids)
-            ->map(fn ($id) => Media::find($id))
-            ->reject(fn ($media) => !$media)
-            ->each(fn ($media, $position) => $this->setImagePosition($media, $position));
+            ->map(fn($id) => Media::find($id))
+            ->reject(fn($media) => !$media)
+            ->each(fn($media, $position) => $this->setImagePosition($media, $position));
     }
 
     private function setImagePosition(Media $image, int $position)
     {
         $image->setCustomProperty('position', $position);
         $image->save();
+    }
+
+    public function toArray()
+    {
+        return [
+            'id'          => $this->id,
+            'title'       => $this->title->toArray(),
+            'description' => $this->description->toArray(),
+            'images'      => $this->getMedia(self::IMAGES)->map(fn(Media $media) => [
+                'id'       => $media->id,
+                'thumb'    => $media->getUrl('thumb'),
+                'web'      => $media->getUrl('web'),
+                'original' => $media->getUrl(),
+                'position' => $media->getCustomProperty('position'),
+            ])->sortBy('position')->values()->all(),
+        ];
     }
 }

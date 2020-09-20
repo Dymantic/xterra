@@ -17,6 +17,7 @@ class EmbeddableVideoRequest extends FormRequest
     public function rules()
     {
         return [
+            'video_id' => ['required'],
             'title' => [new NonEmptyTranslation()],
         ];
     }

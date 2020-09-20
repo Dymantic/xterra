@@ -134,6 +134,17 @@ class UpdateGeneralEventInfoTest extends TestCase
         $this->assertFieldIsInvalid(['end' => 'not-a-real-date']);
     }
 
+    /**
+     *@test
+     */
+    public function the_end_date_must_be_after_the_start_date()
+    {
+        $this->assertFieldIsInvalid([
+            'end' => Carbon::today()->format(DatePresenter::STANDARD),
+            'start' => Carbon::tomorrow()->format(DatePresenter::STANDARD),
+        ]);
+    }
+
     private function assertFieldIsInvalid($field, $error_key = null)
     {
         $event = factory(Event::class)->state('empty')->create();

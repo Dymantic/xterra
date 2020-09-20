@@ -1,0 +1,11 @@
+import CardIndex from "../components/ContentCards/CardIndex";
+import CreateCard from "../components/ContentCards/CreateCard";
+import EditCard from "../components/ContentCards/EditCard";
+import ShowCard from "../components/ContentCards/ShowCard";
+
+export default [
+    { path: "/content-cards", component: CardIndex },
+    { path: "/content-cards/create", component: CreateCard },
+    { path: "/content-cards/:card/show", component: ShowCard },
+    { path: "/content-cards/:card/edit", component: EditCard },
+];

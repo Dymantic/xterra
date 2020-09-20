@@ -27,4 +27,21 @@ class EmbeddableVideo extends Model
         $this->title = $title;
         $this->save();
     }
+
+    public function updateInfo(string $video_id, Translation $title)
+    {
+        $this->video_id = $video_id;
+        $this->title = $title;
+        $this->save();
+    }
+
+    public function toArray()
+    {
+        return [
+            'id'       => $this->id,
+            'video_id' => $this->video_id,
+            'platform' => $this->platform,
+            'title'    => $this->title->toArray(),
+        ];
+    }
 }

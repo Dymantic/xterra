@@ -17,7 +17,7 @@ class EventGeneralInfoController extends Controller
             'venue_maplink' => ['url', 'nullable'],
             'registration_link' => ['url', 'nullable'],
             'start' => ['date', 'nullable'],
-            'end' => ['date', 'nullable'],
+            'end' => ['date', 'nullable', 'after_or_equal:start'],
         ]);
 
         $event->updateGeneralInfo(new GeneralEventInfo(request()->all()));

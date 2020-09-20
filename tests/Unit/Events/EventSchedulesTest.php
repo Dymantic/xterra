@@ -6,6 +6,7 @@ namespace Tests\Unit\Events;
 
 use App\Occasions\Event;
 use App\Occasions\Schedule;
+use App\Occasions\ScheduleEntry;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -24,17 +25,17 @@ class EventSchedulesTest extends TestCase
                 'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day' => '6:30am',
+                        'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                         'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => '8:45',
+                        'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                         'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
                         'position'    => 2,
                     ],
                     [
-                        'time_of_day' => '12:00',
+                        'time_of_day' => ['en' => '12:00', 'zh' => '12:00'],
                         'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
                         'position'    => 3,
                     ],
@@ -44,17 +45,17 @@ class EventSchedulesTest extends TestCase
                 'day'     => 2,
                 'entries' => [
                     [
-                        'time_of_day' => '6:30am',
+                        'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                         'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => '8:45',
+                        'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                         'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
                         'position'    => 3,
                     ],
                     [
-                        'time_of_day' => '7:00',
+                        'time_of_day' => ['en' => '7:00', 'zh' => '7:00'],
                         'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
                         'position'    => 2,
                     ],
@@ -70,42 +71,42 @@ class EventSchedulesTest extends TestCase
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 1,
-            'time_of_day'  => '6:30am',
+            'time_of_day'  => ['en' => '6:30am', 'zh' => '6:30am'],
             'item'         => ['en' => 'test item one', 'zh' => 'zh test item one'],
             'position'     => 1,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 1,
-            'time_of_day'  => '8:45',
+            'time_of_day'  => ['en' => '8:45', 'zh' => '8:45'],
             'item'         => ['en' => 'test item two', 'zh' => 'zh test item two'],
             'position'     => 2,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 1,
-            'time_of_day'  => '12:00',
+            'time_of_day'  => ['en' => '12:00', 'zh' => '12:00'],
             'item'         => ['en' => 'test item three', 'zh' => 'zh test item three'],
             'position'     => 3,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 2,
-            'time_of_day'  => '6:30am',
+            'time_of_day'  => ['en' => '6:30am', 'zh' => '6:30am'],
             'item'         => ['en' => 'test item one', 'zh' => 'zh test item one'],
             'position'     => 1,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 2,
-            'time_of_day'  => '8:45',
+            'time_of_day'  => ['en' => '8:45', 'zh' => '8:45'],
             'item'         => ['en' => 'test item two', 'zh' => 'zh test item two'],
             'position'     => 3,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 2,
-            'time_of_day'  => '7:00',
+            'time_of_day'  => ['en' => '7:00', 'zh' => '7:00'],
             'item'         => ['en' => 'test item three', 'zh' => 'zh test item three'],
             'position'     => 2,
         ]);
@@ -122,12 +123,12 @@ class EventSchedulesTest extends TestCase
                 'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day' => '5am',
+                        'time_of_day' => ['en' => '5am', 'zh' => '5am'],
                         'item'        => ['en' => 'old item one', 'zh' => 'zh old item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => '7am',
+                        'time_of_day' => ['en' => '7am', 'zh' => '7am'],
                         'item'        => ['en' => 'old item two', 'zh' => 'zh old item two'],
                         'position'    => 2,
                     ]
@@ -142,12 +143,12 @@ class EventSchedulesTest extends TestCase
                 'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day' => '9am',
+                        'time_of_day' => ['en' => '9am', 'zh' => '9am'],
                         'item'        => ['en' => 'new item one', 'zh' => 'zh new item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => '11am',
+                        'time_of_day' => ['en' => '11am', 'zh' => '11am'],
                         'item'        => ['en' => 'new item two', 'zh' => 'zh new item two'],
                         'position'    => 2,
                     ]
@@ -161,21 +162,21 @@ class EventSchedulesTest extends TestCase
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 1,
-            'time_of_day'  => '9am',
+            'time_of_day'  => ['en' => '9am', 'zh' => '9am'],
             'item'         => ['en' => 'new item one', 'zh' => 'zh new item one'],
             'position'     => 1,
         ]);
 
         $this->assertEventHasScheduleEntry($event, [
             'day_of_event' => 1,
-            'time_of_day'  => '11am',
+            'time_of_day'  => ['en' => '11am', 'zh' => '11am'],
             'item'         => ['en' => 'new item two', 'zh' => 'zh new item two'],
             'position'     => 2,
         ]);
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_schedule()
     {
@@ -186,12 +187,12 @@ class EventSchedulesTest extends TestCase
                 'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day' => '9am',
+                        'time_of_day' => ['en' =>'9am', 'zh' => '9am'],
                         'item'        => ['en' => 'new item one', 'zh' => 'zh new item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => '11am',
+                        'time_of_day' => ['en' =>'11am', 'zh' => '11am'],
                         'item'        => ['en' => 'new item two', 'zh' => 'zh new item two'],
                         'position'    => 2,
                     ]
@@ -208,11 +209,106 @@ class EventSchedulesTest extends TestCase
         $this->assertCount(0, $event->fresh()->scheduleEntries);
     }
 
+    /**
+     * @test
+     */
+    public function make_schedule_for_event()
+    {
+        $event = factory(Event::class)->create();
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 1,
+            'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
+            'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
+            'position'     => 1,
+        ]);
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 1,
+            'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
+            'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
+            'position'     => 2,
+        ]);
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 1,
+            'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
+            'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
+            'position'     => 2,
+        ]);
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 2,
+            'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
+            'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
+            'position'     => 1,
+        ]);
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 2,
+            'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
+            'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
+            'position'     => 2,
+        ]);
+        factory(ScheduleEntry::class)->create([
+            'event_id' => $event->id,
+            'day_of_event' => 2,
+            'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
+            'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
+            'position'     => 2,
+        ]);
+
+        $expected = [
+            [
+                'day' => 1,
+                'entries' => [
+                    [
+                        'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
+                        'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
+                        'position'     => 1,
+                    ],
+                    [
+                        'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
+                        'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
+                        'position'     => 2,
+                    ],
+                    [
+                        'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
+                        'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
+                        'position'     => 2,
+                    ]
+                ],
+            ],
+            [
+                'day' => 2,
+                'entries' => [
+                    [
+                        'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
+                        'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
+                        'position'     => 1,
+                    ],
+                    [
+                        'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
+                        'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
+                        'position'     => 2,
+                    ],
+                    [
+                        'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
+                        'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
+                        'position'     => 2,
+                    ]
+                ],
+            ]
+        ];
+
+        $this->assertEquals($expected, Schedule::forEvent($event)->toArray());
+    }
+
     private function assertEventHasScheduleEntry($event, $entry)
     {
         $this->assertCount(1, $event->scheduleEntries()->where([
             ['day_of_event', $entry['day_of_event']],
-            ['time_of_day', $entry['time_of_day']],
+            ['time_of_day', json_encode($entry['time_of_day'])],
             ['item', json_encode($entry['item'])],
             ['position', $entry['position']],
         ])->get());

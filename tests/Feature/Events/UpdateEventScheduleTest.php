@@ -29,17 +29,17 @@ class UpdateEventScheduleTest extends TestCase
                     'day'     => 1,
                     'entries' => [
                         [
-                            'time_of_day' => '6:30am',
+                            'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                             'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
                             'position'    => 1,
                         ],
                         [
-                            'time_of_day' => '8:45',
+                            'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                             'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
                             'position'    => 2,
                         ],
                         [
-                            'time_of_day' => '12:00',
+                            'time_of_day' => ['en' => '12:00', 'zh' => '12:00'],
                             'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
                             'position'    => 3,
                         ],
@@ -49,17 +49,17 @@ class UpdateEventScheduleTest extends TestCase
                     'day'     => 2,
                     'entries' => [
                         [
-                            'time_of_day' => '6:30am',
+                            'time_of_day' => ['en' => '6:25am', 'zh' => '6:25am'],
                             'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
                             'position'    => 1,
                         ],
                         [
-                            'time_of_day' => '8:45',
+                            'time_of_day' => ['en' => '1pm', 'zh' => '1pm'],
                             'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
                             'position'    => 3,
                         ],
                         [
-                            'time_of_day' => '7:00',
+                            'time_of_day' => ['en' => '7:00', 'zh' => '7:00'],
                             'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
                             'position'    => 2,
                         ],
@@ -73,7 +73,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 1,
-            'time_of_day'  => '6:30am',
+            'time_of_day'  => json_encode(['en' => '6:30am', 'zh' => '6:30am']),
             'item'         => json_encode(['en' => 'test item one', 'zh' => 'zh test item one']),
             'position'     => 1,
         ]);
@@ -81,7 +81,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 1,
-            'time_of_day'  => '8:45',
+            'time_of_day'  => json_encode(['en' => '8:45', 'zh' => '8:45']),
             'item'         => json_encode(['en' => 'test item two', 'zh' => 'zh test item two']),
             'position'     => 2,
         ]);
@@ -89,7 +89,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 1,
-            'time_of_day'  => '12:00',
+            'time_of_day'  => json_encode(['en' => '12:00', 'zh' => '12:00']),
             'item'         => json_encode(['en' => 'test item three', 'zh' => 'zh test item three']),
             'position'     => 3,
         ]);
@@ -97,7 +97,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 2,
-            'time_of_day'  => '6:30am',
+            'time_of_day'  => json_encode(['en' => '6:25am', 'zh' => '6:25am']),
             'item'         => json_encode(['en' => 'test item one', 'zh' => 'zh test item one']),
             'position'     => 1,
         ]);
@@ -105,7 +105,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 2,
-            'time_of_day'  => '7:00',
+            'time_of_day'  => json_encode(['en' => '7:00', 'zh' => '7:00']),
             'item'         => json_encode(['en' => 'test item three', 'zh' => 'zh test item three']),
             'position'     => 2,
         ]);
@@ -113,7 +113,7 @@ class UpdateEventScheduleTest extends TestCase
         $this->assertDatabaseHas('schedule_entries', [
             'event_id'     => $event->id,
             'day_of_event' => 2,
-            'time_of_day'  => '8:45',
+            'time_of_day'  => json_encode(['en' => '1pm', 'zh' => '1pm']),
             'item'         => json_encode(['en' => 'test item two', 'zh' => 'zh test item two']),
             'position'     => 3,
         ]);
@@ -225,6 +225,27 @@ class UpdateEventScheduleTest extends TestCase
                 ]
             ]
         ], 'schedule.0.entries.0.time_of_day');
+    }
+
+    /**
+     *@test
+     */
+    public function the_schedule_entries_requires_a_time_of_day_with_at_least_translation()
+    {
+        $this->assertFieldIsInvalid([
+            'schedule' => [
+                [
+                    'day'     => 1,
+                    'entries' => [
+                        [
+                            'time_of_day' => [],
+                            'item'        => ['en' => ''],
+                            'position'    => 1
+                        ]
+                    ]
+                ]
+            ]
+        ], 'schedule.0.entries.0.item');
     }
 
     /**

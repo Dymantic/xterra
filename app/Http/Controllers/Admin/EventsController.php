@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
+
+    public function index()
+    {
+        return Event::all()->map->presentForAdmin();
+    }
+
+
     public function store()
     {
         request()->validate([

@@ -12,11 +12,12 @@ class EventScheduleController extends Controller
 {
     public function update(Event $event)
     {
+
         request()->validate([
             'schedule' => ['required', 'array'],
             'schedule.*.day' => ['required', 'integer'],
             'schedule.*.entries' => ['required', 'array'],
-            'schedule.*.entries.*.time_of_day' => ['required'],
+            'schedule.*.entries.*.time_of_day' => [new AtLeastOneTranslation()],
             'schedule.*.entries.*.item' => [new AtLeastOneTranslation()],
             'schedule.*.entries.*.position' => ['required', 'integer'],
         ]);

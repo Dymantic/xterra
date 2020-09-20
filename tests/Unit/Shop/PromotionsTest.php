@@ -5,6 +5,9 @@ namespace Tests\Unit\Shop;
 use App\Shop\Promotion;
 use App\Shop\PromotionInfo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class PromotionsTest extends TestCase
@@ -125,5 +128,28 @@ class PromotionsTest extends TestCase
 
         $this->assertTrue($promotion->fresh()->is_featured);
         $this->assertTrue($promotion->fresh()->is_public);
+    }
+
+    /**
+     *@test
+     */
+    public function a_promotion_item_is_cardable()
+    {
+        Storage::fake('media');
+
+        $item = factory(Promotion::class)->create();
+        $image = $item->setImage(UploadedFile::fake()->image('test.png'));
+
+        $cardInfo = $item->cardInfo();
+
+        $this->assertSame($item->title->toArray(), $cardInfo->title->toArray());
+        $this->assertSame(
+            Lang::get('content-cards.shop', [], 'en'), $cardInfo->category->in('en')
+        );
+        $this->assertSame(
+            Lang::get('content-cards.shop', [], 'zh'), $cardInfo->category->in('zh')
+        );
+        $this->assertSame($item->link, $cardInfo->link);
+        $this->assertStringContainsString($image->getUrl(), $cardInfo->image_path);
     }
 }

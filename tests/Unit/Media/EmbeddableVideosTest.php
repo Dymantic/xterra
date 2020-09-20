@@ -25,4 +25,18 @@ class EmbeddableVideosTest extends TestCase
         $this->assertEquals('test title', $video->fresh()->title->in('en'));
         $this->assertEquals('zh test title', $video->fresh()->title->in('zh'));
     }
+
+    /**
+     *@test
+     */
+    public function can_update_video_info()
+    {
+        $video = factory(EmbeddableVideo::class)->create();
+
+        $video->updateInfo('new_video_id', new Translation(['en' => "test title", 'zh' => "zh test title"]));
+
+        $this->assertEquals('new_video_id', $video->fresh()->video_id);
+        $this->assertEquals('test title', $video->fresh()->title->in('en'));
+        $this->assertEquals('zh test title', $video->fresh()->title->in('zh'));
+    }
 }
