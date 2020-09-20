@@ -66,4 +66,27 @@ class ContentCardsTest extends TestCase
         $this->assertSame("/blog/{$article->slug}/", $card->link);
         $this->assertCount(1, $card->fresh()->getMedia(ContentCard::IMAGE));
     }
+
+    /**
+     *@test
+     */
+    public function making_a_card_from_existing_content_will_not_try_use_non_existing_image()
+    {
+        Storage::fake('media');
+        $this->withoutExceptionHandling();
+
+        $article = factory(Article::class)->create();
+        $english = factory(Translation::class)
+            ->state('en')
+            ->create(['article_id' => $article->id]);
+        $chinese = factory(Translation::class)
+            ->state('zh')
+            ->create(['article_id' => $article->id]);
+        $image = $article->setTitleImage(UploadedFile::fake()->image('test.png'));
+        Storage::disk('media')->delete(Str::after($image->getUrl(), "/media"));
+
+        $card = ContentCard::fromExistingContent($article);
+
+        $this->assertCount(0, $card->fresh()->getMedia(ContentCard::IMAGE));
+    }
 }

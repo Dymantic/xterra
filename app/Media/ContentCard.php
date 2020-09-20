@@ -35,7 +35,7 @@ class ContentCard extends Model implements HasMedia
         $info = $cardable->cardInfo();
         $card = self::create($info->toArray());
 
-        if($info->image_path) {
+        if($info->image_path && file_exists($info->image_path)) {
             $card->addMedia($info->image_path)
                 ->preservingOriginal()
                 ->toMediaCollection(self::IMAGE);
