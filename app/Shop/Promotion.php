@@ -20,6 +20,7 @@ class Promotion extends Model implements HasMedia, Cardable
     use HasMediaTrait;
 
     const IMAGE = 'image';
+    const DEFAULT_IMAGE = '/images/default_image.svg';
 
     protected $fillable = ['title', 'writeup', 'link', 'button_text'];
 
@@ -108,9 +109,9 @@ class Promotion extends Model implements HasMedia, Cardable
             'button_text' => $this->button_text->toArray(),
             'image'       => [
                 'id'       => $image ? $image->id : null,
-                'thumb'    => $image ? $image->getUrl('thumb') : '',
-                'web'      => $image ? $image->getUrl('web') : '',
-                'original' => $image ? $image->getUrl() : '',
+                'thumb'    => $image ? $image->getUrl('thumb') : self::DEFAULT_IMAGE,
+                'web'      => $image ? $image->getUrl('web') : self::DEFAULT_IMAGE,
+                'original' => $image ? $image->getUrl() : self::DEFAULT_IMAGE,
             ]
         ];
     }

@@ -1,6 +1,10 @@
 <template>
     <page>
-        <page-header title="Content Cards"></page-header>
+        <page-header title="Content Cards">
+            <router-link to="/content-cards/create" class="btn btn-dark"
+                >Make New Card</router-link
+            >
+        </page-header>
 
         <div class="mb-12">
             <p>Create from an existing piece of content</p>
