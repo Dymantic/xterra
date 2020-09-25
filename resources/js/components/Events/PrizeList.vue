@@ -1,7 +1,7 @@
 <template>
-    <div v-if="event">
+    <div v-if="race">
         <div class="flex justify-between items-center">
-            <p class="text-lg font-bold">Prize List</p>
+            <p class="text-lg font-bold">Prize List for {{ race.name.en }}</p>
             <div class="flex items-center">
                 <submit-button
                     @click.native="save"
@@ -46,24 +46,28 @@ export default {
         return {
             waiting: false,
             next_id: 1,
-            list: PositionedList.New(
-                this.$store.state.events.current_page_event.prizes
-            ),
+            list: null,
             sortable: null,
         };
     },
 
     computed: {
         list_items() {
-            return this.list.list.sort((a, b) => a.position - b.position);
+            if (this.list) {
+                return this.list.list.sort((a, b) => a.position - b.position);
+            }
         },
 
-        event() {
-            return this.$store.state.events.current_page_event;
+        race() {
+            return this.$store.getters["events/currentEventActivityById"](
+                this.$route.params.race
+            );
         },
     },
 
     mounted() {
+        this.list = PositionedList.New(this.race.prizes);
+
         this.sortable = new Sortable(this.$refs.sortList, {
             onSort: this.handleSort,
         });
@@ -89,8 +93,8 @@ export default {
         save() {
             this.waiting = true;
             this.$store
-                .dispatch("events/savePrizes", {
-                    event_id: this.$route.params.id,
+                .dispatch("events/saveRacePrizes", {
+                    race_id: this.$route.params.race,
                     prizes: this.list.toArray(),
                 })
                 .then(() => notify.success({ message: "Prizes updated" }))

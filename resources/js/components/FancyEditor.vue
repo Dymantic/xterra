@@ -21,6 +21,7 @@ import PageHeader from "./PageHeader";
 import SubmitButton from "./Forms/SubmitButton";
 import EditorJS from "@editorjs/editorjs";
 import ImageTool from "@editorjs/image";
+import Table from "@editorjs/table";
 import IllustratedText from "../editorjs/IllustratedText";
 
 export default {
@@ -72,6 +73,9 @@ export default {
                             byUrl: this.uploadImagesTo,
                         },
                     },
+                },
+                table: {
+                    class: Table,
                 },
             },
             data: this.initialData,

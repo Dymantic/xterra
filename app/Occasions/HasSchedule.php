@@ -8,7 +8,7 @@ trait HasSchedule
 {
     public function scheduleEntries()
     {
-        return $this->hasMany(ScheduleEntry::class);
+        return $this->morphMany(ScheduleEntry::class, 'scheduled');
     }
 
     public function setSchedule(Schedule $schedule)

@@ -4,6 +4,7 @@
 namespace Tests\Unit\Events;
 
 
+use App\Occasions\Activity;
 use App\Occasions\Course;
 use App\Occasions\CourseInfo;
 use App\Occasions\Event;
@@ -14,16 +15,16 @@ use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Models\Media;
 use Tests\TestCase;
 
-class EventCoursesTest extends TestCase
+class RaceCoursesTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
      *@test
      */
-    public function add_a_course_to_an_event()
+    public function add_a_course_to_a_race()
     {
-        $event = factory(Event::class)->create();
+        $race = factory(Activity::class)->state('race')->create();
 
         $course_info = new CourseInfo([
             'name'        => ['en' => "test name", 'zh' => "zh test name"],
@@ -31,7 +32,7 @@ class EventCoursesTest extends TestCase
             'description' => ['en' => "test description", 'zh' => "zh test description"],
         ]);
 
-        $course = $event->addCourse($course_info);
+        $course = $race->addCourse($course_info);
 
         $this->assertInstanceOf(Course::class, $course);
         $this->assertEquals(['en' => "test name", 'zh' => "zh test name"], $course->name);

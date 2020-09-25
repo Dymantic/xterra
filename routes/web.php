@@ -107,6 +107,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('races/{race}', 'EventRacesController@update');
     Route::delete('races/{race}', 'EventRacesController@delete');
 
+    Route::post('races/{race}/schedule', 'RaceScheduleController@update');
+    Route::delete('races/{race}/schedule', 'RaceScheduleController@destroy');
+
     Route::post('events/{event}/activities', 'EventActivitiesController@store');
     Route::post('activities/{activity}', 'EventActivitiesController@update');
     Route::delete('activities/{activity}', 'EventActivitiesController@delete');
@@ -117,8 +120,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('events/{event}/fees', 'EventFeesController@update');
     Route::delete('events/{event}/fees', 'EventFeesController@destroy');
 
-    Route::post('events/{event}/prizes', 'EventPrizesController@update');
-    Route::delete('events/{event}/prizes', 'EventPrizesController@destroy');
+    Route::post('races/{race}/prizes', 'RacePrizesController@update');
+    Route::delete('races/{race}/prizes', 'RacePrizesController@destroy');
+
+    Route::post('races/{race}/fees', 'RaceFeesController@update');
+    Route::delete('races/{race}/fees', 'RaceFeesController@destroy');
 
     Route::post('events/{event}/travel-routes', 'EventTravelRoutesController@store');
     Route::post('travel-routes/{route}', 'EventTravelRoutesController@update');
@@ -131,9 +137,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('accommodations/{accommodation}', 'EventAccommodationsController@update');
     Route::delete('accommodations/{accommodation}', 'EventAccommodationsController@delete');
 
-    Route::post('events/{event}/courses', 'EventCoursesController@store');
-    Route::post('courses/{course}', 'EventCoursesController@update');
-    Route::delete('courses/{course}', 'EventCoursesController@delete');
+    Route::post('races/{race}/courses', 'RaceCoursesController@store');
+    Route::post('courses/{course}', 'RaceCoursesController@update');
+    Route::delete('courses/{course}', 'RaceCoursesController@delete');
 
     Route::post('courses/{course}/gpx-file', 'CourseGPXFileController@store');
     Route::delete('courses/{course}/gpx-file', 'CourseGPXFileController@destroy');
@@ -141,6 +147,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('courses/{course}/images', 'CourseImagesController@store');
     Route::delete('courses/{course}/images/{media}', 'CourseImagesController@destroy');
     Route::post('courses/{course}/images-order', 'CourseImagesOrderController@update');
+
+    Route::post('races/{race}/schedule-notes', 'RaceScheduleNotesController@update');
+    Route::post('races/{race}/prize-notes', 'RacePrizeNotesController@update');
+    Route::post('races/{race}/fees-notes', 'RaceFeesNotesController@update');
+
+    Route::post('races/{race}/race-rules-doc', 'RaceRulesDocumentController@store');
+    Route::delete('races/{race}/race-rules-doc', 'RaceRulesDocumentController@destroy');
+    Route::post('races/{race}/athletes-guide', 'RaceAthleteGuideController@store');
+    Route::delete('races/{race}/athletes-guide', 'RaceAthleteGuideController@destroy');
+
+    Route::post('races/{race}/description', 'RaceDescriptionController@update');
+    Route::post('races/{race}/race-rules', 'RaceRulesController@update');
+    Route::post('races/{race}/race-info', 'RaceInfoController@update');
 
     Route::post('published-events', 'PublishedEventsController@store');
 
@@ -157,6 +176,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('events/{event}/card-image', 'EventCardImageController@store');
     Route::delete('events/{event}/card-image', 'EventCardImageController@destroy');
+
+    Route::post('races/{race}/content-images', 'ActivityContentImagesController@store');
+    Route::post('races/{race}/banner-image', 'RaceBannerImageController@store');
+    Route::post('races/{race}/card-image', 'RaceCardImageController@store');
+
+    Route::post('races/{race}/promo-video', 'RacePromoVideoController@store');
 
     Route::get('galleries', 'GalleriesController@index');
     Route::post('galleries', 'GalleriesController@store');

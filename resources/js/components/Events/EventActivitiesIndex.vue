@@ -9,17 +9,7 @@
             >
         </div>
         <div class="my-8 flex">
-            <radio-input
-                v-model="lang"
-                label="English"
-                thing="en"
-                class="mr-8"
-            ></radio-input>
-            <radio-input
-                v-model="lang"
-                label="Chinese"
-                thing="zh"
-            ></radio-input>
+            <language-selector v-model="lang"></language-selector>
         </div>
         <div>
             <activity
@@ -36,12 +26,14 @@
 <script type="text/babel">
 import Activity from "./Activity";
 import RadioInput from "../Forms/RadioInput";
+import LanguageSelector from "../LanguageSelector";
 import { notify } from "../Messaging/notify";
 
 export default {
     components: {
         Activity,
         RadioInput,
+        LanguageSelector,
     },
 
     data() {

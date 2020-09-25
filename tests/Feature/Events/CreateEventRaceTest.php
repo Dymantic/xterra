@@ -4,10 +4,12 @@
 namespace Tests\Feature\Events;
 
 
+use App\DatePresenter;
 use App\Occasions\Activity;
 use App\Occasions\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Tests\TestCase;
 
 class CreateEventRaceTest extends TestCase
@@ -24,22 +26,56 @@ class CreateEventRaceTest extends TestCase
         $event = factory(Event::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/races", [
-            'name'        => ['en' => 'test name', 'zh' => 'zh test name'],
-            'distance'    => ['en' => 'test distance', 'zh' => 'zh test distance'],
-            'description' => ['en' => 'test description', 'zh' => 'zh test description'],
-            'category'    => Activity::RUN,
+            'name'              => ['en' => 'test name', 'zh' => 'zh test name'],
+            'distance'          => ['en' => 'test distance', 'zh' => 'zh test distance'],
+            'date'              => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
+            'venue_name'        => ['en' => 'test venue_name', 'zh' => 'zh test venue_name'],
+            'venue_address'     => ['en' => 'test venue_address', 'zh' => 'zh test venue_address'],
+            'map_link'          => 'https://maps.test',
+            'registration_link' => 'https://registration.test',
+            'description'       => ['en' => 'test description', 'zh' => 'zh test description'],
+            'category'          => Activity::RUN,
         ]);
 
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('activities', [
-            'event_id'    => $event->id,
-            'name'        => json_encode(['en' => 'test name', 'zh' => 'zh test name']),
-            'distance'    => json_encode(['en' => 'test distance', 'zh' => 'zh test distance']),
-            'description' => json_encode(['en' => 'test description', 'zh' => 'zh test description']),
-            'category'    => Activity::RUN,
-            'is_race'     => true,
+            'event_id'          => $event->id,
+            'name'              => json_encode(['en' => 'test name', 'zh' => 'zh test name']),
+            'distance'          => json_encode(['en' => 'test distance', 'zh' => 'zh test distance']),
+            'description'       => json_encode(['en' => 'test description', 'zh' => 'zh test description']),
+            'date'              => Carbon::today()->addMonth(),
+            'venue_name'        => json_encode(['en' => 'test venue_name', 'zh' => 'zh test venue_name']),
+            'venue_address'     => json_encode(['en' => 'test venue_address', 'zh' => 'zh test venue_address']),
+            'map_link'          => 'https://maps.test',
+            'registration_link' => 'https://registration.test',
+            'category'          => Activity::RUN,
+            'is_race'           => true,
         ]);
+    }
+
+    /**
+     *@test
+     */
+    public function some_empty_states_are_permitted()
+    {
+        $this->withoutExceptionHandling();
+
+        $event = factory(Event::class)->create();
+
+        $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/races", [
+            'name'              => ['en' => 'test name', 'zh' => 'zh test name'],
+            'distance'          => ['en' => null, 'zh' => ''],
+            'date'              => null,
+            'venue_name'        => ['en' => '', 'zh' => ''],
+            'venue_address'     => ['en' => '', 'zh' => ''],
+            'map_link'          => null,
+            'registration_link' => null,
+            'description'       => ['en' => '', 'zh' => ''],
+            'category'          => Activity::RUN,
+        ]);
+
+        $response->assertSuccessful();
     }
 
     /**
@@ -64,6 +100,46 @@ class CreateEventRaceTest extends TestCase
     public function the_category_must_be_a_valid_activity_type()
     {
         $this->assertFieldIsInvalid(['category' => 'not-a-real-category']);
+    }
+
+    /**
+     *@test
+     */
+    public function the_date_must_be_in_date_format()
+    {
+        $this->assertFieldIsInvalid(['date' => 'not-a-valid-date-format']);
+    }
+
+    /**
+     *@test
+     */
+    public function the_venue_name_must_be_a_translation_array()
+    {
+        $this->assertFieldIsInvalid(['venue_name' => []]);
+    }
+
+    /**
+     *@test
+     */
+    public function the_venue_address_must_be_a_translation_array()
+    {
+        $this->assertFieldIsInvalid(['venue_address' => 'not-even-an-array']);
+    }
+
+    /**
+     *@test
+     */
+    public function the_map_link_must_be_a_valid_url()
+    {
+        $this->assertFieldIsInvalid(['map_link' => 'not-a-valid-url']);
+    }
+
+    /**
+     *@test
+     */
+    public function the_registration_link_must_be_a_valid_url()
+    {
+        $this->assertFieldIsInvalid(['registration_link' => 'not-a-valid-url']);
     }
 
 

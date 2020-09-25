@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EventCourseRequest;
+use App\Http\Requests\RaceCourseRequest;
+use App\Occasions\Activity;
 use App\Occasions\Course;
 use App\Occasions\Event;
 use Illuminate\Http\Request;
 
-class EventCoursesController extends Controller
+class RaceCoursesController extends Controller
 {
-    public function store(Event $event, EventCourseRequest $request)
+    public function store(Activity $race, RaceCourseRequest $request)
     {
-        $event->addCourse($request->courseInfo());
+        $race->addCourse($request->courseInfo());
     }
 
-    public function update(Course $course, EventCourseRequest $request)
+    public function update(Course $course, RaceCourseRequest $request)
     {
         $course->update($request->courseInfo()->toArray());
     }

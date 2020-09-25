@@ -4,11 +4,12 @@
 namespace Tests\Feature\Events;
 
 
+use App\Occasions\Activity;
 use App\Occasions\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ClearEventPrizesTest extends TestCase
+class ClearRacePrizesTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -19,8 +20,8 @@ class ClearEventPrizesTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $event =  factory(Event::class)->create();
-        $event->setPrizes([
+        $race =  factory(Activity::class)->state('race')->create();
+        $race->setPrizes([
             [
                 'category' => ['en' => "test category one", 'zh' => "zh test category one"],
                 'prize' => ['en' => "test prize one", 'zh' => "zh test prize one"],
@@ -32,12 +33,12 @@ class ClearEventPrizesTest extends TestCase
                 'position' => 2,
             ]
         ]);
-        $this->assertCount(2, $event->fresh()->prizes);
+        $this->assertCount(2, $race->fresh()->prizes);
 
-        $response = $this->asAdmin()->deleteJson("/admin/events/{$event->id}/prizes");
+        $response = $this->asAdmin()->deleteJson("/admin/races/{$race->id}/prizes");
         $response->assertSuccessful();
 
-        $this->assertDatabaseMissing('prizes', ['event_id' => $event->id]);
-        $this->assertCount(0, $event->fresh()->prizes);
+        $this->assertDatabaseMissing('prizes', ['activity_id' => $race->id]);
+        $this->assertCount(0, $race->fresh()->prizes);
     }
 }

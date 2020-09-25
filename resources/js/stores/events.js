@@ -5,29 +5,38 @@ import {
     createEvent,
     createEventAccommodation,
     createEventActivity,
-    createEventCourse,
+    createEventRaceCourse,
     createEventRace,
     createEventTravelRoute,
     deleteEventAccommodation,
     deleteEventActivity,
-    deleteEventCourse,
+    deleteEventRaceCourse,
     deleteEventYoutubeVideo,
     deleteTravelRoute,
     fetchEventActivityCategories,
     fetchEvents,
     removeGalleryFromEvent,
     saveEventFees,
-    saveEventPrizes,
+    saveEventRaceFees,
+    saveEventRacePrizes,
+    saveEventRaceSchedule,
     saveEventSchedule,
     saveGeneralEventInfo,
     updateCourseImagePositions,
     updateEventAccommodation,
     updateEventActivity,
-    updateEventCourse,
+    updateEventRaceCourse,
     updateEventOverview,
     updateEventRace,
     updateEventTravelRoute,
     updateEventYoutubeVideo,
+    saveRaceScheduleNotes,
+    saveRacePrizeNotes,
+    saveRaceFeesNotes,
+    saveEventRaceRules,
+    saveEventRaceInfo,
+    saveEventRaceDescription,
+    saveEventRacePromoVideo,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -105,9 +114,12 @@ export default {
                 return null;
             }
 
-            return state.current_page_event.courses.find(
-                (course) => course.id === parseInt(id)
-            );
+            return state.current_page_event.activities
+                .reduce((list, activity) => {
+                    activity.courses.forEach((course) => list.push(course));
+                    return list;
+                }, [])
+                .find((course) => course.id === parseInt(id));
         },
     },
 
@@ -126,14 +138,19 @@ export default {
     },
 
     actions: {
-        fetchAll({ commit }) {
-            return fetchEvents().then((events) => commit("setEvents", events));
+        fetchAll({ dispatch, state }) {
+            if (!state.all.length) {
+                return dispatch("refreshEvents");
+            }
+
+            return Promise.resolve();
         },
 
-        refreshEvents({ dispatch, state }) {
-            dispatch("fetchAll")
+        refreshEvents({ commit, dispatch, state }) {
+            return fetchEvents()
+                .then((events) => commit("setEvents", events))
                 .catch(() =>
-                    notify.error({ message: "Unable to fetch event info" })
+                    notify.error({ message: "Unable to fetch events" })
                 )
                 .then(() => {
                     if (state.current_page_event) {
@@ -212,8 +229,8 @@ export default {
             );
         },
 
-        savePrizes({ dispatch }, { event_id, prizes }) {
-            return saveEventPrizes(event_id, prizes).then(() =>
+        saveRacePrizes({ dispatch }, { race_id, prizes }) {
+            return saveEventRacePrizes(race_id, prizes).then(() =>
                 dispatch("refreshEvents")
             );
         },
@@ -273,20 +290,20 @@ export default {
             );
         },
 
-        createCourse({ dispatch }, { event_id, formData }) {
-            return createEventCourse(event_id, formData).then(() =>
+        createRaceCourse({ dispatch }, { race_id, formData }) {
+            return createEventRaceCourse(race_id, formData).then(() =>
                 dispatch("refreshEvents")
             );
         },
 
-        updateCourse({ dispatch }, { course_id, formData }) {
-            return updateEventCourse(course_id, formData).then(() =>
+        updateRaceCourse({ dispatch }, { course_id, formData }) {
+            return updateEventRaceCourse(course_id, formData).then(() =>
                 dispatch("refreshEvents")
             );
         },
 
-        removeCourse({ dispatch }, course_id) {
-            return deleteEventCourse(course_id).then(() =>
+        removeRaceCourse({ dispatch }, course_id) {
+            return deleteEventRaceCourse(course_id).then(() =>
                 dispatch("refreshEvents")
             );
         },
@@ -329,6 +346,62 @@ export default {
 
         removeGallery({ dispatch }, { event_id, gallery_id }) {
             return removeGalleryFromEvent(event_id, gallery_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        saveRaceSchedule({ dispatch }, { race_id, schedule }) {
+            return saveEventRaceSchedule(race_id, schedule).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        saveRaceFees({ dispatch }, { race_id, fees }) {
+            return saveEventRaceFees(race_id, fees).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        saveScheduleNotes({ dispatch }, { race_id, notes }) {
+            return saveRaceScheduleNotes(race_id, notes).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        savePrizeNotes({ dispatch }, { race_id, notes }) {
+            return saveRacePrizeNotes(race_id, notes).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        saveFeesNotes({ dispatch }, { race_id, notes }) {
+            return saveRaceFeesNotes(race_id, notes).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        saveRaceDescription({ dispatch }, { race_id, description, lang }) {
+            return saveEventRaceDescription(
+                race_id,
+                description,
+                lang
+            ).then(() => dispatch("refreshEvents"));
+        },
+
+        saveRaceRules({ dispatch }, { race_id, rules, lang }) {
+            return saveEventRaceRules(race_id, rules, lang).then(() => {
+                dispatch("refreshEvents");
+            });
+        },
+
+        saveRaceInfo({ dispatch }, { race_id, info, lang }) {
+            return saveEventRaceInfo(race_id, info, lang).then(() => {
+                dispatch("refreshEvents");
+            });
+        },
+
+        saveRacePromoVideo({ dispatch }, { race_id, formData }) {
+            return saveEventRacePromoVideo(race_id, formData).then(() =>
                 dispatch("refreshEvents")
             );
         },

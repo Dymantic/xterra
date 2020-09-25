@@ -1,5 +1,5 @@
 <template>
-    <div v-if="pageEvent && activity" :key="$route.params.activity">
+    <div v-if="pageEvent && activity" :key="$route.params.race">
         <div class="flex justify-between items-center">
             <p class="text-lg font-bold">Edit this activity</p>
             <delete-activity :activity="activity"></delete-activity>
@@ -25,15 +25,9 @@ export default {
 
         activity() {
             return this.$store.getters["events/currentEventActivityById"](
-                this.$route.params.activity
+                this.$route.params.race
             );
         },
-    },
-
-    mounted() {
-        this.$store
-            .dispatch("events/getCurrentPage", this.$route.params.id)
-            .catch(() => notify.error({ message: "Unable to get event" }));
     },
 };
 </script>

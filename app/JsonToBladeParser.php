@@ -39,6 +39,10 @@ class JsonToBladeParser
                     'src' => $block['data']['file']['url'] ?? '',
                     'caption' => $block['data']['caption'] ?? '',
                 ])->render();
+            case 'table':
+                return view("{$this->viewRoot}.table", [
+                    'data' => $block['data']['content'] ?? [],
+                ])->render();
             default:
                 return '';
         }

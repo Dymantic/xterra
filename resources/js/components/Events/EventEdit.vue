@@ -1,9 +1,10 @@
 <template>
     <page v-if="pageEvent">
-        <page-header :title="page_title">
-            <router-link :to="`/events/${pageEvent.id}`"
-                >&larr; Back</router-link
-            >
+        <page-header
+            :title="page_title"
+            :breadcrumbs="breadcrumbs"
+            :back-link="`/events/${$route.params.id}`"
+        >
         </page-header>
         <div class="flex">
             <div class="w-64 h-64 pt-6 sticky top-0">
@@ -40,24 +41,6 @@
                         class="font-bold hover:text-blue-600"
                         active-class="text-blue-600"
                         >Activities & Races</router-link
-                    >
-                </div>
-
-                <div class="my-2">
-                    <router-link
-                        :to="`/events/${pageEvent.id}/edit/courses`"
-                        class="font-bold hover:text-blue-600"
-                        active-class="text-blue-600"
-                        >Courses</router-link
-                    >
-                </div>
-
-                <div class="my-2">
-                    <router-link
-                        :to="`/events/${pageEvent.id}/edit/prizes`"
-                        class="font-bold hover:text-blue-600"
-                        active-class="text-blue-600"
-                        >Prizes</router-link
                     >
                 </div>
 
@@ -133,12 +116,19 @@ export default {
     computed: {
         page_title() {
             return this.pageEvent
-                ? `Edit ${this.pageEvent.name.en}`
+                ? `Edit event:  ${this.pageEvent.name.en}`
                 : "Edit event";
         },
 
         pageEvent() {
             return this.$store.state.events.current_page_event;
+        },
+
+        breadcrumbs() {
+            return [
+                { link: `/events/${this.$route.params.id}`, title: "Event" },
+                { link: ``, title: "Edit" },
+            ];
         },
     },
 

@@ -218,8 +218,8 @@ export default {
                 },
                 venue_maplink: event.venue_maplink,
                 registration_link: event.registration_link,
-                start: event.start ? new Date(event.start) : null,
-                end: event.end ? new Date(event.end) : null,
+                start: event.start ? new Date(event.start) : new Date(),
+                end: event.end ? new Date(event.end) : new Date(),
             };
             this.ready = true;
         },

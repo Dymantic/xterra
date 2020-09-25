@@ -31,16 +31,19 @@ class UpdateEventScheduleTest extends TestCase
                         [
                             'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                             'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 1,
                         ],
                         [
                             'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                             'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 2,
                         ],
                         [
                             'time_of_day' => ['en' => '12:00', 'zh' => '12:00'],
                             'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 3,
                         ],
                     ]
@@ -51,16 +54,19 @@ class UpdateEventScheduleTest extends TestCase
                         [
                             'time_of_day' => ['en' => '6:25am', 'zh' => '6:25am'],
                             'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 1,
                         ],
                         [
                             'time_of_day' => ['en' => '1pm', 'zh' => '1pm'],
                             'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 3,
                         ],
                         [
                             'time_of_day' => ['en' => '7:00', 'zh' => '7:00'],
                             'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
+                            'location'    => ['en' => 'test location', 'zh' => 'zh test location'],
                             'position'    => 2,
                         ],
                     ]
@@ -71,50 +77,62 @@ class UpdateEventScheduleTest extends TestCase
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 1,
             'time_of_day'  => json_encode(['en' => '6:30am', 'zh' => '6:30am']),
             'item'         => json_encode(['en' => 'test item one', 'zh' => 'zh test item one']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 1,
         ]);
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 1,
             'time_of_day'  => json_encode(['en' => '8:45', 'zh' => '8:45']),
             'item'         => json_encode(['en' => 'test item two', 'zh' => 'zh test item two']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 2,
         ]);
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 1,
             'time_of_day'  => json_encode(['en' => '12:00', 'zh' => '12:00']),
             'item'         => json_encode(['en' => 'test item three', 'zh' => 'zh test item three']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 3,
         ]);
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 2,
             'time_of_day'  => json_encode(['en' => '6:25am', 'zh' => '6:25am']),
             'item'         => json_encode(['en' => 'test item one', 'zh' => 'zh test item one']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 1,
         ]);
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 2,
             'time_of_day'  => json_encode(['en' => '7:00', 'zh' => '7:00']),
             'item'         => json_encode(['en' => 'test item three', 'zh' => 'zh test item three']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 2,
         ]);
 
         $this->assertDatabaseHas('schedule_entries', [
-            'event_id'     => $event->id,
+            'scheduled_id'     => $event->id,
+            'scheduled_type' => Event::class,
             'day_of_event' => 2,
             'time_of_day'  => json_encode(['en' => '1pm', 'zh' => '1pm']),
             'item'         => json_encode(['en' => 'test item two', 'zh' => 'zh test item two']),
+            'location'     => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
             'position'     => 3,
         ]);
     }
@@ -177,7 +195,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_items_must_requires_entries()
     {
@@ -192,7 +210,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_entries_must_be_an_array()
     {
@@ -207,7 +225,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_entries_requires_a_time_of_day()
     {
@@ -228,7 +246,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_entries_requires_a_time_of_day_with_at_least_translation()
     {
@@ -249,7 +267,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_entries_requires_an_item_with_at_least_translation()
     {
@@ -270,7 +288,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_schedule_entries_requires_a_position()
     {
@@ -291,7 +309,7 @@ class UpdateEventScheduleTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_position_needs_to_be_an_integer()
     {

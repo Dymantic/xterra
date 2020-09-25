@@ -36,8 +36,8 @@ function deleteEventActivity(activity_id) {
     return del(`/admin/activities/${activity_id}`);
 }
 
-function saveEventPrizes(event_id, prizes) {
-    return post(`/admin/events/${event_id}/prizes`, { prizes });
+function saveEventRacePrizes(race_id, prizes) {
+    return post(`/admin/races/${race_id}/prizes`, { prizes });
 }
 
 function saveEventFees(event_id, fees) {
@@ -76,15 +76,15 @@ function deleteTravelRoute(route_id) {
     return del(`/admin/travel-routes/${route_id}`);
 }
 
-function createEventCourse(event_id, formData) {
-    return post(`/admin/events/${event_id}/courses`, formData);
+function createEventRaceCourse(race_id, formData) {
+    return post(`/admin/races/${race_id}/courses`, formData);
 }
 
-function updateEventCourse(course_id, formData) {
+function updateEventRaceCourse(course_id, formData) {
     return post(`/admin/courses/${course_id}`, formData);
 }
 
-function deleteEventCourse(course_id) {
+function deleteEventRaceCourse(course_id) {
     return del(`/admin/courses/${course_id}`);
 }
 
@@ -116,6 +116,42 @@ function removeGalleryFromEvent(event_id, gallery_id) {
     return del(`/admin/events/${event_id}/galleries/${gallery_id}`);
 }
 
+function saveEventRaceSchedule(race_id, schedule) {
+    return post(`/admin/races/${race_id}/schedule`, { schedule });
+}
+
+function saveEventRaceFees(race_id, fees) {
+    return post(`/admin/races/${race_id}/fees`, { fees });
+}
+
+function saveRaceScheduleNotes(race_id, notes) {
+    return post(`/admin/races/${race_id}/schedule-notes`, { notes });
+}
+
+function saveRacePrizeNotes(race_id, notes) {
+    return post(`/admin/races/${race_id}/prize-notes`, { notes });
+}
+
+function saveRaceFeesNotes(race_id, notes) {
+    return post(`/admin/races/${race_id}/fees-notes`, { notes });
+}
+
+function saveEventRaceDescription(race_id, description, lang) {
+    return post(`/admin/races/${race_id}/description`, { description, lang });
+}
+
+function saveEventRaceRules(race_id, rules, lang) {
+    return post(`/admin/races/${race_id}/race-rules`, { rules, lang });
+}
+
+function saveEventRaceInfo(race_id, info, lang) {
+    return post(`/admin/races/${race_id}/race-info`, { info, lang });
+}
+
+function saveEventRacePromoVideo(race_id, formData) {
+    return post(`/admin/races/${race_id}/promo-video`, formData);
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -126,7 +162,7 @@ export {
     updateEventActivity,
     updateEventRace,
     deleteEventActivity,
-    saveEventPrizes,
+    saveEventRacePrizes,
     saveEventFees,
     saveEventSchedule,
     clearEventSchedule,
@@ -136,9 +172,9 @@ export {
     createEventTravelRoute,
     updateEventTravelRoute,
     deleteTravelRoute,
-    createEventCourse,
-    updateEventCourse,
-    deleteEventCourse,
+    createEventRaceCourse,
+    updateEventRaceCourse,
+    deleteEventRaceCourse,
     updateCourseImagePositions,
     updateEventOverview,
     addYoutubeVideoToEvent,
@@ -146,4 +182,13 @@ export {
     deleteEventYoutubeVideo,
     attachGalleryToEvent,
     removeGalleryFromEvent,
+    saveEventRaceSchedule,
+    saveEventRaceFees,
+    saveRaceScheduleNotes,
+    saveRacePrizeNotes,
+    saveRaceFeesNotes,
+    saveEventRaceDescription,
+    saveEventRaceRules,
+    saveEventRaceInfo,
+    saveEventRacePromoVideo,
 };

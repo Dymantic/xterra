@@ -6,7 +6,7 @@ use App\Occasions\CourseInfo;
 use App\Rules\AtLeastOneTranslation;
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventCourseRequest extends FormRequest
+class RaceCourseRequest extends FormRequest
 {
 
     public function authorize()

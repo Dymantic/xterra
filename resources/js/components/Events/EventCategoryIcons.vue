@@ -1,32 +1,42 @@
 <template>
     <div class="flex space-x-4 items-center">
         <run-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('run')"
         ></run-icon>
         <swim-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('swim')"
         ></swim-icon>
         <cycle-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('cycle')"
         ></cycle-icon>
+        <duathlon-icon
+            class="h-8 mr-2 block"
+            :class="colour"
+            v-if="categories.includes('duathlon')"
+        ></duathlon-icon>
+        <triathlon-icon
+            class="h-8 mr-2 block"
+            :class="colour"
+            v-if="categories.includes('triathlon')"
+        ></triathlon-icon>
         <training-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('training')"
         ></training-icon>
         <seminar-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('seminar')"
         ></seminar-icon>
         <lifestyle-icon
-            class="w-8 block"
+            class="h-8 mr-2 block"
             :class="colour"
             v-if="categories.includes('lifestyle')"
         ></lifestyle-icon>
@@ -40,6 +50,8 @@ import CycleIcon from "./CycleIcon";
 import SeminarIcon from "./SeminarIcon";
 import LifestyleIcon from "./LifestyleIcon";
 import TrainingIcon from "./TrainingIcon";
+import DuathlonIcon from "./DuathlonIcon";
+import TriathlonIcon from "./TriathlonIcon";
 export default {
     components: {
         RunIcon,
@@ -48,6 +60,8 @@ export default {
         SeminarIcon,
         LifestyleIcon,
         TrainingIcon,
+        DuathlonIcon,
+        TriathlonIcon,
     },
 
     props: ["categories", "colour"],

@@ -105,6 +105,7 @@ class Course extends Model implements HasMedia
     {
         return [
             'id' => $this->id,
+            'race_id' => $this->activity_id,
             'name' => $this->name,
             'distance' => $this->distance,
             'description' => $this->description,

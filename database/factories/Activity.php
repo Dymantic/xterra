@@ -18,7 +18,7 @@ $factory->define(Activity::class, function (Faker $faker) {
             'en' => $faker->numberBetween(5, 41) . 'km',
             'zh' => $faker->numberBetween(5, 41) . '公里',
         ],
-        'description' => ['en' => $faker->paragraph, 'zh' => $faker->paragraph],
+        'description' => new \App\Translation(['en' => $faker->paragraph, 'zh' => $faker->paragraph]),
         'category'    => $faker->randomElement(Activity::ACTIVITY_TYPES),
         'is_race'     => $faker->boolean,
     ];

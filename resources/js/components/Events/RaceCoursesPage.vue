@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div v-if="race">
         <div class="flex justify-between items-center">
-            <p class="font-bold text-lg">Event Courses</p>
+            <p class="font-bold text-lg">Race Courses for {{ race.name.en }}</p>
             <div class="items-center flex">
                 <router-link
-                    :to="`/events/${$route.params.id}/edit/courses/create`"
+                    :to="`/events/${$route.params.event}/races/${$route.params.race}/edit/courses/create`"
                     class="btn btn-dark"
                     >Add Course</router-link
                 >
@@ -13,7 +13,7 @@
 
         <div class="my-12">
             <event-course-card
-                v-for="course in courses"
+                v-for="course in race.courses"
                 :key="course.id"
                 :course="course"
             ></event-course-card>
@@ -30,8 +30,10 @@ export default {
     },
 
     computed: {
-        courses() {
-            return this.$store.getters["events/currentEventCourses"];
+        race() {
+            return this.$store.getters["events/currentEventActivityById"](
+                this.$route.params.race
+            );
         },
     },
 };

@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Occasions\Activity;
 use App\Occasions\ActivityInfo;
 use App\Rules\AtLeastOneTranslation;
+use App\Rules\TranslationArray;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -22,6 +23,11 @@ class ActivityRequest extends FormRequest
         return [
             'name' => [new AtLeastOneTranslation],
             'category' => ['required', Rule::in(Activity::ACTIVITY_TYPES)],
+            'date' => ['date', 'nullable'],
+            'venue_name' => [new TranslationArray()],
+            'venue_address' => [new TranslationArray()],
+            'map_link' => ['url', 'nullable'],
+            'registration_link' => ['url', 'nullable'],
         ];
     }
 
@@ -32,6 +38,11 @@ class ActivityRequest extends FormRequest
             'distance',
             'description',
             'category',
+            'venue_address',
+            'venue_name',
+            'date',
+            'map_link',
+            'registration_link',
         ]));
     }
 

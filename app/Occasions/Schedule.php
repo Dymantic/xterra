@@ -28,17 +28,19 @@ class Schedule
         $this->entries->push([
             'day_of_event' => $day,
             'item' => ['en' => $entry['item']['en'] ?? '', 'zh' => $entry['item']['zh'] ?? ''],
+            'location' => ['en' => $entry['location']['en'] ?? '', 'zh' => $entry['location']['zh'] ?? ''],
             'time_of_day' => ['en' => $entry['time_of_day']['en'] ?? '', 'zh' => $entry['time_of_day']['zh'] ?? ''],
             'position' => $entry['position'],
         ]);
     }
 
-    public static function forEvent(Event $event): self
+    public static function forEvent( $event): self
     {
         $schedule = new self([]);
         $days = $event->scheduleEntries->each(fn (ScheduleEntry $entry) => $schedule->addEntry($entry->day_of_event, [
             'item' => $entry->item,
             'time_of_day' => $entry->time_of_day,
+            'location' => $entry->location ?? ['en' => '', 'zh' => ''],
             'position' => $entry->position,
         ]));
 
@@ -54,6 +56,7 @@ class Schedule
                 'entries' => $entries->map(fn ($entry) => [
                     'item' => $entry['item'],
                     'time_of_day' => $entry['time_of_day'],
+                    'location' => $entry['location'],
                     'position' => $entry['position'],
                 ])->values()->all(),
             ];

@@ -6,7 +6,6 @@ import EventActivitiesIndex from "../components/Events/EventActivitiesIndex";
 import CreateEventActivity from "../components/Events/CreateEventActivity";
 import UpdateEventActivity from "../components/Events/UpdateEventActivity";
 import PrizeList from "../components/Events/PrizeList";
-import FeesList from "../components/Events/FeesList";
 import ScheduleOrganizer from "../components/Events/ScheduleOrganizer";
 import EventAccommodationsPage from "../components/Events/EventAccommodationsPage";
 import CreateAccommodation from "../components/Events/CreateAccommodation";
@@ -14,7 +13,6 @@ import EditAccommodation from "../components/Events/EditAccommodation";
 import TravelRoutesPage from "../components/Events/TravelRoutesPage";
 import CreateTravelRoute from "../components/Events/CreateTravelRoute";
 import EditTravelRoute from "../components/Events/EditTravelRoute";
-import EventCoursesPage from "../components/Events/EventCoursesPage";
 import CreateEventCourse from "../components/Events/CreateEventCourse";
 import CourseGallery from "../components/Events/CourseGallery";
 import EditEventCourse from "../components/Events/EditEventCourse";
@@ -22,6 +20,24 @@ import EventOverviewEditor from "../components/Events/EventOverviewEditor";
 import EventVideosPage from "../components/Events/EventVideosPage";
 import EventGalleries from "../components/Events/EventGalleries";
 import EventImages from "../components/Events/EventImages";
+import EventSchedulePlanner from "../components/Events/EventSchedulePlanner";
+import RaceSchedulePlanner from "../components/Events/RaceSchedulePlanner";
+import RaceFeesList from "../components/Events/RaceFeesList";
+import EventFeesList from "../components/Events/EventFeesList";
+import RaceCoursesPage from "../components/Events/RaceCoursesPage";
+import RaceEditPage from "../components/Events/RaceEditPage";
+import RaceScheduleNotes from "../components/Events/RaceScheduleNotes";
+import RacePrizeNotes from "../components/Events/RacePrizeNotes";
+import RaceFeesNotes from "../components/Events/RaceFeesNotes";
+import RaceFiles from "../components/Events/RaceFiles";
+import RaceRulesEditor from "../components/Events/RaceRulesEditor";
+import RaceInfoEditor from "../components/Events/RaceInfoEditor";
+import ShowRaceRules from "../components/Events/ShowRaceRules";
+import ShowRaceInfo from "../components/Events/ShowRaceInfo";
+import ShowRaceDescription from "../components/Events/ShowRaceDescription";
+import RaceDescriptionEditor from "../components/Events/RaceDescriptionEditor";
+import RaceTitleImages from "../components/Events/RaceTitleImages";
+import RacePromoVideo from "../components/Events/RacePromoVideo";
 export default [
     { path: "/events", component: EventsIndex },
     { path: "/events/:id", component: EventShow },
@@ -41,21 +57,14 @@ export default [
                 path: "activities/create",
                 component: CreateEventActivity,
             },
-            {
-                path: "activities/:activity/edit",
-                component: UpdateEventActivity,
-            },
-            {
-                path: "prizes",
-                component: PrizeList,
-            },
+
             {
                 path: "fees",
-                component: FeesList,
+                component: EventFeesList,
             },
             {
                 path: "schedule",
-                component: ScheduleOrganizer,
+                component: EventSchedulePlanner,
             },
             {
                 path: "accommodation",
@@ -81,22 +90,7 @@ export default [
                 path: "travel-routes/:travelRoute/edit",
                 component: EditTravelRoute,
             },
-            {
-                path: "courses",
-                component: EventCoursesPage,
-            },
-            {
-                path: "courses/create",
-                component: CreateEventCourse,
-            },
-            {
-                path: "courses/:course/edit",
-                component: EditEventCourse,
-            },
-            {
-                path: "courses/:course/gallery",
-                component: CourseGallery,
-            },
+
             {
                 path: "overview",
                 component: EventOverviewEditor,
@@ -112,6 +106,92 @@ export default [
             {
                 path: "images",
                 component: EventImages,
+            },
+        ],
+    },
+    {
+        path: "/events/:event/races/:race/edit",
+        component: RaceEditPage,
+        children: [
+            {
+                path: "general",
+                component: UpdateEventActivity,
+            },
+            {
+                path: "images",
+                component: RaceTitleImages,
+            },
+            {
+                path: "fees",
+                component: RaceFeesList,
+            },
+            {
+                path: "fees-notes",
+                component: RaceFeesNotes,
+            },
+            {
+                path: "courses",
+                component: RaceCoursesPage,
+            },
+            {
+                path: "courses/create",
+                component: CreateEventCourse,
+            },
+            {
+                path: "courses/:course/edit",
+                component: EditEventCourse,
+            },
+            {
+                path: "courses/:course/gallery",
+                component: CourseGallery,
+            },
+            {
+                path: "prizes",
+                component: PrizeList,
+            },
+            {
+                path: "prize-notes",
+                component: RacePrizeNotes,
+            },
+            {
+                path: "schedule",
+                component: RaceSchedulePlanner,
+            },
+            {
+                path: "schedule-notes",
+                component: RaceScheduleNotes,
+            },
+            {
+                path: "files",
+                component: RaceFiles,
+            },
+            {
+                path: "rules/show",
+                component: ShowRaceRules,
+            },
+            {
+                path: "info/show",
+                component: ShowRaceInfo,
+            },
+            {
+                path: "description/show",
+                component: ShowRaceDescription,
+            },
+            {
+                path: "rules/:lang/edit",
+                component: RaceRulesEditor,
+            },
+            {
+                path: "info/:lang/edit",
+                component: RaceInfoEditor,
+            },
+            {
+                path: "description/:lang/edit",
+                component: RaceDescriptionEditor,
+            },
+            {
+                path: "video",
+                component: RacePromoVideo,
             },
         ],
     },

@@ -10,8 +10,8 @@
             </p>
         </div>
         <div class="flex-1">
-            <p>{{ item.item.en }}</p>
-            <p>{{ item.item.zh }}</p>
+            <p>{{ item.item.en }} - {{ item.location.en }}</p>
+            <p>{{ item.item.zh }} - {{ item.location.zh }}</p>
         </div>
         <div class="w-40">
             <button type="button" @click="deleteItem">
@@ -36,11 +36,13 @@ export default {
     props: ["item"],
 
     methods: {
-        updateItem({ time_of_day, item }) {
+        updateItem({ time_of_day, item, location }) {
+            console.log({ location });
             this.$emit("updated", {
                 id: this.item.id,
                 time_of_day,
                 item,
+                location,
                 position: this.item.position,
             });
         },

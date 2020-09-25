@@ -14,4 +14,9 @@ function uploadFile(file) {
     return new FileUploader(file);
 }
 
-export { getImageFileSrc, uploadFile };
+function readableFilename(original_filename, name, suffix) {
+    const ext = original_filename.split(".").pop();
+    return `${name.replace(/ /g, "_")}_${suffix}.${ext}`;
+}
+
+export { getImageFileSrc, uploadFile, readableFilename };

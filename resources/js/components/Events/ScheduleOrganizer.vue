@@ -14,7 +14,7 @@
                     :disabled="waiting"
                     type="button"
                     @click="clearSchedule"
-                    class="btn"
+                    class="btn ml-4"
                 >
                     Clear Schedule
                 </button>
@@ -72,9 +72,10 @@ export default {
         SubmitButton,
     },
 
+    props: ["days", "waiting"],
+
     data() {
         return {
-            waiting: false,
             schedule: [],
             sortables: [],
         };
@@ -87,8 +88,7 @@ export default {
     },
 
     mounted() {
-        const days = this.$store.getters["events/currentEventSchedule"];
-        days.forEach((day) => this.addExistingDay(day));
+        this.days.forEach((day) => this.addExistingDay(day));
     },
 
     methods: {
@@ -146,16 +146,15 @@ export default {
             );
             const sortable = this.sortables.find((s) => s.id === day_number);
             if (schedule_day && sortable) {
-                console.log({ sortable });
                 schedule_day.entries.repositionList(
                     sortable.sortable.toArray()
                 );
             }
         },
 
-        addEntryToDay({ day, time_of_day, item }) {
+        addEntryToDay({ day, time_of_day, item, location }) {
             const schedule_day = this.schedule.find((d) => d.day === day);
-            schedule_day.entries.addItem({ time_of_day, item });
+            schedule_day.entries.addItem({ time_of_day, item, location });
         },
 
         updateDayEntry(item, day) {
@@ -164,35 +163,18 @@ export default {
         },
 
         save() {
-            this.waiting = true;
             const schedule = this.schedule.map((day) => {
                 return {
                     day: day.day,
                     entries: day.entries.toArray(),
                 };
             });
-            this.$store
-                .dispatch("events/saveSchedule", {
-                    event_id: this.$route.params.id,
-                    schedule,
-                })
-                .then(() => notify.success({ message: "Schedule updated." }))
-                .catch(() =>
-                    notify.error({ message: "Failed to update schedule" })
-                )
-                .then(() => (this.waiting = false));
+            this.$emit("save", schedule);
         },
 
         clearSchedule() {
-            this.waiting = true;
             this.schedule = [];
-            this.$store
-                .dispatch("events/clearSchedule", this.$route.params.id)
-                .then(() => notify.success({ message: "Schedule cleared." }))
-                .catch(() =>
-                    notify.error({ message: "Failed to clear schedule" })
-                )
-                .then(() => (this.waiting = false));
+            this.$emit("clear");
         },
     },
 };

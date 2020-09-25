@@ -42,21 +42,16 @@ export default {
         SubmitButton,
     },
 
+    props: ["fees", "waiting"],
+
     data() {
         return {
-            waiting: false,
-            list: PositionedList.New(
-                this.$store.state.events.current_page_event.fees || {}
-            ),
+            list: PositionedList.New(this.fees),
             sortable: null,
         };
     },
 
     computed: {
-        event() {
-            return this.$store.state.events.current_page_event;
-        },
-
         list_items() {
             return this.list.list;
         },
@@ -86,17 +81,18 @@ export default {
         },
 
         save() {
-            this.waiting = true;
-            this.$store
-                .dispatch("events/saveFees", {
-                    event_id: this.$route.params.id,
-                    fees: this.list.toArray(),
-                })
-                .then(() => notify.success({ message: "Fees updated" }))
-                .catch(() =>
-                    notify.error({ message: "Failed to save fees info" })
-                )
-                .then(() => (this.waiting = false));
+            this.$emit("save", this.list.toArray());
+            // this.waiting = true;
+            // this.$store
+            //     .dispatch("events/saveFees", {
+            //         event_id: this.$route.params.id,
+            //         fees: this.list.toArray(),
+            //     })
+            //     .then(() => notify.success({ message: "Fees updated" }))
+            //     .catch(() =>
+            //         notify.error({ message: "Failed to save fees info" })
+            //     )
+            //     .then(() => (this.waiting = false));
         },
     },
 };

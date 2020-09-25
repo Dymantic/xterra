@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
-class UpdateEventCourseTest extends TestCase
+class UpdateRaceCourseTest extends TestCase
 {
     use RefreshDatabase;
 

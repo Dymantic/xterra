@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Occasions\Activity;
 use App\Occasions\Event;
 use App\Rules\AtLeastOneTranslation;
 use Illuminate\Http\Request;
 
-class EventPrizesController extends Controller
+class RacePrizesController extends Controller
 {
-    public function update(Event $event)
+    public function update(Activity $race)
     {
         request()->validate([
             'prizes' => ['required', 'array'],
@@ -19,11 +20,11 @@ class EventPrizesController extends Controller
             'prizes.*.position' => ['required', 'integer'],
         ]);
 
-        $event->setPrizes(request('prizes'));
+        $race->setPrizes(request('prizes'));
     }
 
-    public function destroy(Event $event)
+    public function destroy(Activity $race)
     {
-        $event->clearPrizes();
+        $race->clearPrizes();
     }
 }

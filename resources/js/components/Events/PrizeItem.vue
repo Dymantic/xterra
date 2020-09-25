@@ -1,12 +1,18 @@
 <template>
     <div :data-id="prize.id" class="my-8 shadow p-6 relative">
-        <p>
-            <span>{{ prize.category.en }} - {{ prize.prize.en }}</span>
-        </p>
-        <div class="my-3 w-64 border-b"></div>
-        <p>
-            <span>{{ prize.category.zh }} - {{ prize.prize.zh }}</span>
-        </p>
+        <div class="flex">
+            <div class="w-64">
+                <p class="text-xs">Category</p>
+                <p>{{ prize.category.en }}</p>
+                <p>{{ prize.category.zh }}</p>
+            </div>
+            <div class="">
+                <p class="text-xs">Prize</p>
+                <p>{{ prize.prize.en }}</p>
+                <p>{{ prize.prize.zh }}</p>
+            </div>
+        </div>
+
         <div class="flex justify-end">
             <button class="mr-4 btn text-red-500" @click="removeItem">
                 Remove

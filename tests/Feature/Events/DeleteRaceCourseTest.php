@@ -8,7 +8,7 @@ use App\Occasions\Course;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DeleteEventCourseTest extends TestCase
+class DeleteRaceCourseTest extends TestCase
 {
     use RefreshDatabase;
 

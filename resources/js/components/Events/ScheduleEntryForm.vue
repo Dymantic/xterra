@@ -4,8 +4,8 @@
             {{ this.entry ? "Edit" : "Add Entry" }}
         </button>
         <modal :show="showModal" @close="showMOdal = true">
-            <form @submit.prevent="done" class="w-screen max-w-md p-6">
-                <div class="my-6">
+            <form @submit.prevent="done" class="w-screen max-w-2xl p-6">
+                <div class="my-6 max-w-md">
                     <p class="font-bold">Time of Day</p>
                     <p class="my-2 text-gray-600">When is this happening?</p>
                     <div class="pl-6">
@@ -21,24 +21,46 @@
                         ></input-field>
                     </div>
                 </div>
-                <div class="my-6">
-                    <p class="font-bold">Activity</p>
-                    <p class="my-2 text-gray-600">
-                        What should be happening at ths time?
-                    </p>
-                    <div class="pl-6">
-                        <input-field
-                            class="mb-4"
-                            label="English"
-                            v-model="formData.item.en"
-                        ></input-field>
-                        <input-field
-                            class="mb-4"
-                            label="Chinese"
-                            v-model="formData.item.zh"
-                        ></input-field>
+                <div class="flex justify-between">
+                    <div class="my-6">
+                        <p class="font-bold">Activity</p>
+                        <p class="my-2 text-gray-600">
+                            What should be happening at ths time?
+                        </p>
+                        <div class="pl-6">
+                            <input-field
+                                class="mb-4"
+                                label="English"
+                                v-model="formData.item.en"
+                            ></input-field>
+                            <input-field
+                                class="mb-4"
+                                label="Chinese"
+                                v-model="formData.item.zh"
+                            ></input-field>
+                        </div>
+                    </div>
+
+                    <div class="my-6">
+                        <p class="font-bold">Location</p>
+                        <p class="my-2 text-gray-600">
+                            Where does the person need to be?
+                        </p>
+                        <div class="pl-6">
+                            <input-field
+                                class="mb-4"
+                                label="English"
+                                v-model="formData.location.en"
+                            ></input-field>
+                            <input-field
+                                class="mb-4"
+                                label="Chinese"
+                                v-model="formData.location.zh"
+                            ></input-field>
+                        </div>
                     </div>
                 </div>
+
                 <div class="mt-6 flex justify-end">
                     <button
                         type="button"
@@ -82,6 +104,10 @@ export default {
                     en: this.entry ? this.entry.item.en : "",
                     zh: this.entry ? this.entry.item.zh : "",
                 },
+                location: {
+                    en: this.entry ? this.entry.location.en : "",
+                    zh: this.entry ? this.entry.location.zh : "",
+                },
             },
         };
     },
@@ -109,6 +135,7 @@ export default {
             this.$emit("updated", {
                 day: this.dayNumber,
                 time_of_day: this.formData.time_of_day,
+                location: this.formData.location,
                 item: this.formData.item,
             });
 
@@ -121,6 +148,10 @@ export default {
                     item: {
                         en: this.entry ? this.entry.item.en : "",
                         zh: this.entry ? this.entry.item.zh : "",
+                    },
+                    location: {
+                        en: this.entry ? this.entry.location.en : "",
+                        zh: this.entry ? this.entry.location.zh : "",
                     },
                 };
             }

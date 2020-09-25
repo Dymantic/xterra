@@ -7,7 +7,7 @@
 
                 <div class="my-6">
                     <p class="font-bold">Category</p>
-                    <p class="my-2 text-gray-600">What is the prize for?</p>
+                    <p class="my-2 text-gray-600">What is the fee for?</p>
                     <div class="pl-6">
                         <input-field
                             class="mb-4"

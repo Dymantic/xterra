@@ -47,11 +47,17 @@
             <p class="uppercase text-lg text-red-700">Races</p>
             <div v-for="race in event_races" :key="race.id" class="my-4">
                 <p class="font-bold text-lg">{{ race.name[lang] }}</p>
-                <div class="flex">
-                    <p>{{ race.category }} |</p>
-                    <p>{{ race.distance[lang] }}</p>
+                <div class="flex items-center">
+                    <category-colour-label
+                        :category="race.category"
+                    ></category-colour-label>
+                    <p class="ml-3 text-gray-600">{{ race.distance[lang] }}</p>
+                    <router-link
+                        :to="`/events/${$route.params.id}/races/${race.id}/edit/general`"
+                        class="mx-4 text-gray-600 hover:text-blue-600 font-bold"
+                        >Edit</router-link
+                    >
                 </div>
-                <p class="text-sm max-w-md">{{ race.description[lang] }}</p>
             </div>
         </div>
 
@@ -63,11 +69,17 @@
                 class="my-4"
             >
                 <p class="font-bold text-lg">{{ activity.name[lang] }}</p>
-                <div class="flex">
-                    <p>{{ activity.category }} |</p>
+                <div class="flex items-center">
+                    <category-colour-label
+                        :category="activity.category"
+                    ></category-colour-label>
                     <p>{{ activity.distance[lang] }}</p>
+                    <router-link
+                        :to="`/events/${$route.params.id}/races/${activity.id}/edit/general`"
+                        class="mx-4 text-gray-600 hover:text-blue-600 font-bold"
+                        >Edit</router-link
+                    >
                 </div>
-                <p class="text-sm max-w-md">{{ activity.description[lang] }}</p>
             </div>
         </div>
 
@@ -133,7 +145,17 @@
                             <td class="px-2 py-1">
                                 {{ entry.time_of_day[lang] }}
                             </td>
-                            <td class="px-2 py-1">{{ entry.item[lang] }}</td>
+                            <td class="px-2 py-1">
+                                <p>{{ entry.item[lang] }}</p>
+                                <div
+                                    class="flex text-sm items-center text-gray-600"
+                                >
+                                    <location-icon
+                                        class="h-5 mr-2"
+                                    ></location-icon>
+                                    <p>{{ entry.location[lang] }}</p>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -257,7 +279,9 @@
 import LanguageSelector from "../LanguageSelector";
 import EventGalleryCard from "./EventGalleryCard";
 import FileIcon from "../Icons/FileIcon";
+import LocationIcon from "../Icons/LocationIcon";
 import EventCategoryIcons from "./EventCategoryIcons";
+import CategoryColourLabel from "./CategoryColourLabel";
 import { notify } from "../Messaging/notify";
 import { getYoutubeIFrame } from "../../lib/videos";
 
@@ -267,6 +291,8 @@ export default {
         EventCategoryIcons,
         EventGalleryCard,
         FileIcon,
+        LocationIcon,
+        CategoryColourLabel,
     },
 
     data() {

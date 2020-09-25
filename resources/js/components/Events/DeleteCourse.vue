@@ -49,12 +49,12 @@ export default {
             this.waiting = true;
 
             this.$store
-                .dispatch("events/removeCourse", this.course.id)
+                .dispatch("events/removeRaceCourse", this.course.id)
                 .then(() => {
                     this.showModal = false;
                     notify.success({ message: "Course deleted" });
                     this.$router.push(
-                        `/events/${this.$route.params.id}/edit/courses`
+                        `/events/${this.$route.params.id}/edit/races/${this.course.race_id}/courses`
                     );
                 })
                 .catch(() => {

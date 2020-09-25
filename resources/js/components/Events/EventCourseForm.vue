@@ -79,7 +79,7 @@ export default {
         SubmitButton,
     },
 
-    props: ["course"],
+    props: ["race", "course"],
 
     data() {
         return {
@@ -122,11 +122,11 @@ export default {
             this.formErrors = clearValidationErrors(this.formErrors);
 
             const action = this.course
-                ? "events/updateCourse"
-                : "events/createCourse";
+                ? "events/updateRaceCourse"
+                : "events/createRaceCourse";
             const payload = !this.course
                 ? {
-                      event_id: this.$route.params.id,
+                      race_id: this.$route.params.race,
                       formData: this.formData,
                   }
                 : {
@@ -151,7 +151,10 @@ export default {
             }
 
             notify.success({ message: "Course saved" });
-            this.$router.push(`/events/${this.$route.params.id}/edit/courses`);
+
+            this.$router.push(
+                `/events/${this.$route.params.event}/races/${this.$route.params.race}/edit/courses`
+            );
         },
 
         onError({ status, data }) {

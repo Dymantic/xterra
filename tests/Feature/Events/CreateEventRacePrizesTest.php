@@ -4,24 +4,25 @@
 namespace Tests\Feature\Events;
 
 
+use App\Occasions\Activity;
 use App\Occasions\Event;
 use App\Occasions\Prize;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
 
-class CreateEventPrizesTest extends TestCase
+class CreateEventRacePrizesTest extends TestCase
 {
     use RefreshDatabase;
 
     /**
      * @test
      */
-    public function create_the_prizes_for_an_event()
+    public function create_the_prizes_for_a_race()
     {
         $this->withoutExceptionHandling();
 
-        $event = factory(Event::class)->create();
+        $race = factory(Activity::class)->state('race')->create();
 
         $prize_info = [
             [
@@ -41,25 +42,25 @@ class CreateEventPrizesTest extends TestCase
             ],
         ];
 
-        $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/prizes", [
+        $response = $this->asAdmin()->postJson("/admin/races/{$race->id}/prizes", [
             'prizes' => $prize_info,
         ]);
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('prizes', [
-            'event_id' => $event->id,
+            'activity_id' => $race->id,
             'category' => json_encode(['en' => "test category one", 'zh' => "zh test category one"]),
             'prize'    => json_encode(['en' => "test prize one", 'zh' => "zh test prize one"]),
             'position' => 1,
         ]);
         $this->assertDatabaseHas('prizes', [
-            'event_id' => $event->id,
+            'activity_id' => $race->id,
             'category' => json_encode(['en' => "test category two", 'zh' => "zh test category two"]),
             'prize'    => json_encode(['en' => "test prize two", 'zh' => "zh test prize two"]),
             'position' => 2,
         ]);
         $this->assertDatabaseHas('prizes', [
-            'event_id' => $event->id,
+            'activity_id' => $race->id,
             'category' => json_encode(['en' => "test category three", 'zh' => "zh test category three"]),
             'prize'    => json_encode(['en' => "test prize three", 'zh' => "zh test prize three"]),
             'position' => 3,
@@ -148,9 +149,9 @@ class CreateEventPrizesTest extends TestCase
 
     private function assertDataIsInvalid($data, $error_key = null)
     {
-        $event = factory(Event::class)->create();
+        $race = factory(Activity::class)->create();
 
-        $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/prizes", $data);
+        $response = $this->asAdmin()->postJson("/admin/races/{$race->id}/prizes", $data);
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
 
         $response->assertJsonValidationErrors($error_key ?? array_key_first($data));

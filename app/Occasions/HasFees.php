@@ -8,7 +8,7 @@ trait HasFees
 {
     public function fees()
     {
-        return $this->hasMany(Fee::class);
+        return $this->morphMany(Fee::class, 'costly');
     }
 
     public function setFees(array $fees)

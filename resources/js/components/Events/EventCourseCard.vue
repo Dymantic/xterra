@@ -34,12 +34,12 @@
         <div class="absolute top-0 right-0 mt-4 mr-4">
             <router-link
                 class="font-bold hover:text-blue-600"
-                :to="`/events/${$route.params.id}/edit/courses/${course.id}/edit`"
+                :to="`/events/${$route.params.event}/races/${$route.params.race}/edit/courses/${course.id}/edit`"
                 >Edit</router-link
             >
             <router-link
                 class="font-bold hover:text-blue-600 ml-4"
-                :to="`/events/${$route.params.id}/edit/courses/${course.id}/gallery`"
+                :to="`/events/${$route.params.event}/races/${$route.params.race}/edit/courses/${course.id}/gallery`"
                 >Gallery</router-link
             >
         </div>

@@ -38,6 +38,9 @@ class ClearEventScheduleTest extends TestCase
         $response = $this->asAdmin()->deleteJson("/admin/events/{$event->id}/schedule");
         $response->assertSuccessful();
 
-        $this->assertDatabaseMissing('schedule_entries', ['event_id' => $event->id]);
+        $this->assertDatabaseMissing('schedule_entries', [
+            'scheduled_id' => $event->id,
+            'scheduled_type' => Event::class,
+        ]);
     }
 }

@@ -27,16 +27,19 @@ class EventSchedulesTest extends TestCase
                     [
                         'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                         'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 1,
                     ],
                     [
                         'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                         'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 2,
                     ],
                     [
                         'time_of_day' => ['en' => '12:00', 'zh' => '12:00'],
                         'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 3,
                     ],
                 ]
@@ -47,16 +50,19 @@ class EventSchedulesTest extends TestCase
                     [
                         'time_of_day' => ['en' => '6:30am', 'zh' => '6:30am'],
                         'item'        => ['en' => 'test item one', 'zh' => 'zh test item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 1,
                     ],
                     [
                         'time_of_day' => ['en' => '8:45', 'zh' => '8:45'],
                         'item'        => ['en' => 'test item two', 'zh' => 'zh test item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 3,
                     ],
                     [
                         'time_of_day' => ['en' => '7:00', 'zh' => '7:00'],
                         'item'        => ['en' => 'test item three', 'zh' => 'zh test item three'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 2,
                     ],
                 ]
@@ -73,6 +79,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 1,
             'time_of_day'  => ['en' => '6:30am', 'zh' => '6:30am'],
             'item'         => ['en' => 'test item one', 'zh' => 'zh test item one'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 1,
         ]);
 
@@ -80,6 +87,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 1,
             'time_of_day'  => ['en' => '8:45', 'zh' => '8:45'],
             'item'         => ['en' => 'test item two', 'zh' => 'zh test item two'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 2,
         ]);
 
@@ -87,6 +95,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 1,
             'time_of_day'  => ['en' => '12:00', 'zh' => '12:00'],
             'item'         => ['en' => 'test item three', 'zh' => 'zh test item three'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 3,
         ]);
 
@@ -94,6 +103,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 2,
             'time_of_day'  => ['en' => '6:30am', 'zh' => '6:30am'],
             'item'         => ['en' => 'test item one', 'zh' => 'zh test item one'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 1,
         ]);
 
@@ -101,6 +111,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 2,
             'time_of_day'  => ['en' => '8:45', 'zh' => '8:45'],
             'item'         => ['en' => 'test item two', 'zh' => 'zh test item two'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 3,
         ]);
 
@@ -108,6 +119,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 2,
             'time_of_day'  => ['en' => '7:00', 'zh' => '7:00'],
             'item'         => ['en' => 'test item three', 'zh' => 'zh test item three'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 2,
         ]);
     }
@@ -125,11 +137,13 @@ class EventSchedulesTest extends TestCase
                     [
                         'time_of_day' => ['en' => '5am', 'zh' => '5am'],
                         'item'        => ['en' => 'old item one', 'zh' => 'zh old item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 1,
                     ],
                     [
                         'time_of_day' => ['en' => '7am', 'zh' => '7am'],
                         'item'        => ['en' => 'old item two', 'zh' => 'zh old item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 2,
                     ]
                 ]
@@ -145,11 +159,13 @@ class EventSchedulesTest extends TestCase
                     [
                         'time_of_day' => ['en' => '9am', 'zh' => '9am'],
                         'item'        => ['en' => 'new item one', 'zh' => 'zh new item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 1,
                     ],
                     [
                         'time_of_day' => ['en' => '11am', 'zh' => '11am'],
                         'item'        => ['en' => 'new item two', 'zh' => 'zh new item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
                         'position'    => 2,
                     ]
                 ]
@@ -164,6 +180,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 1,
             'time_of_day'  => ['en' => '9am', 'zh' => '9am'],
             'item'         => ['en' => 'new item one', 'zh' => 'zh new item one'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 1,
         ]);
 
@@ -171,6 +188,7 @@ class EventSchedulesTest extends TestCase
             'day_of_event' => 1,
             'time_of_day'  => ['en' => '11am', 'zh' => '11am'],
             'item'         => ['en' => 'new item two', 'zh' => 'zh new item two'],
+            'location'     => ['en' => 'test ', 'zh' => 'zh test '],
             'position'     => 2,
         ]);
     }
@@ -187,12 +205,12 @@ class EventSchedulesTest extends TestCase
                 'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day' => ['en' =>'9am', 'zh' => '9am'],
+                        'time_of_day' => ['en' => '9am', 'zh' => '9am'],
                         'item'        => ['en' => 'new item one', 'zh' => 'zh new item one'],
                         'position'    => 1,
                     ],
                     [
-                        'time_of_day' => ['en' =>'11am', 'zh' => '11am'],
+                        'time_of_day' => ['en' => '11am', 'zh' => '11am'],
                         'item'        => ['en' => 'new item two', 'zh' => 'zh new item two'],
                         'position'    => 2,
                     ]
@@ -216,91 +234,108 @@ class EventSchedulesTest extends TestCase
     {
         $event = factory(Event::class)->create();
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 1,
-            'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
-            'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
-            'position'     => 1,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 1,
+            'time_of_day'    => ['en' => '6am', 'zh' => '6am'],
+            'item'           => ['en' => 'item one', 'zh' => 'zh item one'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 1,
         ]);
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 1,
-            'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
-            'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
-            'position'     => 2,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 1,
+            'time_of_day'    => ['en' => '7am', 'zh' => '7am'],
+            'item'           => ['en' => 'item two', 'zh' => 'zh item two'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 2,
         ]);
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 1,
-            'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
-            'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
-            'position'     => 2,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 1,
+            'time_of_day'    => ['en' => '10am', 'zh' => '10am'],
+            'item'           => ['en' => 'item three', 'zh' => 'zh item three'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 2,
         ]);
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 2,
-            'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
-            'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
-            'position'     => 1,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 2,
+            'time_of_day'    => ['en' => '6am', 'zh' => '6am'],
+            'item'           => ['en' => 'item one', 'zh' => 'zh item one'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 1,
         ]);
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 2,
-            'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
-            'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
-            'position'     => 2,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 2,
+            'time_of_day'    => ['en' => '7am', 'zh' => '7am'],
+            'item'           => ['en' => 'item two', 'zh' => 'zh item two'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 2,
         ]);
         factory(ScheduleEntry::class)->create([
-            'event_id' => $event->id,
-            'day_of_event' => 2,
-            'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
-            'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
-            'position'     => 2,
+            'scheduled_id'   => $event->id,
+            'scheduled_type' => Event::class,
+            'day_of_event'   => 2,
+            'time_of_day'    => ['en' => '10am', 'zh' => '10am'],
+            'item'           => ['en' => 'item three', 'zh' => 'zh item three'],
+            'location'       => ['en' => 'test ', 'zh' => 'zh test '],
+            'position'       => 2,
         ]);
 
         $expected = [
             [
-                'day' => 1,
+                'day'     => 1,
                 'entries' => [
                     [
-                        'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
-                        'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
-                        'position'     => 1,
+                        'time_of_day' => ['en' => '6am', 'zh' => '6am'],
+                        'item'        => ['en' => 'item one', 'zh' => 'zh item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 1,
                     ],
                     [
-                        'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
-                        'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
-                        'position'     => 2,
+                        'time_of_day' => ['en' => '7am', 'zh' => '7am'],
+                        'item'        => ['en' => 'item two', 'zh' => 'zh item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 2,
                     ],
                     [
-                        'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
-                        'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
-                        'position'     => 2,
+                        'time_of_day' => ['en' => '10am', 'zh' => '10am'],
+                        'item'        => ['en' => 'item three', 'zh' => 'zh item three'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 2,
                     ]
                 ],
             ],
             [
-                'day' => 2,
+                'day'     => 2,
                 'entries' => [
                     [
-                        'time_of_day'  => ['en' => '6am', 'zh' => '6am'],
-                        'item'         => ['en' => 'item one', 'zh' => 'zh item one'],
-                        'position'     => 1,
+                        'time_of_day' => ['en' => '6am', 'zh' => '6am'],
+                        'item'        => ['en' => 'item one', 'zh' => 'zh item one'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 1,
                     ],
                     [
-                        'time_of_day'  => ['en' => '7am', 'zh' => '7am'],
-                        'item'         => ['en' => 'item two', 'zh' => 'zh item two'],
-                        'position'     => 2,
+                        'time_of_day' => ['en' => '7am', 'zh' => '7am'],
+                        'item'        => ['en' => 'item two', 'zh' => 'zh item two'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 2,
                     ],
                     [
-                        'time_of_day'  => ['en' => '10am', 'zh' => '10am'],
-                        'item'         => ['en' => 'item three', 'zh' => 'zh item three'],
-                        'position'     => 2,
+                        'time_of_day' => ['en' => '10am', 'zh' => '10am'],
+                        'item'        => ['en' => 'item three', 'zh' => 'zh item three'],
+                        'location'    => ['en' => 'test ', 'zh' => 'zh test '],
+                        'position'    => 2,
                     ]
                 ],
             ]
         ];
-
         $this->assertEquals($expected, Schedule::forEvent($event)->toArray());
     }
 
@@ -310,6 +345,7 @@ class EventSchedulesTest extends TestCase
             ['day_of_event', $entry['day_of_event']],
             ['time_of_day', json_encode($entry['time_of_day'])],
             ['item', json_encode($entry['item'])],
+            ['location', json_encode($entry['location'])],
             ['position', $entry['position']],
         ])->get());
     }

@@ -44,17 +44,12 @@ export default {
 
     watch: {
         value(to) {
-            console.log(to);
+            this.internal_date = to;
         },
-    },
-
-    mounted() {
-        console.log(this.value);
     },
 
     methods: {
         emit(date) {
-            console.log("logd", toStandardDateString(date));
             this.$emit("input", toStandardDateString(date));
         },
     },
