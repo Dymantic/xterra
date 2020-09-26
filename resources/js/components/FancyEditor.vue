@@ -22,6 +22,8 @@ import SubmitButton from "./Forms/SubmitButton";
 import EditorJS from "@editorjs/editorjs";
 import ImageTool from "@editorjs/image";
 import Table from "@editorjs/table";
+import Header from "@editorjs/header";
+import List from "@editorjs/list";
 import IllustratedText from "../editorjs/IllustratedText";
 
 export default {
@@ -76,6 +78,17 @@ export default {
                 },
                 table: {
                     class: Table,
+                },
+                list: {
+                    class: List,
+                    inlineToolbar: true,
+                },
+                header: {
+                    class: Header,
+                    config: {
+                        levels: [2, 3, 4],
+                        defaultLevel: 3,
+                    },
                 },
             },
             data: this.initialData,

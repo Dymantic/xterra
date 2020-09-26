@@ -43,6 +43,16 @@ class JsonToBladeParser
                 return view("{$this->viewRoot}.table", [
                     'data' => $block['data']['content'] ?? [],
                 ])->render();
+            case 'list':
+                return view("{$this->viewRoot}.list", [
+                    'ordered' => $block['data']['style'] === 'ordered',
+                    'items' => $block['data']['items'] ?? [],
+                ])->render();
+            case 'header':
+                return view("{$this->viewRoot}.header", [
+                    'text' => $block['data']['text'] ?? '',
+                    'level' => $block['data']['level'] ?? 3,
+                ])->render();
             default:
                 return '';
         }
