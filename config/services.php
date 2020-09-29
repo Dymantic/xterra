@@ -39,7 +39,8 @@ return [
     ],
 
     'google' => [
-        'analytics_id' => env('GA_TRACKING_ID')
+        'analytics_id' => env('GA_TRACKING_ID'),
+        'tag_manager_code' => env('GTM_CODE'),
     ]
 
 ];
