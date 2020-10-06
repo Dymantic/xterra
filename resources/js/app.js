@@ -28,6 +28,7 @@ import mediaRoutes from "./routes/media";
 import promotionRoutes from "./routes/promotions";
 import campaignRoutes from "./routes/campaigns";
 import cardRoutes from "./routes/cards";
+import homePageRoutes from "./routes/homepage";
 
 const routes = [
     ...userRoutes,
@@ -40,6 +41,7 @@ const routes = [
     ...promotionRoutes,
     ...campaignRoutes,
     ...cardRoutes,
+    ...homePageRoutes,
 ];
 
 const router = new VueRouter({ routes });
@@ -55,6 +57,7 @@ import galleriesModule from "./stores/galleries";
 import promotionsModule from "./stores/promotions";
 import campaignsModule from "./stores/campaigns";
 import cardsModule from "./stores/cards";
+import homepageModule from "./stores/homepage";
 
 const store = new Vuex.Store({
     modules: {
@@ -68,6 +71,7 @@ const store = new Vuex.Store({
         promotions: promotionsModule,
         campaigns: campaignsModule,
         cards: cardsModule,
+        homepage: homepageModule,
     },
 });
 

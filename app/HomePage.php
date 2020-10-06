@@ -17,10 +17,21 @@ class HomePage extends Model implements HasMedia
     use HasMediaTrait;
 
     const BANNER_IMG = 'banner_img';
+    const DEFAULT_BANNER = '/images/default_home_banner.jpg';
 
     public static function current(): self
     {
         return self::firstOrCreate([]);
+    }
+
+    public function bannerImage()
+    {
+        $image = $this->getFirstMedia(self::BANNER_IMG);
+
+        return [
+            'full' => optional($image)->getUrl('full') ?? self::DEFAULT_BANNER,
+            'small' => optional($image)->getUrl('small') ?? self::DEFAULT_BANNER,
+        ];
     }
 
     public function setBannerImage(UploadedFile $upload): Media

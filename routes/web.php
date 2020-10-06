@@ -266,6 +266,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('event-content-cards', 'EventContentCardsController@store');
     Route::post('promotion-content-cards', 'PromotionContentCardsController@store');
 
+    Route::get('home-page', 'HomePageController@show');
+
     Route::post('home-page/banner-image', 'HomePageBannerImageController@store');
     Route::delete('home-page/banner-image', 'HomePageBannerImageController@destroy');
 
