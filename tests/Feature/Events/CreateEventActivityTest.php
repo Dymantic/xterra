@@ -26,7 +26,6 @@ class CreateEventActivityTest extends TestCase
         $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/activities", [
             'name'        => ['en' => 'text name', 'zh' => 'test name'],
             'distance'    => ['en' => 'text distance', 'zh' => 'test distance'],
-            'description' => ['en' => 'text description', 'zh' => 'test description'],
             'category'    => Activity::SEMINAR,
         ]);
         $response->assertSuccessful();
@@ -35,7 +34,6 @@ class CreateEventActivityTest extends TestCase
             'event_id'    => $event->id,
             'name'        => json_encode(['en' => 'text name', 'zh' => 'test name']),
             'distance'    => json_encode(['en' => 'text distance', 'zh' => 'test distance']),
-            'description' => json_encode(['en' => 'text description', 'zh' => 'test description']),
             'category'    => Activity::SEMINAR,
             'is_race'     => false
         ]);

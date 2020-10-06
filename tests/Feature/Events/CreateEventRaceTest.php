@@ -33,7 +33,6 @@ class CreateEventRaceTest extends TestCase
             'venue_address'     => ['en' => 'test venue_address', 'zh' => 'zh test venue_address'],
             'map_link'          => 'https://maps.test',
             'registration_link' => 'https://registration.test',
-            'description'       => ['en' => 'test description', 'zh' => 'zh test description'],
             'category'          => Activity::RUN,
         ]);
 
@@ -43,7 +42,6 @@ class CreateEventRaceTest extends TestCase
             'event_id'          => $event->id,
             'name'              => json_encode(['en' => 'test name', 'zh' => 'zh test name']),
             'distance'          => json_encode(['en' => 'test distance', 'zh' => 'zh test distance']),
-            'description'       => json_encode(['en' => 'test description', 'zh' => 'zh test description']),
             'date'              => Carbon::today()->addMonth(),
             'venue_name'        => json_encode(['en' => 'test venue_name', 'zh' => 'zh test venue_name']),
             'venue_address'     => json_encode(['en' => 'test venue_address', 'zh' => 'zh test venue_address']),

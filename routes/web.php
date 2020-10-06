@@ -266,6 +266,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('event-content-cards', 'EventContentCardsController@store');
     Route::post('promotion-content-cards', 'PromotionContentCardsController@store');
 
+    Route::post('home-page/banner-image', 'HomePageBannerImageController@store');
+    Route::delete('home-page/banner-image', 'HomePageBannerImageController@destroy');
+
+    Route::post('home-page/featured-promotion', 'HomePageFeaturedPromotionController@store');
+    Route::post('home-page/featured-event', 'HomePageFeaturedEventController@store');
+    Route::post('home-page/featured-campaign', 'HomePageFeaturedCampaignController@store');
+
 });
 
 Route::group([

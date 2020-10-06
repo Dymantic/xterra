@@ -13,7 +13,7 @@ class Translation implements CastsAttributes
 
     public function __construct(array $translations = [])
     {
-        $this->translations = $translations;
+        $this->translations = array_merge(['en' => '', 'zh' => ''], $translations);
     }
 
     public function get($model, string $key, $value, array $attributes)

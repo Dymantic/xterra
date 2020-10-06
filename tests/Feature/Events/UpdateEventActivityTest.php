@@ -25,7 +25,6 @@ class UpdateEventActivityTest extends TestCase
         $response = $this->asAdmin()->postJson("/admin/activities/{$activity->id}", [
             'name'        => ['en' => 'new name', 'zh' => 'zh new name'],
             'distance'    => ['en' => 'new distance', 'zh' => 'zh new distance'],
-            'description' => ['en' => 'new description', 'zh' => 'zh new description'],
             'category'    => Activity::LIFESTYLE,
         ]);
         $response->assertSuccessful();
@@ -34,7 +33,6 @@ class UpdateEventActivityTest extends TestCase
             'id'          => $activity->id,
             'name'        => json_encode(['en' => 'new name', 'zh' => 'zh new name']),
             'distance'    => json_encode(['en' => 'new distance', 'zh' => 'zh new distance']),
-            'description' => json_encode(['en' => 'new description', 'zh' => 'zh new description']),
             'category'    => Activity::LIFESTYLE,
             'is_race'     => false,
         ]);
