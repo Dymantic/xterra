@@ -83,6 +83,7 @@ export default {
                 },
                 table: {
                     class: Table,
+                    inlineToolbar: true,
                 },
                 list: {
                     class: List,
