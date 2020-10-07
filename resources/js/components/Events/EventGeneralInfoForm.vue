@@ -1,6 +1,10 @@
 <template>
     <div class="px-6" v-if="ready">
-        <p class="text-lg font-bold">General Event Info</p>
+        <div class="flex justify-between mb-8 items-center">
+            <p class="text-lg font-bold">General Event Info</p>
+            <delete-event :event="currentEvent"></delete-event>
+        </div>
+
         <form @submit.prevent="submit">
             <div class="my-6">
                 <p class="font-bold">Name</p>
@@ -151,6 +155,7 @@
 import InputField from "../Forms/InputField";
 import DateField from "../Forms/DateField";
 import SubmitButton from "../Forms/SubmitButton";
+import DeleteEvent from "./DeleteEvent";
 import { clearValidationErrors, setValidationErrors } from "../../lib/forms";
 import { notify } from "../Messaging/notify";
 export default {
@@ -158,6 +163,7 @@ export default {
         InputField,
         DateField,
         SubmitButton,
+        DeleteEvent,
     },
 
     data() {

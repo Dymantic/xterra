@@ -12,6 +12,10 @@ function createEvent(formData) {
     return post("/admin/events/", formData);
 }
 
+function deleteEvent(event_id) {
+    return del(`/admin/events/${event_id}`);
+}
+
 function saveGeneralEventInfo(event_id, formData) {
     return post(`/admin/events/${event_id}/general-info`, formData);
 }
@@ -191,4 +195,5 @@ export {
     saveEventRaceRules,
     saveEventRaceInfo,
     saveEventRacePromoVideo,
+    deleteEvent,
 };

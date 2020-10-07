@@ -49,9 +49,7 @@ export default {
                 .then(() => (this.waiting = false));
         },
 
-        clearSchedule() {
-            alert("yo bro");
-        },
+        clearSchedule() {},
     },
 };
 </script>

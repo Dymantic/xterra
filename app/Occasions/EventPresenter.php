@@ -25,7 +25,7 @@ class EventPresenter
             'registration_link' => $event->registration_link,
             'overview' => $event->overview->toArray(),
             'categories' => $event->listCategories(),
-            'activities' => $event->activities->map->toArray(),
+            'activities' => $event->activities()->orderBy('date')->get()->map->toArray(),
             'fees' => $event->fees->map->toArray(),
             'schedule' => Schedule::forEvent($event)->toArray(),
             'accommodation' => $event->accommodations->map->toArray(),

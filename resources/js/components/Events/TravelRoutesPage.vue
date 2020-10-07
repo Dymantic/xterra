@@ -32,28 +32,37 @@
             </div>
         </div>
 
+        <div class="my-8">
+            <language-selector v-model="lang"></language-selector>
+        </div>
+
         <div class="my-12">
             <div
                 v-for="route in travelRoutes"
                 :key="route.id"
                 class="shadow p-6 my-6 relative"
             >
-                <p class="font-bold">{{ route.name.en }}</p>
-                <p class="text-gray-600">{{ route.name.zh }}</p>
-                <div class="flex justify-between">
-                    <p class="my-4 text-sm w-1/2 mr-4">
-                        {{ route.description.en }}
-                    </p>
-                    <p class="my-4 text-sm w-1/2 ml-4">
-                        {{ route.description.zh }}
-                    </p>
-                </div>
-                <div class="absolute top-0 right-0 mt-4 mr-4">
+                <div class="flex justify-between items-center">
+                    <p class="font-bold">{{ route.name[lang] }}</p>
                     <router-link
                         class="font-bold hover:text-blue-600"
                         :to="`/events/${$route.params.id}/edit/travel-routes/${route.id}/edit`"
                         >Edit</router-link
                     >
+                </div>
+
+                <div class="flex justify-between">
+                    <p class="my-4 text-sm w-1/2 mr-4">
+                        {{ route.description.en }}
+                    </p>
+                    <image-upload
+                        :initial-src="route.image"
+                        :upload-path="`/admin/travel-routes/${route.id}/image`"
+                        :delete-path="`/admin/travel-routes/${route.id}/image`"
+                        width="64"
+                        height="64"
+                        @uploaded="$store.dispatch('events/refreshEvents')"
+                    ></image-upload>
                 </div>
             </div>
         </div>
@@ -62,10 +71,20 @@
 
 <script type="text/babel">
 import SingleFileUpload from "../SingleFileUpload";
+import LanguageSelector from "../LanguageSelector";
+import ImageUpload from "../ImageUpload";
 import { notify } from "../Messaging/notify";
 export default {
     components: {
+        LanguageSelector,
         SingleFileUpload,
+        ImageUpload,
+    },
+
+    data() {
+        return {
+            lang: "en",
+        };
     },
 
     computed: {

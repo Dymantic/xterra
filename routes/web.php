@@ -98,6 +98,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::get('events', 'EventsController@index');
     Route::post('events', 'EventsController@store');
+    Route::delete('events/{event}', 'EventsController@delete');
     Route::post('events/{event}/general-info', 'EventGeneralInfoController@update');
     Route::post('events/{event}/overview', 'EventOverviewController@update');
 
@@ -129,6 +130,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('events/{event}/travel-routes', 'EventTravelRoutesController@store');
     Route::post('travel-routes/{route}', 'EventTravelRoutesController@update');
     Route::delete('travel-routes/{route}', 'EventTravelRoutesController@delete');
+
+    Route::post('travel-routes/{route}/image', 'TravelRouteImageController@store');
 
     Route::post('events/{event}/travel-guide', 'EventTravelGuideController@store');
     Route::delete('events/{event}/travel-guide', 'EventTravelGuideController@destroy');

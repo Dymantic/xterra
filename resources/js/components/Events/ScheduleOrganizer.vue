@@ -35,7 +35,7 @@
         </div>
 
         <div class="pt-12">
-            <div v-for="day in schedule" :key="day.day" class="mb-12">
+            <div v-for="day in ordered_schedule" :key="day.day" class="mb-12">
                 <div class="flex justify-between border-b border-gray-300 mb-3">
                     <p class="font-bold text-lg">Day {{ day.day }}</p>
                     <schedule-entry-form
@@ -82,6 +82,10 @@ export default {
     },
 
     computed: {
+        ordered_schedule() {
+            return this.schedule.sort((a, b) => a.day - b.day);
+        },
+
         scheduleDays() {
             return this.schedule.map((day) => day.day);
         },

@@ -75,6 +75,8 @@ class Activity extends Model implements HasMedia
         'prizes'         => Translation::class,
     ];
 
+    protected $dates = ['date'];
+
     public function setScheduleNotes($notes)
     {
         $this->schedule_notes = $notes;

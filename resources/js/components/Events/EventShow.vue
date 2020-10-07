@@ -83,49 +83,6 @@
             </div>
         </div>
 
-        <div class="mb-12">
-            <p class="uppercase text-lg text-red-700">Courses</p>
-            <div
-                v-for="course in pageEvent.courses"
-                :key="course.id"
-                class="my-4 max-w-2xl"
-            >
-                <div class="flex justify-between border-b border-gray-300 mb-2">
-                    <div class="mr-8">
-                        <p class="font-bold text-lg">{{ course.name[lang] }}</p>
-                        <p>{{ course.distance[lang] }}</p>
-                        <p class="text-sm max-w-md">
-                            {{ course.description[lang] }}
-                        </p>
-                        <div v-if="course.gpx_file" class="mt-2">
-                            <a
-                                class="inline-flex items-center shadow px-4 py-1 rounded-lg font-bold text-gray-600 hover:text-blue-600"
-                                :href="course.gpx_file"
-                                download
-                            >
-                                <file-icon
-                                    class="h-5 text-gray-600 mr-6"
-                                ></file-icon>
-                                <span>GPX file</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="pt-12">
-                        <div v-if="course.gallery.length" class="w-48 h-32">
-                            <img
-                                :src="course.gallery[0].thumb"
-                                alt=""
-                                class="w-full h-full object-cover"
-                            />
-                        </div>
-                        <p v-if="course.gallery.length > 1">
-                            + {{ course.gallery.length - 1 }} more
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div>
             <p class="uppercase text-lg text-red-700">Schedule</p>
             <div v-for="day in pageEvent.schedule" :key="day.day" class="my-4">
@@ -160,29 +117,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="my-12">
-            <p class="uppercase text-lg text-red-700 mb-4">Prizes</p>
-            <table class="w-full max-w-lg border border-gray-400">
-                <thead>
-                    <tr class="text-left border-b border-gray-400">
-                        <th class="p-2">Category</th>
-                        <th class="p-2">Prize</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr
-                        v-for="(prize, index) in pageEvent.prizes"
-                        :class="{ 'bg-blue-100': index % 2 === 1 }"
-                    >
-                        <td class="px-2 py-1">
-                            {{ prize.category[lang] }}
-                        </td>
-                        <td class="px-2 py-1">{{ prize.prize[lang] }}</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
         <div class="my-12">
@@ -241,10 +175,17 @@
             <div
                 v-for="route in pageEvent.travel_routes"
                 :key="route.id"
-                class="my-6 max-w-lg"
+                class="my-6 max-w-xl flex justify-between p-4 shadow rounded"
             >
-                <p class="font-bold">{{ route.name[lang] }}</p>
-                <p class="text-sm mt-2">{{ route.description[lang] }}</p>
+                <div class="pr-8">
+                    <p class="font-bold">{{ route.name[lang] }}</p>
+                    <p class="text-sm mt-2">{{ route.description[lang] }}</p>
+                </div>
+                <div>
+                    <div class="w-32" v-if="route.image">
+                        <img :src="route.image" alt="" />
+                    </div>
+                </div>
             </div>
         </div>
 

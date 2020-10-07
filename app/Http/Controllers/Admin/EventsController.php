@@ -24,4 +24,9 @@ class EventsController extends Controller
         ]);
         Event::createWithName(request('name'));
     }
+
+    public function delete(Event $event)
+    {
+        $event->safeDelete();
+    }
 }

@@ -37,6 +37,7 @@ import {
     saveEventRaceInfo,
     saveEventRaceDescription,
     saveEventRacePromoVideo,
+    deleteEvent,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -404,6 +405,10 @@ export default {
             return saveEventRacePromoVideo(race_id, formData).then(() =>
                 dispatch("refreshEvents")
             );
+        },
+
+        delete({ dispatch }, event_id) {
+            return deleteEvent(event_id).then(() => dispatch("refreshEvents"));
         },
     },
 };

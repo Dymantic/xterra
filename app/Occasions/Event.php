@@ -213,4 +213,10 @@ class Event extends Model implements HasMedia, Cardable
             'image_path' => $image ? Storage::disk('media')->path(Str::after($image->getUrl(), "/media/")) : '',
         ]);
     }
+
+    public function safeDelete()
+    {
+        $this->activities()->delete();
+        $this->delete();
+    }
 }
