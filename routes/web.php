@@ -16,7 +16,9 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect']
     ],
     function () {
-        Route::get('/', 'PagesController@home');
+        Route::get('/', 'HomePageController@show');
+
+        Route::get('blog', 'PagesController@home');
 
         Route::get('blog/{article_slug}/{translation_slug?}', 'PagesController@article');
 

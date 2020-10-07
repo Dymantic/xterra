@@ -23,6 +23,9 @@ module.exports = {
                 "80": "20rem",
                 "120": "30rem",
             },
+            inset: {
+                16: "4rem",
+            },
             boxShadow: {
                 top: "0 3px 6px rgba(0,0,0,.4)",
             },

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="" lang="{{ app()->getLocale() }}">
+<html class="h-full" lang="{{ app()->getLocale() }}">
 
 <head>
     <meta charset="utf-8">
@@ -39,7 +39,7 @@
 
 </head>
 
-<body class="pt-16 font-body leading-relaxed {{ $bodyClasses ?? '' }} antialiased">
+<body class="h-full pt-16 font-body leading-relaxed {{ $bodyClasses ?? '' }} antialiased">
 <!-- Google Tag Manager (noscript) -->
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PRWNH4X" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -48,8 +48,11 @@
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
-<div id="app">
-    @yield('content')
+<div id="app" class="h-full flex flex-col">
+    <div class="flex-1">
+        @yield('content')
+    </div>
+
     @include('front.partials.footer')
     @include('front.partials.navbar')
 </div>

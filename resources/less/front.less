@@ -14,4 +14,14 @@ button:disabled {
     @apply opacity-50;
 }
 
+@media screen and (max-width: 1024px) {
+    .nav-drawer {
+        transition: .3s;
+        transform: translate3d(-100%,0,0);
+    }
+
+    .main-nav.open .nav-drawer {
+        transform: translate3d(0,0,0);
+    }
+}
 
