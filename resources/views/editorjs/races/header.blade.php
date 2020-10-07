@@ -1,1 +1,1 @@
-<h3 class="font-bold text-lg">{{ $text }}</h3>
+<h3 class="font-bold text-lg">{!! $text !!}</h3>

@@ -11,6 +11,10 @@
             >
         </page-header>
 
+        <p class="mb-8 text-gray-600 text-sm" v-if="instruction">
+            {{ instruction }}
+        </p>
+
         <div class="border border-gray-200 p-6 rounded-lg" id="editor"></div>
     </page>
 </template>
@@ -39,6 +43,7 @@ export default {
         "saving",
         "editor-title",
         "back-to",
+        "instruction",
     ],
 
     data() {

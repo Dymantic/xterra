@@ -57,6 +57,7 @@ class Activity extends Model implements HasMedia
         'distance',
         'category',
         'is_race',
+        'prizes',
     ];
 
     protected $casts = [
@@ -70,7 +71,8 @@ class Activity extends Model implements HasMedia
         'fees_notes'     => 'array',
         'race_rules'     => 'array',
         'race_info'      => 'array',
-        'is_race'        => 'boolean'
+        'is_race'        => 'boolean',
+        'prizes'         => Translation::class,
     ];
 
     public function setScheduleNotes($notes)
@@ -246,6 +248,7 @@ class Activity extends Model implements HasMedia
     {
         $card_image = $this->getFirstMedia(self::CARD_IMAGE);
         $banner_image = $this->getFirstMedia(self::BANNER_IMAGE);
+
         return [
             'id'                  => $this->id,
             'name'                => $this->name,
@@ -263,7 +266,11 @@ class Activity extends Model implements HasMedia
             'registration_link'   => $this->registration_link,
             'is_race'             => $this->is_race,
             'schedule'            => Schedule::forEvent($this)->toArray(),
-            'prizes'              => $this->prizes->map->toArray()->values()->all(),
+            'prizes'              => $this->prizes->toArray(),
+            'prizes_html'         => [
+                'en' => $this->prizesHtml('en'),
+                'zh' => $this->prizesHtml('zh'),
+            ],
             'fees'                => $this->fees->map->toArray()->values()->all(),
             'courses'             => $this->courses->map->toArray()->values()->all(),
             'schedule_notes'      => $this->schedule_notes ?? ['en' => '', 'zh' => ''],
@@ -281,11 +288,11 @@ class Activity extends Model implements HasMedia
                 'en' => $this->infoHtml('en'),
                 'zh' => $this->infoHtml('zh'),
             ],
-            'title_image' => [
-                'card' => $card_image ? $card_image->getUrl('card') : self::DEFAULT_IMAGE,
+            'title_image'         => [
+                'card'   => $card_image ? $card_image->getUrl('card') : self::DEFAULT_IMAGE,
                 'banner' => $banner_image ? $banner_image->getUrl('banner') : self::DEFAULT_IMAGE,
             ],
-            'video' => $this->embeddableVideos()->latest()->first(),
+            'video'               => $this->embeddableVideos()->latest()->first(),
         ];
     }
 }

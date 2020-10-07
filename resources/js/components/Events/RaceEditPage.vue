@@ -167,7 +167,7 @@ export default {
                     link: `/events/${this.$route.params.event}/edit/activities`,
                     title: "Activities & Races",
                 },
-                { link: "", title: "Mountain Madness" },
+                { link: "", title: this.race.name.en },
             ];
         },
     },

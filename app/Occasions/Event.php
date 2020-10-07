@@ -20,7 +20,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class Event extends Model implements HasMedia, Cardable
 {
-    use HasActivities, HasSchedule, HasFees, HasPrizes, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, HasMediaTrait;
+    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, HasMediaTrait;
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
     const BANNER_IMAGE = 'banner_image';

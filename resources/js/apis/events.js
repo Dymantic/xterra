@@ -36,8 +36,8 @@ function deleteEventActivity(activity_id) {
     return del(`/admin/activities/${activity_id}`);
 }
 
-function saveEventRacePrizes(race_id, prizes) {
-    return post(`/admin/races/${race_id}/prizes`, { prizes });
+function saveEventRacePrizes(race_id, prizes, lang) {
+    return post(`/admin/races/${race_id}/prizes`, { prizes, lang });
 }
 
 function saveEventFees(event_id, fees) {

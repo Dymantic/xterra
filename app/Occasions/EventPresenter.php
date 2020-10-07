@@ -10,7 +10,7 @@ class EventPresenter
 {
     public static function forAdmin(Event $event): array
     {
-        $event->load('activities.scheduleEntries', 'prizes', 'fees', 'scheduleEntries', 'accommodations', 'travelRoutes', 'activities.courses', 'galleries');
+        $event->load('activities.scheduleEntries', 'fees', 'scheduleEntries', 'accommodations', 'travelRoutes', 'activities.courses', 'galleries');
         return [
             'id' => $event->id,
             'name' => $event->name,
@@ -26,7 +26,6 @@ class EventPresenter
             'overview' => $event->overview->toArray(),
             'categories' => $event->listCategories(),
             'activities' => $event->activities->map->toArray(),
-            'prizes' => $event->prizes->map->toArray(),
             'fees' => $event->fees->map->toArray(),
             'schedule' => Schedule::forEvent($event)->toArray(),
             'accommodation' => $event->accommodations->map->toArray(),

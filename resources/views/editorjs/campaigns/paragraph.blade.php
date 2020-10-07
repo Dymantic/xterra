@@ -1,1 +1,1 @@
-<p class="my-6">{{ $text }}</p>
+<p class="my-6">{!! $text !!}</p>

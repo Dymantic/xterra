@@ -229,8 +229,8 @@ export default {
             );
         },
 
-        saveRacePrizes({ dispatch }, { race_id, prizes }) {
-            return saveEventRacePrizes(race_id, prizes).then(() =>
+        saveRacePrizes({ dispatch }, { race_id, prizes, lang }) {
+            return saveEventRacePrizes(race_id, prizes, lang).then(() =>
                 dispatch("refreshEvents")
             );
         },

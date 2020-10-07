@@ -5,7 +5,7 @@
 @endif
 
 @foreach($items as $item)
-<li>{{ $item }}</li>
+<li>{!! $item !!}</li>
 @endforeach
 
 @if($ordered)

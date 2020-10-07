@@ -5,7 +5,6 @@ import EventShow from "../components/Events/EventShow";
 import EventActivitiesIndex from "../components/Events/EventActivitiesIndex";
 import CreateEventActivity from "../components/Events/CreateEventActivity";
 import UpdateEventActivity from "../components/Events/UpdateEventActivity";
-import PrizeList from "../components/Events/PrizeList";
 import ScheduleOrganizer from "../components/Events/ScheduleOrganizer";
 import EventAccommodationsPage from "../components/Events/EventAccommodationsPage";
 import CreateAccommodation from "../components/Events/CreateAccommodation";
@@ -38,6 +37,8 @@ import ShowRaceDescription from "../components/Events/ShowRaceDescription";
 import RaceDescriptionEditor from "../components/Events/RaceDescriptionEditor";
 import RaceTitleImages from "../components/Events/RaceTitleImages";
 import RacePromoVideo from "../components/Events/RacePromoVideo";
+import ShowRacePrizes from "../components/Events/ShowRacePrizes";
+import PrizeTableEditor from "../components/Events/PrizeTableEditor";
 export default [
     { path: "/events", component: EventsIndex },
     { path: "/events/:id", component: EventShow },
@@ -147,7 +148,11 @@ export default [
             },
             {
                 path: "prizes",
-                component: PrizeList,
+                component: ShowRacePrizes,
+            },
+            {
+                path: "prizes/:lang/edit",
+                component: PrizeTableEditor,
             },
             {
                 path: "prize-notes",

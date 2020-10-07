@@ -4,30 +4,21 @@
 namespace App\Occasions;
 
 
+use App\JsonToBladeParser;
+use App\Translation;
+
 trait HasPrizes
 {
-    public function prizes()
+    public function setPrizes($prize_data, string $lang)
     {
-        return $this->hasMany(Prize::class);
+        $this->prizes->translations[$lang] = $prize_data;
+        $this->save();
     }
 
-    public function setPrizes(array $prizes)
+    public function prizesHtml($lang)
     {
-        $this->clearPrizes();
-        collect($prizes)->each(fn($prize) => $this->addPrize($prize));
-    }
+        $parser = new JsonToBladeParser('editorjs.prizes');
 
-    private function addPrize(array $prize)
-    {
-        $this->prizes()->create([
-            'category' => ['en' => $prize['category']['en'] ?? '', 'zh' => $prize['category']['zh'] ?? ''],
-            'prize' => ['en' => $prize['prize']['en'] ?? '', 'zh' => $prize['prize']['zh'] ?? ''],
-            'position' => $prize['position']
-        ]);
-    }
-
-    public function clearPrizes()
-    {
-        $this->prizes()->delete();
+        return $parser->html($this->prizes->translations[$lang]);
     }
 }
