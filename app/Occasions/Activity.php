@@ -104,6 +104,15 @@ class Activity extends Model implements HasMedia
         $this->save();
     }
 
+    public function setChineseRulesAndInfoDoc(UploadedFile $upload)
+    {
+        $path = $upload->store('race_rules', self::RACE_RULES_DISK);
+
+        $this->zh_race_rules_doc = $path;
+        $this->zh_race_rules_disk = self::RACE_RULES_DISK;
+        $this->save();
+    }
+
     public function clearRulesAndInfoDoc()
     {
         if (Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
@@ -115,10 +124,30 @@ class Activity extends Model implements HasMedia
         $this->save();
     }
 
+    public function clearChineseRulesAndInfoDoc()
+    {
+        if (Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
+            Storage::disk($this->zh_race_rules_disk)->delete($this->zh_race_rules_doc);
+        }
+
+        $this->zh_race_rules_doc = null;
+        $this->zh_race_rules_disk = null;
+        $this->save();
+    }
+
     public function rulesAndInfoDoc()
     {
         if (Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
             return sprintf("/%s/%s", $this->race_rules_disk, $this->race_rules_doc);
+        }
+
+        return "";
+    }
+
+    public function chineseRulesAndInfoDoc()
+    {
+        if (Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
+            return sprintf("/%s/%s", $this->zh_race_rules_disk, $this->zh_race_rules_doc);
         }
 
         return "";
@@ -133,6 +162,15 @@ class Activity extends Model implements HasMedia
         $this->save();
     }
 
+    public function setChineseAthleteGuide(UploadedFile $upload)
+    {
+        $path = $upload->store('athlete_guides', self::ATHLETE_GUIDE_DISK);
+
+        $this->zh_athlete_guide = $path;
+        $this->zh_athlete_guide_disk = self::ATHLETE_GUIDE_DISK;
+        $this->save();
+    }
+
     public function clearAthleteGuide()
     {
         if (Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
@@ -144,10 +182,30 @@ class Activity extends Model implements HasMedia
         $this->save();
     }
 
+    public function clearChineseAthleteGuide()
+    {
+        if (Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
+            Storage::disk($this->zh_athlete_guide_disk)->delete($this->zh_athlete_guide);
+        }
+
+        $this->zh_athlete_guide = null;
+        $this->zh_athlete_guide_disk = null;
+        $this->save();
+    }
+
     public function athletesGuide()
     {
         if (Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
             return sprintf("/%s/%s", $this->athlete_guide_disk, $this->athlete_guide);
+        }
+
+        return "";
+    }
+
+    public function chineseAthleteGuide()
+    {
+        if (Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
+            return sprintf("/%s/%s", $this->zh_athlete_guide_disk, $this->zh_athlete_guide);
         }
 
         return "";
@@ -279,7 +337,9 @@ class Activity extends Model implements HasMedia
             'prize_notes'         => $this->prize_notes ?? ['en' => '', 'zh' => ''],
             'fees_notes'          => $this->fees_notes ?? ['en' => '', 'zh' => ''],
             'race_rules_document' => $this->rulesAndInfoDoc(),
+            'zh_race_rules_document' => $this->chineseRulesAndInfoDoc(),
             'athletes_guide'      => $this->athletesGuide(),
+            'zh_athletes_guide'      => $this->chineseAthleteGuide(),
             'race_rules'          => $this->race_rules ?? ['en' => '', 'zh' => ''],
             'race_info'           => $this->race_info ?? ['en' => '', 'zh' => ''],
             'race_rules_html'     => [

@@ -191,6 +191,76 @@ class EventRacesTest extends TestCase
     /**
      *@test
      */
+    public function set_the_zh_race_rules_disk()
+    {
+        Storage::fake('admin_uploads');
+        $race = factory(Activity::class)->create();
+        $doc = UploadedFile::fake()->create('test_doc.pdf');
+
+        $race->setChineseRulesAndInfoDoc($doc);
+
+        Storage::disk('admin_uploads')->assertExists($doc->hashName('race_rules'));
+
+        $this->assertEquals($doc->hashName('race_rules'), $race->fresh()->zh_race_rules_doc);
+        $this->assertEquals('admin_uploads', $race->fresh()->zh_race_rules_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function clear_the_zh_race_rules_doc()
+    {
+        Storage::fake('admin_uploads');
+        $race = factory(Activity::class)->create();
+        $doc = UploadedFile::fake()->create('test_doc.pdf');
+
+        $race->setChineseRulesAndInfoDoc($doc);
+
+        $race->clearChineseRulesAndInfoDoc();
+
+        Storage::disk('admin_uploads')->assertMissing($doc->hashName('race_rules'));
+        $this->assertNull($race->fresh()->race_rules_doc);
+        $this->assertNull($race->fresh()->race_rules_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function can_set_the_chinese_athletes_guide()
+    {
+        Storage::fake('admin_uploads');
+        $race = factory(Activity::class)->create();
+        $doc = UploadedFile::fake()->create('test_doc.pdf');
+
+        $race->setChineseAthleteGuide($doc);
+
+        Storage::disk('admin_uploads')->assertExists($doc->hashName('athlete_guides'));
+
+        $this->assertEquals($doc->hashName('athlete_guides'), $race->fresh()->zh_athlete_guide);
+        $this->assertEquals('admin_uploads', $race->fresh()->zh_athlete_guide_disk);
+    }
+
+    /**
+     *@test
+     */
+    public function can_clear_the_chinese_athlete_guide()
+    {
+        Storage::fake('admin_uploads');
+        $race = factory(Activity::class)->create();
+        $doc = UploadedFile::fake()->create('test_doc.pdf');
+
+        $race->setChineseAthleteGuide($doc);
+
+        $race->clearChineseAthleteGuide();
+
+        Storage::disk('admin_uploads')->assertMissing($doc->hashName('athlete_guides'));
+        $this->assertNull($race->fresh()->zh_athlete_guide);
+        $this->assertNull($race->fresh()->zh_athlete_guide_disk);
+    }
+
+    /**
+     *@test
+     */
     public function can_update_the_rules_by_lang()
     {
         $race = factory(Activity::class)->state('race')->create();

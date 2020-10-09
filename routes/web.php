@@ -157,8 +157,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('races/{race}/race-rules-doc', 'RaceRulesDocumentController@store');
     Route::delete('races/{race}/race-rules-doc', 'RaceRulesDocumentController@destroy');
+    Route::delete('races/{race}/chinese-race-rules-doc', 'ChineseRaceRulesDocumentController@destroy');
+    Route::post('races/{race}/chinese-race-rules-doc', 'ChineseRaceRulesDocumentController@store');
     Route::post('races/{race}/athletes-guide', 'RaceAthleteGuideController@store');
+    Route::post('races/{race}/chinese-athletes-guide', 'RaceChineseAthleteGuideController@store');
     Route::delete('races/{race}/athletes-guide', 'RaceAthleteGuideController@destroy');
+    Route::delete('races/{race}/chinese-athletes-guide', 'RaceChineseAthleteGuideController@destroy');
 
     Route::post('races/{race}/description', 'RaceDescriptionController@update');
     Route::post('races/{race}/race-rules', 'RaceRulesController@update');

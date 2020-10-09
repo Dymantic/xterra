@@ -38,4 +38,21 @@ class EventPresenter
             'card_image' => $event->getCardImage(),
         ];
     }
+
+    public static function forHomePage(?Event  $event, $lang)
+    {
+        if(!$event) {
+            return null;
+        }
+
+        $event->load('activities.scheduleEntries', 'fees', 'scheduleEntries', 'accommodations', 'travelRoutes', 'activities.courses', 'galleries');
+
+        return [
+            'name' => $event->name[$lang] ?? '',
+            'slug' => $event->slug,
+            'location' => $event->location[$lang] ?? '',
+            'dates' => DatePresenter::range($event->start, $event->end),
+            'banner_image' => $event->getBannerImage(),
+        ];
+    }
 }

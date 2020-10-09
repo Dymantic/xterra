@@ -30,6 +30,22 @@ class CampaignPresenter
         ];
     }
 
+    public static function forHomePage(?Campaign $campaign, $lang)
+    {
+        if(!$campaign) {
+            return null;
+        }
+
+        $campaign->load('event', 'promotion', 'articles');
+        $titleImage = $campaign->titleImage();
+
+        return [
+            'title'       => $campaign->title->in($lang),
+            'intro'       => $campaign->intro->in($lang),
+            'title_image' => self::presentImage($titleImage),
+        ];
+    }
+
     public static function presentImage($image)
     {
         return [

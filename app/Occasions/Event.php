@@ -71,6 +71,11 @@ class Event extends Model implements HasMedia, Cardable
         $this->update($info->toArray());
     }
 
+    public function scopeLive($query)
+    {
+        return $query->where('is_public', true);
+    }
+
     public function publish()
     {
         $this->is_public = true;
