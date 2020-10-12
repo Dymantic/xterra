@@ -9,6 +9,7 @@ use App\Media\ContentCard;
 use App\Occasions\Event;
 use App\Occasions\EventPresenter;
 use App\Shop\Promotion;
+use Dymantic\InstagramFeed\Profile;
 
 class HomePagePresenter
 {
@@ -19,26 +20,54 @@ class HomePagePresenter
         $promotion = $homePage->promotion;
         $promo_image = optional($promotion)->getFirstMedia(Promotion::IMAGE);
         $campaign = $homePage->campaign;
+        $ig_profile = Profile::where('username', 'xterra')->first();
 
         return [
-            'banner_lg' => $banner['full'],
-            'banner_sm' => $banner['small'],
-            'event' => EventPresenter::forHomePage($event, $lang),
-            'campaign' => CampaignPresenter::forHomePage($campaign, $lang),
-            'promotion' => [
+            'banner_lg'     => $banner['full'],
+            'banner_sm'     => $banner['small'],
+            'event'         => EventPresenter::forHomePage($event, $lang),
+            'campaign'      => CampaignPresenter::forHomePage($campaign, $lang),
+            'promotion'     => [
                 'title'       => $promotion->title->in($lang),
                 'writeup'     => $promotion->writeup->in($lang),
                 'button_text' => $promotion->button_text->in($lang),
-                'image' => optional($promo_image)->getUrl('web'),
+                'link'        => $promotion->link,
+                'image'       => optional($promo_image)->getUrl('web'),
             ],
-            'content_cards' => ContentCard::latest()->limit(6)->get()->map(function(ContentCard $card) use ($lang) {
+            'content_cards' => ContentCard::latest()->limit(6)->get()->map(function (ContentCard $card) use ($lang) {
                 $image = $card->getFirstMedia(ContentCard::IMAGE);
+
                 return [
-                    'title' => $card->title->in($lang),
+                    'title'    => $card->title->in($lang),
                     'category' => $card->category->in($lang),
-                    'image' => optional($image)->getUrl('web'),
+                    'link'     => $card->link,
+                    'image'    => optional($image)->getUrl('web'),
                 ];
             }),
+            'blog'          => [
+                'posts' => app('live-posts')->for(app()->getLocale())->getPage(1, 6)['posts'],
+            ],
+            'instagram'     => [
+                'posts' => optional($ig_profile)->feed(),
+            ]
+        ];
+    }
+
+    public static function forAdmin(HomePage $homePage): array
+    {
+        $homePage->load('campaign', 'event', 'promotion', 'bannerVideo');
+
+        return [
+            'banner_image' => $homePage->bannerImage(),
+            'banner_text'  => [
+                'heading'    => $homePage->banner_heading->toArray(),
+                'subheading' => $homePage->banner_subheading->toArray(),
+            ],
+            'banner_video' => $homePage->bannerVideoUrl(),
+            'promo_video' => optional($homePage->promoVideo)->getVideo(),
+            'event'        => $homePage->event ? EventPresenter::forAdmin($homePage->event) : null,
+            'campaign'     => $homePage->campaign ? CampaignPresenter::forAdmin($homePage->campaign) : null,
+            'promotion'    => optional($homePage->promotion)->toArray(),
         ];
     }
 }

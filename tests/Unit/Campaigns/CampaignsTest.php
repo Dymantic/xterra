@@ -5,6 +5,8 @@ namespace Tests\Unit\Campaigns;
 use App\Blog\Article;
 use App\Campaigns\Campaign;
 use App\Campaigns\CampaignInfo;
+use App\Media\EmbeddableVideo;
+use App\Media\PromoVideo;
 use App\Occasions\Event;
 use App\Shop\Promotion;
 use App\Translation;
@@ -39,6 +41,8 @@ class CampaignsTest extends TestCase
 
         $this->assertSame('', $campaign->narrative->in('en'));
         $this->assertSame('', $campaign->narrative->in('zh'));
+
+        $this->assertNotNull($campaign->slug);
     }
 
     /**
@@ -112,5 +116,42 @@ class CampaignsTest extends TestCase
         $campaign->removeArticle($article);
 
         $this->assertFalse($campaign->fresh()->articles->contains($article));
+    }
+
+    /**
+     *@test
+     */
+    public function can_set_the_promo_video()
+    {
+        $campaign = factory(Campaign::class)->create();
+
+        $video = $campaign->setPromoVideo('test_video_id', new Translation(['en' => "test title", 'zh' => "zh test title"]));
+
+        $this->assertInstanceOf(PromoVideo::class, $video);
+        $actual_video = $video->embeddableVideos->first();
+
+        $this->assertSame('test_video_id', $actual_video->video_id);
+        $this->assertSame(EmbeddableVideo::YOUTUBE, $actual_video->platform);
+        $this->assertSame(PromoVideo::class, $actual_video->videoed_type);
+        $this->assertEquals($video->id, $actual_video->videoed_id);
+
+    }
+
+    /**
+     *@test
+     */
+    public function setting_promo_video_overwrites_older_ones()
+    {
+        $campaign = factory(Campaign::class)->create();
+
+        $old_promo_video = $campaign->setPromoVideo('test_video_id', new Translation(['en' => "test title", 'zh' => "zh test title"]));
+
+
+        $new_video = $campaign->setPromoVideo('new_video_id', new Translation(['en' => "test title", 'zh' => "zh test title"]));
+
+        $this->assertEquals($campaign->fresh()->promoVideo->id, $new_video->id);
+        $this->assertNull($old_promo_video->fresh());
+
+
     }
 }

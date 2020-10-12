@@ -5,6 +5,7 @@ module.exports = {
                 42: "10.5rem",
                 100: "25rem",
                 "60": "15rem",
+                "half-screen": "50vw",
             },
             height: {
                 1: "0.2rem",
@@ -19,7 +20,11 @@ module.exports = {
             maxHeight: {
                 "48": "12rem",
             },
+            minHeight: {
+                banner: "56.25vw",
+            },
             width: {
+                "3/10": "30%",
                 "80": "20rem",
                 "120": "30rem",
             },
@@ -42,13 +47,14 @@ module.exports = {
                 "grey-200": "#EFEEEE",
                 "grey-300": "#EEEDED",
                 tinted: "rgba(0,0,0,0.4)",
-                "tinted-dark": "rgba(0,0,0,0.7)",
+                "tinted-dark": "rgba(0,0,0,0.8)",
             },
         },
     },
     variants: {
         textColor: ["responsive", "hover", "focus", "group-hover"],
         opacity: ["responsive", "hover", "focus", "group-hover"],
+        display: ["responsive", "hover", "focus", "group-hover"],
     },
     plugins: [],
 };

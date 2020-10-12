@@ -8,6 +8,10 @@ function createCampaign(formData) {
     return post("/admin/campaigns", formData);
 }
 
+function deleteCampaign(campaign_id) {
+    return del(`/admin/campaigns/${campaign_id}`);
+}
+
 function updateCampaign(campaign_id, formData) {
     return post(`/admin/campaigns/${campaign_id}`, formData);
 }
@@ -32,13 +36,24 @@ function removeArticleFromCampaign(campaign_id, article_id) {
     return del(`/admin/campaigns/${campaign_id}/articles/${article_id}`);
 }
 
+function attachCampaignPromoVideo(campaign_id, formData) {
+    return post(`/admin/campaigns/${campaign_id}/promo-video`, formData);
+}
+
+function clearCampaignPromoVideo(campaign_id) {
+    return del(`/admin/campaigns/${campaign_id}/promo-video`);
+}
+
 export {
     fetchCampaigns,
     createCampaign,
+    deleteCampaign,
     updateCampaign,
     updateCampaignNarrative,
     updateCampaignEvent,
     updateCampaignPromotion,
     assignArticleToCampaign,
     removeArticleFromCampaign,
+    attachCampaignPromoVideo,
+    clearCampaignPromoVideo,
 };

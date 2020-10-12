@@ -1,7 +1,7 @@
 <template>
     <fancy-editor
         v-if="campaign"
-        :back-to="`/campaigns/${campaign.id}/show`"
+        :back-to="`/campaigns/${campaign.id}/show/content`"
         :upload-images-to="`/admin/campaigns/${campaign.id}/narrative-images`"
         @save="saveContent"
         :saving="waiting"

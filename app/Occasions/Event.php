@@ -3,6 +3,7 @@
 namespace App\Occasions;
 
 use App\HasEmbeddedVideos;
+use App\HasPromoVideo;
 use App\Media\Cardable;
 use App\Media\ContentCardInfo;
 use App\Media\EmbeddableVideo;
@@ -20,7 +21,7 @@ use Spatie\MediaLibrary\Models\Media;
 
 class Event extends Model implements HasMedia, Cardable
 {
-    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, HasMediaTrait;
+    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, HasMediaTrait, HasPromoVideo;
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
     const BANNER_IMAGE = 'banner_image';

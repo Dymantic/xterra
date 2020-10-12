@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Campaigns\Campaign;
+use App\Media\HasBannerVideo;
 use App\Occasions\Event;
 use App\Shop\Promotion;
 use Illuminate\Database\Eloquent\Model;
@@ -14,14 +15,26 @@ use Spatie\MediaLibrary\Models\Media;
 
 class HomePage extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use HasMediaTrait, HasBannerVideo, HasPromoVideo;
 
     const BANNER_IMG = 'banner_img';
     const DEFAULT_BANNER = '/images/default_home_banner.jpg';
 
+    protected $fillable = ['banner_heading', 'banner_subheading'];
+
+    protected $casts = [
+        'banner_heading' => Translation::class,
+        'banner_subheading' => Translation::class,
+    ];
+
     public static function current(): self
     {
         return self::firstOrCreate([]);
+    }
+
+    public function setBannerText(BannerTextInfo $bannerTextInfo)
+    {
+        $this->update($bannerTextInfo->toArray());
     }
 
     public function bannerImage()

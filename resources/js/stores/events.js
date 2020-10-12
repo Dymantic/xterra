@@ -38,6 +38,8 @@ import {
     saveEventRaceDescription,
     saveEventRacePromoVideo,
     deleteEvent,
+    attachEventPromoVideo,
+    clearEventPromoVideo,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -409,6 +411,18 @@ export default {
 
         delete({ dispatch }, event_id) {
             return deleteEvent(event_id).then(() => dispatch("refreshEvents"));
+        },
+
+        attachPromoVideo({ dispatch }, { event_id, formData }) {
+            return attachEventPromoVideo(event_id, formData).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        clearPromoVideo({ dispatch }, event_id) {
+            return clearEventPromoVideo(event_id).then(() =>
+                dispatch("refreshEvents")
+            );
         },
     },
 };

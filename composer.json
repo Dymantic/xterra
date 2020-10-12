@@ -11,6 +11,7 @@
         "php": "^7.4",
         "cviebrock/eloquent-sluggable": "^7.0",
         "doctrine/dbal": "^2.11",
+        "dymantic/laravel-instagram-feed": "^2.3",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.4",
         "laravel/framework": "^7.0",

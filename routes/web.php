@@ -25,6 +25,8 @@ Route::group([
         Route::get('categories/{slug}', 'PagesController@category');
 
         Route::get('tags/{tag}/{slug?}', 'PagesController@tag');
+
+        Route::get('campaigns/{campaign:slug}/{name?}', 'CampaignsController@show');
 });
 
 
@@ -103,6 +105,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::delete('events/{event}', 'EventsController@delete');
     Route::post('events/{event}/general-info', 'EventGeneralInfoController@update');
     Route::post('events/{event}/overview', 'EventOverviewController@update');
+
+    Route::post('events/{event}/promo-video', 'EventPromoVideoController@store');
+    Route::delete('events/{event}/promo-video', 'EventPromoVideoController@destroy');
 
     Route::get('events/activity-categories', 'EventActivityCategoriesController@index');
 
@@ -249,9 +254,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::get('campaigns', 'CampaignsController@index');
     Route::post('campaigns', 'CampaignsController@store');
     Route::post('campaigns/{campaign}', 'CampaignsController@update');
+    Route::delete('campaigns/{campaign}', 'CampaignsController@delete');
 
     Route::post('campaigns/{campaign}/narrative', 'CampaignNarrativeController@update');
 
+    Route::post('campaigns/{campaign}/promo-video', 'CampaignPromoVideoController@store');
+    Route::delete('campaigns/{campaign}/promo-video', 'CampaignPromoVideoController@destroy');
+    Route::post('campaigns/{campaign}/banner-video', 'CampaignBannerVideoController@store');
+    Route::delete('campaigns/{campaign}/banner-video', 'CampaignBannerVideoController@destroy');
+
+    Route::post('campaigns/{campaign}/banner-image', 'CampaignBannerImageController@store');
+    Route::delete('campaigns/{campaign}/banner-image', 'CampaignBannerImageController@destroy');
     Route::post('campaigns/{campaign}/title-image', 'CampaignTitleImageController@store');
     Route::delete('campaigns/{campaign}/title-image', 'CampaignTitleImageController@destroy');
 
@@ -277,12 +290,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::get('home-page', 'HomePageController@show');
 
+    Route::post('home-page/banner-text', 'HomePageBannerTextController@update');
+
     Route::post('home-page/banner-image', 'HomePageBannerImageController@store');
     Route::delete('home-page/banner-image', 'HomePageBannerImageController@destroy');
 
     Route::post('home-page/featured-promotion', 'HomePageFeaturedPromotionController@store');
     Route::post('home-page/featured-event', 'HomePageFeaturedEventController@store');
     Route::post('home-page/featured-campaign', 'HomePageFeaturedCampaignController@store');
+
+    Route::post('home-page/banner-video', 'HomePageBannerVideoController@store');
+    Route::delete('home-page/banner-video', 'HomePageBannerVideoController@destroy');
+    Route::post('home-page/promo-video', 'HomePagePromoVideoController@store');
+    Route::delete('home-page/promo-video', 'HomePagePromoVideoController@destroy');
+
+
 
 });
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="p-4 shadow">
+    <div class="p-4 shadow" v-if="video">
         <p class="font-bold">{{ video.title.en }}</p>
         <p class="text-gray-600">{{ video.title.zh }}</p>
         <div class="w-80">
@@ -20,7 +20,11 @@
                     @video-chosen="updateVideo"
                 ></add-youtube-video>
 
-                <button class="" @click="show_delete_confirmation = true">
+                <button
+                    v-if="!cannotDelete"
+                    class=""
+                    @click="show_delete_confirmation = true"
+                >
                     Delete
                 </button>
             </div>
@@ -56,7 +60,7 @@ export default {
         AddYoutubeVideo,
     },
 
-    props: ["video"],
+    props: ["video", "cannot-delete"],
 
     data() {
         return {

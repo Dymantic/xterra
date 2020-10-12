@@ -91,7 +91,7 @@ export default {
 
     computed: {
         empty() {
-            return this.downloadPath === "";
+            return !this.downloadPath;
         },
 
         prompt_text() {

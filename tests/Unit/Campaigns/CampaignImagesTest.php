@@ -99,4 +99,63 @@ class CampaignImagesTest extends TestCase
 
         Storage::disk('media')->assertExists(Str::after($image->getUrl('web'), '/media'));
     }
+
+    /**
+     *@test
+     */
+    public function can_set_the_banner_image_for_the_campaign()
+    {
+        Storage::fake('media');
+
+        $campaign = factory(Campaign::class)->create();
+        $upload = UploadedFile::fake()->image('testpic.png');
+
+        $image = $campaign->setBannerImage($upload);
+
+        $this->assertTrue($campaign->fresh()->getFirstMedia(Campaign::BANNER_IMAGE)->is($image));
+        $this->assertSame($upload->hashName(), $image->file_name);
+
+        Storage::disk('media')->assertExists(Str::after($image->getUrl(), '/media'));
+
+        $this->assertTrue($image->fresh()->hasGeneratedConversion('full'));
+        $this->assertTrue($image->fresh()->hasGeneratedConversion('small'));
+
+        Storage::disk('media')->assertExists(Str::after($image->getUrl('full'), '/media'));
+        Storage::disk('media')->assertExists(Str::after($image->getUrl('small'), '/media'));
+    }
+
+    /**
+     *@test
+     */
+    public function can_clear_the_banner_image()
+    {
+        Storage::fake('media');
+
+        $campaign = factory(Campaign::class)->create();
+        $image = $campaign->setBannerImage(UploadedFile::fake()->image('testpic.png'));
+
+        $campaign->clearBannerImage();
+
+        Storage::disk('media')->assertMissing(Str::after($image->getUrl(), '/media'));
+    }
+
+    /**
+     *@test
+     */
+    public function setting_banner_image_clears_existing_ones()
+    {
+        Storage::fake('media');
+
+        $campaign = factory(Campaign::class)->create();
+        $old_image = $campaign->setBannerImage(UploadedFile::fake()->image('testpic.png'));
+
+        $this->assertCount(1, $campaign->fresh()->getMedia(Campaign::BANNER_IMAGE));
+
+        $new_image = $campaign->setBannerImage(UploadedFile::fake()->image('test_pic.jpg'));
+
+        $this->assertCount(1, $campaign->fresh()->getMedia(Campaign::BANNER_IMAGE));
+
+        Storage::disk('media')->assertMissing(Str::after($old_image->getUrl(), '/media'));
+        Storage::disk('media')->assertExists(Str::after($new_image->getUrl(), '/media'));
+    }
 }

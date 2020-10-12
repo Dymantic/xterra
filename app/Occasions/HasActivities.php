@@ -23,6 +23,12 @@ trait HasActivities
 
     public function listCategories(): array
     {
-        return $this->activities->map(fn (Activity $activity) => $activity->category)->values()->all();
+        return $this
+            ->activities()
+            ->orderBy('date')
+            ->get()
+            ->map(fn (Activity $activity) => $activity->category)
+            ->unique()
+            ->values()->all();
     }
 }

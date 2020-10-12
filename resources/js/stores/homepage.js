@@ -2,7 +2,10 @@ import {
     attachHomePageCampaign,
     attachHomePageEvent,
     attachHomePagePromotion,
+    attachHomePagePromoVideo,
+    clearHomePagePromoVideo,
     fetchHomePageInfo,
+    updateHomePageBannerText,
 } from "../apis/homepage";
 import { notify } from "../components/Messaging/notify";
 
@@ -10,21 +13,12 @@ export default {
     namespaced: true,
 
     state: {
-        banner_image: {
-            small: "",
-            full: "",
-        },
-        event: null,
-        campaign: null,
-        promotion: null,
+        homepage: null,
     },
 
     mutations: {
         setMainState(state, homepage) {
-            state.banner_image = homepage.banner_image;
-            state.event = homepage.event;
-            state.campaign = homepage.campaign;
-            state.promotion = homepage.promotion;
+            state.homepage = homepage;
         },
     },
 
@@ -43,6 +37,12 @@ export default {
                 );
         },
 
+        updateBannerText({ dispatch }, formData) {
+            return updateHomePageBannerText(formData).then(() =>
+                dispatch("refreshHomePage")
+            );
+        },
+
         attachPromotion({ dispatch }, promotion_id) {
             return attachHomePagePromotion(promotion_id).then(() =>
                 dispatch("refreshHomePage")
@@ -57,6 +57,18 @@ export default {
 
         attachCampaign({ dispatch }, campaign_id) {
             return attachHomePageCampaign(campaign_id).then(() =>
+                dispatch("refreshHomePage")
+            );
+        },
+
+        attachPromoVideo({ dispatch }, formData) {
+            return attachHomePagePromoVideo(formData).then(() =>
+                dispatch("refreshHomePage")
+            );
+        },
+
+        clearPromoVideo({ dispatch }) {
+            return clearHomePagePromoVideo().then(() =>
                 dispatch("refreshHomePage")
             );
         },

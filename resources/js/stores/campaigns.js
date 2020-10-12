@@ -1,6 +1,9 @@
 import {
     assignArticleToCampaign,
+    attachCampaignPromoVideo,
+    clearCampaignPromoVideo,
     createCampaign,
+    deleteCampaign,
     fetchCampaigns,
     removeArticleFromCampaign,
     updateCampaign,
@@ -47,6 +50,10 @@ export default {
             return createCampaign(formData).then(() => dispatch("refresh"));
         },
 
+        delete({ dispatch }, campaign_id) {
+            return deleteCampaign(campaign_id).then(() => dispatch("refresh"));
+        },
+
         update({ dispatch }, { campaign_id, formData }) {
             return updateCampaign(campaign_id, formData).then(() =>
                 dispatch("refresh")
@@ -79,6 +86,18 @@ export default {
 
         setPromotion({ dispatch }, { campaign_id, promotion_id }) {
             return updateCampaignPromotion(campaign_id, promotion_id).then(() =>
+                dispatch("refresh")
+            );
+        },
+
+        attachPromoVideo({ dispatch }, { campaign_id, formData }) {
+            return attachCampaignPromoVideo(campaign_id, formData).then(() =>
+                dispatch("refresh")
+            );
+        },
+
+        clearPromoVideo({ dispatch }, campaign_id) {
+            return clearCampaignPromoVideo(campaign_id).then(() =>
                 dispatch("refresh")
             );
         },

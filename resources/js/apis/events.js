@@ -156,6 +156,14 @@ function saveEventRacePromoVideo(race_id, formData) {
     return post(`/admin/races/${race_id}/promo-video`, formData);
 }
 
+function attachEventPromoVideo(event_id, formData) {
+    return post(`/admin/events/${event_id}/promo-video`, formData);
+}
+
+function clearEventPromoVideo(event_id) {
+    return del(`/admin/events/${event_id}/promo-video`);
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -196,4 +204,6 @@ export {
     saveEventRaceInfo,
     saveEventRacePromoVideo,
     deleteEvent,
+    attachEventPromoVideo,
+    clearEventPromoVideo,
 };

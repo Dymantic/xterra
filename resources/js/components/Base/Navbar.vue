@@ -20,7 +20,7 @@
             >
                 <div slot="dropdown_content" class="pt-3">
                     <router-link
-                        to="/home-page-content"
+                        to="/homepage"
                         class="text-black no-underline hover:text-indigo-500 pb-3 block"
                         >Home Page
                     </router-link>

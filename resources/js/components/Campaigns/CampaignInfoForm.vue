@@ -131,7 +131,7 @@ export default {
 
         onSuccess() {
             const redirect = this.campaign
-                ? `/campaigns/${this.campaign.id}/show`
+                ? `/campaigns/${this.campaign.id}/show/general`
                 : "/campaigns";
             notify.success({ message: "Campaign info has been saved." });
             this.$router.push(redirect);

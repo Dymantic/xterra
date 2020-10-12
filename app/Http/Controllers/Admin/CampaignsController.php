@@ -24,4 +24,9 @@ class CampaignsController extends Controller
     {
         $campaign->update($request->campaignInfo()->toArray());
     }
+
+    public function delete(Campaign $campaign)
+    {
+        $campaign->delete();
+    }
 }
