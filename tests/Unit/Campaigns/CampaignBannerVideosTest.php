@@ -5,6 +5,7 @@ namespace Tests\Unit\Campaigns;
 
 
 use App\Campaigns\Campaign;
+use App\Media\BannerVideo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class CampaignBannerVideosTest extends TestCase
      */
     public function can_set_a_banner_video_on_a_campaign()
     {
-        Storage::fake(Campaign::BANNER_VIDEO_DISK);
+        Storage::fake(BannerVideo::DISK_NAME);
 
         $campaign = factory(Campaign::class)->create();
         $upload = UploadedFile::fake()->create('video.mp4');
@@ -28,9 +29,9 @@ class CampaignBannerVideosTest extends TestCase
 
         $this->assertSame(Campaign::class, $video->bannerable_type);
         $this->assertSame($campaign->id, $video->bannerable_id);
-        $this->assertSame(Campaign::BANNER_VIDEO_DISK, $video->disk);
+        $this->assertSame(BannerVideo::DISK_NAME, $video->disk);
         $this->assertSame($upload->hashName('banner_videos'), $video->filename);
 
-        Storage::disk(Campaign::BANNER_VIDEO_DISK)->assertExists($video->filename);
+        Storage::disk(BannerVideo::DISK_NAME)->assertExists($video->filename);
     }
 }

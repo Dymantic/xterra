@@ -24,9 +24,11 @@ window.addEventListener("load", () => {
     const navTrigger = document.querySelector(".nav-trigger");
     const mainNav = document.querySelector(".main-nav");
 
-    navTrigger.addEventListener("click", () => {
-        mainNav.classList.toggle("open");
-    });
+    if (navTrigger && mainNav) {
+        navTrigger.addEventListener("click", () => {
+            mainNav.classList.toggle("open");
+        });
+    }
 
     if (!document.querySelector(".article-content")) {
         return;

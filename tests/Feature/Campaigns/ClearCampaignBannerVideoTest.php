@@ -5,6 +5,7 @@ namespace Tests\Feature\Campaigns;
 
 
 use App\Campaigns\Campaign;
+use App\Media\BannerVideo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +20,7 @@ class ClearCampaignBannerVideoTest extends TestCase
      */
     public function delete_an_existing_campaign_banner_video()
     {
-        Storage::fake(Campaign::BANNER_VIDEO_DISK);
+        Storage::fake(BannerVideo::DISK_NAME);
         $this->withoutExceptionHandling();
 
         $campaign = factory(Campaign::class)->create();
@@ -31,6 +32,6 @@ class ClearCampaignBannerVideoTest extends TestCase
         $this->assertDatabaseMissing('banner_videos', ['id' => $video->id]);
         $this->assertNull($campaign->fresh()->bannerVideo);
 
-        Storage::disk(Campaign::BANNER_VIDEO_DISK)->assertMissing($video->filename);
+        Storage::disk(BannerVideo::DISK_NAME)->assertMissing($video->filename);
     }
 }

@@ -6,6 +6,7 @@ namespace Tests\Feature\Campaigns;
 
 use App\Campaigns\Campaign;
 use App\Media\EmbeddableVideo;
+use App\Media\PromoVideo;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Tests\TestCase;
@@ -15,7 +16,7 @@ class AttachYoutubeVideoToCampaignTest extends TestCase
     use RefreshDatabase;
 
     /**
-     *@test
+     * @test
      */
     public function attach_an_embeddable_youtube_video_to_campaign()
     {
@@ -23,21 +24,22 @@ class AttachYoutubeVideoToCampaignTest extends TestCase
         $campaign = factory(Campaign::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/campaigns/{$campaign->id}/promo-video", [
-            'title' => ['en' => 'test title', 'zh' => 'zh test title'],
+            'title'    => ['en' => 'test title', 'zh' => 'zh test title'],
             'video_id' => 'test_video_id',
         ]);
         $response->assertSuccessful();
 
         $this->assertDatabaseHas('embeddable_videos', [
             'title'        => json_encode(['en' => "test title", 'zh' => "zh test title"]),
-            'videoed_id'   => $campaign->id,
-            'videoed_type' => Campaign::class,
+            'video_id'     => 'test_video_id',
+            'videoed_id'   => $campaign->fresh()->promoVideo->id,
+            'videoed_type' => PromoVideo::class,
             'platform'     => EmbeddableVideo::YOUTUBE,
         ]);
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_video_id_is_required()
     {
@@ -45,7 +47,7 @@ class AttachYoutubeVideoToCampaignTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_video_title_must_be_a_translation()
     {
@@ -56,7 +58,7 @@ class AttachYoutubeVideoToCampaignTest extends TestCase
     {
         $campaign = factory(Campaign::class)->create();
         $valid = [
-            'title' => ['en' => 'test title', 'zh' => 'zh test title'],
+            'title'    => ['en' => 'test title', 'zh' => 'zh test title'],
             'video_id' => 'test_video_id',
         ];
         $response = $this
