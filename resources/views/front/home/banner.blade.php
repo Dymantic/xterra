@@ -8,9 +8,9 @@
     </div>
 
     <div class="flex flex-col justify-center items-center py-32 px-6">
-        <p class="type-banner text-white uppercase text-center">We Play, <br> And We Protect</p>
+        <p class="type-banner text-white uppercase text-center">{!! $page['banner_heading'] !!}</p>
 
-        <p class="type-h2 text-white mt-12 text-center max-w-2xl">XTERRA Taiwan brings endurance racing and the environment together on this beautiful island.</p>
+        <p class="type-h2 text-white mt-12 text-center max-w-2xl">{!! $page['banner_subheading'] !!}</p>
 
         <a href="" class="px-8 py-2 uppercase rounded-lg bg-white text-grey-700 type-h3 shadow-lg mt-12">Next event</a>
     </div>

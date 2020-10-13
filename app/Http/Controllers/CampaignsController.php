@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class CampaignsController extends Controller
 {
+
+    public function index()
+    {
+        return view('front.campaigns.index', ['campaigns' => Campaign::all()]);
+    }
+
     public function show(Campaign $campaign)
     {
         return view('front.campaigns.show', [

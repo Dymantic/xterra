@@ -16,9 +16,9 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect']
     ],
     function () {
-        Route::get('/', 'HomePageController@show');
 
-        Route::get('blog', 'PagesController@home');
+
+        Route::get('/', 'PagesController@home');
 
         Route::get('blog/{article_slug}/{translation_slug?}', 'PagesController@article');
 
@@ -26,7 +26,17 @@ Route::group([
 
         Route::get('tags/{tag}/{slug?}', 'PagesController@tag');
 
-        Route::get('campaigns/{campaign:slug}/{name?}', 'CampaignsController@show');
+
+
+        Route::group(['middleware' => 'auth', 'prefix' => 'top-secret'], function() {
+            Route::get('/', 'HomePageController@show');
+
+            Route::get('campaigns', 'CampaignsController@index');
+            Route::get('campaigns/{campaign:slug}/{name?}', 'CampaignsController@show');
+
+            Route::get('events', 'EventsController@index');
+            Route::get('events/{event:slug}/{name?}', 'EventsController@show');
+        });
 });
 
 

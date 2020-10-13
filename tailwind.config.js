@@ -21,7 +21,7 @@ module.exports = {
                 "48": "12rem",
             },
             minHeight: {
-                banner: "56.25vw",
+                banner: "50vw",
             },
             width: {
                 "3/10": "30%",

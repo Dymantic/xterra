@@ -25,6 +25,8 @@ class HomePagePresenter
         return [
             'banner_lg'     => $banner['full'],
             'banner_sm'     => $banner['small'],
+            'banner_heading' => $homePage->banner_heading->in($lang),
+            'banner_subheading' => $homePage->banner_subheading->in($lang),
             'event'         => EventPresenter::forHomePage($event, $lang),
             'campaign'      => CampaignPresenter::forHomePage($campaign, $lang),
             'promotion'     => [
