@@ -74,13 +74,10 @@ class CampaignPresenter
             'intro'       => $campaign->intro->in($lang),
             'description' => $campaign->description->in($lang),
             'title_image' => self::presentImage($titleImage),
-            'narrative_html' => [
-                'en' => $campaign->narrativeHtml('en'),
-                'zh' => $campaign->narrativeHtml('zh'),
-            ],
+            'narrative_html' => $campaign->narrativeHtml($lang),
             'event' => $campaign->event ? EventPresenter::forHomePage($campaign->event, $lang) : null,
-            'promotion' => $campaign->promotion ? $campaign->promotion->toArray() : null,
-            'articles' => $campaign->articles->map->toArray()->values()->all(),
+            'promotion' => $campaign->promotion ? $campaign->promotion->presentForLang($lang) : null,
+            'articles' => app('live-posts')->for($lang)->getPosts($campaign->articles)->take(3),
             'banner_image' => [
                 'full' => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
                 'small' => optional($banner_image)->getUrl('small') ?? Campaign::DEFAULT_IMAGE,

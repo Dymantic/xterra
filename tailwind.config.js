@@ -1,6 +1,10 @@
 module.exports = {
     theme: {
         extend: {
+            fontSize: {
+                "6xl": "3.5rem",
+                banner: "5.25rem",
+            },
             spacing: {
                 42: "10.5rem",
                 100: "25rem",
@@ -22,6 +26,7 @@ module.exports = {
             },
             minHeight: {
                 banner: "50vw",
+                "banner-tall": "120vw",
             },
             width: {
                 "3/10": "30%",

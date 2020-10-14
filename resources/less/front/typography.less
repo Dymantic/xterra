@@ -1,10 +1,17 @@
 .type-banner {
-  @apply font-heading font-bold leading-none;
-    font-size: 7rem;
+  @apply font-heading text-banner font-bold leading-none;
 
   @media screen and (max-width: 640px) {
-      font-size: 5rem;
+      @apply text-5xl;
   }
+}
+
+.type-h0 {
+@apply text-6xl font-body font-bold;
+
+    @media screen and (max-width: 640px) {
+    @apply text-4xl;
+    }
 }
 
 .type-h1 {

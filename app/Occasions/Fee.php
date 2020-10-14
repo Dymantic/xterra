@@ -13,4 +13,12 @@ class Fee extends Model
     ];
 
     protected $casts = ['category' => 'array'];
+
+    public function presentForLang($lang)
+    {
+        return [
+            'fee' => $this->fee,
+            'category' => $this->category[$lang] ?? '',
+        ];
+    }
 }

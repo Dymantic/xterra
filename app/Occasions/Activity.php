@@ -49,6 +49,7 @@ class Activity extends Model implements HasMedia
     protected $fillable = [
         'name',
         'description',
+        'intro',
         'venue_address',
         'venue_name',
         'date',
@@ -63,6 +64,7 @@ class Activity extends Model implements HasMedia
     protected $casts = [
         'name'           => 'array',
         'distance'       => 'array',
+        'intro'          => Translation::class,
         'description'    => Translation::class,
         'venue_name'     => 'array',
         'venue_address'  => 'array',
@@ -310,51 +312,52 @@ class Activity extends Model implements HasMedia
         $banner_image = $this->getFirstMedia(self::BANNER_IMAGE);
 
         return [
-            'id'                  => $this->id,
-            'name'                => $this->name,
-            'category'            => $this->category,
-            'distance'            => $this->distance,
-            'description'         => $this->description->toArray(),
-            'description_html'    => [
+            'id'                     => $this->id,
+            'name'                   => $this->name,
+            'category'               => $this->category,
+            'distance'               => $this->distance,
+            'intro'               => $this->intro->toArray(),
+            'description'            => $this->description->toArray(),
+            'description_html'       => [
                 'en' => $this->descriptionHtml('en'),
                 'zh' => $this->descriptionHtml('zh'),
             ],
-            'venue_name'          => $this->venue_name ?? ['en' => '', 'zh' => ''],
-            'venue_address'       => $this->venue_address ?? ['en' => '', 'zh' => ''],
-            'date'                => $this->date,
-            'map_link'            => $this->map_link,
-            'registration_link'   => $this->registration_link,
-            'is_race'             => $this->is_race,
-            'schedule'            => Schedule::forEvent($this)->toArray(),
-            'prizes'              => $this->prizes->toArray(),
-            'prizes_html'         => [
+            'venue_name'             => $this->venue_name ?? ['en' => '', 'zh' => ''],
+            'venue_address'          => $this->venue_address ?? ['en' => '', 'zh' => ''],
+            'date'                   => $this->date,
+            'map_link'               => $this->map_link,
+            'registration_link'      => $this->registration_link,
+            'is_race'                => $this->is_race,
+            'schedule'               => Schedule::forEvent($this)->toArray(),
+            'prizes'                 => $this->prizes->toArray(),
+            'prizes_html'            => [
                 'en' => $this->prizesHtml('en'),
                 'zh' => $this->prizesHtml('zh'),
             ],
-            'fees'                => $this->fees->map->toArray()->values()->all(),
-            'courses'             => $this->courses->map->toArray()->values()->all(),
-            'schedule_notes'      => $this->schedule_notes ?? ['en' => '', 'zh' => ''],
-            'prize_notes'         => $this->prize_notes ?? ['en' => '', 'zh' => ''],
-            'fees_notes'          => $this->fees_notes ?? ['en' => '', 'zh' => ''],
-            'race_rules_document' => $this->rulesAndInfoDoc(),
+            'fees'                   => $this->fees->map->toArray()->values()->all(),
+            'courses'                => $this->courses->map->toArray()->values()->all(),
+            'schedule_notes'         => $this->schedule_notes ?? ['en' => '', 'zh' => ''],
+            'prize_notes'            => $this->prize_notes ?? ['en' => '', 'zh' => ''],
+            'fees_notes'             => $this->fees_notes ?? ['en' => '', 'zh' => ''],
+            'race_rules_document'    => $this->rulesAndInfoDoc(),
             'zh_race_rules_document' => $this->chineseRulesAndInfoDoc(),
-            'athletes_guide'      => $this->athletesGuide(),
+            'athletes_guide'         => $this->athletesGuide(),
             'zh_athletes_guide'      => $this->chineseAthleteGuide(),
-            'race_rules'          => $this->race_rules ?? ['en' => '', 'zh' => ''],
-            'race_info'           => $this->race_info ?? ['en' => '', 'zh' => ''],
-            'race_rules_html'     => [
+            'race_rules'             => $this->race_rules ?? ['en' => '', 'zh' => ''],
+            'race_info'              => $this->race_info ?? ['en' => '', 'zh' => ''],
+            'race_rules_html'        => [
                 'en' => $this->rulesHtml('en'),
                 'zh' => $this->rulesHtml('zh'),
             ],
-            'race_info_html'      => [
+            'race_info_html'         => [
                 'en' => $this->infoHtml('en'),
                 'zh' => $this->infoHtml('zh'),
             ],
-            'title_image'         => [
+            'title_image'            => [
                 'card'   => $card_image ? $card_image->getUrl('card') : self::DEFAULT_IMAGE,
                 'banner' => $banner_image ? $banner_image->getUrl('banner') : self::DEFAULT_IMAGE,
             ],
-            'video'               => $this->embeddableVideos()->latest()->first(),
+            'video'                  => $this->embeddableVideos()->latest()->first(),
         ];
     }
 }

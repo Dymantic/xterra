@@ -28,6 +28,7 @@ class CreateEventRaceTest extends TestCase
         $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/races", [
             'name'              => ['en' => 'test name', 'zh' => 'zh test name'],
             'distance'          => ['en' => 'test distance', 'zh' => 'zh test distance'],
+            'intro'             => ['en' => 'test intro', 'zh' => 'zh test intro'],
             'date'              => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
             'venue_name'        => ['en' => 'test venue_name', 'zh' => 'zh test venue_name'],
             'venue_address'     => ['en' => 'test venue_address', 'zh' => 'zh test venue_address'],
@@ -42,6 +43,7 @@ class CreateEventRaceTest extends TestCase
             'event_id'          => $event->id,
             'name'              => json_encode(['en' => 'test name', 'zh' => 'zh test name']),
             'distance'          => json_encode(['en' => 'test distance', 'zh' => 'zh test distance']),
+            'intro'             => json_encode(['en' => 'test intro', 'zh' => 'zh test intro']),
             'date'              => Carbon::today()->addMonth(),
             'venue_name'        => json_encode(['en' => 'test venue_name', 'zh' => 'zh test venue_name']),
             'venue_address'     => json_encode(['en' => 'test venue_address', 'zh' => 'zh test venue_address']),
@@ -53,7 +55,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function some_empty_states_are_permitted()
     {
@@ -101,7 +103,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_date_must_be_in_date_format()
     {
@@ -109,7 +111,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_venue_name_must_be_a_translation_array()
     {
@@ -117,7 +119,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_venue_address_must_be_a_translation_array()
     {
@@ -125,7 +127,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_map_link_must_be_a_valid_url()
     {
@@ -133,7 +135,7 @@ class CreateEventRaceTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function the_registration_link_must_be_a_valid_url()
     {

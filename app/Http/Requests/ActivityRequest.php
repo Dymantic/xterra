@@ -36,6 +36,7 @@ class ActivityRequest extends FormRequest
         return ActivityInfo::forRace($this->all([
             'name',
             'distance',
+            'intro',
             'category',
             'venue_address',
             'venue_name',
@@ -50,6 +51,7 @@ class ActivityRequest extends FormRequest
         return ActivityInfo::forActivity($this->all([
             'name',
             'distance',
+            'intro',
             'category',
             'venue_name',
             'venue_address',

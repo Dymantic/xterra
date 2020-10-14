@@ -28,9 +28,10 @@ class EventRacesTest extends TestCase
         $event = factory(Event::class)->create();
 
         $raceInfo = ActivityInfo::forRace([
-            'name'        => ['en' => 'test name', 'zh' => 'zh test name'],
-            'distance'    => ['en' => 'test distance', 'zh' => 'zh test distance'],
-            'category'    => Activity::RUN,
+            'name'              => ['en' => 'test name', 'zh' => 'zh test name'],
+            'distance'          => ['en' => 'test distance', 'zh' => 'zh test distance'],
+            'intro'             => ['en' => 'test intro', 'zh' => 'zh test intro'],
+            'category'          => Activity::RUN,
             'date'              => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
             'venue_name'        => ['en' => 'test venue_name', 'zh' => 'zh test venue_name'],
             'venue_address'     => ['en' => 'test venue_address', 'zh' => 'zh test venue_address'],
@@ -43,6 +44,7 @@ class EventRacesTest extends TestCase
         $this->assertInstanceOf(Activity::class, $race);
         $this->assertEquals(['en' => 'test name', 'zh' => 'zh test name'], $race->name);
         $this->assertEquals(['en' => 'test distance', 'zh' => 'zh test distance'], $race->distance);
+        $this->assertEquals(['en' => "test intro", 'zh' => "zh test intro"], $race->intro->toArray());
         $this->assertEquals(Activity::RUN, $race->category);
         $this->assertTrue($race->is_race);
 
@@ -62,9 +64,9 @@ class EventRacesTest extends TestCase
         $event = factory(Event::class)->create();
 
         $activity_info = ActivityInfo::forActivity([
-            'name'        => ['en' => 'test name', 'zh' => 'zh test name'],
-            'distance'    => ['en' => 'test distance', 'zh' => 'zh test distance'],
-            'category'    => Activity::RUN,
+            'name'     => ['en' => 'test name', 'zh' => 'zh test name'],
+            'distance' => ['en' => 'test distance', 'zh' => 'zh test distance'],
+            'category' => Activity::RUN,
         ]);
 
         $activity = $event->addActivity($activity_info);
@@ -77,7 +79,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_schedule_notes_for_activity()
     {
@@ -91,7 +93,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_prize_notes_for_a_race()
     {
@@ -105,7 +107,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_fees_notes_for_a_race()
     {
@@ -119,7 +121,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_rules_and_info_doc()
     {
@@ -136,7 +138,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_rules_doc()
     {
@@ -154,7 +156,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_athlete_guide()
     {
@@ -171,7 +173,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_athlete_guide()
     {
@@ -189,7 +191,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function set_the_zh_race_rules_disk()
     {
@@ -206,7 +208,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function clear_the_zh_race_rules_doc()
     {
@@ -224,7 +226,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_chinese_athletes_guide()
     {
@@ -241,7 +243,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_chinese_athlete_guide()
     {
@@ -259,7 +261,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_update_the_rules_by_lang()
     {
@@ -277,7 +279,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_update_the_race_info()
     {
@@ -290,7 +292,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_add_a_content_image()
     {
@@ -311,7 +313,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_banner_image()
     {
@@ -332,7 +334,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_banner_image()
     {
@@ -348,7 +350,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function setting_a_banner_image_clears_previous_ones()
     {
@@ -367,7 +369,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_set_the_card_image()
     {
@@ -388,7 +390,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function can_clear_the_card_image()
     {
@@ -404,7 +406,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function setting_card_image_clears_previous_ones()
     {
@@ -423,7 +425,7 @@ class EventRacesTest extends TestCase
     }
 
     /**
-     *@test
+     * @test
      */
     public function set_the_description_for_a_given_language()
     {

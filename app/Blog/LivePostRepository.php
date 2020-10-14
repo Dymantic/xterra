@@ -58,6 +58,13 @@ class LivePostRepository
         return $result;
     }
 
+    public function getPosts($articles)
+    {
+        return collect($articles)
+            ->map(fn ($article) => $this->getPost($article))
+            ->reject(fn ($post) => !$post);
+    }
+
     public function getPage($page_number, $per_page = null)
     {
         if (!$per_page) {

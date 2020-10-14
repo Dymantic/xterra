@@ -4,6 +4,7 @@
 namespace App\Occasions;
 
 
+use App\Translation;
 use Illuminate\Support\Carbon;
 
 class ActivityInfo
@@ -11,6 +12,7 @@ class ActivityInfo
 
     public array $name;
     public array $distance;
+    public Translation $intro;
     public array $venue_name;
     public array $venue_address;
     public string $category;
@@ -31,6 +33,7 @@ class ActivityInfo
             'zh' => $data['distance']['zh'] ?? '',
         ];
 
+        $this->intro = new Translation($data['intro'] ?? []);
 
 
         $this->venue_name = [
@@ -67,6 +70,7 @@ class ActivityInfo
         return [
             'name'              => $this->name,
             'distance'          => $this->distance,
+            'intro'             => $this->intro,
             'date'              => $this->date,
             'venue_name'        => $this->venue_name,
             'venue_address'     => $this->venue_address,

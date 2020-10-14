@@ -15,7 +15,18 @@ class Accommodation extends Model
     ];
 
     protected $casts = [
-        'name' => 'array',
+        'name'        => 'array',
         'description' => 'array',
     ];
+
+    public function presentForLang($lang)
+    {
+        return [
+            'name'        => $this->name[$lang] ?? '',
+            'description' => $this->description[$lang] ?? '',
+            'link'        => $this->link,
+            'phone'       => $this->phone,
+            'email'       => $this->email,
+        ];
+    }
 }

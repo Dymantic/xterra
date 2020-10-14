@@ -21,6 +21,27 @@
             </div>
 
             <div class="my-6">
+                <p class="font-bold">Intro</p>
+                <p class="my-2 text-gray-600">
+                    A brief introduction or description of the race or activity.
+                    This appears on the main event page.
+                </p>
+                <div class="pl-6">
+                    <textarea-field
+                        class="mb-4"
+                        label="English"
+                        :error-msg="formErrors.intro"
+                        v-model="formData.intro.en"
+                    ></textarea-field>
+                    <textarea-field
+                        class="my-4"
+                        label="Chinese"
+                        v-model="formData.intro.zh"
+                    ></textarea-field>
+                </div>
+            </div>
+
+            <div class="my-6">
                 <p class="font-bold">Race or Activity</p>
                 <p class="my-2 text-gray-600">
                     Does this count as a race or an activity?
@@ -205,6 +226,7 @@ export default {
             formData: {
                 name: { en: "", zh: "" },
                 distance: { en: "", zh: "" },
+                intro: { en: "", zh: "" },
                 venue_name: { en: "", zh: "" },
                 venue_address: { en: "", zh: "" },
                 map_link: "",
@@ -217,6 +239,7 @@ export default {
                 "name.en": "",
                 "name.zh": "",
                 "distance.en": "",
+                intro: "",
                 "distance.zh": "",
                 venue_name: "",
                 venue_address: "",
@@ -247,6 +270,11 @@ export default {
                 distance: {
                     en: this.activity.distance.en,
                     zh: this.activity.distance.zh,
+                },
+
+                intro: {
+                    en: this.activity.intro.en,
+                    zh: this.activity.intro.zh,
                 },
 
                 venue_name: {
@@ -326,9 +354,10 @@ export default {
                 ? "Activity updated"
                 : "New activity saved";
             notify.success({ message });
-            this.$router.push(
-                `/events/${this.$route.params.event}/edit/activities`
-            );
+            const redirect = `/events/${
+                this.$route.params.id || this.$route.params.event
+            }/edit/activities`;
+            this.$router.push(redirect);
         },
 
         onError({ status, data }) {

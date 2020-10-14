@@ -88,11 +88,13 @@ class Promotion extends Model implements HasMedia, Cardable
     {
         $this->addMediaConversion('thumb')
              ->fit(Manipulations::FIT_CROP, 600, 400)
+             ->keepOriginalImageFormat()
              ->optimize()
              ->performOnCollections(self::IMAGE);
 
         $this->addMediaConversion('web')
              ->fit(Manipulations::FIT_CROP, 1200, 800)
+             ->keepOriginalImageFormat()
              ->optimize()
              ->performOnCollections(self::IMAGE);
     }
@@ -105,7 +107,7 @@ class Promotion extends Model implements HasMedia, Cardable
             'id'          => $this->id,
             'link'        => $this->link,
             'title'       => $this->title->toArray(),
-            'writeup' => $this->writeup->toArray(),
+            'writeup'     => $this->writeup->toArray(),
             'button_text' => $this->button_text->toArray(),
             'image'       => [
                 'id'       => $image ? $image->id : null,
@@ -116,17 +118,30 @@ class Promotion extends Model implements HasMedia, Cardable
         ];
     }
 
+    public function presentForLang($lang)
+    {
+        $image = $this->getFirstMedia(self::IMAGE);
+
+        return [
+            'link'        => $this->link,
+            'title'       => $this->title->in($lang),
+            'writeup'     => $this->writeup->in($lang),
+            'button_text' => $this->button_text->in($lang),
+            'image'       => $image ? $image->getUrl('web') : self::DEFAULT_IMAGE,
+        ];
+    }
+
     public function cardInfo(): ContentCardInfo
     {
         $image = $this->getFirstMedia(self::IMAGE);
 
         return new ContentCardInfo([
-            'category' => [
+            'category'   => [
                 'en' => Lang::get('content-cards.shop', [], 'en'),
                 'zh' => Lang::get('content-cards.shop', [], 'zh'),
             ],
-            'title' => $this->title->toArray(),
-            'link' => $this->link,
+            'title'      => $this->title->toArray(),
+            'link'       => $this->link,
             'image_path' => $image ? Storage::disk('media')->path(Str::after($image->getUrl(), "/media/")) : ''
         ]);
     }

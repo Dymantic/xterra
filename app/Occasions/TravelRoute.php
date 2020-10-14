@@ -53,4 +53,13 @@ class TravelRoute extends Model implements HasMedia
             'image' => optional($this->getFirstMedia(self::IMAGE))->getUrl('web'),
         ];
     }
+
+    public function presentForLang($lang)
+    {
+        return [
+            'name' => $this->name[$lang] ?? '',
+            'description' => $this->description[$lang] ?? '',
+            'image' => optional($this->getFirstMedia(self::IMAGE))->getUrl('web'),
+        ];
+    }
 }
