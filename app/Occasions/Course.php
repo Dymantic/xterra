@@ -81,7 +81,7 @@ class Course extends Model implements HasMedia
              ->performOnCollections(self::IMAGES);
 
         $this->addMediaConversion('web')
-             ->fit(Manipulations::FIT_CROP, 1200, 800)
+             ->fit(Manipulations::FIT_MAX, 1200, 800)
              ->optimize()
              ->performOnCollections(self::IMAGES);
     }
