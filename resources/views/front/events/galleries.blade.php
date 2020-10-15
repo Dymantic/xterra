@@ -1,4 +1,4 @@
-<div class="py-20 px-8">
+<div class="py-20 px-8" id="media">
     <div class="max-w-5xl mx-auto">
         <p class="type-h2 uppercase mb-6">Image Galleries</p>
         @foreach($event['galleries'] as $gallery)

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="h-full" lang="{{ app()->getLocale() }}">
+<html class="h-full" lang="{{ app()->getLocale() }}" style="scroll-behavior: smooth">
 
 <head>
     <meta charset="utf-8">

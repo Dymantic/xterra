@@ -27,6 +27,7 @@ class Event extends Model implements HasMedia, Cardable
     const BANNER_IMAGE = 'banner_image';
     const CARD_IMAGE = 'card_image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
+    const DEFAULT_BANNER = '/images/default_home_banner.jpg';
 
     protected $fillable = [
         'name',
@@ -153,13 +154,13 @@ class Event extends Model implements HasMedia, Cardable
                     ->toMediaCollection(self::BANNER_IMAGE);
     }
 
-    public function getBannerImage()
+    public function getBannerImage($default = self::DEFAULT_IMAGE)
     {
         $image = $this->getFirstMedia(self::BANNER_IMAGE);
 
         return [
-            'original' => $image ? $image->getUrl() : self::DEFAULT_IMAGE,
-            'banner'   => $image ? $image->getUrl('banner') : self::DEFAULT_IMAGE,
+            'original' => $image ? $image->getUrl() : $default,
+            'banner'   => $image ? $image->getUrl('banner') : $default,
         ];
     }
 

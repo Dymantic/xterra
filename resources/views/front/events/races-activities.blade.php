@@ -1,4 +1,4 @@
-<div class="py-20 px-8">
+<div class="py-20 px-8" id="races">
     <div class="max-w-5xl mx-auto">
         @if(count($event['races']))
             <p class="type-h2 uppercase mb-6">Races</p>

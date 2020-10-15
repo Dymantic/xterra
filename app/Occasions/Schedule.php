@@ -65,14 +65,14 @@ class Schedule
         })->values()->all();
     }
 
-    public function presentForLang($lang, Carbon $date): array
+    public function presentForLang($lang, ?Carbon $date): array
     {
         return $this->entries->groupBy('day_of_event')->map(function($entries, $day) use ($date, $lang) {
             $new_date = Carbon::parse($date);
             $day_date = $day < 1 ? $new_date->subDays(abs($day) + 1) : $new_date->addDays($day - 1);
             return [
                 'day' => $day,
-                'date' => DatePresenter::pretty($day_date),
+                'date' => $date ? DatePresenter::pretty($day_date) : '',
                 'day_of_week' => $day_date->format('l'),
                 'entries' => $entries->sortBy('position')->map(fn ($entry) => [
                     'item' => $entry['item'][$lang] ?? '',

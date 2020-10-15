@@ -45,6 +45,7 @@ class Activity extends Model implements HasMedia
     const BANNER_IMAGE = 'banner_image';
     const CARD_IMAGE = 'card_image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
+    const DEFAULT_BANNER = '/images/default_home_banner.jpg';
 
     protected $fillable = [
         'name',

@@ -1,4 +1,4 @@
-<div class="py-20 px-8">
+<div class="py-20 px-8" id="fees">
     <div class="max-w-5xl mx-auto">
         <p class="type-h2 uppercase mb-6">Fees</p>
         <table class="w-full max-w-2xl mx-auto border border-red-700">

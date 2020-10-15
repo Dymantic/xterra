@@ -1,4 +1,4 @@
-<div class="min-h-banner-tall md:min-h-banner flex flex-col justify-center pl-3 md:pl-32 pr-3" style="background-image: url({{ $event['banner_image']['banner'] }})">
+<div class="min-h-banner-tall md:min-h-banner bg-cover flex flex-col justify-center pl-3 md:pl-32 pr-3" style="background-image: url({{ $event['banner_image']['banner'] }})">
     <div class="max-w-xl w-full mx-auto lg:mx-0 bg-tinted-dark p-4 rounded">
         <div class="flex items-center my-2 py-2 border-b-2 border-red-500">
             @foreach($event['categories'] as $icon)

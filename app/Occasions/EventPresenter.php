@@ -71,7 +71,7 @@ class EventPresenter
             'galleries'         => $event->galleries->map->presentForLang($lang)->values()->all(),
             'promo_video'       => optional($event->promoVideo)->getVideo(),
             'videos'            => $event->embeddableVideos->map->toArray()->values()->all(),
-            'banner_image'      => $event->getBannerImage(),
+            'banner_image'      => $event->getBannerImage(Event::DEFAULT_BANNER),
             'card_image'        => $event->getCardImage(),
         ];
     }

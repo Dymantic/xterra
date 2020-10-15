@@ -43,8 +43,8 @@ class ActivityPresenter
             'race_rules_html'        => $activity->rulesHtml($lang),
             'race_info_html'         => $activity->infoHtml($lang),
             'title_image'            => [
-                'card'   => $card_image ? $card_image->getUrl('card') : Activity::DEFAULT_IMAGE,
-                'banner' => $banner_image ? $banner_image->getUrl('banner') : Activity::DEFAULT_IMAGE,
+                'card'   => $card_image ? $card_image->getUrl('card') : Activity::DEFAULT_BANNER,
+                'banner' => $banner_image ? $banner_image->getUrl('banner') : Activity::DEFAULT_BANNER,
             ],
             'video'                  => $activity->embeddableVideos()->latest()->first(),
         ];
