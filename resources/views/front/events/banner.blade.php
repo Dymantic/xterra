@@ -14,8 +14,6 @@
             @include('svg.icons.calendar', ['classes' => 'h-6 text-red-500 mr-2'])
             <p class="type-h2 uppercase text-white">{{ $event['dates'] }}</p>
         </div>
-        <div class="text-right mt-2">
-            <a class="text-white hover:text-red-500 uppercase text-sm" href="/">View Event &gt;</a>
-        </div>
+
     </div>
 </div>

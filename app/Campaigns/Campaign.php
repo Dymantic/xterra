@@ -12,6 +12,7 @@ use App\Media\PromoVideo;
 use App\Occasions\Event;
 use App\Shop\Promotion;
 use App\Translation;
+use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -47,7 +48,9 @@ class Campaign extends Model implements HasMedia
     public static function new(CampaignInfo $info): self
     {
 
-        return self::create(array_merge($info->toArray(), ['slug' => Str::random(6)]));
+        return self::create(
+            array_merge($info->toArray(), ['slug' => UniqueKey::for('campaigns:slug')])
+        );
     }
 
     public function updateNarrative($narrative, $lang)
@@ -171,10 +174,6 @@ class Campaign extends Model implements HasMedia
     {
         return CampaignPresenter::forAdmin($this);
     }
-
-
-
-
 
 
 }

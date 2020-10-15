@@ -8,7 +8,7 @@
                     <p><span class="font-bold">Distance: </span>{{ $race['distance'] }}</p>
                     <p>{{ $race['intro'] }}</p>
                     <div class="text-right mt-4">
-                        <a href="">View Race &gt;</a>
+                        <a href="/top-secret/races/{{ $race['slug'] }}">View Race &gt;</a>
                     </div>
                 </div>
             @endforeach
@@ -22,7 +22,7 @@
                     <p>{{ $activity['distance'] }}</p>
                     <p class="max-w-xl mt-4">{{ $activity['intro'] }}</p>
                     <div class="text-right mt-4">
-                        <a href="">View Activity &gt;</a>
+                        <a href="/top-secret/activities/{{ $activity['slug'] }}">View Activity &gt;</a>
                     </div>
                 </div>
             @endforeach

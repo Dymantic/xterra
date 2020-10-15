@@ -75,4 +75,19 @@ class Gallery extends Model implements HasMedia
             ])->sortBy('position')->values()->all(),
         ];
     }
+
+    public function presentForLang($lang)
+    {
+        return [
+            'title'       => $this->title->in($lang),
+            'description' => $this->description->in($lang),
+            'images'      => $this->getMedia(self::IMAGES)->map(fn(Media $media) => [
+                'id'       => $media->id,
+                'thumb'    => $media->getUrl('thumb'),
+                'web'      => $media->getUrl('web'),
+                'original' => $media->getUrl(),
+                'position' => $media->getCustomProperty('position'),
+            ])->sortBy('position')->values()->all(),
+        ];
+    }
 }

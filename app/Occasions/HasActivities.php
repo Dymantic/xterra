@@ -4,6 +4,8 @@
 namespace App\Occasions;
 
 
+use App\UniqueKey;
+
 trait HasActivities
 {
     public function activities()
@@ -13,12 +15,16 @@ trait HasActivities
 
     public function addRace(ActivityInfo $info): Activity
     {
-        return $this->activities()->create($info->toArray());
+        return $this
+            ->activities()
+            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug')]));
     }
 
     public function addActivity(ActivityInfo $info): Activity
     {
-        return $this->activities()->create($info->toArray());
+        return $this
+            ->activities()
+            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug')]));
     }
 
     public function listCategories(): array

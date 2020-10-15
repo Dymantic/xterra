@@ -53,6 +53,7 @@ class EventRacesTest extends TestCase
         $this->assertSame('https://maps.test', $race->map_link);
         $this->assertSame('https://registration.test', $race->registration_link);
         $this->assertTrue(Carbon::today()->addMonth()->isSameDay($race->date));
+        $this->assertNotNull($race->fresh()->slug);
 
     }
 

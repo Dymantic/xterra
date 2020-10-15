@@ -36,6 +36,9 @@ Route::group([
 
             Route::get('events', 'EventsController@index');
             Route::get('events/{event:slug}/{name?}', 'EventsController@show');
+
+            Route::get('races/{activity:slug}/{name?}', 'ActivitiesController@show');
+            Route::get('activities/{activity:slug}/{name?}', 'ActivitiesController@show');
         });
 });
 

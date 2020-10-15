@@ -48,6 +48,7 @@ class Activity extends Model implements HasMedia
 
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'intro',
         'venue_address',
@@ -78,6 +79,11 @@ class Activity extends Model implements HasMedia
     ];
 
     protected $dates = ['date'];
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
+    }
 
     public function setScheduleNotes($notes)
     {

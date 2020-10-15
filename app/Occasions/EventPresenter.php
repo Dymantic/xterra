@@ -68,7 +68,7 @@ class EventPresenter
             'travel_routes'     => $event->travelRoutes->map->presentForLang($lang),
             'travel_guide'      => $event->getTravelGuideUrl(),
             'courses'           => [],
-            'galleries'         => $event->galleries->map->toArray()->values()->all(),
+            'galleries'         => $event->galleries->map->presentForLang($lang)->values()->all(),
             'promo_video'       => optional($event->promoVideo)->getVideo(),
             'videos'            => $event->embeddableVideos->map->toArray()->values()->all(),
             'banner_image'      => $event->getBannerImage(),

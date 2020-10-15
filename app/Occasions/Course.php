@@ -120,4 +120,21 @@ class Course extends Model implements HasMedia
 
         ];
     }
+
+    public function presentForLang($lang)
+    {
+        return [
+            'name' => $this->name[$lang] ?? '',
+            'distance' => $this->distance[$lang] ?? '',
+            'description' => $this->description[$lang] ?? '',
+            'gallery' => $this->getMedia(self::IMAGES)->map(fn (Media $image) => [
+                'id' => $image->id,
+                'thumb' => $image->getUrl('thumb'),
+                'web' => $image->getUrl('web'),
+                'original' => $image->getUrl(),
+                'position' => $image->getCustomProperty('position')
+            ])->sortBy('position')->values()->all(),
+            'gpx_file' => $this->getGPXFileUrl(),
+        ];
+    }
 }
