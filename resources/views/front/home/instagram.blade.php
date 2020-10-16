@@ -1,3 +1,4 @@
+@if(count($ig_posts))
 <div>
     <div class="flex">
         <div class="w-half-screen h-half-screen flex-shrink-0 relative group">
@@ -23,3 +24,4 @@
         </div>
     </div>
 </div>
+@endif
