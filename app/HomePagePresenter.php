@@ -16,7 +16,7 @@ class HomePagePresenter
     public static function forPublic(HomePage $homePage, $lang)
     {
         $banner = $homePage->bannerImage();
-        $event = $homePage->event ?? Event::live()->latest()->get();
+        $event = $homePage->event ?? Event::live()->latest()->first();
         $promotion = $homePage->promotion;
         $promo_image = optional($promotion)->getFirstMedia(Promotion::IMAGE);
         $campaign = $homePage->campaign;
