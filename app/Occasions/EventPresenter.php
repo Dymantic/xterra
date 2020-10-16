@@ -90,7 +90,7 @@ class EventPresenter
             'slug'         => $event->slug,
             'location'     => $event->location[$lang] ?? '',
             'dates'        => DatePresenter::range($event->start, $event->end),
-            'banner_image' => $event->getBannerImage(),
+            'banner_image' => $event->getBannerImage(Event::DEFAULT_BANNER),
             'categories'   => $event->listCategories(),
         ];
     }

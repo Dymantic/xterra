@@ -1,5 +1,5 @@
 @if($event)
-    <div style="background-image: url({{ $event['banner_image']['banner'] }})" class="min-h-banner flex flex-col justify-center items-center px-4 md:pl-32  md:items-start py-8">
+    <div style="background-image: url({{ $event['banner_image']['banner'] }})" class="bg-cover min-h-banner flex flex-col justify-center items-center px-4 md:pl-32  md:items-start py-8">
         <div class="bg-tinted-dark rounded p-6 w-full max-w-lg">
             <div class="flex flex-col md:flex-row justify-between border-b-2 border-red-500">
                 <p class="type-h2 uppercase text-white">Next Event</p>

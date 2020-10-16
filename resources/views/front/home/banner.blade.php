@@ -1,4 +1,4 @@
-<div class="relative min-h-banner">
+<div class="video-banner relative min-h-banner">
     <div class="absolute top-0 bottom-0 left-0 right-0" style="z-index: -1;">
         <picture class="" >
             <source srcset="{{ $page['banner_lg'] }}" media="(min-width: 601px)">
@@ -6,6 +6,12 @@
             <img class="object-cover h-full w-full block" src="{{ $page['banner_lg'] }}" alt="banner image">
         </picture>
     </div>
+
+    @if($page['banner_video'])
+        <div class="absolute inset-0" style="z-index: -1">
+            <video src="{{ $page['banner_video'] }}" class="hidden banner-video w-full h-full object-cover" muted autoplay loop playsinline></video>
+        </div>
+    @endif
 
     <div class="flex flex-col justify-center items-center py-32 px-6">
         <p class="type-banner text-white uppercase text-center">{!! $page['banner_heading'] !!}</p>

@@ -13,7 +13,7 @@
 
         @if($event['travel_guide'])
         <div class="mt-12 text-center">
-            <a download="travel_guide" href="{{ $event['travel_guide'] }}" class="type-h4 uppercase">Download Travel Guide</a>
+            <a download="travel_guide" href="{{ $event['travel_guide'] }}" class="blue-btn">Download Travel Guide</a>
         </div>
         @endif
     </div>

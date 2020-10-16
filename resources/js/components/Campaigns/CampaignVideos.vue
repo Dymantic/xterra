@@ -12,6 +12,7 @@
             </div>
 
             <single-file-upload
+                :max-size="30"
                 class="border-t border-gray-300 pt-2"
                 :upload-path="`/admin/campaigns/${$route.params.campaign}/banner-video`"
                 :delete-path="`/admin/campaigns/${$route.params.campaign}/banner-video`"

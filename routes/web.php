@@ -317,7 +317,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('home-page/promo-video', 'HomePagePromoVideoController@store');
     Route::delete('home-page/promo-video', 'HomePagePromoVideoController@destroy');
 
-
+    Route::get('instagram', 'InstagramController@show');
 
 });
 

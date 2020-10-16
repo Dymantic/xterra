@@ -51,7 +51,8 @@ class HomePagePresenter
             ],
             'instagram'     => [
                 'posts' => optional($ig_profile)->feed(),
-            ]
+            ],
+            'banner_video' => $homePage->bannerVideoUrl(),
         ];
     }
 

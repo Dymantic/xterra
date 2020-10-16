@@ -9,10 +9,10 @@
     <div class="flex items-center">
         @auth
         <div class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50">
-            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Initiatives</a>
-            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Events</a>
+            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="/top-secret/campaigns">Initiatives</a>
+            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="/top-secret/events">Events</a>
             <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Shop</a>
-            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Blog</a>
+            <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="/">Blog</a>
             <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Discover</a>
             <a class="type-h3 mx-4 text-white hover:text-red-500 uppercase" href="">Friends</a>
 

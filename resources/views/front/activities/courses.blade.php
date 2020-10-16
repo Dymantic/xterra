@@ -22,13 +22,13 @@
         @endforeach
 
 
-            <div class="mt-12 flex flex-col items-center justify-center">
+            <div class="mt-12 flex flex-col md:flex-row gap-10 items-center justify-center">
                 @if($activity['athletes_guide'])
-                <a download="athlete_guide" href="{{ $activity['athletes_guide'] }}" class="type-h4 uppercase">Download Athletes Guide (English)</a>
+                <a download="athlete_guide" href="{{ $activity['athletes_guide'] }}" class="blue-btn">Download Athletes Guide (English)</a>
                 @endif
 
                     @if($activity['zh_athletes_guide'])
-                        <a download="athlete_guide" href="{{ $activity['zh_athletes_guide'] }}" class="type-h4 uppercase">Download Athletes Guide (Chinese)</a>
+                        <a download="athlete_guide" href="{{ $activity['zh_athletes_guide'] }}" class="blue-btn">Download Athletes Guide (Chinese)</a>
                     @endif
             </div>
     </div>

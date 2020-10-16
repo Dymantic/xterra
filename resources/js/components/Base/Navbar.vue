@@ -34,6 +34,11 @@
                         class="text-black no-underline hover:text-indigo-500 pb-3 block"
                         >Galleries
                     </router-link>
+                    <router-link
+                        to="/instagram"
+                        class="text-black no-underline hover:text-indigo-500 pb-3 block"
+                        >Instagram
+                    </router-link>
                 </div>
             </dropdown-menu>
 
