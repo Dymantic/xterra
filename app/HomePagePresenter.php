@@ -50,7 +50,7 @@ class HomePagePresenter
                 'posts' => app('live-posts')->for(app()->getLocale())->getPage(1, 6)['posts'],
             ],
             'instagram'     => [
-                'posts' => optional($ig_profile)->feed(),
+                'posts' => optional($ig_profile)->feed() ? $ig_profile->feed()->values()->all() : [],
             ],
             'banner_video' => $homePage->bannerVideoUrl(),
             'promo_video_id' => optional($homePage->promoVideo)->getVideoId(),

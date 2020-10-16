@@ -14,7 +14,7 @@ class InstagramController extends Controller
 
         return [
             'auth_url' => $profile->getInstagramAuthUrl(),
-            'feed' => $profile->feed(),
+            'feed' => $profile->feed()->values()->all(),
             'has_auth' => $profile->hasInstagramAccess(),
         ];
     }
