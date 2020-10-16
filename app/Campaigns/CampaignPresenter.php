@@ -82,7 +82,7 @@ class CampaignPresenter
                 'full' => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
                 'small' => optional($banner_image)->getUrl('small') ?? Campaign::DEFAULT_IMAGE,
             ],
-            'promo_video' => optional($campaign->promoVideo)->getVideo(),
+            'promo_video_id' => optional($campaign->promoVideo)->getVideoId(),
             'banner_video' => $campaign->bannerVideoUrl(),
         ];
     }

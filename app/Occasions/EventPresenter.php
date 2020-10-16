@@ -69,7 +69,7 @@ class EventPresenter
             'travel_guide'      => $event->getTravelGuideUrl(),
             'courses'           => [],
             'galleries'         => $event->galleries->map->presentForLang($lang)->values()->all(),
-            'promo_video'       => optional($event->promoVideo)->getVideo(),
+            'promo_video_id'       => optional($event->promoVideo)->getVideoId(),
             'videos'            => $event->embeddableVideos->map->toArray()->values()->all(),
             'banner_image'      => $event->getBannerImage(Event::DEFAULT_BANNER),
             'card_image'        => $event->getCardImage(),

@@ -1,4 +1,4 @@
-<div class="main-nav fixed top-0 w-full h-16 bg-grey-700 flex justify-between items-center px-4">
+<div x-data="{show: false}" class="main-nav fixed top-0 w-full h-16 bg-grey-700 flex justify-between items-center px-4" :class="{'open': show}">
     <div class="flex items-center">
         <a href="{{ localUrl("/") }}">
             <img src="/images/logos/nav_logo.svg"
@@ -23,7 +23,7 @@
                 {{ trans('navbar.lang') }}
             </a>
             @auth
-            <button class="nav-trigger text-white hover:text-red-500 block lg:hidden focus:outline-none">
+            <button @click="show = !show" class="nav-trigger text-white hover:text-red-500 block lg:hidden focus:outline-none">
                 <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z" clip-rule="evenodd"/>
                 </svg>

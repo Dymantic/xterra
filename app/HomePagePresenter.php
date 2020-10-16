@@ -53,6 +53,7 @@ class HomePagePresenter
                 'posts' => optional($ig_profile)->feed(),
             ],
             'banner_video' => $homePage->bannerVideoUrl(),
+            'promo_video_id' => optional($homePage->promoVideo)->getVideoId(),
         ];
     }
 

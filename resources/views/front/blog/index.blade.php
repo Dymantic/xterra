@@ -1,4 +1,4 @@
-@extends('front.base')
+@extends('front.base', ['flickity' => true])
 
 @section('title')
     {{ $seo_title ?? '' }}

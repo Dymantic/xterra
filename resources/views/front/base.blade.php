@@ -13,7 +13,12 @@
 
     <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,600|Source+Serif+Pro" rel="stylesheet">
 
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 
+    @if($flickity ?? false)
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    @endif
 
 
 
@@ -48,8 +53,8 @@
 <!--[if lte IE 9]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
-<div id="app" class="h-full flex flex-col">
-    <div class="flex-1">
+<div class="h-full flex flex-col">
+    <div id="app" class="flex-1">
         @yield('content')
     </div>
 
@@ -57,6 +62,36 @@
     @include('front.partials.navbar')
 </div>
 @yield('bodyscripts')
+@if($has_promo_video ?? false)
+    <script type="text/javascript">
+        var tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        window.promoVideoIsReady = false;
+        function onYouTubeIframeAPIReady() {
+            window.promoVideo = new YT.Player('home-promo-video', {
+                events: {
+                    'onReady': onPlayerReady,
+                }
+            });
+
+            window.playPromoVideo = function() {
+                window.promoVideo.playVideo();
+            }
+
+            window.pausePromoVideo = function() {
+                window.promoVideo.pauseVideo();
+            }
+        }
+
+        function onPlayerReady(ev) {
+            window.promoVideoIsReady = true;
+        }
+    </script>
+@endif
 <script>
     window.fbAsyncInit = function() {
         FB.init({
@@ -78,7 +113,9 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
+@if($all_scripts ?? true)
 <script src="{{ mix("js/front.js") }}"></script>
+@endif
 <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', '{{ config('services.google.analytics_id') }}', 'auto'); ga('send', 'pageview')
