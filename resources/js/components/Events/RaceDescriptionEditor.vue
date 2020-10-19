@@ -3,7 +3,7 @@
         <fancy-editor
             v-if="race"
             :back-to="`/events/${$route.params.event}/races/${race.id}/edit/description/show`"
-            upload-images-to=""
+            :upload-images-to="`/admin/races/${race.id}/content-images`"
             @save="saveContent"
             :saving="waiting"
             :initial-data="race.description[$route.params.lang]"
