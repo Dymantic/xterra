@@ -1,4 +1,4 @@
-@extends('front.base', ['flickity' => true])
+@extends('front.base', ['flickity' => true, 'all_scripts' => false, 'has_promo_video' => true])
 
 @section('content')
     @include('front.activities.banner')
