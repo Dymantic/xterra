@@ -19,7 +19,7 @@ class ArticleTitleImageTest extends TestCase
      */
     public function set_title_image_on_article()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $article = factory(Article::class)->create();
 
@@ -35,7 +35,7 @@ class ArticleTitleImageTest extends TestCase
      */
     public function it_makes_conversions()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $article = factory(Article::class)->create();
         $image = $article->setTitleImage(UploadedFile::fake()->image('testpic.png'));
 
@@ -57,7 +57,7 @@ class ArticleTitleImageTest extends TestCase
      */
     public function article_gets_image_urls()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $with_image = factory(Article::class)->create();
         $image = $with_image->setTitleImage(UploadedFile::fake()->image('test.png'));
 

@@ -22,7 +22,7 @@ class UploadCampaignNarrativeImagesTest extends TestCase
     public function upload_a_campaign_narrative_image()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
 
@@ -45,7 +45,7 @@ class UploadCampaignNarrativeImagesTest extends TestCase
      */
     public function the_image_is_required_to_be_an_accepted_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
 

@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class AmbassadorProfilePicsTest extends TestCase
@@ -22,7 +22,7 @@ class AmbassadorProfilePicsTest extends TestCase
      */
     public function set_profile_pic_for_ambassador()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $ambassador = factory(Ambassador::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -46,7 +46,7 @@ class AmbassadorProfilePicsTest extends TestCase
      */
     public function uploading_second_image_overwrites_first()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $ambassador = factory(Ambassador::class)->create();
 
@@ -69,7 +69,7 @@ class AmbassadorProfilePicsTest extends TestCase
      */
     public function clear_profile_picture()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $ambassador = factory(Ambassador::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
         $image = $ambassador->setProfilePic($upload);

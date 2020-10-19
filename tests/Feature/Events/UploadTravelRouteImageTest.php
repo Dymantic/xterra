@@ -21,7 +21,7 @@ class UploadTravelRouteImageTest extends TestCase
      */
     public function upload_an_image_for_a_travel_route()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $travel_route = factory(TravelRoute::class)->create();
@@ -42,7 +42,7 @@ class UploadTravelRouteImageTest extends TestCase
      */
     public function the_image_is_required_as_an_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $travel_route = factory(TravelRoute::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/travel-routes/{$travel_route->id}/image", [

@@ -20,7 +20,7 @@ class ClearEventBannerImageTest extends TestCase
      */
     public function clear_an_uploaded_banner_image_from_event()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $event = factory(Event::class)->create();

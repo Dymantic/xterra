@@ -6,7 +6,7 @@ namespace App\People;
 
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait HasProfilePic
 {

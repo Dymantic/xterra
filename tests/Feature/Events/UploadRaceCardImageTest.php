@@ -21,7 +21,7 @@ class UploadRaceCardImageTest extends TestCase
      */
     public function upload_the_card_image_for_a_race()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $race = factory(Activity::class)->create();
@@ -42,7 +42,7 @@ class UploadRaceCardImageTest extends TestCase
      */
     public function the_image_must_be_a_valid_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->create();
 

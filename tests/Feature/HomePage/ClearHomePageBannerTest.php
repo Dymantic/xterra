@@ -20,7 +20,7 @@ class ClearHomePageBannerTest extends TestCase
      */
     public function clear_the_existing_homepage_banner()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $image = HomePage::current()->setBannerImage(UploadedFile::fake()->image('test.png'));

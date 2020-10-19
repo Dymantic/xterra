@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class SetGalleryImagesOrderTest extends TestCase
@@ -21,7 +21,7 @@ class SetGalleryImagesOrderTest extends TestCase
      */
     public function set_the_image_positions_for_gallery_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $gallery = factory(Gallery::class)->create();
@@ -69,7 +69,7 @@ class SetGalleryImagesOrderTest extends TestCase
 
     private function assertImageIdsInvalid($image_ids, $error_key = 'image_ids')
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $gallery = factory(Gallery::class)->create();
 

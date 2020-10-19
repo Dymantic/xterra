@@ -21,7 +21,7 @@ class UploadGalleryImageTest extends TestCase
      */
     public function upload_an_image_to_a_gallery()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $gallery = factory(Gallery::class)->create();
@@ -59,7 +59,7 @@ class UploadGalleryImageTest extends TestCase
 
     private function assertUploadIsInvalid($upload)
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $gallery = factory(Gallery::class)->create();
 

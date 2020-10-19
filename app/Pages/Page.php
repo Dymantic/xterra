@@ -7,13 +7,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Page extends Model implements HasMedia
 {
-    use HasMediaTrait, Sluggable;
+    use InteractsWithMedia, Sluggable;
 
     const CONTENT_IMAGES = 'content-images';
 
@@ -84,7 +84,7 @@ class Page extends Model implements HasMedia
             ->toMediaCollection(self::CONTENT_IMAGES);
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('web')
             ->fit(Manipulations::FIT_CONTAIN, 1500, 2000)

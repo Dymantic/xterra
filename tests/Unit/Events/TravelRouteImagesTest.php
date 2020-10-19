@@ -20,7 +20,7 @@ class TravelRouteImagesTest extends TestCase
      */
     public function set_image_for_route()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $route = factory(TravelRoute::class)->create();
         $upload = UploadedFile::fake()->image('test.png');
@@ -41,7 +41,7 @@ class TravelRouteImagesTest extends TestCase
      */
     public function can_clear_the_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $route = factory(TravelRoute::class)->create();
         $image = $route->setImage(UploadedFile::fake()->image('test.png'));
@@ -58,7 +58,7 @@ class TravelRouteImagesTest extends TestCase
      */
     public function setting_image_clears_previous_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $route = factory(TravelRoute::class)->create();
         $old_image = $route->setImage(UploadedFile::fake()->image('test.png'));

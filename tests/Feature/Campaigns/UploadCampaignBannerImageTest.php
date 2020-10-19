@@ -22,7 +22,7 @@ class UploadCampaignBannerImageTest extends TestCase
      */
     public function upload_the_banner_image_of_a_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $campaign = factory(Campaign::class)->create();
@@ -43,7 +43,7 @@ class UploadCampaignBannerImageTest extends TestCase
      */
     public function the_banner_image_must_be_an_actual_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $campaign = factory(Campaign::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/campaigns/{$campaign->id}/banner-image", [

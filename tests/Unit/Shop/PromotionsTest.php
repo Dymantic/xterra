@@ -135,7 +135,7 @@ class PromotionsTest extends TestCase
      */
     public function a_promotion_item_is_cardable()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $item = factory(Promotion::class)->create();
         $image = $item->setImage(UploadedFile::fake()->image('test.png'));

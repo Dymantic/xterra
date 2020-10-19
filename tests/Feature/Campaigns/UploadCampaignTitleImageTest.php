@@ -21,7 +21,7 @@ class UploadCampaignTitleImageTest extends TestCase
      */
     public function upload_a_title_image_for_a_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $campaign = factory(Campaign::class)->create();
@@ -43,7 +43,7 @@ class UploadCampaignTitleImageTest extends TestCase
      */
     public function the_image_is_required_as_accepted_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $campaign = factory(Campaign::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/campaigns/{$campaign->id}/title-image", [

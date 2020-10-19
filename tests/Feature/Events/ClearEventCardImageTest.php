@@ -20,7 +20,7 @@ class ClearEventCardImageTest extends TestCase
      */
     public function clear_an_uploaded_event_card_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $event = factory(Event::class)->create();

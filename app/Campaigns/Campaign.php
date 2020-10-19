@@ -18,13 +18,13 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Campaign extends Model implements HasMedia
 {
-    use HasMediaTrait, HasPromoVideo, HasBannerVideo;
+    use InteractsWithMedia, HasPromoVideo, HasBannerVideo;
 
     const TITLE_IMAGE = 'title-image';
     const NARRATIVE_IMAGES = 'narrative-image';
@@ -147,7 +147,7 @@ class Campaign extends Model implements HasMedia
         $this->clearMediaCollection(self::BANNER_IMAGE);
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
              ->fit(Manipulations::FIT_CROP, 500, 333)

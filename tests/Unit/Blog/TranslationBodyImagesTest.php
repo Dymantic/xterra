@@ -8,7 +8,7 @@ use App\Blog\Translation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 use Tests\TestsMediaAttachments;
 
@@ -21,7 +21,7 @@ class TranslationBodyImagesTest extends TestCase
      */
     public function attach_a_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $translation = factory(Translation::class)->create();
         $this->assertCount(0, $translation->getMedia(Translation::BODY_IMAGES));
@@ -38,7 +38,7 @@ class TranslationBodyImagesTest extends TestCase
      */
     public function a_web_conversion_is_created()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $translation = factory(Translation::class)->create();
 

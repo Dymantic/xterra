@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Translation extends Model implements HasMedia
 {
-    use Sluggable, HasMediaTrait;
+    use Sluggable, InteractsWithMedia;
 
     const BODY_IMAGES = 'body-images';
 
@@ -112,7 +112,7 @@ class Translation extends Model implements HasMedia
             ->toMediaCollection(static::BODY_IMAGES);
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('web')
              ->fit(Manipulations::FIT_MAX, 1000, 2000)

@@ -20,7 +20,7 @@ class EventImagesTest extends TestCase
      */
     public function can_set_banner_image_for_event()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $upload = UploadedFile::fake()->image('test.jpeg');
@@ -40,7 +40,7 @@ class EventImagesTest extends TestCase
      */
     public function can_clear_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $image = $event->setBannerImage(UploadedFile::fake()->image('test.jpeg'));
@@ -56,7 +56,7 @@ class EventImagesTest extends TestCase
      */
     public function setting_banner_image_clears_previous_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $old_image = $event->setBannerImage(UploadedFile::fake()->image('test.jpeg'));
@@ -74,7 +74,7 @@ class EventImagesTest extends TestCase
      */
     public function can_set_card_image_for_an_event()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $upload = UploadedFile::fake()->image('test.jpeg');
@@ -93,7 +93,7 @@ class EventImagesTest extends TestCase
      */
     public function can_clear_the_card_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $image = $event->setCardImage(UploadedFile::fake()->image('test.jpeg'));
@@ -109,7 +109,7 @@ class EventImagesTest extends TestCase
      */
     public function setting_card_image_clears_any_previous_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
         $old_image = $event->setCardImage(UploadedFile::fake()->image('test.jpeg'));

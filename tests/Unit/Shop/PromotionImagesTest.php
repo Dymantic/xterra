@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class PromotionImagesTest extends TestCase
@@ -21,7 +21,7 @@ class PromotionImagesTest extends TestCase
      */
     public function set_image_for_a_promotion()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -46,7 +46,7 @@ class PromotionImagesTest extends TestCase
      */
     public function can_clear_a_promotion_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
         $old_image = $promotion->setImage(UploadedFile::fake()->image('test_one.jpg'));
@@ -63,7 +63,7 @@ class PromotionImagesTest extends TestCase
      */
     public function setting_an_image_overwrites_the_previous_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
 

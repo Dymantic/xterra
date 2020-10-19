@@ -20,7 +20,7 @@ class UploadCourseImagesTest extends TestCase
      */
     public function upload_image_to_course()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $course = factory(Course::class)->create();
@@ -51,7 +51,7 @@ class UploadCourseImagesTest extends TestCase
 
     private function assertUploadIsInvalid($upload)
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $course = factory(Course::class)->create();
 
         $response = $this->asAdmin()->postJson("/admin/courses/{$course->id}/images", $upload);

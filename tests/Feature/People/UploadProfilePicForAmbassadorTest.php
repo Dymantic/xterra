@@ -23,7 +23,7 @@ class UploadProfilePicForAmbassadorTest extends TestCase
     public function upload_profile_pic_for_ambassador()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $ambassador = factory(Ambassador::class)->create();
 
@@ -58,7 +58,7 @@ class UploadProfilePicForAmbassadorTest extends TestCase
 
     private function assertUploadIsInvalid($upload)
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $ambassador = factory(Ambassador::class)->create();
 

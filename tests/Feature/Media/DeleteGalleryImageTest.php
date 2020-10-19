@@ -19,7 +19,7 @@ class DeleteGalleryImageTest extends TestCase
      */
     public function delete_an_image_from_a_gallery()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $gallery = factory(Gallery::class)->create();
@@ -36,7 +36,7 @@ class DeleteGalleryImageTest extends TestCase
      */
     public function cannot_delete_image_from_other_gallery()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $galleryA = factory(Gallery::class)->create();
         $galleryB = factory(Gallery::class)->create();

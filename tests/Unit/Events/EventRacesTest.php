@@ -297,7 +297,7 @@ class EventRacesTest extends TestCase
      */
     public function can_add_a_content_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $upload = UploadedFile::fake()->image('test.png');
@@ -318,7 +318,7 @@ class EventRacesTest extends TestCase
      */
     public function can_set_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $upload = UploadedFile::fake()->image('test.png');
@@ -339,7 +339,7 @@ class EventRacesTest extends TestCase
      */
     public function can_clear_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $image = $race->setBannerImage(UploadedFile::fake()->image('test.png'));
@@ -355,7 +355,7 @@ class EventRacesTest extends TestCase
      */
     public function setting_a_banner_image_clears_previous_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $old_image = $race->setBannerImage(UploadedFile::fake()->image('test.png'));
@@ -374,7 +374,7 @@ class EventRacesTest extends TestCase
      */
     public function can_set_the_card_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $upload = UploadedFile::fake()->image('test.png');
@@ -395,7 +395,7 @@ class EventRacesTest extends TestCase
      */
     public function can_clear_the_card_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $image = $race->setCardImage(UploadedFile::fake()->image('test.png'));
@@ -411,7 +411,7 @@ class EventRacesTest extends TestCase
      */
     public function setting_card_image_clears_previous_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
         $old_image = $race->setCardImage(UploadedFile::fake()->image('test.png'));

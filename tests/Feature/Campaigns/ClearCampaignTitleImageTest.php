@@ -20,7 +20,7 @@ class ClearCampaignTitleImageTest extends TestCase
      */
     public function remove_the_title_image_of_a_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $campaign = factory(Campaign::class)->create();

@@ -199,7 +199,7 @@ class EventsTest extends TestCase
      */
     public function an_event_is_cardable()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $event = factory(Event::class)->create();
         $image = $event->setCardImage(UploadedFile::fake()->image('test.png'));
 

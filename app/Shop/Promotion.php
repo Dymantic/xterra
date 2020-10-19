@@ -11,13 +11,13 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Promotion extends Model implements HasMedia, Cardable
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     const IMAGE = 'image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
@@ -84,7 +84,7 @@ class Promotion extends Model implements HasMedia, Cardable
         $this->clearMediaCollection(self::IMAGE);
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
              ->fit(Manipulations::FIT_CROP, 600, 400)

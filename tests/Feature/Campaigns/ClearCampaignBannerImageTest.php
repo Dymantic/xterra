@@ -20,7 +20,7 @@ class ClearCampaignBannerImageTest extends TestCase
      */
     public function clear_existing_banner_image_for_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $campaign = factory(Campaign::class)->create();

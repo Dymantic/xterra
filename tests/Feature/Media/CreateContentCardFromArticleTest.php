@@ -21,7 +21,7 @@ class CreateContentCardFromArticleTest extends TestCase
      */
     public function create_a_new_content_card_from_an_article()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $article = factory(Article::class)->create();

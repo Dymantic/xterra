@@ -22,7 +22,7 @@ class UploadImageForPromotionTest extends TestCase
     public function upload_an_image_for_a_promotion()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
 
@@ -56,7 +56,7 @@ class UploadImageForPromotionTest extends TestCase
 
     private function assertUploadIsInvalid($upload)
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
 

@@ -20,7 +20,7 @@ class UploadTranslationBodyImageTest extends TestCase
      */
     public function upload_image_for_translation_body()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $this->withoutExceptionHandling();
 
@@ -46,7 +46,7 @@ class UploadTranslationBodyImageTest extends TestCase
      */
     public function the_image_is_required()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $translation = factory(Translation::class)->create();
 
@@ -64,7 +64,7 @@ class UploadTranslationBodyImageTest extends TestCase
      */
     public function the_image_must_be_a_valid_image_type()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $translation = factory(Translation::class)->create();
 

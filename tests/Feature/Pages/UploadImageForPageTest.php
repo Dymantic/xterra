@@ -21,7 +21,7 @@ class UploadImageForPageTest extends TestCase
     public function upload_an_image_for_a_page()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $page = factory(Page::class)->create();
 

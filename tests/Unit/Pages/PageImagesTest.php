@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class PageImagesTest extends TestCase
@@ -21,7 +21,7 @@ class PageImagesTest extends TestCase
      */
     public function save_image_for_a_given_page()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $page = factory(Page::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');

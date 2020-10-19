@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class CampaignImagesTest extends TestCase
@@ -21,7 +21,7 @@ class CampaignImagesTest extends TestCase
      */
     public function can_set_title_image_for_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -46,7 +46,7 @@ class CampaignImagesTest extends TestCase
      */
     public function can_clear_the_title_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $image = $campaign->setTitleImage(UploadedFile::fake()->image('testpic.png'));
@@ -61,7 +61,7 @@ class CampaignImagesTest extends TestCase
      */
     public function setting_a_title_image_overwrites_any_previous_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $old_image = $campaign->setTitleImage(UploadedFile::fake()->image('testpic.png'));
@@ -83,7 +83,7 @@ class CampaignImagesTest extends TestCase
      */
     public function can_store_images_for_the_campaign_narrative()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -105,7 +105,7 @@ class CampaignImagesTest extends TestCase
      */
     public function can_set_the_banner_image_for_the_campaign()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -129,7 +129,7 @@ class CampaignImagesTest extends TestCase
      */
     public function can_clear_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $image = $campaign->setBannerImage(UploadedFile::fake()->image('testpic.png'));
@@ -144,7 +144,7 @@ class CampaignImagesTest extends TestCase
      */
     public function setting_banner_image_clears_existing_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $campaign = factory(Campaign::class)->create();
         $old_image = $campaign->setBannerImage(UploadedFile::fake()->image('testpic.png'));

@@ -42,7 +42,7 @@ class UploadEventCardImageTest extends TestCase
      */
     public function the_image_must_be_an_actual_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $event = factory(Event::class)->create();
 

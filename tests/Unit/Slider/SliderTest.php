@@ -90,7 +90,7 @@ class SliderTest extends TestCase
      */
     public function present_live_slideshow()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $articleA = factory(Article::class)->create();
         $imgA = $articleA->setTitleImage(UploadedFile::fake()->image('art_a.png'));

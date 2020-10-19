@@ -21,7 +21,7 @@ class UploadContentCardImageTest extends TestCase
      */
     public function upload_an_image_for_a_content_card()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $card = factory(ContentCard::class)->create();
@@ -42,7 +42,7 @@ class UploadContentCardImageTest extends TestCase
      */
     public function the_image_must_be_a_valid_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $card = factory(ContentCard::class)->create();
 

@@ -22,7 +22,7 @@ class UploadRaceBannerImageTest extends TestCase
     public function upload_a_banner_image_for_a_race()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
 
@@ -42,7 +42,7 @@ class UploadRaceBannerImageTest extends TestCase
      */
     public function the_image_must_be_a_valid_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
 

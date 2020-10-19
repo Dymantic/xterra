@@ -21,7 +21,7 @@ class ClearCoachProfilePicTest extends TestCase
     public function clear_a_coaches_profile_pic()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $coach = factory(Coach::class)->create();
         $image = $coach->setProfilePic(UploadedFile::fake()->image('testpic.png'));

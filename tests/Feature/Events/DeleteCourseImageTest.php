@@ -19,7 +19,7 @@ class DeleteCourseImageTest extends TestCase
      */
     public function remove_an_image_from_a_course_gallery()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $course = factory(Course::class)->create();

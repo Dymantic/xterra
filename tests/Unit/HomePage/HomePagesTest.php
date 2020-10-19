@@ -21,7 +21,7 @@ class HomePagesTest extends TestCase
      */
     public function can_set_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $upload = UploadedFile::fake()->image('test.png');
 
@@ -44,7 +44,7 @@ class HomePagesTest extends TestCase
      */
     public function can_clear_the_banner_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $image = HomePage::current()->setBannerImage(UploadedFile::fake()->image('test.png'));
 
         HomePage::current()->clearBannerImage();
@@ -59,7 +59,7 @@ class HomePagesTest extends TestCase
      */
     public function setting_banner_image_overwrites_previous_ones()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $old_image = HomePage::current()->setBannerImage(UploadedFile::fake()->image('test.png'));
         $this->assertCount(1, HomePage::current()->getMedia(HomePage::BANNER_IMG));
 

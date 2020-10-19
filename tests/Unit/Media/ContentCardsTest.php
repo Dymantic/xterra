@@ -46,7 +46,7 @@ class ContentCardsTest extends TestCase
      */
     public function make_a_card_from_an_article()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $article = factory(Article::class)->create();
@@ -72,7 +72,7 @@ class ContentCardsTest extends TestCase
      */
     public function making_a_card_from_existing_content_will_not_try_use_non_existing_image()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $article = factory(Article::class)->create();

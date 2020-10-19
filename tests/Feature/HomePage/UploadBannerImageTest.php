@@ -19,7 +19,7 @@ class UploadBannerImageTest extends TestCase
      */
     public function upload_the_banner_image_for_the_homepage()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $response = $this->asAdmin()->postJson("/admin/home-page/banner-image", [
@@ -38,7 +38,7 @@ class UploadBannerImageTest extends TestCase
      */
     public function the_image_is_required_to_be_an_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $response = $this->asAdmin()->postJson("/admin/home-page/banner-image", [
             'image' => 'null',

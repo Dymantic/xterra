@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Manipulations;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Activity extends Model implements HasMedia
 {
-    use HasSchedule, HasPrizes, HasFees, HasCourses, HasMediaTrait, HasEmbeddedVideos;
+    use HasSchedule, HasPrizes, HasFees, HasCourses, InteractsWithMedia, HasEmbeddedVideos;
 
     const RUN = 'run';
     const SWIM = 'swim';
@@ -294,7 +294,7 @@ class Activity extends Model implements HasMedia
         $this->clearMediaCollection(self::CARD_IMAGE);
     }
 
-    public function registerMediaConversions(Media $media = null)
+    public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('web')
              ->fit(Manipulations::FIT_MAX, 1000, 1800)

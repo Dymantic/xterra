@@ -21,7 +21,7 @@ class ClearPromotionImageTest extends TestCase
     public function clear_an_uploaded_promotion_image()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $promotion = factory(Promotion::class)->create();
         $image = $promotion->setImage(UploadedFile::fake()->image('testpic.png'));

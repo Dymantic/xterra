@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class SetCourseImagePositionsTest extends TestCase
@@ -21,7 +21,7 @@ class SetCourseImagePositionsTest extends TestCase
      */
     public function set_the_image_positions_for_course_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $course = factory(Course::class)->create();
@@ -67,7 +67,7 @@ class SetCourseImagePositionsTest extends TestCase
 
     private function assertImageIdsInvalid($image_ids, $error_key = 'image_ids')
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $course = factory(Course::class)->create();
 

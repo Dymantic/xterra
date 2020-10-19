@@ -21,7 +21,7 @@ class ClearAmbassadorProfilePicTest extends TestCase
     public function clear_an_existing_profile_pic_for_an_ambassador()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $ambassador = factory(Ambassador::class)->create();
         $image = $ambassador->setProfilePic(UploadedFile::fake()->image('testpic.png'));

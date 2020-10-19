@@ -20,7 +20,7 @@ class UploadTitleImageForArticleTest extends TestCase
      */
     public function upload_a_title_image_for_article()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $this->withoutExceptionHandling();
 
@@ -44,7 +44,7 @@ class UploadTitleImageForArticleTest extends TestCase
      */
     public function the_image_is_required()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $article = factory(Article::class)->create();
 
@@ -60,7 +60,7 @@ class UploadTitleImageForArticleTest extends TestCase
      */
     public function image_must_be_a_valid_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $article = factory(Article::class)->create();
 

@@ -23,7 +23,7 @@ class UploadCoachProfilePicTest extends TestCase
     public function upload_coach_profile_picture()
     {
         $this->withoutExceptionHandling();
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $coach = factory(Coach::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
@@ -59,7 +59,7 @@ class UploadCoachProfilePicTest extends TestCase
 
     private function assertUploadIsInvalid($upload)
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $coach = factory(Coach::class)->create();
 

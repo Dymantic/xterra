@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Occasions\Course;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CourseImagesController extends Controller
 {

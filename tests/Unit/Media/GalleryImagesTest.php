@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class GalleryImagesTest extends TestCase
@@ -21,7 +21,7 @@ class GalleryImagesTest extends TestCase
      */
     public function add_image_to_gallery()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $gallery = factory(Gallery::class)->create();
 
@@ -45,7 +45,7 @@ class GalleryImagesTest extends TestCase
      */
     public function order_gallery_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $gallery = factory(Gallery::class)->create();
 

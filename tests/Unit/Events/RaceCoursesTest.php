@@ -12,7 +12,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class RaceCoursesTest extends TestCase
@@ -97,7 +97,7 @@ class RaceCoursesTest extends TestCase
      */
     public function add_image_to_course()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $course = factory(Course::class)->create();
 
         $image = $course->addImage(UploadedFile::fake()->image('test_pic.jpg'));
@@ -118,7 +118,7 @@ class RaceCoursesTest extends TestCase
      */
     public function order_position_of_course_images()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $course = factory(Course::class)->create();
 
         $imageA = $course->addImage(UploadedFile::fake()->image('test_picA.jpg'));

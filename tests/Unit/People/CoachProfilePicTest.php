@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Tests\TestCase;
 
 class CoachProfilePicTest extends TestCase
@@ -21,7 +21,7 @@ class CoachProfilePicTest extends TestCase
      */
     public function can_set_profile_pic_for_coach()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $coach = factory(Coach::class)->create();
         $upload = UploadedFile::fake()->image('testpic.png');
 

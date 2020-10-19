@@ -21,7 +21,7 @@ class UploadActivityContentImageTest extends TestCase
      */
     public function upload_a_content_image_to_an_activity()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
         $this->withoutExceptionHandling();
 
         $race = factory(Activity::class)->state('race')->create();
@@ -45,7 +45,7 @@ class UploadActivityContentImageTest extends TestCase
      */
     public function the_image_must_be_a_valid_image_file()
     {
-        Storage::fake('media');
+        Storage::fake('media', config('filesystems.disks.media'));
 
         $race = factory(Activity::class)->state('race')->create();
 
