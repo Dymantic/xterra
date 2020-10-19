@@ -26,7 +26,7 @@ class CreatePromotionTest extends TestCase
 
         $response->assertSuccessful();
 
-        $this->assertNotNull($response->decodeResponseJson('id'));
+        $this->assertNotNull($response->json('id'));
 
         $this->assertDatabaseHas('promotions', [
             'title'       => json_encode(['en' => 'test title', 'zh' => 'zh test title']),

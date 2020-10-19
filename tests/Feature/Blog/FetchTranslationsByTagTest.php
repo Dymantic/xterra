@@ -32,7 +32,7 @@ class FetchTranslationsByTagTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/tags/{$tag->id}/translations");
         $response->assertStatus(200);
 
-        $fetched = $response->decodeResponseJson();
+        $fetched = $response->json();
 
         $this->assertCount(2, $fetched);
 

@@ -26,7 +26,7 @@ class FetchCategoriesTest extends TestCase
 
         $categries_with_count = Category::withCount('articles')->get()->map->toArray()->all();
 
-        $this->assertCount(4, $response->decodeResponseJson());
-        $this->assertEquals($categries_with_count, $response->decodeResponseJson());
+        $this->assertCount(4, $response->json());
+        $this->assertEquals($categries_with_count, $response->json());
     }
 }

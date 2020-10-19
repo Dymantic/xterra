@@ -32,7 +32,7 @@ class CreateNewTranslationTest extends TestCase
             ]);
         $response->assertStatus(201);
         $new_translation = $article->fresh()->translations()->where('language', 'zh')->first();
-        $this->assertEquals($new_translation->toArray(), $response->decodeResponseJson());
+        $this->assertEquals($new_translation->toArray(), $response->json());
 
         $this->assertDatabaseHas('translations', [
             'article_id'  => $article->id,

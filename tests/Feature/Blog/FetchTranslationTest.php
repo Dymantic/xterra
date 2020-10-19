@@ -24,6 +24,6 @@ class FetchTranslationTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/translations/{$translation->id}");
         $response->assertStatus(200);
 
-        $this->assertEquals($translation->toArray(), $response->decodeResponseJson());
+        $this->assertEquals($translation->toArray(), $response->json());
     }
 }

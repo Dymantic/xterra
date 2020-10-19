@@ -27,7 +27,7 @@ class FetchRecentRepliesTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/replies");
         $response->assertStatus(200);
 
-        $fetched = $response->decodeResponseJson();
+        $fetched = $response->json();
 
         $this->assertCount(14, $fetched);
 
@@ -53,7 +53,7 @@ class FetchRecentRepliesTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/replies?start={$start}&end={$end}");
         $response->assertStatus(200);
 
-        $fetched = $response->decodeResponseJson();
+        $fetched = $response->json();
 
         $this->assertCount(6, $fetched);
 

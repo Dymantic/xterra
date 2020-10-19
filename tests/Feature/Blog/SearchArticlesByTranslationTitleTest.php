@@ -40,10 +40,10 @@ class SearchArticlesByTranslationTitleTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/search/articles?query=query");
         $response->assertStatus(200);
 
-        $this->assertCount(2, $response->decodeResponseJson());
+        $this->assertCount(2, $response->json());
 
         $expected = [$matches_english->toArray(), $matches_chinese->toArray()];
 
-        $this->assertEquals($expected, $response->decodeResponseJson());
+        $this->assertEquals($expected, $response->json());
     }
 }

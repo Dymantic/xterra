@@ -29,6 +29,6 @@ class FetchSetSlidesTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/slider/slides");
         $response->assertStatus(200);
 
-        $this->assertEquals(Slider::getSetSlides(), $response->decodeResponseJson());
+        $this->assertEquals(Slider::getSetSlides(), $response->json());
     }
 }

@@ -34,7 +34,7 @@ class PostReplyToCommentTest extends TestCase
 
         $this->assertEquals(
             $translation->fresh()->comments->map->toArray()->all(),
-            $response->decodeResponseJson()
+            $response->json()
         );
 
         $this->assertDatabaseHas('replies', [

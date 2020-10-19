@@ -55,7 +55,7 @@ class FetchTagsTest extends TestCase
             ],
         ];
 
-        $this->assertEquals($expected, $response->decodeResponseJson());
+        $this->assertEquals($expected, $response->json());
 
     }
 

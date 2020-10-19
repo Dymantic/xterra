@@ -25,7 +25,7 @@ class FetchUsersTest extends TestCase
         $response = $this->actingAs($userA)->getJson("/admin/users");
         $response->assertStatus(200);
 
-        $fetched_users = collect($response->decodeResponseJson());
+        $fetched_users = collect($response->json());
 
         $this->assertCount(4, $fetched_users);
 

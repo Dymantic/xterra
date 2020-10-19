@@ -29,7 +29,7 @@ class CreateCommentTest extends TestCase
         $response->assertStatus(200);
         $this->assertEquals(
             $translation->comments->map->toArray()->all(),
-            $response->decodeResponseJson()
+            $response->json()
         );
 
         $this->assertDatabaseHas('comments', [

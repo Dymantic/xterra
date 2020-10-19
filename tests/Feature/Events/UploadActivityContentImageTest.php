@@ -36,8 +36,8 @@ class UploadActivityContentImageTest extends TestCase
 
         Storage::disk('media')->assertExists(Str::after($image->getUrl(), "/media"));
 
-        $this->assertSame($image->getUrl(), $response->decodeResponseJson('file.url'));
-        $this->assertSame(1, $response->decodeResponseJson('success'));
+        $this->assertSame($image->getUrl(), $response->json('file.url'));
+        $this->assertSame(1, $response->json('success'));
     }
 
     /**

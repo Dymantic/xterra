@@ -9,17 +9,18 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
-        "cviebrock/eloquent-sluggable": "^7.0",
+        "cviebrock/eloquent-sluggable": "^8.0",
         "doctrine/dbal": "^2.11",
         "dymantic/laravel-instagram-feed": "^2.3",
         "fideloper/proxy": "^4.0",
-        "guzzlehttp/guzzle": "^6.4",
-        "laravel/framework": "^7.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "laravel/framework": "^8.0",
+        "laravel/legacy-factories": "^1.0",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^2.0",
+        "laravel/ui": "^3.0",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "mcamara/laravel-localization": "^1.5",
+        "mcamara/laravel-localization": "^1.6",
         "spatie/laravel-backup": "^6.7",
         "spatie/laravel-medialibrary": "^8.0",
         "spatie/laravel-sitemap": "^5.5"
@@ -31,8 +32,9 @@
         "filp/whoops": "^2.0",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.0",
-        "phpunit/phpunit": "^8.0"
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0",
+        "facade/ignition": "^2.3.6"
     },
     "config": {
         "optimize-autoloader": true,

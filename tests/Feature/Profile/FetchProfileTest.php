@@ -25,6 +25,6 @@ class FetchProfileTest extends TestCase
         $response = $this->actingAs($user)->getJson("/admin/me");
         $response->assertStatus(200);
 
-        $this->assertEquals($user_data, $response->decodeResponseJson());
+        $this->assertEquals($user_data, $response->json());
     }
 }

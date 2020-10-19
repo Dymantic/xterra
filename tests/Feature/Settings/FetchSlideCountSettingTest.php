@@ -24,6 +24,6 @@ class FetchSlideCountSettingTest extends TestCase
         $response = $this->asAdmin()->getJson("/admin/site-settings/slide-count");
         $response->assertStatus(200);
 
-        $this->assertEquals(6, $response->decodeResponseJson('slide_count'));
+        $this->assertEquals(6, $response->json('slide_count'));
     }
 }

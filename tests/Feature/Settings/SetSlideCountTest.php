@@ -24,6 +24,6 @@ class SetSlideCountTest extends TestCase
         $this->assertDatabaseHas('site_settings', [
             'settings->slide_count' => 6,
         ]);
-        $this->assertEquals(6, $response->decodeResponseJson('slide_count'));
+        $this->assertEquals(6, $response->json('slide_count'));
     }
 }
