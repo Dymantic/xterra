@@ -1,4 +1,4 @@
-<div class="max-w-sm bg-grey-300 flex flex-col justify-between mb-8 sm:mb-0 {{ $classes ?? '' }}">
+<div class="max-w-sm bg-grey-300 flex flex-col justify-between mb-8 sm:mb-0 {{ $classes ?? '' }} shadow-small">
     <div class="group">
         <div class="relative">
             <a href="{{ localUrl('/blog/' . $post['full_slug']) }}">

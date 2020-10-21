@@ -9,7 +9,12 @@
             @dragover.prevent="hovering = true"
             @dragleave.prevent="hovering = false"
         >
-            <img :src="src" alt="" class="w-full h-full object-cover" />
+            <img
+                :src="src"
+                alt=""
+                class="w-full h-full"
+                :class="{ 'object-cover': !contain, 'object-contain': contain }"
+            />
         </div>
         <div class="py-2" v-show="uploading">
             <div class="h-2 w-full rounded bg-gray-400">
@@ -51,6 +56,10 @@ export default {
         "max-size": {
             type: Number,
             default: 15,
+        },
+        contain: {
+            type: Boolean,
+            default: false,
         },
     },
 

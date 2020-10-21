@@ -23,5 +23,24 @@ abstract class TestCase extends BaseTestCase
         return $this->assertGuest();
     }
 
+    public function fakeMediaStorage()
+    {
+        Storage::fake('media', config('filesystems.disks.media'));
+    }
+
+    public function assertMediaStorageHas($media, $conversions = [])
+    {
+        Storage::disk('media')->assertExists(Str::after($media->getUrl(), "/media"));
+
+        collect($conversions)->each(
+            fn ($conversion) => Storage::disk('media')->assertExists(Str::after($media->getUrl($conversion), "/media"))
+        );
+    }
+
+    public function assertMediaStorageMissing($media)
+    {
+        Storage::disk('media')->assertMissing(Str::after($media->getUrl(), "/media"));
+    }
+
 
 }

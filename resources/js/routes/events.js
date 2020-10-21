@@ -39,6 +39,9 @@ import RaceTitleImages from "../components/Events/RaceTitleImages";
 import RacePromoVideo from "../components/Events/RacePromoVideo";
 import ShowRacePrizes from "../components/Events/ShowRacePrizes";
 import PrizeTableEditor from "../components/Events/PrizeTableEditor";
+import EventSponsorsIndex from "../components/Events/EventSponsorsIndex";
+import SponsorCreate from "../components/Events/SponsorCreate";
+import SponsorEdit from "../components/Events/SponsorEdit";
 export default [
     { path: "/events", component: EventsIndex },
     { path: "/events/:id", component: EventShow },
@@ -91,7 +94,18 @@ export default [
                 path: "travel-routes/:travelRoute/edit",
                 component: EditTravelRoute,
             },
-
+            {
+                path: "sponsors",
+                component: EventSponsorsIndex,
+            },
+            {
+                path: "sponsors/create",
+                component: SponsorCreate,
+            },
+            {
+                path: "sponsors/:sponsor/edit",
+                component: SponsorEdit,
+            },
             {
                 path: "overview",
                 component: EventOverviewEditor,

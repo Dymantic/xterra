@@ -82,6 +82,15 @@
 
                 <div class="my-2">
                     <router-link
+                        :to="`/events/${pageEvent.id}/edit/sponsors`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Sponsors</router-link
+                    >
+                </div>
+
+                <div class="my-2">
+                    <router-link
                         :to="`/events/${pageEvent.id}/edit/galleries`"
                         class="font-bold hover:text-blue-600"
                         active-class="text-blue-600"

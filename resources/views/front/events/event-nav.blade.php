@@ -5,6 +5,7 @@
         <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#fees">Fees</a>
         <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#travel">Travel</a>
         <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#accommodation">Accommodation</a>
+        <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#sponsors">Sponsors</a>
         <a class="type-h2 uppercase mp-6 whitespace-no-wrap" href="#media">Media</a>
     </div>
 </div>

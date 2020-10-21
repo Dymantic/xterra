@@ -11,7 +11,7 @@
 
 {{--    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,400i,600,700|Source+Serif+Pro" rel="stylesheet">--}}
 
-    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,600|Source+Serif+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:500|Source+Sans+Pro:400,700|Source+Serif+Pro" rel="stylesheet">
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.7.0/dist/alpine.min.js" defer></script>
 

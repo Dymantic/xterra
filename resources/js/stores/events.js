@@ -40,6 +40,9 @@ import {
     deleteEvent,
     attachEventPromoVideo,
     clearEventPromoVideo,
+    createEventSponsor,
+    updateEventSponsor,
+    deleteEventSponsor,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -92,6 +95,16 @@ export default {
             state.current_page_event
                 ? state.current_page_event.travel_routes
                 : [],
+
+        sponsorById: (state) => (id) => {
+            if (!state.current_page_event) {
+                return null;
+            }
+
+            return state.current_page_event.sponsors.find(
+                (sponsor) => sponsor.id === parseInt(id)
+            );
+        },
 
         travelRouteById: (state) => (id) => {
             if (!state.current_page_event) {
@@ -421,6 +434,24 @@ export default {
 
         clearPromoVideo({ dispatch }, event_id) {
             return clearEventPromoVideo(event_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        createSponsor({ dispatch }, { event_id, formData }) {
+            return createEventSponsor(event_id, formData).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        updateSponsor({ dispatch }, { sponsor_id, formData }) {
+            return updateEventSponsor(sponsor_id, formData).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        deleteSponsor({ dispatch }, sponsor_id) {
+            return deleteEventSponsor(sponsor_id).then(() =>
                 dispatch("refreshEvents")
             );
         },

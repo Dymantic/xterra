@@ -9,6 +9,7 @@
     @include('front.events.fees')
     @include('front.events.travel')
     @include('front.events.accommodation')
+    @include('front.events.sponsors')
     @include('front.events.galleries')
     @include('front.events.videos')
 @endsection

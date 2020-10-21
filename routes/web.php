@@ -160,6 +160,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('accommodations/{accommodation}', 'EventAccommodationsController@update');
     Route::delete('accommodations/{accommodation}', 'EventAccommodationsController@delete');
 
+    Route::post('events/{event}/sponsors', 'EventSponsorsController@store');
+    Route::post('sponsors/{sponsor}', 'EventSponsorsController@update');
+    Route::delete('sponsors/{sponsor}', 'EventSponsorsController@delete');
+
+    Route::post('event-sponsors/{sponsor}/image', 'SponsorLogosController@store');
+    Route::delete('event-sponsors/{sponsor}/image', 'SponsorLogosController@destroy');
+
     Route::post('races/{race}/courses', 'RaceCoursesController@store');
     Route::post('courses/{course}', 'RaceCoursesController@update');
     Route::delete('courses/{course}', 'RaceCoursesController@delete');

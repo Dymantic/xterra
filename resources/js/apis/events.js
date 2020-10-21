@@ -164,6 +164,18 @@ function clearEventPromoVideo(event_id) {
     return del(`/admin/events/${event_id}/promo-video`);
 }
 
+function createEventSponsor(event_id, formData) {
+    return post(`/admin/events/${event_id}/sponsors`, formData);
+}
+
+function updateEventSponsor(sponsor_id, formData) {
+    return post(`/admin/sponsors/${sponsor_id}`, formData);
+}
+
+function deleteEventSponsor(sponsor_id) {
+    return del(`/admin/sponsors/${sponsor_id}`);
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -206,4 +218,7 @@ export {
     deleteEvent,
     attachEventPromoVideo,
     clearEventPromoVideo,
+    createEventSponsor,
+    updateEventSponsor,
+    deleteEventSponsor,
 };

@@ -21,7 +21,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Event extends Model implements HasMedia, Cardable
 {
-    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, InteractsWithMedia, HasPromoVideo;
+    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, InteractsWithMedia, HasPromoVideo, HasSponsors;
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
     const BANNER_IMAGE = 'banner_image';

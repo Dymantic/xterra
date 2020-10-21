@@ -38,6 +38,8 @@ module.exports = {
             },
             boxShadow: {
                 top: "0 3px 6px rgba(0,0,0,.4)",
+                big: "11px 15px 20px 0px rgba(0, 0, 0, 0.4)",
+                small: "5px 5px 4px 0px rgba(0, 0, 0, 0.12)",
             },
             fontFamily: {
                 heading: ["Barlow Condensed", "sans-serif"],
@@ -53,6 +55,8 @@ module.exports = {
                 "grey-300": "#EEEDED",
                 tinted: "rgba(0,0,0,0.4)",
                 "tinted-dark": "rgba(0,0,0,0.8)",
+                "blue-700": "#20327a",
+                "blue-500": "#285ac8",
             },
         },
     },
