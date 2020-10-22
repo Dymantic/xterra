@@ -173,7 +173,7 @@ function updateEventSponsor(sponsor_id, formData) {
 }
 
 function deleteEventSponsor(sponsor_id) {
-    return del(`/admin/sponsors/${sponsor_id}`);
+    return del(`/admin/event-sponsors/${sponsor_id}`);
 }
 
 export {
