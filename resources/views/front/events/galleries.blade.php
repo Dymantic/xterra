@@ -3,7 +3,9 @@
         <p class="type-h2 uppercase mb-6">Image Galleries</p>
         @foreach($event['galleries'] as $gallery)
             <div class="max-w-3xl mx-auto mb-6">
-                <p class="font-bold">{{ $gallery['title'] }}</p>
+                <p class="font-bold">
+                    <a href="/top-secret/galleries/{{ $gallery['slug'] }}">{{ $gallery['title'] }}</a>
+                </p>
                 <div class="flex flex-wrap">
                     @foreach($gallery['images'] as $image)
                         <div class="w-42 h-42 m-2">

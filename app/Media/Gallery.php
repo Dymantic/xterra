@@ -3,6 +3,7 @@
 namespace App\Media;
 
 use App\Translation;
+use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
@@ -19,12 +20,20 @@ class Gallery extends Model implements HasMedia
     protected $fillable = [
         'title',
         'description',
+        'slug',
     ];
 
     protected $casts = [
         'title'       => Translation::class,
         'description' => Translation::class,
     ];
+
+    public static function new(GalleryInfo $galleryInfo): self
+    {
+        return self::create(
+            array_merge($galleryInfo->toArray(), ['slug' => UniqueKey::for('galleries:slug')])
+        );
+    }
 
     public function addImage(UploadedFile $file): Media
     {
@@ -79,10 +88,10 @@ class Gallery extends Model implements HasMedia
     public function presentForLang($lang)
     {
         return [
+            'slug'        => $this->slug,
             'title'       => $this->title->in($lang),
             'description' => $this->description->in($lang),
             'images'      => $this->getMedia(self::IMAGES)->map(fn(Media $media) => [
-                'id'       => $media->id,
                 'thumb'    => $media->getUrl('thumb'),
                 'web'      => $media->getUrl('web'),
                 'original' => $media->getUrl(),

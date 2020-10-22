@@ -1,5 +1,5 @@
 <div class="py-20 max-w-screen overflow-hidden">
-    <div class="max-w-5xl mx-auto md:px-8" data-flickity='{"cellAlign": "left", "contain": "true", "imagesLoaded": "true"}'>
+    <div class="max-w-5xl mx-auto md:px-8 text-black" data-flickity='{"cellAlign": "left", "contain": "true", "imagesLoaded": "true", "arrowShape": "M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z"}'>
         @foreach($page['content_cards'] as $card)
             <div class="w-full md:w-3/10 mx-6">
                 <div class="relative w-9/10 mx-auto shadow-lg bg-gray-200">

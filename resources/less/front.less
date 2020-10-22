@@ -39,6 +39,15 @@ button:disabled {
 display: none;
 }
 
+    .flickity-button.flickity-prev-next-button {
+        background: none;
+    @apply text-black h-24 w-24;
+
+        @media screen and (max-width: 640px) {
+        @apply hidden;
+        }
+    }
+
 body.nav-open {
     overflow: hidden;
 }

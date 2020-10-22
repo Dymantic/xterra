@@ -39,6 +39,8 @@ Route::group([
 
             Route::get('races/{activity:slug}/{name?}', 'ActivitiesController@show');
             Route::get('activities/{activity:slug}/{name?}', 'ActivitiesController@show');
+
+            Route::get('galleries/{gallery:slug}', 'GalleriesController@show');
         });
 });
 
