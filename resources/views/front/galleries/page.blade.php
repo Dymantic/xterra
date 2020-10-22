@@ -11,11 +11,13 @@
         <div x-data="{flick: null, flickNav: null}" x-init="flick = new Flickity(document.querySelector('.gallery'), {cellAlign: 'left', lazyLoad: true, arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z'}); flick = new Flickity(document.querySelector('.gallery-nav'), {contain: true, pageDots: false, asNavFor: '.gallery', arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z'})" class="max-w-4xl mx-auto">
             <div class="gallery">
                 @foreach($gallery['images'] as $image)
-                    @if($loop->first)
-                        <img src="{{ $image['web'] }}" data-flickity-lazyload="{{ $image['web'] }}" alt="gallery image">
-                    @else
-                        <img src="" data-flickity-lazyload="{{ $image['web'] }}" alt="gallery image">
-                    @endif
+                    <div class="bg-black w-full">
+                        @if($loop->first)
+                            <img src="{{ $image['web'] }}" data-flickity-lazyload="{{ $image['web'] }}" alt="gallery image">
+                        @else
+                            <img src="" data-flickity-lazyload="{{ $image['web'] }}" alt="gallery image">
+                        @endif
+                    </div>
                 @endforeach
             </div>
             <div class="gallery-nav my-12">
