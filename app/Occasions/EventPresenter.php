@@ -5,6 +5,7 @@ namespace App\Occasions;
 
 
 use App\DatePresenter;
+use Illuminate\Support\Str;
 
 class EventPresenter
 {
@@ -47,10 +48,12 @@ class EventPresenter
     {
         $event->load('activities.scheduleEntries', 'fees', 'scheduleEntries', 'accommodations', 'travelRoutes',
             'activities.courses', 'galleries', 'sponsors');
+        $slugged_name = Str::slug($event->name[$lang]);
 
         return [
             'name'              => $event->name[$lang] ?? '',
             'slug'              => $event->slug,
+            'full_slug'         => "/events/{$event->slug}/{$slugged_name}",
             'location'          => $event->location[$lang] ?? '',
             'venue_name'        => $event->venue_name[$lang] ?? '',
             'venue_address'     => $event->venue_address[$lang] ?? '',
@@ -61,12 +64,18 @@ class EventPresenter
             'registration_link' => $event->registration_link,
             'overview'          => $event->overview->in($lang),
             'categories'        => $event->listCategories(),
-            'races'             => $event->activities()->where('is_race', true)->orderBy('date')->get()->map(fn(
-                $activity
-            ) => ActivityPresenter::forPublic($activity, $lang)),
-            'activities'        => $event->activities()->where('is_race', false)->orderBy('date')->get()->map(fn(
-                $activity
-            ) => ActivityPresenter::forPublic($activity, $lang)),
+            'races'             => $event
+                ->activities()
+                ->where('is_race', true)
+                ->orderBy('date')->get()->map(
+                    fn($activity) => ActivityPresenter::forPublic($activity, $lang)
+                ),
+            'activities'        => $event
+                ->activities()
+                ->where('is_race', false)
+                ->orderBy('date')->get()->map(
+                    fn($activity) => ActivityPresenter::forPublic($activity, $lang)
+                ),
             'fees'              => $event->fees->sortBy('position')->map->presentForLang($lang),
             'schedule'          => Schedule::forEvent($event)->presentForLang($lang, $event->start),
             'accommodation'     => $event->accommodations->map->presentForLang($lang),
@@ -76,7 +85,7 @@ class EventPresenter
             'courses'           => [],
             'galleries'         => $event->galleries->map->presentForLang($lang)->values()->all(),
             'promo_video_id'    => optional($event->promoVideo)->getVideoId(),
-            'videos'            => $event->embeddableVideos->map->toArray()->values()->all(),
+            'videos'            => $event->embeddableVideos->map->presentForLang($lang)->values()->all(),
             'banner_image'      => $event->getBannerImage(Event::DEFAULT_BANNER),
             'card_image'        => $event->getCardImage(),
         ];
@@ -90,10 +99,12 @@ class EventPresenter
 
         $event->load('activities.scheduleEntries', 'fees', 'scheduleEntries', 'accommodations', 'travelRoutes',
             'activities.courses', 'galleries');
+        $slugged_name = Str::slug($event->name[$lang]);
 
         return [
             'name'         => $event->name[$lang] ?? '',
             'slug'         => $event->slug,
+            'full_slug'    => "/events/{$event->slug}/{$slugged_name}",
             'location'     => $event->location[$lang] ?? '',
             'dates'        => DatePresenter::range($event->start, $event->end),
             'banner_image' => $event->getBannerImage(Event::DEFAULT_BANNER),

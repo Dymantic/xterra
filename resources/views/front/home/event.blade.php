@@ -9,7 +9,11 @@
                     @endforeach
                 </div>
             </div>
-            <p class="type-h0 text-white uppercase mt-3">{{ $event['name'] }}</p>
+            <p class="type-h0 text-white uppercase mt-3">
+                <a class="hover:text-red-700" href="{{ $event['full_slug'] }}">
+                    {{ $event['name'] }}
+                </a>
+            </p>
             <div class="flex items-center">
                 @include('svg.icons.location', ['classes' => 'h-6 text-red-500 mr-2'])
                 <p class="type-h1 text-white">{{ $event['location'] }}</p>
@@ -19,7 +23,7 @@
                 <p class="type-h1 text-white">{{ $event['dates'] }}</p>
             </div>
             <div class="text-right mt-2">
-                <a class="text-white hover:text-red-500 uppercase type-b2" href="/">View Event &gt;</a>
+                <a class="text-white hover:text-red-500 uppercase type-b2" href="{{ $event['full_slug'] }}">View Event &gt;</a>
             </div>
         </div>
     </div>

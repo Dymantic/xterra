@@ -2,7 +2,6 @@
 
 @tailwind utilities;
 
-@import (less) "~flickity/dist/flickity.css";
 
 @import "front/typography";
 @import "front/slider";
@@ -38,4 +37,12 @@ button:disabled {
 
 [x-cloak] {
 display: none;
+}
+
+body.nav-open {
+    overflow: hidden;
+}
+
+.nav-open .sticky-nav {
+    z-index: -1;
 }

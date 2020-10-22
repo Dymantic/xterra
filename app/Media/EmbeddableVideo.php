@@ -44,4 +44,13 @@ class EmbeddableVideo extends Model
             'title'    => $this->title->toArray(),
         ];
     }
+
+    public function presentForLang($lang)
+    {
+        return [
+            'video_id' => $this->video_id,
+            'platform' => $this->platform,
+            'title'    => $this->title->in($lang),
+        ];
+    }
 }
