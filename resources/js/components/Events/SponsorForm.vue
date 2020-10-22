@@ -117,7 +117,7 @@ export default {
                 : "events/createSponsor";
             const payload = this.sponsor
                 ? {
-                      sponsor_id: this.sponsor_id.id,
+                      sponsor_id: this.sponsor.id,
                       formData: this.formData,
                   }
                 : {
