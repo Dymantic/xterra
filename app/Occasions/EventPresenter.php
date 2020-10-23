@@ -18,6 +18,7 @@ class EventPresenter
             'id'                => $event->id,
             'name'              => $event->name,
             'slug'              => $event->slug,
+            'intro'             => $event->intro ?? ['en' => '', 'zh' => ''],
             'location'          => $event->location,
             'venue_name'        => $event->venue_name,
             'venue_address'     => $event->venue_address,
@@ -53,7 +54,8 @@ class EventPresenter
         return [
             'name'              => $event->name[$lang] ?? '',
             'slug'              => $event->slug,
-            'full_slug'         => "/events/{$event->slug}/{$slugged_name}",
+            'full_slug'         => "/top-secret/events/{$event->slug}/{$slugged_name}",
+            'intro'             => $event->intro[$lang] ?? '',
             'location'          => $event->location[$lang] ?? '',
             'venue_name'        => $event->venue_name[$lang] ?? '',
             'venue_address'     => $event->venue_address[$lang] ?? '',

@@ -10,6 +10,7 @@ class GeneralEventInfo
 {
 
     public array $name;
+    public array $intro;
     public array $location;
     public array $venue_name;
     public array $venue_address;
@@ -21,6 +22,7 @@ class GeneralEventInfo
     public function __construct($info)
     {
         $this->name = ['en' => $info['name']['en'] ?? '', 'zh' => $info['name']['zh'] ?? ''];
+        $this->intro = ['en' => $info['intro']['en'] ?? '', 'zh' => $info['intro']['zh'] ?? ''];
         $this->location = ['en' => $info['location']['en'] ?? '', 'zh' => $info['location']['zh'] ?? ''];
         $this->venue_name = ['en' => $info['venue_name']['en'] ?? '', 'zh' => $info['venue_name']['zh'] ?? ''];
         $this->venue_address = ['en' => $info['venue_address']['en'] ?? '', 'zh' => $info['venue_address']['zh'] ?? ''];
@@ -34,6 +36,7 @@ class GeneralEventInfo
     {
         return [
             'name' => $this->name,
+            'intro' => $this->intro,
             'location' => $this->location,
             'venue_name' => $this->venue_name,
             'venue_address' => $this->venue_address,

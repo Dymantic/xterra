@@ -49,6 +49,7 @@ class EventsTest extends TestCase
             'start' => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
             'end' => Carbon::today()->addMonth()->addDay()->format(DatePresenter::STANDARD),
             'registration_link' => 'https://test.test/registration',
+            'intro' => ['en' => 'test intro', 'zh' => 'zh test intro'],
         ]);
 
         $event->updateGeneralInfo($info);
@@ -66,6 +67,8 @@ class EventsTest extends TestCase
         $this->assertTrue(Carbon::today()->addMonth()->startOfDay()->eq($event->start));
         $this->assertTrue(Carbon::today()->addMonth()->addDay()->endOfDay()->setMicro(0)->equalTo($event->end));
         $this->assertEquals('https://test.test/registration', $event->registration_link);
+        $this->assertEquals('test intro', $event->intro['en']);
+        $this->assertEquals('zh test intro', $event->intro['zh']);
 
     }
 

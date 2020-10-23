@@ -26,6 +26,26 @@
             </div>
 
             <div class="my-6">
+                <p class="font-bold">Intro</p>
+                <p class="my-2 text-gray-600">
+                    A brief description of the event.
+                </p>
+                <div class="pl-6">
+                    <textarea-field
+                        class="mb-4"
+                        label="English"
+                        :error-msg="formErrors.intro"
+                        v-model="formData.intro.en"
+                    ></textarea-field>
+                    <textarea-field
+                        class="my-4"
+                        label="Chinese"
+                        v-model="formData.intro.zh"
+                    ></textarea-field>
+                </div>
+            </div>
+
+            <div class="my-6">
                 <p class="font-bold">Event Dates</p>
                 <p class="my-2 text-gray-600">When will the event occur?</p>
                 <div class="pl-6 flex justfiy-between">
@@ -156,11 +176,13 @@ import InputField from "../Forms/InputField";
 import DateField from "../Forms/DateField";
 import SubmitButton from "../Forms/SubmitButton";
 import DeleteEvent from "./DeleteEvent";
+import TextareaField from "../Forms/TextareaField";
 import { clearValidationErrors, setValidationErrors } from "../../lib/forms";
 import { notify } from "../Messaging/notify";
 export default {
     components: {
         InputField,
+        TextareaField,
         DateField,
         SubmitButton,
         DeleteEvent,
@@ -172,6 +194,7 @@ export default {
             waiting: false,
             formData: {
                 name: { en: "", zh: "" },
+                intro: { en: "", zh: "" },
                 location: { en: "", zh: "" },
                 venue_name: { en: "", zh: "" },
                 venue_address: { en: "", zh: "" },
@@ -183,6 +206,7 @@ export default {
             formErrors: {
                 "name.en": "",
                 "name.zh": "",
+                intro: "",
                 "location.en": "",
                 "location.zh": "",
                 "venue_name.en": "",
@@ -213,6 +237,7 @@ export default {
         setForm(event) {
             this.formData = {
                 name: { en: event.name.en, zh: event.name.zh },
+                intro: { en: event.intro.en, zh: event.intro.zh },
                 location: { en: event.location.en, zh: event.location.zh },
                 venue_name: {
                     en: event.venue_name.en,

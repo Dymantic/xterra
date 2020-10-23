@@ -31,6 +31,7 @@ class Event extends Model implements HasMedia, Cardable
 
     protected $fillable = [
         'name',
+        'intro',
         'slug',
         'location',
         'venue_name',
@@ -44,6 +45,7 @@ class Event extends Model implements HasMedia, Cardable
 
     protected $casts = [
         'name'          => 'array',
+        'intro'          => 'array',
         'location'      => 'array',
         'venue_name'    => 'array',
         'venue_address' => 'array',
@@ -76,6 +78,11 @@ class Event extends Model implements HasMedia, Cardable
     public function scopeLive($query)
     {
         return $query->where('is_public', true);
+    }
+
+    public function scopeUpcoming($query)
+    {
+        return $query->where('start', '>', now());
     }
 
     public function publish()
@@ -128,6 +135,10 @@ class Event extends Model implements HasMedia, Cardable
     function presentForAdmin()
     {
         return EventPresenter::forAdmin($this);
+    }
+
+    public function presentForLang($lang) {
+        return EventPresenter::forPublic($this, $lang);
     }
 
     public function galleries()
