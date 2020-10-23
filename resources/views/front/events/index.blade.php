@@ -17,9 +17,11 @@
             <p class="type-h1 uppercase border-b border-red-700">Upcoming Events</p>
             @foreach($events as $event)
                 <div class="flex flex-col md:flex-row border-b border-grey-700 pb-3 mt-4">
-                    <p class="px-2 type-b2 md:type-h2 w-64">{{ $event['dates'] }}</p>
+                    <p class="px-2 md:hidden type-b2 w-64">{{ $event['dates'] }}</p>
+                    <p class="px-2 hidden md:block type-h2 w-64">{{ $event['dates'] }}</p>
                     <p class="px-2 type-h2 flex-1">{{ $event['name'] }}</p>
-                    <p class="px-2 type-b2 md:type-h2 w-48">{{ $event['location'] }}</p>
+                    <p class="px-2 md:hidden type-b2 w-48">{{ $event['location'] }}</p>
+                    <p class="px-2 hidden md:block type-h2 w-48">{{ $event['location'] }}</p>
                 </div>
             @endforeach
         </div>
