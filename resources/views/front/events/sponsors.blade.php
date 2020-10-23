@@ -3,7 +3,7 @@
         <p class="type-h2 mb-6 uppercase">Event Sponsors</p>
         <div class="flex flex-wrap justify-center">
             @foreach($event['sponsors'] as $sponsor)
-                <div class="w-32 h-32 m-4">
+                <div class="w-16 md:w-32 h-16 md:h-32 m-4">
                     <a href="{{ $sponsor['link'] }}" target="_blank">
                         <img class="w-full h-full object-contain" src="{{ $sponsor['logo']['thumb'] }}" alt="{{ $sponsor['name'] }}">
                     </a>
