@@ -59,7 +59,7 @@
     </div>
 
     @include('front.partials.footer')
-    @include('front.partials.navbar')
+    <x-nav-bar></x-nav-bar>
 </div>
 @yield('bodyscripts')
 @if($has_promo_video ?? false)

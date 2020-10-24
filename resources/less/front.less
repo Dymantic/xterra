@@ -59,3 +59,16 @@ body.nav-open {
 .nav-open .sticky-nav {
     z-index: -1;
 }
+@media screen and (min-width: 1024px) {
+    .event-subnav {
+        transition: .3s;
+        perspective: 1000px;
+        transform-origin: top left;
+        transform: rotateX(90deg);
+    }
+
+    .event-nav:hover .event-subnav{
+        transform: rotateX(0deg);
+    }
+}
+

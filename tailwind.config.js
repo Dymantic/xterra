@@ -55,7 +55,7 @@ module.exports = {
                 "grey-200": "#EFEEEE",
                 "grey-300": "#EEEDED",
                 tinted: "rgba(0,0,0,0.4)",
-                "tinted-dark": "rgba(0,0,0,0.8)",
+                "tinted-dark": "rgba(0,0,0,0.9)",
                 "blue-700": "#20327a",
                 "blue-500": "#285ac8",
             },
