@@ -20,7 +20,7 @@ class DeleteSponsorTest extends TestCase
         $this->withoutExceptionHandling();
         $sponsor = factory(Sponsor::class)->create();
 
-        $response = $this->asAdmin()->deleteJson("/admin/sponsors/{$sponsor->id}");
+        $response = $this->asAdmin()->deleteJson("/admin/event-sponsors/{$sponsor->id}");
         $response->assertSuccessful();
 
         $this->assertDatabaseMissing('sponsors', ['id' => $sponsor->id]);

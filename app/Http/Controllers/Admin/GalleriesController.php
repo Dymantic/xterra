@@ -18,7 +18,7 @@ class GalleriesController extends Controller
 
     public function store(GalleryRequest $request)
     {
-        return Gallery::create($request->galleryInfo()->toArray());
+        return Gallery::new($request->galleryInfo());
     }
 
     public function update(Gallery $gallery, GalleryRequest $request)

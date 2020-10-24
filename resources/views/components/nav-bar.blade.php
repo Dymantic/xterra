@@ -25,7 +25,7 @@
                         </svg>
 
                     </a>
-                    <div class="event-subnav lg:absolute lg:top-16 w-screen h-64 lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
+                    <div class="event-subnav lg:absolute lg:top-16 w-screen lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
                         <div class="flex flex-col lg:flex-row justify-center text-white pb-2 mr-4">
                             @foreach($upcomingEvents as $event)
                                 <div

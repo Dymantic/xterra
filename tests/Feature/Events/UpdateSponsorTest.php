@@ -21,7 +21,7 @@ class UpdateSponsorTest extends TestCase
         $this->withoutExceptionHandling();
         $sponsor = factory(Sponsor::class)->create();
 
-        $response = $this->asAdmin()->postJson("/admin/sponsors/{$sponsor->id}", [
+        $response = $this->asAdmin()->postJson("/admin/event-sponsors/{$sponsor->id}", [
             'name'        => ['en' => 'new test name', 'zh' => 'zh new test name'],
             'description' => ['en' => 'new test description', 'zh' => 'zh new test description'],
             'link'        => 'https://new.test',
@@ -70,7 +70,7 @@ class UpdateSponsorTest extends TestCase
 
         $response = $this
             ->asAdmin()
-            ->postJson("/admin/sponsors/{$sponsor->id}", array_merge($valid, $field));
+            ->postJson("/admin/event-sponsors/{$sponsor->id}", array_merge($valid, $field));
         $response->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
         $response->assertJsonValidationErrors(array_key_first($field));
     }
