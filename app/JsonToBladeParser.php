@@ -19,7 +19,9 @@ class JsonToBladeParser
         $data = is_array($json) ? $json : json_decode($json, true);
         $blocks = collect($data['blocks'] ?? []);
 
-        return $blocks->map(fn ($block) => $this->parseBlock($block))->join("\n");
+        $from_editor = $blocks->map(fn ($block) => $this->parseBlock($block))->join("\n");
+
+        return sprintf('<div class="admin-edited">%s</div>', $from_editor);
     }
 
     private function parseBlock($block)

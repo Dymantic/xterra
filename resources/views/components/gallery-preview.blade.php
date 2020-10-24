@@ -1,15 +1,15 @@
-<div class="max-w-3xl mx-auto mb-6">
-    <p class="font-bold px-6">
+<div class="max-w-3xl mx-auto mb-12">
+    <p class="font-bold px-8">
         <a href="{{ $slug }}">{{ $title }}</a>
     </p>
-    <div class="flex flex-wrap justify-center">
+    <div class="grid grid-cols-3 md:grid-cols-4 gap-1 place-content-center">
         @foreach($firstImages() as $image)
-            <div class="w-24 md:w-42 h-24 md:h-42 m-1">
-                <img src="{{ $image['thumb'] }}" class="w-full h-full object-cover" alt="">
+            <div class="relative" style="padding-bottom: 100%;">
+                <img src="{{ $image['thumb'] }}" class="w-full h-full object-cover inset-0 absolute" alt="">
             </div>
         @endforeach
         @if($hasExtra())
-                <div class="w-24 md:w-42 h-24 md:h-42 m-2 flex items-center justify-center bg-gray-100">
+                <div class="flex items-center justify-center bg-gray-100" style="">
                     <p class="text-gray-600 type-h2 pb-1 mr-1">+ {{ $extraCount() }}</p>
                     @include('svg.icons.camera', ['classes' => 'h-6 text-gray-600'])
                 </div>

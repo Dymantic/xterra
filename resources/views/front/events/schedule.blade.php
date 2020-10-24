@@ -1,5 +1,6 @@
-<div class="py-20 px-8" id="schedule">
-    <div class="max-w-5xl mx-auto">
+@if($event['has_schedule'])
+<div class="pb-20 px-8" id="schedule">
+    <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">Schedule</p>
         @foreach($event['schedule'] as $day)
             <div class="max-w-3xl mx-auto mb-12">
@@ -9,3 +10,4 @@
         @endforeach
     </div>
 </div>
+@endif

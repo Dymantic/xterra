@@ -1,18 +1,18 @@
 <div class="relative min-h-banner-tall md:min-h-banner bg-cover flex flex-col justify-center pl-3 md:pl-32 pr-3" style="background-image: url({{ $event['banner_image']['banner'] }})">
-    <div class="max-w-xl w-full mx-auto lg:mx-0 bg-tinted-dark p-4 rounded mt-8 md:mt-0">
+    <div class="max-w-xl w-full mx-auto lg:mx-0 bg-tinted-dark p-4 rounded mt-8 md:mt-0 leading-tight">
         <div class="flex items-center justify-end my-2 py-2 border-b-2 border-red-500">
             @foreach($event['categories'] as $icon)
                 @include('svg.event-categories.' . $icon, ['classes' => 'h-8 text-white mr-4 md:ml-4 md:mr-0'])
             @endforeach
         </div>
-        <p class="type-banner uppercase text-white my-4">{{ $event['name'] }}</p>
+        <p class="type-h0 uppercase text-white my-4">{{ $event['name'] }}</p>
         <div class="flex items-center">
             @include('svg.icons.location', ['classes' => 'h-6 text-red-500 mr-2'])
-            <p class="type-h2 uppercase text-white">{{ $event['location'] }}</p>
+            <p class="type-h1 text-white">{{ $event['location'] }}</p>
         </div>
         <div class="flex items-center">
             @include('svg.icons.calendar', ['classes' => 'h-6 text-red-500 mr-2'])
-            <p class="type-h2 uppercase text-white">{{ $event['dates'] }}</p>
+            <p class="type-h1 text-white">{{ $event['dates'] }}</p>
         </div>
         <div class="text-right mt-4">
             <a href="{{ $event['registration_link'] }}" target="_blank" class="type-b2 text-white hover:text-red-700 uppercase">Register Now &gt;</a>

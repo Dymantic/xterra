@@ -1,5 +1,6 @@
-<div class="py-20 px-8" id="travel">
-    <div class="max-w-5xl mx-auto">
+@if($event['has_travel'])
+<div class="pb-20 px-8" id="travel">
+    <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">Travel</p>
         @foreach($event['travel_routes'] as $travel_route)
             <div class="max-w-xl mx-auto mb-12">
@@ -18,3 +19,4 @@
         @endif
     </div>
 </div>
+@endif

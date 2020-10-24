@@ -14,7 +14,9 @@
             <p class="type-h1 text-white">{{ $activity['date'] }}</p>
         </div>
         <div class="text-right mt-4">
+            @if($activity['registration_link'])
             <a href="{{ $activity['registration_link'] }}" target="_blank" class="type-b2 text-white hover:text-red-700 uppercase">Register Now &gt;</a>
+                @endif
         </div>
     </div>
 </div>

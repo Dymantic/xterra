@@ -1,5 +1,6 @@
+@if($activity['has_rules_and_info'])
 <div class="py-20 px-8" id="rules">
-    <div class="max-w-5xl mx-auto">
+    <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">Rules And Info</p>
 
         <div class="max-w-3xl mx-auto">
@@ -20,4 +21,6 @@
             @endif
         </div>
     </div>
+
 </div>
+@endif

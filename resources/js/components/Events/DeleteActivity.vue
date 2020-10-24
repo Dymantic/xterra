@@ -56,7 +56,7 @@ export default {
             notify.success({ message: "Activity deleted" });
             this.showForm = false;
             this.$router.push(
-                `/events/${this.$route.params.id}/edit/activities`
+                `/events/${this.$route.params.event}/edit/activities`
             );
         },
 

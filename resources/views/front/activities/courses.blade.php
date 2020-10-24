@@ -1,5 +1,6 @@
-<div class="py-20 px-8" id="courses">
-    <div class="max-w-5xl mx-auto">
+@if($activity['has_courses'])
+<div class="pb-20 px-8" id="courses">
+    <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">Courses</p>
         @foreach($activity['courses'] as $course)
             <div class="max-w-3xl mx-auto my-10">
@@ -11,12 +12,16 @@
                 </div>
 
                 <p class="my-4">{{ $course['description'] }}</p>
-                @if(count($course['gallery']))
+                @if(count($course['gallery']) > 1)
                     <div data-flickity='{"imagesLoaded": "true", "alignCells": "left", "contain": "true"}'>
                         @foreach($course['gallery'] as $image)
-                            <img src="{{ $image['web'] }}" alt="">
+                            <img src="{{ $image['web'] }}" alt="Picture number {{ $loop->index + 1 }} of {{ $course['name'] }}">
                         @endforeach
                     </div>
+                @endif
+
+                @if(count($course['gallery']) === 1)
+                    <img src="{{ $course['gallery'][0]['web'] }}" alt="{{ $course['name'] }}">
                 @endif
             </div>
         @endforeach
@@ -33,3 +38,4 @@
             </div>
     </div>
 </div>
+@endif

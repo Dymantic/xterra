@@ -23,7 +23,7 @@
             <div x-data="{ open: false, ready: promoVideoIsReady}" x-cloak
                  @keydown.window.escape="window.pausePromoVideo(); open = false">
                 <button @click="open = true; window.playPromoVideo()"
-                        class="px-8 py-2 uppercase rounded-lg bg-white text-grey-700 type-h3 shadow-lg mt-12 focus:outline-none">
+                        class="white-btn mt-12 focus:outline-none">
                     Watch Video
                 </button>
                 <div x-show="open" class="fixed flex justify-center items-center z-50 inset-0 bg-tinted-dark">

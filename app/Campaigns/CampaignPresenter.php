@@ -15,31 +15,31 @@ class CampaignPresenter
         $banner_image = $campaign->getFirstMedia(Campaign::BANNER_IMAGE);
 
         return [
-            'id'          => $campaign->id,
-            'title'       => $campaign->title->toArray(),
-            'intro'       => $campaign->intro->toArray(),
-            'description' => $campaign->description->toArray(),
-            'title_image' => self::presentImage($titleImage),
-            'narrative_raw' => $campaign->narrative->toArray(),
+            'id'             => $campaign->id,
+            'title'          => $campaign->title->toArray(),
+            'intro'          => $campaign->intro->toArray(),
+            'description'    => $campaign->description->toArray(),
+            'title_image'    => self::presentImage($titleImage),
+            'narrative_raw'  => $campaign->narrative->toArray(),
             'narrative_html' => [
                 'en' => $campaign->narrativeHtml('en'),
                 'zh' => $campaign->narrativeHtml('zh'),
             ],
-            'event' => $campaign->event ? EventPresenter::forAdmin($campaign->event) : null,
-            'promotion' => $campaign->promotion ? $campaign->promotion->toArray() : null,
-            'articles' => $campaign->articles->map->toArray()->values()->all(),
-            'banner_image' => [
-                'full' => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
+            'event'          => $campaign->event ? EventPresenter::forAdmin($campaign->event) : null,
+            'promotion'      => $campaign->promotion ? $campaign->promotion->toArray() : null,
+            'articles'       => $campaign->articles->map->toArray()->values()->all(),
+            'banner_image'   => [
+                'full'  => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
                 'small' => optional($banner_image)->getUrl('small') ?? Campaign::DEFAULT_IMAGE,
             ],
-            'promo_video' => optional($campaign->promoVideo)->getVideo(),
-            'banner_video' => $campaign->bannerVideoUrl(),
+            'promo_video'    => optional($campaign->promoVideo)->getVideo(),
+            'banner_video'   => $campaign->bannerVideoUrl(),
         ];
     }
 
     public static function forHomePage(?Campaign $campaign, $lang)
     {
-        if(!$campaign) {
+        if (!$campaign) {
             return null;
         }
 
@@ -47,9 +47,10 @@ class CampaignPresenter
         $titleImage = $campaign->titleImage();
 
         return [
-            'title'       => $campaign->title->in($lang),
-            'intro'       => $campaign->intro->in($lang),
-            'image' => self::presentImage($titleImage)['web'],
+            'title'     => $campaign->title->in($lang),
+            'full_slug' => '/top-secret/campaigns/' . $campaign->slug,
+            'intro'     => $campaign->intro->in($lang),
+            'image'     => self::presentImage($titleImage)['web'],
         ];
     }
 
@@ -69,21 +70,22 @@ class CampaignPresenter
         $banner_image = $campaign->getFirstMedia(Campaign::BANNER_IMAGE);
 
         return [
-            'slug'          => $campaign->slug,
-            'title'       => $campaign->title->in($lang),
-            'intro'       => $campaign->intro->in($lang),
-            'description' => $campaign->description->in($lang),
-            'title_image' => self::presentImage($titleImage),
+            'slug'           => $campaign->slug,
+            'full_slug' => '/top-secret/campaigns/' . $campaign->slug,
+            'title'          => $campaign->title->in($lang),
+            'intro'          => $campaign->intro->in($lang),
+            'description'    => $campaign->description->in($lang),
+            'title_image'    => self::presentImage($titleImage),
             'narrative_html' => $campaign->narrativeHtml($lang),
-            'event' => $campaign->event ? EventPresenter::forHomePage($campaign->event, $lang) : null,
-            'promotion' => $campaign->promotion ? $campaign->promotion->presentForLang($lang) : null,
-            'articles' => app('live-posts')->for($lang)->getPosts($campaign->articles)->take(3),
-            'banner_image' => [
-                'full' => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
+            'event'          => $campaign->event ? EventPresenter::forHomePage($campaign->event, $lang) : null,
+            'promotion'      => $campaign->promotion ? $campaign->promotion->presentForLang($lang) : null,
+            'articles'       => app('live-posts')->for($lang)->getPosts($campaign->articles)->take(3),
+            'banner_image'   => [
+                'full'  => optional($banner_image)->getUrl('full') ?? Campaign::DEFAULT_IMAGE,
                 'small' => optional($banner_image)->getUrl('small') ?? Campaign::DEFAULT_IMAGE,
             ],
             'promo_video_id' => optional($campaign->promoVideo)->getVideoId(),
-            'banner_video' => $campaign->bannerVideoUrl(),
+            'banner_video'   => $campaign->bannerVideoUrl(),
         ];
     }
 }

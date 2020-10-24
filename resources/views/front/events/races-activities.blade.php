@@ -1,5 +1,6 @@
-<div class="py-20 px-8" id="races">
-    <div class="max-w-5xl mx-auto">
+@if($event['has_activities'])
+<div class="pb-20 px-8" id="races">
+    <div class="max-w-4xl mx-auto">
         @if(count($event['races']))
             <p class="type-h2 uppercase mb-6">Races</p>
             @foreach($event['races'] as $race)
@@ -15,3 +16,4 @@
         @endif
     </div>
 </div>
+@endif

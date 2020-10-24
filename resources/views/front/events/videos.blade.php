@@ -1,5 +1,6 @@
-<div class="py-20 px-8">
-    <div class="max-w-5xl mx-auto">
+@if($event['has_videos'])
+<div class="py-20 px-8" id="videos">
+    <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">Event Videos</p>
         <div class="flex flex-wrap justify-center">
             @foreach($event['videos'] as $video)
@@ -11,3 +12,4 @@
         </div>
     </div>
 </div>
+@endif

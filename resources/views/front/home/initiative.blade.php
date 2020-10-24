@@ -5,11 +5,13 @@
             <img src="{{ $campaign['image'] }}" alt="{{ $campaign['title'] }}">
         </div>
         <div class="fw-full md:w-1/2  order-1 md:order-2 px-8 flex flex-col justify-center">
-            <p class="type-h1 text-center">{{ $campaign['title'] }}</p>
+            <p class="type-h0 text-center">
+                <a href="{{ $campaign['full_slug'] }}" class="hover:text-red-700">{{ $campaign['title'] }}</a>
+            </p>
             <p class="type-b1 mt-8">{{ $campaign['intro'] }}</p>
 
             <div class="mt-10 text-center">
-                <a class="type-b2 uppercase hover:text-red-500" href="">View Initiative &gt;</a>
+                <a class="type-b2 uppercase hover:text-red-500" href="{{ $campaign['full_slug'] }}">View Initiative &gt;</a>
             </div>
         </div>
     </div>
