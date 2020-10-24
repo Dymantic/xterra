@@ -1,6 +1,6 @@
 <div x-data="{show: false}"
      x-init="$watch('show', val => val ? document.body.classList.add('nav-open') : document.body.classList.remove('nav-open'))"
-     class="main-nav fixed top-0 w-full h-16 bg-grey-700 flex justify-between items-center px-4"
+     class="main-nav fixed top-0 w-full h-16 bg-grey-700 flex justify-between items-center px-4 z-20"
      :class="{'open': show}">
     <div class="flex items-center">
         <a href="{{ localUrl("/") }}">
