@@ -25,8 +25,8 @@
                         </svg>
 
                     </a>
-                    <div class="event-subnav lg:absolute lg:top-16 w-screen h-64 lg:bg-tinted-dark left-0 lg:z-50">
-                        <div class="flex flex-col lg:flex-row justify-center text-white py-2 mr-4">
+                    <div class="event-subnav lg:absolute lg:top-16 w-screen h-64 lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
+                        <div class="flex flex-col lg:flex-row justify-center text-white pb-2 mr-4">
                             @foreach($upcomingEvents as $event)
                                 <div
                                     class="px-2 mt-4 mr-6 lg:mr-0 @if(!$loop->last) lg:border-r-2 border-red-700 @endif">
@@ -37,15 +37,13 @@
                                     </p>
                                     <div class="lg:pr-6 lg:pl-3">
                                         @foreach($event['races'] as $race)
-                                            <p class="type-b2 mt-1">
+                                            <p class="type-b2 my-2">
                                                 <a href="{{ $race['full_slug'] }}" class="hover:text-red-700">
                                                     {{ $race['name'] }}
                                                 </a>
-
                                             </p>
                                         @endforeach
                                     </div>
-
                                 </div>
                             @endforeach
                         </div>
