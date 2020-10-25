@@ -15,7 +15,11 @@
                 @if(count($course['gallery']) > 1)
                     <div data-flickity='{"imagesLoaded": "true", "alignCells": "left", "contain": "true"}'>
                         @foreach($course['gallery'] as $image)
-                            <img src="{{ $image['web'] }}" alt="Picture number {{ $loop->index + 1 }} of {{ $course['name'] }}">
+                            <div class="max-w-3xl w-full" style="height: 550px;">
+                                <img src="{{ $image['web'] }}" alt="Picture number {{ $loop->index + 1 }} of {{ $course['name'] }}" class="w-full h-full object-contain">
+                            </div>
+
+
                         @endforeach
                     </div>
                 @endif
