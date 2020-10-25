@@ -166,6 +166,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('event-sponsors/{sponsor}', 'EventSponsorsController@update');
     Route::delete('event-sponsors/{sponsor}', 'EventSponsorsController@delete');
 
+    Route::post('event-sponsors-order', 'EventSponsorsOrderController@store');
+
     Route::post('event-sponsors/{sponsor}/image', 'SponsorLogosController@store');
     Route::delete('event-sponsors/{sponsor}/image', 'SponsorLogosController@destroy');
 
@@ -302,6 +304,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('content-cards', 'ContentCardController@store');
     Route::post('content-cards/{card}', 'ContentCardController@update');
     Route::delete('content-cards/{card}', 'ContentCardController@delete');
+
+    Route::post('content-cards-order', 'ContentCardsOrderController@store');
 
     Route::post('content-cards/{card}/image', 'ContentCardImageController@store');
     Route::delete('content-cards/{card}/image', 'ContentCardImageController@destroy');

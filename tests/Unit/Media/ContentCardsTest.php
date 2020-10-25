@@ -44,6 +44,43 @@ class ContentCardsTest extends TestCase
     /**
      *@test
      */
+    public function can_set_order_of_cards()
+    {
+        $cardA = factory(ContentCard::class)->create();
+        $cardB = factory(ContentCard::class)->create();
+        $cardC = factory(ContentCard::class)->create();
+        $cardD = factory(ContentCard::class)->create();
+
+        ContentCard::setOrder([$cardC->id, $cardB->id, $cardA->id, $cardD->id]);
+
+        $this->assertSame(1, $cardC->fresh()->position);
+        $this->assertSame(2, $cardB->fresh()->position);
+        $this->assertSame(3, $cardA->fresh()->position);
+        $this->assertSame(4, $cardD->fresh()->position);
+    }
+
+    /**
+     *@test
+     */
+    public function creating_new_card_gives_it_a_position_at_back()
+    {
+        factory(ContentCard::class)->create(['position' => 1]);
+        factory(ContentCard::class)->create(['position' => 4]);
+        factory(ContentCard::class)->create(['position' => 5]);
+        $cardInfo = new ContentCardInfo([
+            'category' => ['en' => 'test category', 'zh' => 'zh test category'],
+            'title'    => ['en' => 'test title', 'zh' => 'zh test title'],
+            'link'     => 'https://test.test',
+        ]);
+
+        $card = ContentCard::new($cardInfo);
+
+        $this->assertSame(6, $card->fresh()->position);
+    }
+
+    /**
+     *@test
+     */
     public function make_a_card_from_an_article()
     {
         Storage::fake('media', config('filesystems.disks.media'));

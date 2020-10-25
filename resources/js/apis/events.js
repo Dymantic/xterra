@@ -176,6 +176,10 @@ function deleteEventSponsor(sponsor_id) {
     return del(`/admin/event-sponsors/${sponsor_id}`);
 }
 
+function setEventSponsorsOrder(sponsor_ids) {
+    return post("/admin/event-sponsors-order", { sponsor_ids });
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -221,4 +225,5 @@ export {
     createEventSponsor,
     updateEventSponsor,
     deleteEventSponsor,
+    setEventSponsorsOrder,
 };

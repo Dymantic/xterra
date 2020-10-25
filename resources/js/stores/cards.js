@@ -5,6 +5,7 @@ import {
     createContentCardFromPromotion,
     deleteContentCard,
     fetchContentCards,
+    setContentCardsOrder,
     updateContentCard,
 } from "../apis/cards";
 import { notify } from "../components/Messaging/notify";
@@ -71,6 +72,12 @@ export default {
 
         createFromPromotion({ dispatch }, promotion_id) {
             return createContentCardFromPromotion(promotion_id).then(() =>
+                dispatch("refresh")
+            );
+        },
+
+        setOrder({ dispatch }, card_ids) {
+            return setContentCardsOrder(card_ids).then(() =>
                 dispatch("refresh")
             );
         },

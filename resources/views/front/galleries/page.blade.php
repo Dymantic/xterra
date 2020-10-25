@@ -8,7 +8,7 @@
         </div>
     </div>
     <div>
-        <div x-data="{flick: null, flickNav: null, current: 1}" x-init="flick = new Flickity(document.querySelector('.gallery'), {cellAlign: 'left', lazyLoad: true, arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z', pageDots: false}); flick = new Flickity(document.querySelector('.gallery-nav'), {contain: true, pageDots: false, asNavFor: '.gallery', arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z'}); flick.on('change', slide => current = slide + 1)" class="max-w-4xl mx-auto">
+        <div x-data="{flick: null, flickNav: null, current: 1}" x-init="flick = new Flickity(document.querySelector('.gallery'), {cellAlign: 'left', lazyLoad: true, arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z', pageDots: false}); flickNav = new Flickity(document.querySelector('.gallery-nav'), {contain: true, groupCells: true, pageDots: false, asNavFor: '.gallery', arrowShape: 'M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z'}); flick.on('change', slide => current = slide + 1)" class="max-w-4xl mx-auto">
             <div class="gallery">
                 @foreach($gallery['images'] as $image)
                     <div class="bg-grey-700 w-full relative" style="padding-bottom: 66.67%;">

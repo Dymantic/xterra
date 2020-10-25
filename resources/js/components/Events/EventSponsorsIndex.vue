@@ -2,11 +2,18 @@
     <div v-if="event">
         <div class="flex justify-between items-center mb-12">
             <p class="text-lg font-bold">Event Sponsors</p>
-            <router-link
-                class="btn btn-dark"
-                :to="`/events/${event.id}/edit/sponsors/create`"
-                >Add Sponsor</router-link
-            >
+            <div class="flex justify-end">
+                <router-link
+                    class="btn mr-4"
+                    :to="`/events/${event.id}/edit/sponsors/order`"
+                    >Set Order</router-link
+                >
+                <router-link
+                    class="btn btn-dark"
+                    :to="`/events/${event.id}/edit/sponsors/create`"
+                    >Add Sponsor</router-link
+                >
+            </div>
         </div>
 
         <div class="my-12">

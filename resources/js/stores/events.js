@@ -43,6 +43,7 @@ import {
     createEventSponsor,
     updateEventSponsor,
     deleteEventSponsor,
+    setEventSponsorsOrder,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -452,6 +453,12 @@ export default {
 
         deleteSponsor({ dispatch }, sponsor_id) {
             return deleteEventSponsor(sponsor_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        setSponsorsOrder({ dispatch }, sponsor_ids) {
+            return setEventSponsorsOrder(sponsor_ids).then(() =>
                 dispatch("refreshEvents")
             );
         },

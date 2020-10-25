@@ -36,7 +36,7 @@ class HomePagePresenter
                 'link'        => $promotion->link,
                 'image'       => optional($promo_image)->getUrl('web'),
             ],
-            'content_cards' => ContentCard::latest()->limit(6)->get()->map(function (ContentCard $card) use ($lang) {
+            'content_cards' => ContentCard::limit(6)->get()->map(function (ContentCard $card) use ($lang) {
                 $image = $card->getFirstMedia(ContentCard::IMAGE);
 
                 return [

@@ -12,7 +12,7 @@ class ContentCardController extends Controller
 
     public function index()
     {
-        return ContentCard::latest()->get()->map->toArray();
+        return ContentCard::all()->map->toArray();
     }
 
     public function store(ContentCardRequest $request)

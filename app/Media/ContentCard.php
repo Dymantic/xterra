@@ -3,6 +3,7 @@
 namespace App\Media;
 
 use App\Translation;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
@@ -18,16 +19,32 @@ class ContentCard extends Model implements HasMedia
     const IMAGE = 'image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
 
-    protected $fillable = ['title', 'category', 'link'];
+    protected $fillable = ['title', 'category', 'link', 'position'];
 
     protected $casts = [
-        'title' => Translation::class,
+        'title'    => Translation::class,
         'category' => Translation::class,
+        'position' => 'integer',
     ];
+
+    protected static function booted()
+    {
+        static::addGlobalScope('order', fn (Builder $builder) => $builder->orderBy('position'));
+    }
 
     public static function new(ContentCardInfo $cardInfo): self
     {
-        return self::create($cardInfo->toArray());
+        $next_position = optional(self::orderBy('position', 'desc')->first())->position;
+
+        return self::create(
+            array_merge($cardInfo->toArray(), ['position' => $next_position ? $next_position + 1 : null])
+        );
+    }
+
+    public static function setOrder(array $card_ids)
+    {
+        collect($card_ids)
+            ->each(fn($id, $position) => self::find($id)->update(['position' => $position + 1]));
     }
 
     public static function fromExistingContent(Cardable $cardable): self
@@ -35,10 +52,10 @@ class ContentCard extends Model implements HasMedia
         $info = $cardable->cardInfo();
         $card = self::create($info->toArray());
 
-        if($info->image_path && file_exists($info->image_path)) {
+        if ($info->image_path && file_exists($info->image_path)) {
             $card->addMedia($info->image_path)
-                ->preservingOriginal()
-                ->toMediaCollection(self::IMAGE);
+                 ->preservingOriginal()
+                 ->toMediaCollection(self::IMAGE);
         }
 
         return $card;
@@ -47,9 +64,10 @@ class ContentCard extends Model implements HasMedia
     public function setImage(UploadedFile $upload): Media
     {
         $this->clearImage();
+
         return $this->addMedia($upload)
-            ->usingFileName($upload->hashName())
-            ->toMediaCollection(self::IMAGE);
+                    ->usingFileName($upload->hashName())
+                    ->toMediaCollection(self::IMAGE);
     }
 
     public function clearImage()
@@ -70,12 +88,13 @@ class ContentCard extends Model implements HasMedia
         $image = $this->getFirstMedia(self::IMAGE);
 
         return [
-            'id' => $this->id,
+            'id'       => $this->id,
             'category' => $this->category->toArray(),
-            'title' => $this->title->toArray(),
-            'link' => $this->link,
-            'image' => [
-                'web' => $image ? $image->getUrl('web') : self::DEFAULT_IMAGE,
+            'title'    => $this->title->toArray(),
+            'link'     => $this->link,
+            'position' => $this->position,
+            'image'    => [
+                'web'      => $image ? $image->getUrl('web') : self::DEFAULT_IMAGE,
                 'original' => $image ? $image->getUrl() : self::DEFAULT_IMAGE,
             ]
 

@@ -42,6 +42,7 @@ import PrizeTableEditor from "../components/Events/PrizeTableEditor";
 import EventSponsorsIndex from "../components/Events/EventSponsorsIndex";
 import SponsorCreate from "../components/Events/SponsorCreate";
 import SponsorEdit from "../components/Events/SponsorEdit";
+import SponsorsOrder from "../components/Events/SponsorsOrder";
 export default [
     { path: "/events", component: EventsIndex },
     { path: "/events/:id", component: EventShow },
@@ -101,6 +102,10 @@ export default [
             {
                 path: "sponsors/create",
                 component: SponsorCreate,
+            },
+            {
+                path: "sponsors/order",
+                component: SponsorsOrder,
             },
             {
                 path: "sponsors/:sponsor/edit",

@@ -28,6 +28,10 @@ function createContentCardFromPromotion(promotion_id) {
     return post(`/admin/promotion-content-cards`, { promotion_id });
 }
 
+function setContentCardsOrder(card_ids) {
+    return post("/admin/content-cards-order", { card_ids });
+}
+
 export {
     fetchContentCards,
     createContentCard,
@@ -36,4 +40,5 @@ export {
     createContentCardFromArticle,
     createContentCardFromEvent,
     createContentCardFromPromotion,
+    setContentCardsOrder,
 };

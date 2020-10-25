@@ -17,20 +17,28 @@ class Sponsor extends Model implements HasMedia
 
     const LOGO = 'logo';
 
-    protected $fillable = ['name', 'description', 'link'];
+    protected $fillable = ['name', 'description', 'link', 'position'];
 
     protected $casts = [
-        'name' => Translation::class,
+        'name'        => Translation::class,
         'description' => Translation::class,
+        'position'    => 'integer',
     ];
+
+    public static function setOrder(array $sponsor_ids)
+    {
+        collect($sponsor_ids)
+            ->each(fn($id, $position) => self::find($id)->update(['position' => $position + 1]));
+    }
+
 
     public function setLogo(UploadedFile $upload): Media
     {
         $this->clearLogo();
 
         return $this->addMedia($upload)
-            ->usingFileName($upload->hashName())
-            ->toMediaCollection(self::LOGO);
+                    ->usingFileName($upload->hashName())
+                    ->toMediaCollection(self::LOGO);
     }
 
     public function clearLogo()
@@ -42,7 +50,7 @@ class Sponsor extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
              ->fit(Manipulations::FIT_MAX, 500, 333)
-            ->keepOriginalImageFormat()
+             ->keepOriginalImageFormat()
              ->optimize()
              ->performOnCollections(self::LOGO);
     }
@@ -50,13 +58,14 @@ class Sponsor extends Model implements HasMedia
     public function toArray()
     {
         $logo = $this->getFirstMedia(self::LOGO);
+
         return [
-            'id' => $this->id,
-            'name' => $this->name->toArray(),
+            'id'          => $this->id,
+            'name'        => $this->name->toArray(),
             'description' => $this->description->toArray(),
-            'link' => $this->link,
-            'logo' => [
-                'thumb' => optional($logo)->getUrl('thumb'),
+            'link'        => $this->link,
+            'logo'        => [
+                'thumb'    => optional($logo)->getUrl('thumb'),
                 'original' => optional($logo)->getUrl(),
             ]
         ];
@@ -65,12 +74,13 @@ class Sponsor extends Model implements HasMedia
     public function presentForLang($lang)
     {
         $logo = $this->getFirstMedia(self::LOGO);
+
         return [
-            'name' => $this->name->in($lang),
+            'name'        => $this->name->in($lang),
             'description' => $this->description->in($lang),
-            'link' => $this->link,
-            'logo' => [
-                'thumb' => optional($logo)->getUrl('thumb'),
+            'link'        => $this->link,
+            'logo'        => [
+                'thumb'    => optional($logo)->getUrl('thumb'),
                 'original' => optional($logo)->getUrl(),
             ]
         ];

@@ -35,7 +35,7 @@ class EventPresenter
             'accommodation'     => $event->accommodations->map->toArray(),
             'travel_routes'     => $event->travelRoutes->map->toArray(),
             'travel_guide'      => $event->getTravelGuideUrl(),
-            'sponsors'          => $event->sponsors->map->toArray()->values()->all(),
+            'sponsors'          => $event->sponsors()->orderBy('position')->get()->map->toArray()->values()->all(),
             'courses'           => [],
             'galleries'         => $event->galleries->map->toArray()->values()->all(),
             'promo_video'       => optional($event->promoVideo)->getVideo(),
@@ -66,7 +66,7 @@ class EventPresenter
         $schedule = Schedule::forEvent($event)->presentForLang($lang, $event->start);
         $accomodation = $event->accommodations->map->presentForLang($lang);
         $travel_routes = $event->travelRoutes->map->presentForLang($lang);
-        $sponsors = $event->sponsors->map->presentForLang($lang);
+        $sponsors = $event->sponsors()->orderBy('position')->get()->map->presentForLang($lang);
         $galleries = $event->galleries->map->presentForLang($lang)->values()->all();
         $videos = $event->embeddableVideos->map->presentForLang($lang)->values()->all();
 
