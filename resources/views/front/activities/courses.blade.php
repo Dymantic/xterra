@@ -12,21 +12,40 @@
                 </div>
 
                 <p class="my-4">{{ $course['description'] }}</p>
-                @if(count($course['gallery']) > 1)
-                    <div data-flickity='{"imagesLoaded": "true", "alignCells": "left", "contain": "true"}'>
-                        @foreach($course['gallery'] as $image)
-                            <div class="max-w-3xl w-full" style="height: 550px;">
-                                <img src="{{ $image['web'] }}" alt="Picture number {{ $loop->index + 1 }} of {{ $course['name'] }}" class="w-full h-full object-contain">
+
+                <div x-data="{showFullImage: false, src: null}" @keydown.escape.window="showFullImage = false">
+                    @if(count($course['gallery']) > 1)
+                        <div data-flickity='{"imagesLoaded": "true", "alignCells": "left", "contain": "true", "arrowShape":"M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z"}'>
+                            @foreach($course['gallery'] as $image)
+                                <div class="course-gallery-slide max-w-3xl w-full relative border border-gray-300">
+                                    <img src="{{ $image['web'] }}" alt="Picture number {{ $loop->index + 1 }} of {{ $course['name'] }}" class="w-full h-full object-scale-down">
+                                    <button @click="src = '{{ $image['original'] }}'; showFullImage = true" class="absolute top-0 right-0 h-8 w-8 rounded-full bg-tinted-dark flex justify-center items-center mt-8 mr-6 focus:outline-none">
+                                        <svg class="fill-current h-4 hover:text-red-700 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6.987 10.987l-2.931 3.031L2 11.589V18h6.387l-2.43-2.081 3.03-2.932-2-2zM11.613 2l2.43 2.081-3.03 2.932 2 2 2.931-3.031L18 8.411V2h-6.387z"/></svg>
+                                    </button>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+
+                    @if(count($course['gallery']) === 1)
+                            <div class="flex justify-center max-w-3xl w-full">
+                                <div class="relative">
+                                    <img src="{{ $course['gallery'][0]['web'] }}" class="mx-auto" alt="{{ $course['name'] }}">
+                                    <button @click="src = '{{ $course['gallery'][0]['original'] }}'; showFullImage = true" class="focus:outline-none absolute top-0 right-0 h-8 w-8 rounded-full bg-tinted-dark flex justify-center items-center mt-3 mr-3">
+                                        <svg class="fill-current h-4 hover:text-red-700 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M6.987 10.987l-2.931 3.031L2 11.589V18h6.387l-2.43-2.081 3.03-2.932-2-2zM11.613 2l2.43 2.081-3.03 2.932 2 2 2.931-3.031L18 8.411V2h-6.387z"/></svg>
+                                    </button>
+                                </div>
+
                             </div>
 
+                    @endif
 
-                        @endforeach
-                    </div>
-                @endif
+                        <div class="fixed z-50 inset-0 bg-grey-700" x-show="showFullImage">
+                            <button @click="showFullImage = false" class="focus:outline-none type-h0 text-white hover:text-red-700 absolute top-0 right-0 m-2 leading-none">&times;</button>
+                            <img :src="src" class="w-full h-full object-scale-down" alt="">
+                        </div>
+                </div>
 
-                @if(count($course['gallery']) === 1)
-                    <img src="{{ $course['gallery'][0]['web'] }}" alt="{{ $course['name'] }}">
-                @endif
             </div>
         @endforeach
 
