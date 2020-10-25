@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="py-20 px-8">
-        <p class="max-w-2xl mx-auto text-center type-h4">These are our upcoming events to look out for, both locally and
-            internationally.</p>
+        <p class="max-w-2xl mx-auto text-center type-h4">These are our upcoming events to look out for.</p>
         <div class="flex justify-center flex-wrap my-12">
             @foreach(['cycle','duathlon','lifestyle','run','seminar','swim','training','triathlon'] as $category)
                 <div class="m-4 flex flex-col items-center">
@@ -19,7 +18,9 @@
                 <div class="flex flex-col md:flex-row border-b border-grey-700 pb-3 mt-4">
                     <p class="px-2 md:hidden type-b2 w-64">{{ $event['dates'] }}</p>
                     <p class="px-2 hidden md:block type-h2 w-64">{{ $event['dates'] }}</p>
-                    <p class="px-2 type-h2 flex-1">{{ $event['name'] }}</p>
+                    <p class="px-2 type-h2 flex-1">
+                        <a href="{{ $event['full_slug'] }}" class="hover:text-red-700">{{ $event['name'] }}</a>
+                    </p>
                     <p class="px-2 md:hidden type-b2 w-48">{{ $event['location'] }}</p>
                     <p class="px-2 hidden md:block type-h2 w-48">{{ $event['location'] }}</p>
                 </div>
@@ -28,7 +29,7 @@
 
     </div>
 
-    <div class="flex flex-wrap justify-around max-w-5xl mx-auto px-4">
+    <div class="flex flex-wrap justify-around max-w-5xl mx-auto px-4 pb-20">
         @foreach($events as $event)
             <div class="my-8 max-w-md shadow-small flex flex-col justify-between">
                 <img src="{{ $event['card_image']['web'] }}" alt="{{ $event['name'] }}">

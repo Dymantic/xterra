@@ -17,7 +17,7 @@ class NavBar extends Component
                                      ->upcoming()
                                      ->limit(3)
                                      ->get()
-                                     ->map(fn($event) => EventPresenter::forPublic($event, app()->getLocale()));
+                                     ->map(fn($event) => EventPresenter::forPublic($event, app()->getLocale()))->filter(fn ($event) => count($event['races']));
     }
 
 

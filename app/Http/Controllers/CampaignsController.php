@@ -11,7 +11,13 @@ class CampaignsController extends Controller
 
     public function index()
     {
-        return view('front.campaigns.index', ['campaigns' => Campaign::all()]);
+        return view('front.campaigns.index', [
+            'campaigns' => Campaign::live()
+                                   ->latest()
+                                   ->get()
+                                   ->map(
+                                       fn ($campaign) => CampaignPresenter::forHomePage($campaign, app()->getLocale()))
+        ]);
     }
 
     public function show(Campaign $campaign)

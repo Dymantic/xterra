@@ -53,6 +53,11 @@ class Campaign extends Model implements HasMedia
         );
     }
 
+    public function scopeLive($query)
+    {
+        return $query;
+    }
+
     public function updateNarrative($narrative, $lang)
     {
         $this->narrative->translations[$lang] = $narrative;
