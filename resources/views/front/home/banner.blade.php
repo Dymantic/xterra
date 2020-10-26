@@ -24,7 +24,7 @@
                  @keydown.window.escape="window.pausePromoVideo(); open = false">
                 <button @click="open = true; window.playPromoVideo()"
                         class="white-btn mt-12 focus:outline-none">
-                    Watch Video
+                    {{ trans('homepage.watch_video') }}
                 </button>
                 <div x-show="open" class="fixed flex justify-center items-center z-50 inset-0 bg-tinted-dark">
                     <div class="w-full max-w-5xl mx-auto">

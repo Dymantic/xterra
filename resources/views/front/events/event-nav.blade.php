@@ -4,25 +4,25 @@
             <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#races">{{ $event['race_menu_name'] }}</a>
         @endif
         @if($event['has_schedule'])
-            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#schedule">Schedule</a>
+            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#schedule">{{ trans('navbar.event_nav.schedule') }}</a>
         @endif
         @if($event['has_fees'])
-            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#fees">Fees</a>
+            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#fees">{{ trans('navbar.event_nav.fees') }}</a>
         @endif
         @if($event['has_travel'])
-            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#travel">Travel</a>
+            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#travel">{{ trans('navbar.event_nav.travel') }}</a>
         @endif
         @if($event['has_accommodation'])
-            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#accommodation">Accommodation</a>
+            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#accommodation">{{ trans('navbar.event_nav.accommodation') }}</a>
         @endif
         @if($event['has_sponsors'])
-            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#sponsors">Sponsors</a>
+            <a class="type-h2 uppercase mr-6 whitespace-no-wrap" href="#sponsors">{{ trans('navbar.event_nav.sponsors') }}</a>
         @endif
         @if($event['has_galleries'])
-            <a class="type-h2 uppercase pr-6 whitespace-no-wrap" href="#photos">Photos</a>
+            <a class="type-h2 uppercase pr-6 whitespace-no-wrap" href="#photos">{{ trans('navbar.event_nav.photos') }}</a>
         @endif
         @if($event['has_videos'])
-            <a class="type-h2 uppercase pr-6 whitespace-no-wrap" href="#videos">Videos</a>
+            <a class="type-h2 uppercase pr-6 whitespace-no-wrap" href="#videos">{{ trans('navbar.event_nav.videos') }}</a>
         @endif
     </div>
 </div>

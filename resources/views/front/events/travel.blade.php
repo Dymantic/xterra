@@ -1,7 +1,7 @@
 @if($event['has_travel'])
 <div class="pb-20 px-8" id="travel">
     <div class="max-w-4xl mx-auto">
-        <p class="type-h2 uppercase mb-6">Travel</p>
+        <p class="type-h2 uppercase mb-6">{{ trans('events.travel') }}</p>
         @foreach($event['travel_routes'] as $travel_route)
             <div class="max-w-xl mx-auto mb-12">
                 <p class="font-bold mb-4">{{ $travel_route['name'] }}</p>
@@ -14,7 +14,7 @@
 
         @if($event['travel_guide'])
         <div class="mt-12 text-center">
-            <a download="travel_guide" href="{{ $event['travel_guide'] }}" class="blue-btn">Download Travel Guide</a>
+            <a download="travel_guide" href="{{ $event['travel_guide'] }}" class="blue-btn">{{ trans('events.travel_guide') }}</a>
         </div>
         @endif
     </div>

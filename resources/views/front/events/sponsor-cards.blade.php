@@ -15,8 +15,7 @@
                 </div>
 
                 <div class="flex justify-end">
-                    <a target="_blank" href="{{ $sponsor['link'] }}" class="type-b2 text-blue-700 uppercase">Visit
-                        Sponsor &gt;</a>
+                    <a target="_blank" href="{{ $sponsor['link'] }}" class="type-b2 text-blue-700 uppercase">{{ trans('events.visit_sponsor') }} &gt;</a>
                 </div>
             </div>
         </div>

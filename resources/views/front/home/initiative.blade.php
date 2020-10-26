@@ -11,7 +11,7 @@
             <p class="type-b1 mt-8">{{ $campaign['intro'] }}</p>
 
             <div class="mt-10 text-center">
-                <a class="type-b2 uppercase hover:text-red-500" href="{{ $campaign['full_slug'] }}">View Initiative &gt;</a>
+                <a class="type-b2 uppercase hover:text-red-500" href="{{ $campaign['full_slug'] }}">{{ trans('homepage.view_initiative') }} &gt;</a>
             </div>
         </div>
     </div>

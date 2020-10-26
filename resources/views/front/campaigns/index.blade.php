@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="py-20 px-8">
-        <p class="max-w-2xl mx-auto text-center type-h4">A collection of stories and initiatives XTERRA Taiwan has had the pleasure of being a part of.</p>
+        <p class="max-w-2xl mx-auto text-center type-h4">{{ trans('campaigns.index_intro') }}</p>
 
         <div class="max-w-3xl mx-auto py-12">
             @foreach($campaigns as $campaign)
@@ -20,7 +20,7 @@
                         </p>
                         <p class="type-b1 my-6">{{ $campaign['intro'] }}</p>
                         <div class="text-right">
-                            <a href="{{ $campaign['full_slug'] }}" class="type-b2 hover:text-red-700">See Initiative &gt;</a>
+                            <a href="{{ $campaign['full_slug'] }}" class="type-b2 hover:text-red-700">{{ trans('campaigns.see_initiative') }} &gt;</a>
                         </div>
                     </div>
                 </div>

@@ -14,18 +14,19 @@
             <div
                 class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50 pt-6 lg:pt-0">
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="/top-secret/campaigns">Initiatives</a>
+                   href="/top-secret/campaigns">{{ trans('navbar.initiatives') }}</a>
                 <div class="mx-4 event-nav">
                     <a class="font-heading font-medium text-2xl lg:text-lg text-white hover:text-red-500 uppercase flex items-center"
                        href="/top-secret/events">
-                        <span>Events</span>
+                        <span>{{ trans('navbar.events') }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              class="stroke-current h-4 ml-2 text-white hidden lg:block">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
 
                     </a>
-                    <div class="event-subnav lg:absolute lg:top-16 w-screen lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
+                    <div
+                        class="event-subnav lg:absolute lg:top-16 w-screen lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
                         <div class="flex flex-col lg:flex-row justify-center text-white pb-2 mr-4">
                             @foreach($upcomingEvents as $event)
                                 <div
@@ -48,19 +49,19 @@
                             @endforeach
                         </div>
                         <div class="text-center my-12 hidden lg:block">
-                            <a href="/top-secret/events" class="uppercase type-b2 text-white hover:text-red-700">See All Events</a>
+                            <a href="/top-secret/events" class="uppercase type-b2 text-white hover:text-red-700">{{ trans('navbar.all_events') }}</a>
                         </div>
                     </div>
                 </div>
 
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">Shop</a>
+                   href="">{{ trans('navbar.shop') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="/">Blog</a>
+                   href="/">{{ trans('navbar.blog') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">Discover</a>
+                   href="">{{ trans('navbar.discover') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">Friends</a>
+                   href="">{{ trans('navbar.friends') }}</a>
 
             </div>
         @endauth

@@ -1,4 +1,7 @@
 <div class="py-20 max-w-screen overflow-hidden">
+    <div class="max-w-4xl mx-auto">
+        <p class="type-h2 mb-6 uppercase">{{ trans('homepage.cards_heading') }}</p>
+    </div>
     <div class="max-w-5xl mx-auto md:px-8 text-black" data-flickity='{"cellAlign": "left", "contain": "true", "imagesLoaded": "true", "arrowShape": "M33.79 49.99l38.08 38.09h-5.66L28.13 49.99l38.08-38.08h5.66L33.79 49.99z"}'>
         @foreach($page['content_cards'] as $card)
             <div class="w-full md:w-3/10 mx-6">

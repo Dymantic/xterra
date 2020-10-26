@@ -1,7 +1,7 @@
 @if($activity['has_fees'])
 <div class="py-20 px-8" id="fees">
     <div class="max-w-4xl mx-auto">
-        <p class="type-h2 uppercase mb-6">Fees</p>
+        <p class="type-h2 uppercase mb-6">{{ trans('activities.fees') }}</p>
         <div class="max-w-3xl mx-auto">
             <x-table
                 :headings="['Category', 'Fee']"

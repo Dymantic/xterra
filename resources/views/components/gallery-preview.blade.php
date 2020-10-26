@@ -16,6 +16,6 @@
         @endif
     </div>
     <div class="flex justify-center mt-8">
-        <a class="blue-btn" href="{{ $slug }}">View Gallery</a>
+        <a class="blue-btn" href="{{ $slug }}">{{ trans('events.view_gallery') }}</a>
     </div>
 </div>

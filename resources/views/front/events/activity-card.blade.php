@@ -5,12 +5,11 @@
         </a>
     </p>
     @if($activity['distance'])
-        <p><span class="font-bold">Distance: </span>{{ $activity['distance'] }}</p>
+        <p><span class="font-bold">{{ trans('events.distance') }}: </span>{{ $activity['distance'] }}</p>
     @endif
-    <p class=""><span class="font-bold">Date: </span>{{ $activity['date'] }}</p>
-    <p class="max-w-xl"><span class="font-bold">Intro: </span>{{ $activity['intro'] }}</p>
+    <p class=""><span class="font-bold">{{ trans('events.date') }}: </span>{{ $activity['date'] }}</p>
+    <p class="max-w-xl"><span class="font-bold">{{ trans('events.intro') }}: </span>{{ $activity['intro'] }}</p>
     <div class="text-right mt-4">
-        <a class="type-b2 text-blue-700 hover:text-blue-500 uppercase" href="/top-secret/activities/{{ $activity['slug'] }}">View
-            {{ $type === 'race' ? 'Race' : 'Activity' }} &gt;</a>
+        <a class="type-b2 text-blue-700 hover:text-blue-500 uppercase" href="/top-secret/activities/{{ $activity['slug'] }}">{{ $type === 'race' ? trans('events.view_race') : trans('events.view_activity') }} &gt;</a>
     </div>
 </div>

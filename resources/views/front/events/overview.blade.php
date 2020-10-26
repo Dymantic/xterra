@@ -2,7 +2,7 @@
     <div class="max-w-2xl mx-auto">{!! $event['overview'] !!}</div>
 
     <div class="max-w-xl mx-auto mt-12 p-6 rounded shadow-lg bg-gray-200 type-b1">
-        <p class="type-h2 uppercase mb-6 border-b-2 border-red-700">Event Overview</p>
+        <p class="type-h2 uppercase mb-6 border-b-2 border-red-700">{{ trans('events.overview') }}</p>
         <p>
             <span class="font-bold">Name: </span>
             <span>{{ $event['name'] }}</span>

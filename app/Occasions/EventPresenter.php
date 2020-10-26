@@ -86,7 +86,7 @@ class EventPresenter
             'overview'          => $event->overview->in($lang),
             'categories'        => $event->listCategories(),
             'has_activities'    => !!($races->count() || $activities->count()),
-            'race_menu_name'    => $races->count() > 1 ? 'Races' : 'Activities',
+            'race_menu_name'    => $races->count() > 1 ? trans('navbar.event_nav.races') : trans('navbar.event_nav.activities'),
             'races'             => $races,
             'activities'        => $activities,
             'fees'              => $fees,
