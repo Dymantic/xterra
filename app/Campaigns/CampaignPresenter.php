@@ -17,6 +17,7 @@ class CampaignPresenter
         return [
             'id'             => $campaign->id,
             'title'          => $campaign->title->toArray(),
+            'is_public'      => $campaign->is_public,
             'intro'          => $campaign->intro->toArray(),
             'description'    => $campaign->description->toArray(),
             'title_image'    => self::presentImage($titleImage),
@@ -71,7 +72,7 @@ class CampaignPresenter
 
         return [
             'slug'           => $campaign->slug,
-            'full_slug' => '/top-secret/campaigns/' . $campaign->slug,
+            'full_slug'      => '/top-secret/campaigns/' . $campaign->slug,
             'title'          => $campaign->title->in($lang),
             'intro'          => $campaign->intro->in($lang),
             'description'    => $campaign->description->in($lang),

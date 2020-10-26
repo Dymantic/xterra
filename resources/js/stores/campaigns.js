@@ -5,7 +5,9 @@ import {
     createCampaign,
     deleteCampaign,
     fetchCampaigns,
+    publishCampaign,
     removeArticleFromCampaign,
+    retractCampaign,
     updateCampaign,
     updateCampaignEvent,
     updateCampaignNarrative,
@@ -100,6 +102,14 @@ export default {
             return clearCampaignPromoVideo(campaign_id).then(() =>
                 dispatch("refresh")
             );
+        },
+
+        publish({ dispatch }, campaign_id) {
+            return publishCampaign(campaign_id).then(() => dispatch("refresh"));
+        },
+
+        retract({ dispatch }, campaign_id) {
+            return retractCampaign(campaign_id).then(() => dispatch("refresh"));
         },
     },
 };

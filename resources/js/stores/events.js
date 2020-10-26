@@ -44,6 +44,8 @@ import {
     updateEventSponsor,
     deleteEventSponsor,
     setEventSponsorsOrder,
+    publishEvent,
+    retractEvent,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -461,6 +463,14 @@ export default {
             return setEventSponsorsOrder(sponsor_ids).then(() =>
                 dispatch("refreshEvents")
             );
+        },
+
+        publish({ dispatch }, event_id) {
+            return publishEvent(event_id).then(() => dispatch("refreshEvents"));
+        },
+
+        retract({ dispatch }, event_id) {
+            return retractEvent(event_id).then(() => dispatch("refreshEvents"));
         },
     },
 };

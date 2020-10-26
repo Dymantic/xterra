@@ -44,7 +44,7 @@ class ActivityRulesHtmlTest extends TestCase
         $expected = sprintf("%s\n%s\n%s\n%s", $expected_block_one, $expected_block_two, $expected_block_three,
             $expected_block_four);
 
-        $this->assertEquals($expected, $race->rulesHtml('en'));
+        $this->assertEquals(sprintf('<div class="admin-edited">%s</div>', $expected), $race->rulesHtml('en'));
     }
 
     private function getTestRules()

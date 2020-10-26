@@ -180,6 +180,14 @@ function setEventSponsorsOrder(sponsor_ids) {
     return post("/admin/event-sponsors-order", { sponsor_ids });
 }
 
+function publishEvent(event_id) {
+    return post("/admin/published-events", { event_id });
+}
+
+function retractEvent(event_id) {
+    return del(`/admin/published-events/${event_id}`);
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -226,4 +234,6 @@ export {
     updateEventSponsor,
     deleteEventSponsor,
     setEventSponsorsOrder,
+    publishEvent,
+    retractEvent,
 };

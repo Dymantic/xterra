@@ -11,6 +11,7 @@ import CampaignEvent from "../components/Campaigns/CampaignEvent";
 import CampaignPromotion from "../components/Campaigns/CampaignPromotion";
 import CampaignArticles from "../components/Campaigns/CampaignArticles";
 import CampaignGeneralInfo from "../components/Campaigns/CampaignGeneralInfo";
+import CampaignPublishPage from "../components/Campaigns/CampaignPublishPage";
 
 export default [
     { path: "/campaigns", component: CampaignsIndex },
@@ -28,6 +29,7 @@ export default [
             { path: "event", component: CampaignEvent },
             { path: "promotion", component: CampaignPromotion },
             { path: "articles", component: CampaignArticles },
+            { path: "publish", component: CampaignPublishPage },
             { path: "content/edit/:lang", component: CampaignEditor },
         ],
     },

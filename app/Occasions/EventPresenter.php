@@ -18,6 +18,7 @@ class EventPresenter
             'id'                => $event->id,
             'name'              => $event->name,
             'slug'              => $event->slug,
+            'is_public'         => $event->is_public,
             'intro'             => $event->intro ?? ['en' => '', 'zh' => ''],
             'location'          => $event->location,
             'venue_name'        => $event->venue_name,

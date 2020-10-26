@@ -44,6 +44,13 @@ Route::group([
         });
 });
 
+Route::group(['prefix' => 'previews', 'middleware' => ['auth'], 'namespace' => 'Admin'], function() {
+
+    Route::get('events/{event}', 'EventPreviewController@show');
+    Route::get('campaigns/{campaign}', 'CampaignPreviewController@show');
+});
+
+
 
 Route::get('translations/{translation}/comments', 'CommentsController@index');
 Route::post('translations/{translation}/comments', 'CommentsController@store');
@@ -200,6 +207,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('races/{race}/race-info', 'RaceInfoController@update');
 
     Route::post('published-events', 'PublishedEventsController@store');
+    Route::delete('published-events/{event}', 'PublishedEventsController@destroy');
 
     Route::post('events/{event}/youtube-videos', 'EventYoutubeVideosController@store');
 
@@ -279,6 +287,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('campaigns', 'CampaignsController@store');
     Route::post('campaigns/{campaign}', 'CampaignsController@update');
     Route::delete('campaigns/{campaign}', 'CampaignsController@delete');
+
+    Route::post('published-campaigns', 'PublishedCampaignsController@store');
+    Route::delete('published-campaigns/{campaign}', 'PublishedCampaignsController@destroy');
 
     Route::post('campaigns/{campaign}/narrative', 'CampaignNarrativeController@update');
 

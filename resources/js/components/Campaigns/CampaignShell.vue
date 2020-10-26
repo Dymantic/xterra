@@ -70,6 +70,15 @@
                         >Blog Articles</router-link
                     >
                 </div>
+
+                <div class="mb-2">
+                    <router-link
+                        :to="`/campaigns/${$route.params.campaign}/show/publish`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >Publish</router-link
+                    >
+                </div>
             </div>
             <div class="flex-1">
                 <router-view></router-view>

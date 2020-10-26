@@ -154,4 +154,28 @@ class CampaignsTest extends TestCase
 
 
     }
+
+    /**
+     *@test
+     */
+    public function can_publish_a_campaign()
+    {
+        $campaign = factory(Campaign::class)->state('private')->create();
+
+        $campaign->publish();
+
+        $this->assertTrue($campaign->fresh()->is_public);
+    }
+
+    /**
+     *@test
+     */
+    public function can_retract_a_campaign()
+    {
+        $campaign = factory(Campaign::class)->state('public')->create();
+
+        $campaign->retract();
+
+        $this->assertFalse($campaign->fresh()->is_public);
+    }
 }

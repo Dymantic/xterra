@@ -44,6 +44,14 @@ function clearCampaignPromoVideo(campaign_id) {
     return del(`/admin/campaigns/${campaign_id}/promo-video`);
 }
 
+function publishCampaign(campaign_id) {
+    return post("/admin/published-campaigns", { campaign_id });
+}
+
+function retractCampaign(campaign_id) {
+    return del(`/admin/published-campaigns/${campaign_id}`);
+}
+
 export {
     fetchCampaigns,
     createCampaign,
@@ -56,4 +64,6 @@ export {
     removeArticleFromCampaign,
     attachCampaignPromoVideo,
     clearCampaignPromoVideo,
+    publishCampaign,
+    retractCampaign,
 };

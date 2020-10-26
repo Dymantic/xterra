@@ -12,4 +12,9 @@ class PublishedEventsController extends Controller
     {
         Event::findOrFail(request('event_id'))->publish();
     }
+
+    public function destroy(Event $event)
+    {
+        $event->retract();
+    }
 }

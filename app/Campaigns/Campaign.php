@@ -43,6 +43,7 @@ class Campaign extends Model implements HasMedia
         'description' => Translation::class,
         'intro'       => Translation::class,
         'narrative'   => Translation::class,
+        'is_public'   => 'boolean',
     ];
 
     public static function new(CampaignInfo $info): self
@@ -56,6 +57,18 @@ class Campaign extends Model implements HasMedia
     public function scopeLive($query)
     {
         return $query;
+    }
+
+    public function publish()
+    {
+        $this->is_public = true;
+        $this->save();
+    }
+
+    public function retract()
+    {
+        $this->is_public = false;
+        $this->save();
     }
 
     public function updateNarrative($narrative, $lang)
