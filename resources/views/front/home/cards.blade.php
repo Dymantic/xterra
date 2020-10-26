@@ -1,4 +1,4 @@
-<div class="py-20 max-w-screen overflow-hidden">
+<div class="py-20 px-8 max-w-screen overflow-hidden">
     <div class="max-w-4xl mx-auto">
         <p class="type-h2 mb-6 uppercase">{{ trans('homepage.cards_heading') }}</p>
     </div>

@@ -1,5 +1,5 @@
 <div class="py-20 px-8">
-    <div class="max-w-2xl mx-auto">{!! $event['overview'] !!}</div>
+    <div class="max-w-2xl mx-auto admin-edited">{!! $event['overview'] !!}</div>
 
     <div class="max-w-xl mx-auto mt-12 p-6 rounded shadow-lg bg-gray-200 type-b1">
         <p class="type-h2 uppercase mb-6 border-b-2 border-red-700">{{ trans('events.overview') }}</p>

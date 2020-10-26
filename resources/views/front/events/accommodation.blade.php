@@ -22,7 +22,7 @@
                 @if($hotel['link'])
                     <div class="flex items-center">
                         @include('svg.icons.link', ['classes' => 'text-gray-600 h-4 mr-3'])
-                        <a href="{{ $hotel['link'] }}">{{ $hotel['link'] }}</a>
+                        <a class="hover:text-blue-500 underline text-blue-700" href="{{ $hotel['link'] }}">{{ $hotel['link'] }}</a>
                     </div>
                 @endif
 
