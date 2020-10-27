@@ -53,7 +53,7 @@
                             <a
                                 target="_blank"
                                 :href="sponsor.link"
-                                class="text-gray-600 hover:text-blue-500"
+                                class="text-gray-600 hover:text-blue-500 w-80 truncate"
                             >
                                 {{ sponsor.link }}
                             </a>

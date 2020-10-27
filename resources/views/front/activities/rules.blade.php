@@ -1,5 +1,5 @@
 @if($activity['has_rules_and_info'])
-<div class="py-20 px-8" id="rules">
+<div class="pb-20 px-8" id="rules">
     <div class="max-w-4xl mx-auto">
         <p class="type-h2 uppercase mb-6">{{ trans('activities.rules') }}</p>
 
