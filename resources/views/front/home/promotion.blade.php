@@ -1,5 +1,5 @@
 @if($promo)
-<div class="py-20 px-8">
+<div class="py-24 px-8">
     <div class="flex flex-col md:flex-row justify-start">
         <div class="w-full md:w-1/2">
             <img src="{{ $promo['image'] }}" alt="{{ $promo['title'] }}">

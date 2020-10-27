@@ -27,10 +27,11 @@
                     </a>
                     <div
                         class="event-subnav lg:absolute lg:top-16 w-screen lg:bg-tinted-dark left-0 lg:z-50 mb-4 lg:mb-0">
+                        <p class="hidden lg:block pl-12 my-6 text-white type-h2">{{ trans('events.upcoming_events') }}...</p>
                         <div class="flex flex-col lg:flex-row justify-center text-white pb-2 mr-4">
                             @foreach($upcomingEvents as $event)
                                 <div
-                                    class="px-2 mt-4 mr-6 lg:mr-0 @if(!$loop->last) lg:border-r-2 border-red-700 @endif">
+                                    class="text-center px-2 lg:px-12 mt-4 mr-6 lg:mr-0 lg:ml-0 @if(!$loop->last) lg:border-r-2 border-gray-700 @endif">
                                     <p class="font-medium font-heading text-lg lg:text-2xl uppercase border-b-2 border-red-700 pr-6 lg:pl-3">
                                         <a class="hover:text-red-700"
                                            href="{{ $event['full_slug'] }}">{{ $event['name'] }}</a>
@@ -49,7 +50,7 @@
                             @endforeach
                         </div>
                         <div class="text-center my-12 hidden lg:block">
-                            <a href="/top-secret/events" class="uppercase type-b2 text-white hover:text-red-700">{{ trans('navbar.all_events') }}</a>
+                            <a href="/top-secret/events" class="uppercase type-b2 text-white hover:text-red-700">{{ trans('navbar.all_events') }} &gt;</a>
                         </div>
                     </div>
                 </div>
