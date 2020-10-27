@@ -44,6 +44,8 @@ Route::group([
         });
 });
 
+Route::post('newsletter/subscribe', 'NewsletterSignupController@store');
+
 Route::group(['prefix' => 'previews', 'middleware' => ['auth'], 'namespace' => 'Admin'], function() {
 
     Route::get('events/{event}', 'EventPreviewController@show');

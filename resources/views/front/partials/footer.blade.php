@@ -71,17 +71,74 @@
                 </div>
             </div>
             <div class="w-full lg:w-1/3 mb-8 lg:mb-0 flex flex-col items-center">
-                <p class="uppercase type-h2 text-center">{{ trans('footer.subscribe') }}</p>
-                <p class="type-b1 w-64 text-center">{{ trans('footer.subscribe_blurb') }}</p>
-                <div class="flex items-stretch w-9/10 mt-3">
-                    <input type="text" name="subscribe_email" class="focus:outline-none bg-gray-500 rounded-l-lg p-2 flex-1">
-                    <button class="bg-gray-500 text-black type-h2 uppercase rounded-r-lg ml-1 px-6 hover:text-red-700">{{ trans('footer.subscribe_button') }}</button>
+
+                <div x-data="newsletter()" class="w-full h-64">
+
+                    <form @submit.prevent="subscribe"  class="w-9/10 mt-3 max-w-sm" x-show="!complete">
+                        <p class="text-center uppercase type-h2 text-center">{{ trans('footer.subscribe') }}</p>
+                        <p class="text-center type-b1 w-64 mx-auto text-center">{{ trans('footer.subscribe_blurb') }}</p>
+                        <div>
+                            <label class="type-b3" for="">Email Address</label>
+                            <input required x-model="email" type="email" name="subscribe_email" class="block w-full mb-1 bg-grey-700 border border-gray-500 p-1 rounded flex-1" placeholder="Your email address">
+                        </div>
+                        <div>
+                            <label class="type-b3" for="">Your name</label>
+                            <input x-model="name" type="text" name="subscribe_email" class="block w-full bg-grey-700 border border-gray-500 rounded flex-1 p-1" placeholder="Your name">
+                        </div>
+                        <div class="flex justify-center mt-2">
+                            <button :class="{'bg-gray-500 hover:bg-white': !waiting}" class="text-black type-h2 uppercase rounded ml-1 px-6" :disabled="waiting">
+                                <span x-show="!waiting">{{ trans('footer.subscribe_button') }}</span>
+                                <span x-show="waiting" class="text-white">....</span>
+                            </button>
+                        </div>
+                    </form>
+                    <div>
+                        <p class="type-h3 text-center" x-text="message" x-show="complete"></p>
+                    </div>
                 </div>
+
             </div>
         </div>
         <div class="pb-2">
             <p class="text-center type-b3">{{ trans('footer.all_rights') }}</p>
         </div>
-
     </footer>
+
+    <script>
+        function newsletter() {
+            return {
+                name: '',
+                email: '',
+                waiting: false,
+                complete: false,
+                message: '',
+                subscribe() {
+                    this.waiting = true;
+                    const fd = new FormData();
+                    fd.append('name', this.name);
+                    fd.append('email', this.email);
+                    fd.append('_token', '{{ csrf_token() }}');
+                    return fetch("/newsletter/subscribe", {
+                        method: 'POST',
+                        body: fd,
+                    }).then(response => response.json())
+                      .then((data) => this.handleResponse(data))
+                        .catch(() => {
+                            this.waiting = false;
+                            this.message = 'Something went wrong, please refresh and retry.'
+                            this.complete = true;
+                        });
+                },
+                handleResponse(response) {
+                    console.log(this);
+                    this.success = response.subscribed;
+                    this.message = response.message;
+                    this.complete = true;
+                }
+            };
+
+        }
+
+
+    </script>
 @endauth
