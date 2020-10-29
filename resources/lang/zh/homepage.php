@@ -2,7 +2,7 @@
 
 return [
     'watch_video'        => '觀看影片',
-    'initiative_heading' => 'An XTERRA Initiative',
+    'initiative_heading' => 'XTERRA 的使命宣言',
     'view_initiative'    => '暸解更多',
     'next_event'         => '即將舉辦',
     'view_event'         => '暸解更多',

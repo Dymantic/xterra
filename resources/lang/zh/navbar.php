@@ -5,7 +5,7 @@ return [
     'all'         => '所有文章',
     'initiatives' => '理念',
     'events'      => '活動',
-    'all_events'  => 'See all Events',
+    'all_events'  => '瀏覽所有活動',
     'shop'        => '商店',
     'blog'        => '部落格',
     'discover'    => '發現',
@@ -14,12 +14,12 @@ return [
 
     'event_nav' => [
         'races'         => '組別',
-        'activities'    => 'Activities',
+        'activities'    => '活動',
         'schedule'      => '活動日程表',
         'fees'          => '費用',
         'travel'        => '交通資訊',
         'accommodation' => '住宿資訊',
-        'sponsors'      => 'Sponsors',
+        'sponsors'      => '合作夥伴',
         'photos'        => '活動照片',
         'videos'        => '觀賞影片'
     ],
@@ -29,6 +29,6 @@ return [
         'schedule' => '活動日程表',
         'fees'     => '費用',
         'prizes'   => '獎勵辦法',
-        'rules'    => 'Rules & Info',
+        'rules'    => '規則與其他資訊',
     ]
 ];

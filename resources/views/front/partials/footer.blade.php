@@ -33,8 +33,8 @@
             <img src="/images/logos/nav_logo.svg" alt="XTERRA Taiwan logo" class="w-48 mx-auto" width="300px"
                  height="71px">
         </div>
-        <div class="pb-12 px-6 flex flex-col-reverse lg:flex-row">
-            <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+        <div class="pb-12 px-6 flex flex-col lg:flex-row">
+            <div class="w-full lg:w-1/3 mb-8 lg:mb-0 order-3 lg:order-1">
                 <p class="uppercase type-h2 text-center">{{ trans('footer.quick_links') }}</p>
                 <div class="grid grid-cols-2 place-content-center w-64 mx-auto mt-4">
                     <a class="type-b3 hover:text-red-700 mx-auto"
@@ -49,7 +49,7 @@
                        href="{{ localUrl('/top-secret/friends') }}">{{ trans('navbar.friends') }}</a>
                 </div>
             </div>
-            <div class="w-full lg:w-1/3 mb-8 lg:mb-0">
+            <div class="w-full lg:w-1/3 mb-8 lg:mb-0 order-2 lg:order-3">
                 <p class="uppercase type-h2 text-center">{{ trans('footer.follow') }}</p>
                 <div class="flex justify-center my-4">
                     <a target="_blank" href="https://facebook.com/xterrataiwan" rel="noreferrer nofollow"
@@ -70,30 +70,42 @@
                     </a>
                 </div>
             </div>
-            <div class="w-full lg:w-1/3 mb-8 lg:mb-0 flex flex-col items-center">
+            <div class="w-full lg:w-1/3 mb-8 lg:mb-0 flex flex-col items-center order-1 lg:order-2">
 
                 <div x-data="newsletter()" class="w-full h-64">
 
-                    <form @submit.prevent="subscribe"  class="w-9/10 mt-3 max-w-sm" x-show="!complete">
+                    <form @submit.prevent="subscribe"  class="w-9/10 max-w-sm mx-auto" x-show="!complete">
                         <p class="text-center uppercase type-h2 text-center">{{ trans('footer.subscribe') }}</p>
-                        <p class="text-center type-b1 w-64 mx-auto text-center">{{ trans('footer.subscribe_blurb') }}</p>
+                        <p class="text-center type-b3 w-64 mx-auto text-center">{{ trans('footer.subscribe_blurb') }}</p>
                         <div>
-                            <label class="type-b3" for="">Email Address</label>
                             <input required x-model="email" type="email" name="subscribe_email" class="block w-full mb-1 bg-grey-700 border border-gray-500 p-1 rounded flex-1" placeholder="Your email address">
                         </div>
                         <div>
-                            <label class="type-b3" for="">Your name</label>
                             <input x-model="name" type="text" name="subscribe_email" class="block w-full bg-grey-700 border border-gray-500 rounded flex-1 p-1" placeholder="Your name">
                         </div>
                         <div class="flex justify-center mt-2">
-                            <button :class="{'bg-gray-500 hover:bg-white': !waiting}" class="text-black type-h2 uppercase rounded ml-1 px-6" :disabled="waiting">
-                                <span x-show="!waiting">{{ trans('footer.subscribe_button') }}</span>
+                            <button class="type-b2 uppercase rounded p-2" :disabled="waiting || email === ''">
+                                <span x-show="!waiting" :class="{'hover:text-red-700': email !== ''}">{{ trans('footer.subscribe_button') }} &gt;</span>
                                 <span x-show="waiting" class="text-white">....</span>
                             </button>
                         </div>
                     </form>
                     <div>
-                        <p class="type-h3 text-center" x-text="message" x-show="complete"></p>
+                        <div x-transition:enter="transition ease-out duration-300"
+                           x-transition:enter-start="opacity-0 transform scale-50"
+                           x-transition:enter-end="opacity-100 transform scale-100"
+                           x-transition:leave="transition ease-in duration-300"
+                           x-transition:leave-start="opacity-100 transform scale-100"
+                           x-transition:leave-end="opacity-0 transform scale-50" class="type-h3 text-center"  x-show="complete">
+                            <p class="text-center uppercase type-h2 text-center mb-4">Thanks</p>
+                            <p x-text="message"></p>
+                            <div class="text-center py-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current h-8 mx-auto transform rotate-45">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                                </svg>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
