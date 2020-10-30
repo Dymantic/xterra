@@ -1,6 +1,9 @@
 <template>
     <page>
         <page-header title="Content Cards">
+            <router-link to="/content-cards/order" class="btn mr-4"
+                >Set Order</router-link
+            >
             <router-link to="/content-cards/create" class="btn btn-dark"
                 >Make New Card</router-link
             >
