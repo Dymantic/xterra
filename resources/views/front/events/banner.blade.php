@@ -1,6 +1,6 @@
 <div class="event-banner relative min-h-banner-tall md:min-h-banner bg-cover sm:flex flex-col justify-center sm:pl-3 md:pl-32 sm:pr-3">
 
-    <img src="{{ $event['banner_image']['banner'] }}" alt="{{ $event['name'] }}" class="block sm:hidden" style="width: 100vw; height: 100vw; object-fit: cover;">
+    <img src="{{ $event['mobile_banner'] }}" alt="{{ $event['name'] }}" class="block sm:hidden" style="width: 100vw; height: 100vw; object-fit: cover;">
 
     <div class="max-w-xl w-full mx-auto lg:mx-0 bg-tinted-dark p-4 sm:rounded sm:mt-8 md:mt-0 leading-tight">
         <div class="hidden sm:flex items-center justify-end my-2 py-2 border-b-2 border-red-500">

@@ -176,6 +176,12 @@ class Event extends Model implements HasMedia, Cardable
         ];
     }
 
+    public function getMobileBanner($default = self::DEFAULT_IMAGE)
+    {
+        return optional($this->getFirstMedia(self::MOBILE_BANNER))
+                ->getUrl('mobile_banner') ?? $default;
+    }
+
     public function clearBannerImage()
     {
         $this->clearMediaCollection(self::BANNER_IMAGE);
@@ -229,6 +235,11 @@ class Event extends Model implements HasMedia, Cardable
              ->fit(Manipulations::FIT_CROP, 1200, 800)
              ->optimize()
              ->performOnCollections(self::CARD_IMAGE);
+
+        $this->addMediaConversion('mobile_banner')
+             ->fit(Manipulations::FIT_CROP, 1000, 1000)
+             ->optimize()
+             ->performOnCollections(self::MOBILE_BANNER);
     }
 
     public function cardInfo(): ContentCardInfo

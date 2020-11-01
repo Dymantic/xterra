@@ -136,7 +136,8 @@ class EventImagesTest extends TestCase
 
         $this->assertTrue($event->getFirstMedia(Event::MOBILE_BANNER)->is($image));
         $this->assertStringContainsString($upload->hashName(), $image->file_name);
-        $this->assertMediaStorageHas($image);
+        $this->assertTrue($image->fresh()->hasGeneratedConversion('mobile_banner'));
+        $this->assertMediaStorageHas($image, ['mobile_banner']);
 
     }
 

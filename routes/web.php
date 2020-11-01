@@ -221,6 +221,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('events/{event}/banner-image', 'EventBannerImageController@store');
     Route::delete('events/{event}/banner-image', 'EventBannerImageController@destroy');
+    Route::post('events/{event}/mobile-banner', 'EventMobileBannerController@store');
+    Route::delete('events/{event}/mobile-banner', 'EventMobileBannerController@destroy');
 
     Route::post('events/{event}/card-image', 'EventCardImageController@store');
     Route::delete('events/{event}/card-image', 'EventCardImageController@destroy');

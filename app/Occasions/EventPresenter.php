@@ -43,6 +43,7 @@ class EventPresenter
             'videos'            => $event->embeddableVideos->map->toArray()->values()->all(),
             'banner_image'      => $event->getBannerImage(),
             'card_image'        => $event->getCardImage(),
+            'mobile_banner'     => $event->getMobileBanner(),
         ];
     }
 
@@ -70,6 +71,7 @@ class EventPresenter
         $sponsors = $event->sponsors()->orderBy('position')->get()->map->presentForLang($lang);
         $galleries = $event->galleries->map->presentForLang($lang)->values()->all();
         $videos = $event->embeddableVideos->map->presentForLang($lang)->values()->all();
+        $banner_image = $event->getBannerImage(Event::DEFAULT_BANNER);
 
         return [
             'name'              => $event->name[$lang] ?? '',
@@ -106,7 +108,8 @@ class EventPresenter
             'promo_video_id'    => optional($event->promoVideo)->getVideoId(),
             'videos'            => $videos,
             'has_videos'        => count($videos) > 0,
-            'banner_image'      => $event->getBannerImage(Event::DEFAULT_BANNER),
+            'banner_image'      => $banner_image,
+            'mobile_banner'     => $event->getMobileBanner($banner_image['banner']),
             'card_image'        => $event->getCardImage(),
         ];
     }
