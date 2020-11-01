@@ -121,4 +121,58 @@ class EventImagesTest extends TestCase
         Storage::disk('media')->assertMissing(Str::after($old_image->getUrl(), "/media"));
         Storage::disk('media')->assertExists(Str::after($new_image->getUrl(), "/media"));
     }
+
+    /**
+     *@test
+     */
+    public function can_set_the_mobile_banner_image_for_an_event()
+    {
+        $this->fakeMediaStorage();
+
+        $event = factory(Event::class)->create();
+        $upload = UploadedFile::fake()->image('test.png');
+
+        $image = $event->setMobileBanner($upload);
+
+        $this->assertTrue($event->getFirstMedia(Event::MOBILE_BANNER)->is($image));
+        $this->assertStringContainsString($upload->hashName(), $image->file_name);
+        $this->assertMediaStorageHas($image);
+
+    }
+
+    /**
+     *@test
+     */
+    public function can_clear_the_mobile_banner()
+    {
+        $this->fakeMediaStorage();
+
+        $event = factory(Event::class)->create();
+        $image = $event->setMobileBanner(UploadedFile::fake()->image('test.png'));
+
+        $event->refresh();
+
+        $event->clearMobileBanner();
+        $event->refresh();
+
+        $this->assertMediaStorageMissing($image);
+        $this->assertCount(0, $event->getMedia(Event::MOBILE_BANNER));
+    }
+
+    /**
+     *@test
+     */
+    public function uploading_a_second_mobile_banner_clears_the_first()
+    {
+        $this->fakeMediaStorage();
+        $event = factory(Event::class)->create();
+        $old_image = $event->setMobileBanner(UploadedFile::fake()->image('test.png'));
+        $this->assertCount(1, $event->fresh()->getMedia(Event::MOBILE_BANNER));
+
+        $new_image = $event->setMobileBanner(UploadedFile::fake()->image('test2.png'));
+        $this->assertCount(1, $event->fresh()->getMedia(Event::MOBILE_BANNER));
+
+        $this->assertMediaStorageMissing($old_image);
+        $this->assertMediaStorageHas($new_image);
+    }
 }

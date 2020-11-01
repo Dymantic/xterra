@@ -25,6 +25,7 @@ class Event extends Model implements HasMedia, Cardable
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
     const BANNER_IMAGE = 'banner_image';
+    const MOBILE_BANNER = 'mobile_banner_image';
     const CARD_IMAGE = 'card_image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
     const DEFAULT_BANNER = '/images/default_home_banner.jpg';
@@ -178,6 +179,19 @@ class Event extends Model implements HasMedia, Cardable
     public function clearBannerImage()
     {
         $this->clearMediaCollection(self::BANNER_IMAGE);
+    }
+
+    public function setMobileBanner(UploadedFile $upload)
+    {
+        $this->clearMobileBanner();
+        return $this->addMedia($upload)
+            ->usingFileName($upload->hashName())
+            ->toMediaCollection(self::MOBILE_BANNER);
+    }
+
+    public function clearMobileBanner()
+    {
+        $this->clearMediaCollection(self::MOBILE_BANNER);
     }
 
     public function setCardImage(UploadedFile $upload)

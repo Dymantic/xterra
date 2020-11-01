@@ -1,5 +1,19 @@
 @extends('front.base', ['all_scripts' => false, 'flickity' => true, 'has_promo_video' => true])
 
+@section('head')
+    <style>
+        .event-banner {
+            background-image: url({{ $event['banner_image']['banner']}});
+        }
+
+        @media screen and (max-width: 639px) {
+            .event-banner {
+                background-image: none;
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
     @include('front.events.banner')
     @include('front.events.event-nav')
