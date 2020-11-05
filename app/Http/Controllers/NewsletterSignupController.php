@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Newsletter\NewsletterFacade;
 
 class NewsletterSignupController extends Controller
 {
     public function store()
     {
-        sleep(2);
+        NewsletterFacade::subscribe(request('email'), ['FNAME' => request('name', 'anonymous')]);
         return [
-            'subscribed' => true,
+            'subscribed' => !NewsletterFacade::getLastError(),
             'message' => 'Successfully subscribed, thanks!'
         ];
     }

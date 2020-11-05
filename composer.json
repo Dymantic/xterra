@@ -23,6 +23,7 @@
         "mcamara/laravel-localization": "^1.6",
         "spatie/laravel-backup": "^6.7",
         "spatie/laravel-medialibrary": "^8.0",
+        "spatie/laravel-newsletter": "^4.8",
         "spatie/laravel-sitemap": "^5.5"
     },
     "require-dev": {
