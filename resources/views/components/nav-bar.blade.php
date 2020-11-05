@@ -56,7 +56,7 @@
                 </div>
 
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">{{ trans('navbar.shop') }}</a>
+                   href="https://shop.xterrataiwan.com/" target="_blank" rel="nofollow">{{ trans('navbar.shop') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/blog">{{ trans('navbar.blog') }}</a>
 {{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
