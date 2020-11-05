@@ -1,4 +1,4 @@
-<div class="w-full overflow-x-auto">
+<div class="w-full">
     <table class="min-w-full border border-red-700">
         @if($hasHeadings())
             <thead>
@@ -14,11 +14,11 @@
             <tr class="@if($loop->odd) bg-gray-200 @endif">
                 @if($hasColumns())
                     @foreach($columns as $column)
-                        <td class="px-2 py-1 whitespace-no-wrap">{{ $row[$column] }}</td>
+                        <td class="px-2 py-1">{{ $row[$column] }}</td>
                     @endforeach
                 @else
                     @foreach($row as $entry)
-                        <td class="px-2 py-1 whitespace-no-wrap">{{ $entry }}</td>
+                        <td class="px-2 py-1">{{ $entry }}</td>
                     @endforeach
                 @endif
             </tr>
