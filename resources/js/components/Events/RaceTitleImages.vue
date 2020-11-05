@@ -23,6 +23,28 @@
                 </div>
             </div>
 
+            <div class="my-12">
+                <div class="my-8 shadow rounded p-6">
+                    <p class="font-bold">Mobile Banner Image</p>
+                    <p class="my-4 text-gray-600">
+                        This image is used as the banner on mobile or smaller
+                        devices. It should be at least 1000px wide, and 1000px
+                        high. The image will always be presented as a square,
+                        and cropped if necessary.
+                    </p>
+                    <div class="w-120 mx-auto">
+                        <image-upload
+                            :initial-src="race.title_image.mobile"
+                            :upload-path="`/admin/races/${$route.params.race}/mobile-banner`"
+                            :delete-path="`/admin/races/${$route.params.race}/mobile-banner`"
+                            width="80"
+                            height="80"
+                            @uploaded="$store.dispatch('events/refreshEvents')"
+                        ></image-upload>
+                    </div>
+                </div>
+            </div>
+
             <div class="my-8 shadow rounded p-6">
                 <p class="font-bold">Card Image</p>
                 <p class="my-4 text-gray-600">

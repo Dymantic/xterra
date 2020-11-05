@@ -231,6 +231,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('races/{race}/banner-image', 'RaceBannerImageController@store');
     Route::post('races/{race}/card-image', 'RaceCardImageController@store');
 
+    Route::post('races/{race}/mobile-banner', 'RaceMobileBannerController@store');
+    Route::delete('races/{race}/mobile-banner', 'RaceMobileBannerController@destroy');
+
     Route::post('races/{race}/promo-video', 'RacePromoVideoController@store');
 
     Route::get('galleries', 'GalleriesController@index');

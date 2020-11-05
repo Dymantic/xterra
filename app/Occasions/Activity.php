@@ -46,6 +46,7 @@ class Activity extends Model implements HasMedia
     const CARD_IMAGE = 'card_image';
     const DEFAULT_IMAGE = '/images/default_image.svg';
     const DEFAULT_BANNER = '/images/default_home_banner.jpg';
+    const MOBILE_BANNER = 'mobile_banner';
 
     protected $fillable = [
         'name',
@@ -280,6 +281,19 @@ class Activity extends Model implements HasMedia
         $this->clearMediaCollection(self::BANNER_IMAGE);
     }
 
+    public function setMobileBanner(UploadedFile $upload): Media
+    {
+        $this->clearMobileBanner();
+        return $this->addMedia($upload)
+            ->usingFileName($upload->hashName())
+            ->toMediaCollection(self::MOBILE_BANNER);
+    }
+
+    public function clearMobileBanner()
+    {
+        $this->clearMediaCollection(self::MOBILE_BANNER);
+    }
+
     public function setCardImage(UploadedFile $upload): Media
     {
         $this->clearCardImage();
@@ -310,6 +324,11 @@ class Activity extends Model implements HasMedia
              ->fit(Manipulations::FIT_CROP, 2000, 1125)
              ->optimize()
              ->performOnCollections(self::BANNER_IMAGE);
+
+        $this->addMediaConversion('mobile_banner')
+             ->fit(Manipulations::FIT_CROP, 1000, 1000)
+             ->optimize()
+             ->performOnCollections(self::MOBILE_BANNER);
     }
 
 
@@ -317,6 +336,7 @@ class Activity extends Model implements HasMedia
     {
         $card_image = $this->getFirstMedia(self::CARD_IMAGE);
         $banner_image = $this->getFirstMedia(self::BANNER_IMAGE);
+        $mobile_banner = $this->getFirstMedia(self::MOBILE_BANNER);
 
         return [
             'id'                     => $this->id,
@@ -363,6 +383,7 @@ class Activity extends Model implements HasMedia
             'title_image'            => [
                 'card'   => $card_image ? $card_image->getUrl('card') : self::DEFAULT_IMAGE,
                 'banner' => $banner_image ? $banner_image->getUrl('banner') : self::DEFAULT_IMAGE,
+                'mobile' => optional($mobile_banner)->getUrl('mobile_banner') ?? self::DEFAULT_IMAGE,
             ],
             'video'                  => $this->embeddableVideos()->latest()->first(),
         ];

@@ -14,6 +14,7 @@ class ActivityPresenter
         $activity->load('fees', 'courses', 'event');
         $card_image = $activity->getFirstMedia(Activity::CARD_IMAGE);
         $banner_image = $activity->getFirstMedia(Activity::BANNER_IMAGE);
+        $mobile_banner = $activity->getFirstMedia(Activity::MOBILE_BANNER);
         $schedule = Schedule::forEvent($activity)->presentForLang($lang, $activity->date);
         $fees = $activity->fees->map->presentForLang($lang)->values()->all();
         $courses = $activity->courses->map->presentForLang($lang)->values()->all();
@@ -52,12 +53,13 @@ class ActivityPresenter
             'athletes_guide'         => $activity->athletesGuide(),
             'zh_athletes_guide'      => $activity->chineseAthleteGuide(),
             'has_rules_and_info'     => self::checkForHtml($rulesHtml) && self::checkForHtml($infoHtml),
-            'has_rules'     => self::checkForHtml($prizeHtml),
+            'has_rules'              => self::checkForHtml($prizeHtml),
             'race_rules_html'        => $rulesHtml,
             'race_info_html'         => $infoHtml,
             'title_image'            => [
                 'card'   => $card_image ? $card_image->getUrl('card') : Activity::DEFAULT_BANNER,
                 'banner' => $banner_image ? $banner_image->getUrl('banner') : Activity::DEFAULT_BANNER,
+                'mobile' => optional($mobile_banner)->getUrl('mobile_banner') ?? optional($banner_image)->getUrl('banner') ?? Activity::DEFAULT_BANNER,
             ],
             'video'                  => $activity->embeddableVideos()->latest()->first(),
         ];

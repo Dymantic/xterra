@@ -1,6 +1,6 @@
 <div class="event-banner min-h-banner-tall md:min-h-banner bg-cover flex flex-col justify-center sm:pl-3 md:pl-32 sm:pr-3">
 
-    <img src="{{ $activity['title_image']['card'] }}" alt="{{ $activity['name'] }}" class="block sm:hidden" style="width: 100vw; height: 100vw; object-fit: cover;">
+    <img src="{{ $activity['title_image']['mobile'] }}" alt="{{ $activity['name'] }}" class="block sm:hidden" style="width: 100vw; height: 100vw; object-fit: cover;">
 
     <div class="max-w-xl w-full mx-auto lg:mx-0 bg-tinted-dark p-4 sm:rounded leading-tight">
         <div class="hidden sm:flex justify-between items-center my-2 py-2 border-b-2 border-red-500">
