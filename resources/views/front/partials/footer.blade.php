@@ -139,12 +139,11 @@
                       .then((data) => this.handleResponse(data))
                         .catch(() => {
                             this.waiting = false;
-                            this.message = 'Something went wrong, please refresh and retry.'
+                            this.message = "{{ trans('footer.subscribe_error') }}";
                             this.complete = true;
                         });
                 },
                 handleResponse(response) {
-                    console.log(this);
                     this.success = response.subscribed;
                     this.message = response.message;
                     this.complete = true;
