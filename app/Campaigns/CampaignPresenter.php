@@ -49,7 +49,7 @@ class CampaignPresenter
 
         return [
             'title'     => $campaign->title->in($lang),
-            'full_slug' => '/top-secret/campaigns/' . $campaign->slug,
+            'full_slug' => '/campaigns/' . $campaign->slug,
             'intro'     => $campaign->intro->in($lang),
             'image'     => self::presentImage($titleImage)['web'],
         ];
@@ -72,7 +72,7 @@ class CampaignPresenter
 
         return [
             'slug'           => $campaign->slug,
-            'full_slug'      => '/top-secret/campaigns/' . $campaign->slug,
+            'full_slug'      => '/campaigns/' . $campaign->slug,
             'title'          => $campaign->title->in($lang),
             'intro'          => $campaign->intro->in($lang),
             'description'    => $campaign->description->in($lang),

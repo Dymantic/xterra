@@ -1,7 +1,7 @@
 @if($campaign)
 <div class="py-24 px-8">
     <div class="max-w-4xl mx-auto">
-        <p class="type-h2 mb-6 uppercase">An XTERRA Initiative</p>
+        <p class="type-h2 mb-6 uppercase">{{ trans('homepage.initiative_heading') }}</p>
     </div>
     <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between">
         <div class="fw-full md:w-1/2 order-2 md:order-1 mt-8 md:mt-0">

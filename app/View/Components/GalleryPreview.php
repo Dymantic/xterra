@@ -15,7 +15,7 @@ class GalleryPreview extends Component
     public function __construct($gallery)
     {
         $this->gallery = $gallery;
-        $this->slug = "/top-secret/galleries/{$this->gallery['slug']}";
+        $this->slug = "/galleries/{$this->gallery['slug']}";
         $this->title = $gallery['title'];
         $this->images = collect($gallery['images'] ?? []);
     }

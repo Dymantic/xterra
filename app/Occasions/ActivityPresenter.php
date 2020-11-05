@@ -24,7 +24,7 @@ class ActivityPresenter
 
         return [
             'slug'                   => $activity->slug,
-            'full_slug'              => '/top-secret/races/' . $activity->slug,
+            'full_slug'              => '/races/' . $activity->slug,
             'name'                   => $activity->name[$lang] ?? '',
             'category'               => $activity->category,
             'distance'               => $activity->distance[$lang] ?? '',

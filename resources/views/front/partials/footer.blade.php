@@ -38,15 +38,15 @@
                 <p class="uppercase type-h2 text-center">{{ trans('footer.quick_links') }}</p>
                 <div class="grid grid-cols-2 place-content-center w-64 mx-auto mt-4">
                     <a class="type-b3 hover:text-red-700 mx-auto"
-                       href="{{ localUrl('/top-secret/events') }}">{{ trans('navbar.events') }}</a>
+                       href="{{ localUrl('/events') }}">{{ trans('navbar.events') }}</a>
                     <a class="type-b3 hover:text-red-700 mx-auto"
-                       href="{{ localUrl('/top-secret/campaigns') }}">{{ trans('navbar.initiatives') }}</a>
+                       href="{{ localUrl('/campaigns') }}">{{ trans('navbar.initiatives') }}</a>
                     <a class="type-b3 hover:text-red-700 mx-auto" href="{{ localUrl('') }}"
                        target="_blank">{{ trans('navbar.shop') }}</a>
                     <a class="type-b3 hover:text-red-700 mx-auto"
-                       href="{{ localUrl('/top-secret/blog') }}">{{ trans('navbar.blog') }}</a>
+                       href="{{ localUrl('/blog') }}">{{ trans('navbar.blog') }}</a>
                     <a class="type-b3 hover:text-red-700 mx-auto"
-                       href="{{ localUrl('/top-secret/friends') }}">{{ trans('navbar.friends') }}</a>
+                       href="{{ localUrl('/friends') }}">{{ trans('navbar.friends') }}</a>
                 </div>
             </div>
             <div class="w-full lg:w-1/3 mb-8 lg:mb-0 order-2 lg:order-3">

@@ -76,7 +76,7 @@ class EventPresenter
         return [
             'name'              => $event->name[$lang] ?? '',
             'slug'              => $event->slug,
-            'full_slug'         => "/top-secret/events/{$event->slug}/{$slugged_name}",
+            'full_slug'         => "/events/{$event->slug}/{$slugged_name}",
             'intro'             => $event->intro[$lang] ?? '',
             'location'          => $event->location[$lang] ?? '',
             'venue_name'        => $event->venue_name[$lang] ?? '',
@@ -127,7 +127,7 @@ class EventPresenter
         return [
             'name'         => $event->name[$lang] ?? '',
             'slug'         => $event->slug,
-            'full_slug'    => "/top-secret/events/{$event->slug}/{$slugged_name}",
+            'full_slug'    => "/events/{$event->slug}/{$slugged_name}",
             'location'     => $event->location[$lang] ?? '',
             'dates'        => DatePresenter::range($event->start, $event->end),
             'banner_image' => $event->getBannerImage(Event::DEFAULT_BANNER),

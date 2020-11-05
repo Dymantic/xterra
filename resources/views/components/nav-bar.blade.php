@@ -10,14 +10,14 @@
     </div>
 
     <div class="flex items-center">
-        @auth
+{{--        @auth--}}
             <div
                 class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50 pt-6 lg:pt-0">
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="/top-secret/campaigns">{{ trans('navbar.initiatives') }}</a>
+                   href="/campaigns">{{ trans('navbar.initiatives') }}</a>
                 <div class="mx-4 event-nav">
                     <a class="font-heading font-medium text-2xl lg:text-lg text-white hover:text-red-500 uppercase flex items-center"
-                       href="/top-secret/events">
+                       href="/events">
                         <span>{{ trans('navbar.events') }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              class="stroke-current h-4 ml-2 text-white hidden lg:block">
@@ -50,7 +50,7 @@
                             @endforeach
                         </div>
                         <div class="text-center my-12 hidden lg:block">
-                            <a href="/top-secret/events" class="uppercase type-b2 text-white hover:text-red-700">{{ trans('navbar.all_events') }} &gt;</a>
+                            <a href="/events" class="uppercase type-b2 text-white hover:text-red-700">{{ trans('navbar.all_events') }} &gt;</a>
                         </div>
                     </div>
                 </div>
@@ -58,14 +58,14 @@
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="">{{ trans('navbar.shop') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="/">{{ trans('navbar.blog') }}</a>
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">{{ trans('navbar.discover') }}</a>
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="">{{ trans('navbar.friends') }}</a>
+                   href="/blog">{{ trans('navbar.blog') }}</a>
+{{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
+{{--                   href="">{{ trans('navbar.discover') }}</a>--}}
+{{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
+{{--                   href="">{{ trans('navbar.friends') }}</a>--}}
 
             </div>
-        @endauth
+{{--        @endauth--}}
         <div class="flex items-center">
             <a class="mx-4 text-white no-underline hover:text-red-500 type-h3" href="{{ transUrl(Request::path()) }}">
                 {{ trans('navbar.lang') }}
