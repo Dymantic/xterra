@@ -70,7 +70,7 @@
             <a class="mx-4 text-white no-underline hover:text-red-500 type-h3" href="{{ transUrl(Request::path()) }}">
                 {{ trans('navbar.lang') }}
             </a>
-            @auth
+{{--            @auth--}}
                 <button @click="show = !show"
                         class="nav-trigger text-white hover:text-red-500 block lg:hidden focus:outline-none">
                     <svg class="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -79,7 +79,7 @@
                               clip-rule="evenodd"/>
                     </svg>
                 </button>
-            @endauth
+{{--            @endauth--}}
         </div>
 
 
