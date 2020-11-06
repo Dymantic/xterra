@@ -15,6 +15,7 @@ class NewsletterSignupController extends Controller
         return [
             'subscribed' => !$failed,
             'message' => $failed ? trans('footer.subscribe_error') : trans('footer.subscribe_success'),
+            'error' => NewsletterFacade::getLastError(),
         ];
     }
 }
