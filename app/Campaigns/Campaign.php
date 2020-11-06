@@ -56,7 +56,7 @@ class Campaign extends Model implements HasMedia
 
     public function scopeLive($query)
     {
-        return $query;
+        return $query->where('is_public', true);
     }
 
     public function publish()
