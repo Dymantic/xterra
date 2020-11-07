@@ -9,13 +9,23 @@ class NewsletterSignupController extends Controller
 {
     public function store()
     {
-        NewsletterFacade::subscribe(request('email'), ['FNAME' => request('name', 'anonymous')]);
-        $failed = NewsletterFacade::getLastError() !== false;
+
+        request()->validate([
+            'email' => ['required', 'email'],
+        ]);
+
+        $subscribed = NewsletterFacade::subscribeOrUpdate(request('email'), [
+            'FNAME' => request('name', '')
+        ]);
+
+        $message = $subscribed === false ?
+            trans('footer.subscribe_error', ['email' => request('email')]) :
+            trans('footer.subscribe_success');
 
         return [
-            'subscribed' => !$failed,
-            'message' => $failed ? trans('footer.subscribe_error') : trans('footer.subscribe_success'),
-            'error' => NewsletterFacade::getLastError(),
+            'subscribed' => $subscribed !== false,
+            'message'    => $message,
+            'error'      => NewsletterFacade::getLastError(),
         ];
     }
 }
