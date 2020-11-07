@@ -9,6 +9,7 @@ use App\Media\ContentCardInfo;
 use App\Media\EmbeddableVideo;
 use App\Media\Gallery;
 use App\Translation;
+use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Lang;
@@ -63,7 +64,7 @@ class Event extends Model implements HasMedia, Cardable
                 'en' => $name['en'] ?? '',
                 'zh' => $name['zh'] ?? '',
             ],
-            'slug'          => Str::uuid()->toString(),
+            'slug'          => UniqueKey::for('events:slug', 4),
             'location'      => ['en' => '', 'zh' => ''],
             'venue_name'    => ['en' => '', 'zh' => ''],
             'venue_address' => ['en' => '', 'zh' => ''],

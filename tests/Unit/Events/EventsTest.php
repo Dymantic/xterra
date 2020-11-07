@@ -31,7 +31,7 @@ class EventsTest extends TestCase
 
         $this->assertEquals('test name', $event->name['en']);
         $this->assertEquals('zh test name', $event->name['zh']);
-        $this->assertTrue(Str::isUuid($event->slug));
+        $this->assertNotNull($event->slug);
     }
 
     /**

@@ -50,7 +50,7 @@ class Campaign extends Model implements HasMedia
     {
 
         return self::create(
-            array_merge($info->toArray(), ['slug' => UniqueKey::for('campaigns:slug')])
+            array_merge($info->toArray(), ['slug' => UniqueKey::for('campaigns:slug', 4)])
         );
     }
 

@@ -17,14 +17,14 @@ trait HasActivities
     {
         return $this
             ->activities()
-            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug')]));
+            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug', 4)]));
     }
 
     public function addActivity(ActivityInfo $info): Activity
     {
         return $this
             ->activities()
-            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug')]));
+            ->create(array_merge($info->toArray(), ['slug' => UniqueKey::for('activities:slug', 4)]));
     }
 
     public function listCategories(): array

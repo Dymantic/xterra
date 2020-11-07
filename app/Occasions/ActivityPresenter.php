@@ -5,6 +5,7 @@ namespace App\Occasions;
 
 
 use App\DatePresenter;
+use Illuminate\Support\Str;
 
 class ActivityPresenter
 {
@@ -21,10 +22,11 @@ class ActivityPresenter
         $prizeHtml = $activity->prizesHtml($lang);
         $rulesHtml = $activity->rulesHtml($lang);
         $infoHtml = $activity->infoHtml($lang);
+        $fullSlug = sprintf('/races/%s/%s', $activity->slug, Str::slug($activity->name['en'] ?? ''));
 
         return [
             'slug'                   => $activity->slug,
-            'full_slug'              => '/races/' . $activity->slug,
+            'full_slug'              => $fullSlug,
             'name'                   => $activity->name[$lang] ?? '',
             'category'               => $activity->category,
             'distance'               => $activity->distance[$lang] ?? '',

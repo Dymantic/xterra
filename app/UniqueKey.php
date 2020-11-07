@@ -9,12 +9,12 @@ use Illuminate\Support\Str;
 
 class UniqueKey
 {
-    public static function for(string $schema)
+    public static function for(string $schema, int $length = 6)
     {
         $table = Str::before($schema, ":");
         $column = Str::after($schema, ":");
 
-        $key = Str::random(6);
+        $key = Str::lower(Str::random($length));
 
         while(DB::table($table)->where($column, $key)->count($column) > 0) {
             $key = Str::random(6);

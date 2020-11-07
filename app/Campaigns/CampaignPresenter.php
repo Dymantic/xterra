@@ -5,6 +5,7 @@ namespace App\Campaigns;
 
 
 use App\Occasions\EventPresenter;
+use Illuminate\Support\Str;
 
 class CampaignPresenter
 {
@@ -49,7 +50,7 @@ class CampaignPresenter
 
         return [
             'title'     => $campaign->title->in($lang),
-            'full_slug' => '/campaigns/' . $campaign->slug,
+            'full_slug' => sprintf('/campaigns/%s/%s', $campaign->slug, Str::slug($campaign->title->in('en'))),
             'intro'     => $campaign->intro->in($lang),
             'image'     => self::presentImage($titleImage)['web'],
         ];
@@ -72,7 +73,7 @@ class CampaignPresenter
 
         return [
             'slug'           => $campaign->slug,
-            'full_slug'      => '/campaigns/' . $campaign->slug,
+            'full_slug'      => sprintf('/campaigns/%s/%s', $campaign->slug, Str::slug($campaign->title->in('en'))),
             'title'          => $campaign->title->in($lang),
             'intro'          => $campaign->intro->in($lang),
             'description'    => $campaign->description->in($lang),

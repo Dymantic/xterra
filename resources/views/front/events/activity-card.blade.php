@@ -10,6 +10,6 @@
     <p class=""><span class="font-bold">{{ trans('events.date') }}: </span>{{ $activity['date'] }}</p>
     <p class="max-w-xl"><span class="font-bold">{{ trans('events.intro') }}: </span>{{ $activity['intro'] }}</p>
     <div class="text-right mt-4">
-        <a class="type-b2 text-blue-700 hover:text-blue-500 uppercase" href="/activities/{{ $activity['slug'] }}">{{ $type === 'race' ? trans('events.view_race') : trans('events.view_activity') }} &gt;</a>
+        <a class="type-b2 text-blue-700 hover:text-blue-500 uppercase" href="{{ $activity['full_slug'] }}">{{ $type === 'race' ? trans('events.view_race') : trans('events.view_activity') }} &gt;</a>
     </div>
 </div>
