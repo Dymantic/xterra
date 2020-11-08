@@ -2,6 +2,7 @@
 
 namespace App\Pages;
 
+use App\JsonToBladeParser;
 use App\Translation;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
@@ -51,9 +52,19 @@ class Page extends Model implements HasMedia
         return $this->title->in('en');
     }
 
-    public static function new(PageInfo $info): self
+    public function scopeLive($query)
     {
-        return self::create($info->toArray());
+        return $query->where('is_public', true);
+    }
+
+    public static function new(PageMetaInfo $info): self
+    {
+        return self::create(
+            array_merge(
+                $info->toArray(),
+                ['content' => new Translation(['en' => '', 'zh' => ''])]
+            )
+        );
     }
 
     public function publish()
@@ -77,6 +88,19 @@ class Page extends Model implements HasMedia
         $this->save();
     }
 
+    public function setContent($contents, $lang)
+    {
+        $this->content = new Translation(array_merge($this->content->toArray(), [$lang => $contents]));
+        $this->save();
+    }
+
+    public function contentHtml($lang)
+    {
+        $parser = new JsonToBladeParser('editorjs.pages');
+
+        return $parser->html($this->content->translations[$lang]);
+    }
+
     public function saveImage(UploadedFile  $upload): Media
     {
         return $this->addMedia($upload)
@@ -90,5 +114,10 @@ class Page extends Model implements HasMedia
             ->fit(Manipulations::FIT_CONTAIN, 1500, 2000)
             ->optimize()
             ->performOnCollections(self::CONTENT_IMAGES);
+    }
+
+    public function presentForAdmin()
+    {
+        return PagePresenter::forAdmin($this);
     }
 }

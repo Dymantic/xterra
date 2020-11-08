@@ -25,6 +25,11 @@
                         >Home Page
                     </router-link>
                     <router-link
+                        to="/pages"
+                        class="text-black no-underline hover:text-indigo-500 pb-3 block"
+                        >Discover Pages
+                    </router-link>
+                    <router-link
                         to="/content-cards"
                         class="text-black no-underline hover:text-indigo-500 pb-3 block"
                         >Content Cards

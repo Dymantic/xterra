@@ -21,7 +21,6 @@ class CreatePageTest extends TestCase
             'title'       => ['en' => 'test title', 'zh' => 'zh test title'],
             'description' => ['en' => 'test description', 'zh' => 'zh test description'],
             'blurb'       => ['en' => 'test blurb', 'zh' => 'zh test blurb'],
-            'content'     => ['en' => 'test content', 'zh' => 'zh test content'],
             'menu_name'   => ['en' => 'test menu name', 'zh' => 'zh test menu name'],
         ]);
 
@@ -31,7 +30,6 @@ class CreatePageTest extends TestCase
             'title'       => json_encode(['en' => 'test title', 'zh' => 'zh test title']),
             'description' => json_encode(['en' => 'test description', 'zh' => 'zh test description']),
             'blurb'       => json_encode(['en' => 'test blurb', 'zh' => 'zh test blurb']),
-            'content'     => json_encode(['en' => 'test content', 'zh' => 'zh test content']),
             'menu_name'   => json_encode(['en' => 'test menu name', 'zh' => 'zh test menu name']),
         ]);
     }
@@ -64,13 +62,6 @@ class CreatePageTest extends TestCase
         $this->assertFieldIsInvalid(['blurb' => ['not-a-translation']]);
     }
 
-    /**
-     *@test
-     */
-    public function the_content_must_be_a_translation()
-    {
-        $this->assertFieldIsInvalid(['content' => ['not-a-translation']]);
-    }
 
     /**
      *@test

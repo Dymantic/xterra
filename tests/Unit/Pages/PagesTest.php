@@ -3,7 +3,8 @@
 namespace Tests\Unit\Pages;
 
 use App\Pages\Page;
-use App\Pages\PageInfo;
+use App\Pages\PageMetaInfo;
+use App\Translation;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 use Tests\TestCase;
@@ -17,11 +18,10 @@ class PagesTest extends TestCase
      */
     public function make_a_new_page()
     {
-        $page_info = new PageInfo([
+        $page_info = new PageMetaInfo([
             'title' => ['en' => 'test title', 'zh' => 'zh test title'],
             'description' => ['en' => 'test description', 'zh' => 'zh test description'],
             'blurb' => ['en' => 'test blurb', 'zh' => 'zh test blurb'],
-            'content'     => ['en' => 'test content', 'zh' => 'zh test content'],
             'menu_name' => ['en' => 'test menu name', 'zh' => 'zh test menu name'],
         ]);
 
@@ -34,8 +34,6 @@ class PagesTest extends TestCase
         $this->assertEquals('zh test description', $page->description->in('zh'));
         $this->assertEquals('test blurb', $page->blurb->in('en'));
         $this->assertEquals('zh test blurb', $page->blurb->in('zh'));
-        $this->assertEquals('test content', $page->content->in('en'));
-        $this->assertEquals('zh test content', $page->content->in('zh'));
         $this->assertEquals('test menu name', $page->menu_name->in('en'));
         $this->assertEquals('zh test menu name', $page->menu_name->in('zh'));
     }
@@ -45,7 +43,7 @@ class PagesTest extends TestCase
      */
     public function making_new_page_generates_slug_from_en_title()
     {
-        $page_info = new PageInfo([
+        $page_info = new PageMetaInfo([
             'title' => ['en' => 'test title', 'zh' => 'zh test title'],
             'description' => ['en' => 'test description', 'zh' => 'zh test description'],
             'blurb' => ['en' => 'test blurb', 'zh' => 'zh test blurb'],
@@ -65,7 +63,7 @@ class PagesTest extends TestCase
     {
         $page = factory(Page::class)->state('draft')->create();
 
-        $page_info = new PageInfo([
+        $page_info = new PageMetaInfo([
             'title' => ['en' => 'new title', 'zh' => 'zh new title'],
             'description' => ['en' => 'new description', 'zh' => 'zh new description'],
             'blurb' => ['en' => 'new blurb', 'zh' => 'zh new blurb'],
@@ -88,7 +86,7 @@ class PagesTest extends TestCase
         ]);
         $original_slug = $page->slug;
 
-        $page_info = new PageInfo([
+        $page_info = new PageMetaInfo([
             'title' => ['en' => 'new title', 'zh' => 'zh new title'],
             'description' => ['en' => 'new description', 'zh' => 'zh new description'],
             'blurb' => ['en' => 'new blurb', 'zh' => 'zh new blurb'],
@@ -140,5 +138,25 @@ class PagesTest extends TestCase
         $page->retract();
 
         $this->assertFalse($page->fresh()->is_public);
+    }
+
+    /**
+     *@test
+     */
+    public function can_set_the_contents_for_a_page_in_a_lang()
+    {
+        $page = factory(Page::class)->create([
+            'content' => new Translation(['en' => "old content", 'zh' => "zh old content"])
+        ]);
+
+        $page->setContent('new en contents', 'en');
+
+        $this->assertSame("new en contents", $page->fresh()->content->in('en'));
+        $this->assertSame("zh old content", $page->fresh()->content->in('zh'));
+
+        $page->setContent('new zh contents', 'zh');
+
+        $this->assertSame("new en contents", $page->fresh()->content->in('en'));
+        $this->assertSame("new zh contents", $page->fresh()->content->in('zh'));
     }
 }

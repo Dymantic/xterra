@@ -67,15 +67,21 @@ body.nav-open {
     z-index: -1;
 }
 @media screen and (min-width: 1024px) {
-    .event-subnav {
+    .event-subnav, .discover-subnav {
         transition: .3s;
         perspective: 1000px;
         transform-origin: top left;
         transform: rotateX(90deg);
+        display: none;
     }
 
-    .event-nav:hover .event-subnav{
+    .event-nav:hover .event-subnav, .discover-nav:hover .discover-subnav{
         transform: rotateX(0deg);
+        display: block;
+    }
+
+    .discover-nav:hover .event-subnav {
+        pointer-events: none;
     }
 }
 

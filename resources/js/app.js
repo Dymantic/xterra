@@ -30,6 +30,7 @@ import campaignRoutes from "./routes/campaigns";
 import cardRoutes from "./routes/cards";
 import homePageRoutes from "./routes/homepage";
 import instagramRoutes from "./routes/instagram";
+import pagesRoutes from "./routes/pages";
 
 const routes = [
     ...userRoutes,
@@ -44,6 +45,7 @@ const routes = [
     ...cardRoutes,
     ...homePageRoutes,
     ...instagramRoutes,
+    ...pagesRoutes,
 ];
 
 const router = new VueRouter({
@@ -70,6 +72,7 @@ import campaignsModule from "./stores/campaigns";
 import cardsModule from "./stores/cards";
 import homepageModule from "./stores/homepage";
 import instagramModule from "./stores/instagram";
+import pagesModule from "./stores/pages";
 
 const store = new Vuex.Store({
     modules: {
@@ -85,6 +88,7 @@ const store = new Vuex.Store({
         cards: cardsModule,
         homepage: homepageModule,
         instagram: instagramModule,
+        pages: pagesModule,
     },
 });
 

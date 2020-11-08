@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Pages\PageInfo;
+use App\Pages\PageMetaInfo;
 use App\Rules\Translation;
 use App\Rules\TranslationRequired;
 use Illuminate\Foundation\Http\FormRequest;
@@ -27,13 +27,12 @@ class PageRequest extends FormRequest
         ];
     }
 
-    public function pageInfo(): PageInfo
+    public function pageInfo(): PageMetaInfo
     {
-        return new PageInfo($this->all([
+        return new PageMetaInfo($this->all([
             'title',
             'description',
             'blurb',
-            'content',
             'menu_name',
         ]));
     }

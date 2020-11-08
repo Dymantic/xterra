@@ -10,12 +10,11 @@
     </div>
 
     <div class="flex items-center">
-{{--        @auth--}}
             <div
                 class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50 pt-6 lg:pt-0">
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/campaigns">{{ trans('navbar.initiatives') }}</a>
-                <div class="mx-4 event-nav">
+                <div class="mx-4 event-nav lg:h-16 lg:flex lg:items-center">
                     <a class="font-heading font-medium text-2xl lg:text-lg text-white hover:text-red-500 uppercase flex items-center"
                        href="/events">
                         <span>{{ trans('navbar.events') }}</span>
@@ -59,13 +58,27 @@
                    href="https://shop.xterrataiwan.com/" target="_blank" rel="nofollow">{{ trans('navbar.shop') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/blog">{{ trans('navbar.blog') }}</a>
-{{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
-{{--                   href="">{{ trans('navbar.discover') }}</a>--}}
+                @auth
+                    @if($discoverPages->count())
+                    <div class="discover-nav lg:flex lg:items-center mx-4 lg:h-16">
+                        <a class="hidden lg:inline font-heading font-medium text-2xl lg:text-lg  text-white hover:text-red-500 uppercase"
+                           href="">{{ trans('navbar.discover') }}</a>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                             class="stroke-current h-4 ml-2 text-white hidden lg:block">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                        <div class="discover-subnav lg:absolute lg:top-16 bg-grey-700 lg:px-6 lg:pb-4 text-white">
+                            @foreach($discoverPages as $page)
+                                <a class="block my-2 font-heading font-medium text-2xl lg:text-lg lg:mx-4 text-white hover:text-red-500 uppercase" href="{{ $page['full_slug'] }}">{{ $page['menu_name'] }}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                @endauth
 {{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
 {{--                   href="">{{ trans('navbar.friends') }}</a>--}}
 
             </div>
-{{--        @endauth--}}
         <div class="flex items-center">
             <a class="mx-4 text-white no-underline hover:text-red-500 type-h3" href="{{ transUrl(Request::path()) }}">
                 {{ trans('navbar.lang') }}

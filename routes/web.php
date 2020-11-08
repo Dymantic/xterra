@@ -39,6 +39,8 @@ Route::group([
 
         Route::get('galleries/{gallery:slug}', 'GalleriesController@show');
 
+//        Route::get('discover/{page:slug}', 'DiscoverPagesController@show');
+
 
 
 //        Route::group(['middleware' => 'auth', 'prefix' => 'top-secret'], function() {
@@ -52,6 +54,8 @@ Route::group(['prefix' => 'previews', 'middleware' => ['auth'], 'namespace' => '
 
     Route::get('events/{event}', 'EventPreviewController@show');
     Route::get('campaigns/{campaign}', 'CampaignPreviewController@show');
+
+    Route::get('discover/pages/{page}', 'PreviewPagesController@show');
 });
 
 
@@ -283,9 +287,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('promotions/{promotion}/image', 'PromotionImageController@store');
     Route::delete('promotions/{promotion}/image', 'PromotionImageController@destroy');
 
+    Route::get('pages', 'PagesController@index');
     Route::post('pages', 'PagesController@store');
     Route::post('pages/{page}', 'PagesController@update');
     Route::delete('pages/{page}', 'PagesController@delete');
+
+    Route::post('pages/{page}/content', 'PageContentController@update');
 
     Route::post('pages/{page}/images', 'PageImagesController@store');
 

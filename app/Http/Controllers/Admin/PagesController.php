@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
+
+    public function index()
+    {
+        return Page::latest()->get()->map->presentForAdmin()->values()->all();
+    }
+
     public function store(PageRequest $request)
     {
         Page::new($request->pageInfo());
