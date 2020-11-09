@@ -1,6 +1,13 @@
 @extends('front.base', ['flickity' => true, 'all_scripts' => false, 'has_promo_video' => true])
 
+@section('title'){{ $activity['name'] }}@endsection
+
 @section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => $activity['name'],
+        'ogDescription' => $activity['intro']
+    ])
+    <link rel="canonical" href="{{ $activity['canonical_slug'] }}">
     <style>
         .event-banner {
             background-image: url({{ $activity['title_image']['banner']}});

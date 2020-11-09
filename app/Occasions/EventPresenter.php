@@ -77,6 +77,7 @@ class EventPresenter
             'name'              => $event->name[$lang] ?? '',
             'slug'              => $event->slug,
             'full_slug'         => "/events/{$event->slug}/{$slugged_name}",
+            'canonical_slug'    => localUrl("/events/{$event->slug}"),
             'intro'             => $event->intro[$lang] ?? '',
             'location'          => $event->location[$lang] ?? '',
             'venue_name'        => $event->venue_name[$lang] ?? '',

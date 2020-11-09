@@ -1,5 +1,14 @@
 @extends('front.base', ['all_scripts' => false, 'has_promo_video' => true, 'flickity' => true])
 
+@section('title'){{ $campaign['title'] }}@endsection
+
+@section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => $campaign['title'],
+        'ogDescription' => $campaign['description']
+    ])
+    <link rel="canonical" href="{{ $campaign['canonical_slug'] }}">
+@endsection
 
 @section('content')
     @include('front.campaigns.banner')

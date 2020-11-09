@@ -74,6 +74,7 @@ class CampaignPresenter
         return [
             'slug'           => $campaign->slug,
             'full_slug'      => sprintf('/initiatives/%s/%s', $campaign->slug, Str::slug($campaign->title->in('en'))),
+            'canonical_slug' => localUrl("/initiatives/{$campaign->slug}"),
             'title'          => $campaign->title->in($lang),
             'intro'          => $campaign->intro->in($lang),
             'description'    => $campaign->description->in($lang),

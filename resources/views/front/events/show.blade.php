@@ -3,6 +3,11 @@
 @section('title'){{ $event['name'] }}@endsection
 
 @section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => $event['name'],
+        'ogDescription' => $event['intro']
+    ])
+    <link rel="canonical" href="{{ $event['canonical_slug'] }}">
     <style>
         .event-banner {
             background-image: url({{ $event['banner_image']['banner']}});
