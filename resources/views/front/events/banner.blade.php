@@ -18,9 +18,9 @@
             @include('svg.icons.calendar', ['classes' => 'h-5 sm:h-6 text-red-500 mr-2'])
             <p class="font-heading font-medium text-lg sm:text-4xl uppercase sm:capitalize text-white">{{ $event['dates'] }}</p>
         </div>
-        <div class="text-right mt-4">
+        <div class="mt-6 mb-5 sm:mb-2">
             @if($event['registration_link'])
-            <a href="{{ $event['registration_link'] }}" target="_blank" class="type-b3 sm:type-b2 text-white hover:text-red-700 sm:uppercase">{{ trans('events.register_now') }} &gt;</a>
+            <a href="{{ $event['registration_link'] }}" target="_blank" class="red-btn">{{ trans('events.register_now') }} &gt;</a>
             @endif
         </div>
     </div>

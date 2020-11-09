@@ -1,6 +1,12 @@
 <?php
 
 return [
+
+    'meta' => [
+        'title' => 'XTERRA Taiwan Events',
+        'description' => 'XTERRA Taiwan hosts events which connect your soul to nature, teach respect for the environment and challenge you in beautiful locations.'
+    ],
+
     'index_intro'     => 'These are our upcoming events to look out for.',
     'upcoming_events' => 'Upcoming Events',
     'see_event'       => 'View Event',

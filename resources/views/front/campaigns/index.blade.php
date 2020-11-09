@@ -1,5 +1,14 @@
 @extends('front.base')
 
+@section('title'){{ trans('campaigns.meta.title') }}@endsection
+
+@section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => trans('campaigns.meta.title'),
+        'ogDescription' => trans('campaigns.meta.description')
+    ])
+@endsection
+
 @section('content')
     <div class="py-20 px-8">
         <p class="max-w-2xl mx-auto text-center type-h4">{{ trans('campaigns.index_intro') }}</p>

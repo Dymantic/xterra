@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="text-center pb-20">
-        <a class="type-b2 hover:text-red-700" href="{{ localUrl('/campaigns') }}">{{ trans('campaigns.all_initiatives') }} &gt;</a>
+        <a class="type-b2 hover:text-red-700" href="{{ localUrl('/initiatives') }}">{{ trans('campaigns.all_initiatives') }} &gt;</a>
     </div>
 
 @endsection

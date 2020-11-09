@@ -29,7 +29,9 @@ Route::group([
         Route::get('/', 'HomePageController@show');
 
         Route::get('campaigns', 'CampaignsController@index');
+        Route::get('initiatives', 'CampaignsController@index');
         Route::get('campaigns/{campaign:slug}/{name?}', 'CampaignsController@show');
+        Route::get('initiatives/{campaign:slug}/{name?}', 'CampaignsController@show');
 
         Route::get('events', 'EventsController@index');
         Route::get('events/{event:slug}/{name?}', 'EventsController@show');

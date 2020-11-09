@@ -41,7 +41,7 @@
                             <a href="{{ localUrl($event['full_slug']) }}" class="hover:text-red-700">
                                 <p class="type-h2 uppercase">{{ $event['name'] }}</p>
                             </a>
-                            <div class="flex justify-end">
+                            <div class="flex justify-end divide-x divide-gray-300">
                                 @foreach($event['categories'] as $category)
                                     @include('svg.event-categories.' . $category, ['classes' => 'h-4 md:h-8 ml-1 text-red-700'])
                                 @endforeach

@@ -1,5 +1,7 @@
 @extends('front.base', ['all_scripts' => false, 'flickity' => true, 'has_promo_video' => true])
 
+@section('title'){{ $event['name'] }}@endsection
+
 @section('head')
     <style>
         .event-banner {

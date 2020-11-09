@@ -1,5 +1,13 @@
 @extends('front.base', ['all_scripts' => false, 'has_promo_video' => true, 'flickity' => true])
 
+@section('title'){{ trans('homepage.meta.title') }}@endsection
+
+@section('head')
+    @include('front.partials.og-meta', [
+        'ogTitle' => trans('homepage.meta.title'),
+        'ogDescription' => trans('homepage.meta.description')
+    ])
+@endsection
 
 
 @section('content')

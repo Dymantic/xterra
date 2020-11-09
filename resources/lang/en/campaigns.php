@@ -1,6 +1,12 @@
 <?php
 
 return [
+
+    'meta' => [
+        'title' => 'XTERRA Taiwan Initiatives',
+        'description' => 'XTERRA Taiwan is dedicated to sustainable lifestyles, protecting the environment and helping our communities.'
+    ],
+
     'watch_video'      => 'Watch Video',
     'promo_heading'     => 'Initiative Collectibles',
     'related_event'    => 'Related Event',

@@ -40,7 +40,7 @@
                 <a class="type-b3 hover:text-red-700 mx-auto"
                    href="{{ localUrl('/events') }}">{{ trans('navbar.events') }}</a>
                 <a class="type-b3 hover:text-red-700 mx-auto"
-                   href="{{ localUrl('/campaigns') }}">{{ trans('navbar.initiatives') }}</a>
+                   href="{{ localUrl('/initiatives') }}">{{ trans('navbar.initiatives') }}</a>
                 <a class="type-b3 hover:text-red-700 mx-auto" href="https://shop.xterrataiwan.com/"
                    target="_blank">{{ trans('navbar.shop') }}</a>
                 <a class="type-b3 hover:text-red-700 mx-auto"

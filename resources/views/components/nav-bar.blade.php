@@ -13,7 +13,7 @@
             <div
                 class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50 pt-6 lg:pt-0">
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
-                   href="/campaigns">{{ trans('navbar.initiatives') }}</a>
+                   href="/initiatives">{{ trans('navbar.initiatives') }}</a>
                 <div class="mx-4 event-nav lg:h-16 lg:flex lg:items-center">
                     <a class="font-heading font-medium text-2xl lg:text-lg text-white hover:text-red-500 uppercase flex items-center"
                        href="/events">
