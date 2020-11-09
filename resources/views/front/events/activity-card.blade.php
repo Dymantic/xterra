@@ -1,6 +1,6 @@
 <div class="max-w-2xl mx-auto p-6 rounded shadow-small mb-12">
     <p class="uppercase type-h2 text-blue-700">
-        <a class="hover:text-blue-500" href="/activities/{{ $activity['full_slug'] }}">
+        <a class="hover:text-blue-500" href="{{ $activity['full_slug'] }}">
             {{ $activity['name'] }}
         </a>
     </p>
