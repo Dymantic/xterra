@@ -18,7 +18,7 @@ class CampaignNarrativeImagesController extends Controller
 
         return [
             'success' => 1,
-            'file' => ['url' => $image->getUrl()],
+            'file' => ['url' => $image->getUrl('web')],
         ];
     }
 }
