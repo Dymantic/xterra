@@ -18,13 +18,14 @@ class NavBar extends Component
         $this->upcomingEvents = Event::with('activities')
                                      ->live()
                                      ->upcoming()
+                                     ->orderBy('start')
                                      ->limit(3)
                                      ->get()
                                      ->map(fn($event) => EventPresenter::forPublic($event, app()->getLocale()));
 
         $this->discoverPages = Page::live()
-                             ->get()
-                             ->map(fn (Page $page) => PagePresenter::forPublic($page, app()->getLocale()));
+                                   ->get()
+                                   ->map(fn(Page $page) => PagePresenter::forPublic($page, app()->getLocale()));
     }
 
 
