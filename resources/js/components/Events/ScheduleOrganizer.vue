@@ -167,12 +167,14 @@ export default {
         },
 
         save() {
-            const schedule = this.schedule.map((day) => {
-                return {
-                    day: day.day,
-                    entries: day.entries.toArray(),
-                };
-            });
+            const schedule = this.schedule
+                .map((day) => {
+                    return {
+                        day: day.day,
+                        entries: day.entries.toArray(),
+                    };
+                })
+                .filter((day) => day.entries.length);
             this.$emit("save", schedule);
         },
 

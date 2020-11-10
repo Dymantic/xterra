@@ -5,7 +5,9 @@
         @save="saveContent"
         :saving="waiting"
         :initial-data="page.content_raw[$route.params.lang]"
-        editor-title="English Content"
+        :editor-title="
+            $route.params.lang === 'zh' ? 'Chinese Content' : 'English Content'
+        "
     ></fancy-editor>
 </template>
 
