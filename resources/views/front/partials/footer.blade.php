@@ -80,12 +80,12 @@
                     <div>
                         <input required x-model="email" type="email" name="subscribe_email"
                                class="block w-full mb-1 bg-grey-700 border border-gray-500 p-1 rounded flex-1"
-                               placeholder="Your email address">
+                               placeholder="{{ trans('footer.email_placeholder') }}">
                     </div>
                     <div>
                         <input x-model="name" type="text" name="subscribe_email"
                                class="block w-full bg-grey-700 border border-gray-500 rounded flex-1 p-1"
-                               placeholder="Your name">
+                               placeholder="{{trans('footer.name_placeholder')}}">
                     </div>
                     <div class="flex justify-center mt-2">
                         <button class="type-b2 uppercase rounded p-2" :disabled="waiting || email === ''">
