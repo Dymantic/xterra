@@ -10,17 +10,22 @@ class RedirectsBlog
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure $next
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        $path = str_replace(['en/', 'zh/'], '', $request->path());
-        if(Str::contains($request->getHost(), 'blog.')) {
-            $redirect = Str::startsWith($path, 'blog/') ? $path : 'blog/' . $path;
-            return redirect(sprintf("%s/%s", config('app.url'), $redirect));
+        $going_home = Str::of($request->path())
+                   ->trim('/')
+                   ->match('/^[a-zA-Z]{0,2}$/')
+                   ->isNotEmpty();
+
+
+        if (Str::contains($request->getHost(), 'blog.') && $going_home) {
+            return redirect(sprintf("%s/%s", config('app.url'), 'blog'));
         }
+
         return $next($request);
     }
 }
