@@ -5,13 +5,17 @@
     <div class="grid grid-cols-3 md:grid-cols-4 gap-1 place-content-center">
         @foreach($firstImages() as $image)
             <div class="relative" style="padding-bottom: 100%;">
-                <img src="{{ $image['thumb'] }}" class="w-full h-full object-cover inset-0 absolute" alt="">
+                <a href="{{ $slug }}">
+                    <img src="{{ $image['thumb'] }}" class="w-full h-full object-cover inset-0 absolute" alt="">
+                </a>
             </div>
         @endforeach
         @if($hasExtra())
                 <div class="flex items-center justify-center bg-gray-100" style="">
-                    <p class="text-gray-600 type-h2 pb-1 mr-1">+ {{ $extraCount() }}</p>
-                    @include('svg.icons.camera', ['classes' => 'h-6 text-gray-600'])
+                    <a href="{{ $slug }}" class="flex justify-center items-center">
+                        <p class="text-gray-600 type-h2 pb-1 mr-1">+ {{ $extraCount() }}</p>
+                        @include('svg.icons.camera', ['classes' => 'h-6 text-gray-600'])
+                    </a>
                 </div>
         @endif
     </div>

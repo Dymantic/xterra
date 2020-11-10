@@ -116,6 +116,7 @@
 @if($all_scripts ?? true)
 <script src="{{ mix("js/front.js") }}"></script>
 @endif
+<script src="{{ mix("js/front_basic.js") }}"></script>
 <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', '{{ config('services.google.analytics_id') }}', 'auto'); ga('send', 'pageview')
