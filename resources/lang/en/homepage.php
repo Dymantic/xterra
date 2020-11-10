@@ -3,7 +3,7 @@
 return [
 
     'meta' => [
-        'title' => 'XTERRA Taiwan | We PLay & We Protect',
+        'title' => 'XTERRA Taiwan | We Play & We Protect',
         'description' => 'XTERRA Taiwan is driven by sustainability, protecting our environment, helping our communities and living an active, healthy, outdoor lifestyle.'
     ],
 
