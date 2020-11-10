@@ -13,7 +13,7 @@
             @foreach($data as $row)
                 <tr class="@if($loop->odd) bg-gray-200 @endif">
                     @foreach($row as $cell)
-                        <td class="py-1 px-2">{{ $cell }}</td>
+                        <td class="py-1 px-2">{!! $cell !!}</td>
                     @endforeach
                 </tr>
             @endforeach
