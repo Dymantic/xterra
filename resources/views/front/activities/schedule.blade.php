@@ -5,7 +5,7 @@
         @foreach($activity['schedule'] as $day)
             <div class="max-w-3xl mx-auto mb-12">
                 <p class="type-h2 uppercase">{{ $day['date'] }} <span class="ml-4 text-gray-600">({{ $day['day_of_week'] }})</span></p>
-                <x-table :headings="['Time', 'Activity', 'Locations']" :rows="$day['entries']" :columns="['time_of_day', 'item', 'location']"></x-table>
+                <x-table :headings="[trans('events.schedule_time'), trans('events.schedule_activity'), trans('events.schedule_location')]" :rows="$day['entries']" :columns="['time_of_day', 'item', 'location']"></x-table>
             </div>
         @endforeach
 

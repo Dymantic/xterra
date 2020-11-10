@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 class DatePresenter
 {
     const STANDARD = 'Y-m-d';
-    const PRETTY = 'jS M, Y';
+    const PRETTY = 'Y.m.d';
 
     public static function standard($date): string
     {
@@ -40,14 +40,14 @@ class DatePresenter
         }
 
         if(($from->year === $to->year) && ($from->month === $to->month)) {
-            return sprintf("%s %s %s", $from->format("jS"), $separator, $to->format("jS M, Y"));
+            return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("d"));
         }
 
         if(($from->year === $to->year) && ($from->month !== $to->month)) {
-            return sprintf("%s %s %s", $from->format("jS M"), $separator, $to->format("jS M, Y"));
+            return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("m.d"));
         }
 
-        return sprintf("%s %s %s", $from->format("jS M, Y"), $separator, $to->format("jS M, Y"));
+        return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("Y.m.d"));
 
     }
 }

@@ -73,7 +73,7 @@ class Schedule
             return [
                 'day' => $day,
                 'date' => $date ? DatePresenter::pretty($day_date) : '',
-                'day_of_week' => $day_date->format('l'),
+                'day_of_week' => trans("dates.{$day_date->format('l')}", [], $lang),
                 'entries' => $entries->sortBy('position')->map(fn ($entry) => [
                     'item' => $entry['item'][$lang] ?? '',
                     'time_of_day' => $entry['time_of_day'][$lang] ?? '',

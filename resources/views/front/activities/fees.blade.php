@@ -4,7 +4,7 @@
         <p class="type-h2 uppercase mb-6">{{ trans('activities.fees') }}</p>
         <div class="max-w-3xl mx-auto">
             <x-table
-                :headings="['Category', 'Fee']"
+                :headings="[trans('events.fees_category'), trans('events.fees_fee')]"
                 :rows="$activity['fees']"
                 :columns="['category', 'fee']">
 

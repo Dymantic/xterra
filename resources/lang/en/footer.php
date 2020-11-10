@@ -12,4 +12,6 @@ return [
     'subscribe_success'         => 'You have successfully subscribed.',
     'subscribe_error'           => 'There was an error adding ":email" to the list.',
     'subscribe_retry'           => 'Try again',
+    'email_placeholder'         => 'Your email address',
+    'name_placeholder'          => 'Your name',
 ];
