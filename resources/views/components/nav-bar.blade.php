@@ -58,7 +58,7 @@
                    href="https://shop.xterrataiwan.com/" target="_blank" rel="nofollow">{{ trans('navbar.shop') }}</a>
                 <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/blog">{{ trans('navbar.blog') }}</a>
-                @auth
+{{--                @auth--}}
                     @if($discoverPages->count())
                     <div class="discover-nav lg:flex lg:items-center mx-4 lg:h-16">
                         <a class="hidden lg:inline font-heading font-medium text-2xl lg:text-lg  text-white hover:text-red-500 uppercase"
@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     @endif
-                @endauth
+{{--                @endauth--}}
 {{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
 {{--                   href="">{{ trans('navbar.friends') }}</a>--}}
 

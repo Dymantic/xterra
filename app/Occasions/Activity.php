@@ -28,15 +28,16 @@ class Activity extends Model implements HasMedia
     const NO_CATEGORY = 'other';
 
     const ACTIVITY_TYPES = [
-        self::RUN,
-        self::SWIM,
-        self::CYCLE,
-        self::DUATHLON,
         self::TRIATHLON,
+        self::DUATHLON,
+        self::RUN,
+        self::CYCLE,
+        self::SWIM,
+        self::TRAINING,
         self::SEMINAR,
         self::LIFESTYLE,
         self::NO_CATEGORY,
-        self::TRAINING,
+
     ];
 
     const RACE_RULES_DISK = 'admin_uploads';

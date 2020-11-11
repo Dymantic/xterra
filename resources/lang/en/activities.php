@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'cycle'     => 'Cycle',
+    'cycle'     => 'MTB',
     'duathlon'  => 'Duathlon',
     'lifestyle' => 'Lifestyle',
-    'run'       => 'Run',
+    'run'       => 'Trail Run',
     'seminar'   => 'Seminar',
     'swim'      => 'Swim',
     'training'  => 'Training',

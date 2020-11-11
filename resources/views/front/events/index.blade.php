@@ -4,7 +4,7 @@
     <div class="py-20 px-8">
         <p class="max-w-2xl mx-auto text-center type-h4">{{ trans('events.index_intro') }}</p>
         <div class="flex justify-center flex-wrap my-12">
-            @foreach(['cycle','duathlon','lifestyle','run','seminar','swim','training','triathlon'] as $category)
+            @foreach(['triathlon','duathlon','run', 'cycle','swim','training','seminar','lifestyle',] as $category)
                 <div class="m-4 flex flex-col items-center">
                     @include('svg.event-categories.' . $category, ['classes' => 'h-8 text-red-700'])
                     <p class="type-b3 text-center capitalize">{{ trans("activities.{$category}") }}</p>

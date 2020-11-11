@@ -40,14 +40,14 @@ class DatePresenter
         }
 
         if(($from->year === $to->year) && ($from->month === $to->month)) {
-            return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("d"));
+            return sprintf("%s%s%s", $from->format("Y.m.d"), $separator, $to->format("d"));
         }
 
         if(($from->year === $to->year) && ($from->month !== $to->month)) {
-            return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("m.d"));
+            return sprintf("%s%s%s", $from->format("Y.m.d"), $separator, $to->format("m.d"));
         }
 
-        return sprintf("%s %s %s", $from->format("Y.m.d"), $separator, $to->format("Y.m.d"));
+        return sprintf("%s%s%s", $from->format("Y.m.d"), $separator, $to->format("Y.m.d"));
 
     }
 }
