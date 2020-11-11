@@ -41,7 +41,7 @@ Route::group([
 
         Route::get('galleries/{gallery:slug}', 'GalleriesController@show');
 
-//        Route::get('discover/{page:slug}', 'DiscoverPagesController@show');
+        Route::get('discover/{page:slug}', 'DiscoverPagesController@show');
 
 
 
