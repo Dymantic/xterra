@@ -29,6 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('sitemap:generate')->dailyAt('01:00');
         $schedule->command('backup:run')->twiceDaily(1,13);
         $schedule->command('backup:clean')->twiceDaily(2,14);
+        $schedule->command('instagram-feed:refresh-tokens')->dailyAt('04:00');
+        $schedule->command('instagram-feed:refresh')->dailyAt('05:00');
     }
 
     /**
