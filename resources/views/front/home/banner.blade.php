@@ -20,9 +20,9 @@
         <p class="type-h2 text-white mt-12 text-center max-w-2xl">{!! $page['banner_subheading'] !!}</p>
 
         @if($page['promo_video_id'])
-            <div x-data="{ open: false, ready: promoVideoIsReady}" x-cloak
-                 @keydown.window.escape="window.pausePromoVideo(); open = false">
-                <button @click="open = true; window.playPromoVideo()"
+            <div x-data="promoVideo()" x-cloak
+                 @keydown.window.escape="closeVideo()">
+                <button @click="openVideo()"
                         class="white-btn mt-12 focus:outline-none">
                     {{ trans('homepage.watch_video') }}
                 </button>
@@ -37,10 +37,29 @@
                         </div>
                     </div>
                     <button class="absolute top-0 right-0 mr-4 type-h0 text-white hover:text-red-700"
-                            @click="window.pausePromoVideo(); open = false">&times
+                            @click="closeVideo()">&times
                     </button>
                 </div>
             </div>
         @endif
     </div>
 </div>
+<script>
+    function promoVideo() {
+        return {
+            open: false,
+            openVideo() {
+                this.open = true;
+                if(window.playPromoVideo) {
+                    window.playPromoVideo();
+                }
+            },
+            closeVideo() {
+                this.open = false;
+                if(window.pausePromoVideo()) {
+                    window.pausePromoVideo();
+                }
+            }
+        }
+    }
+</script>
