@@ -56,6 +56,7 @@ class ActivityRequest extends FormRequest
             'venue_name',
             'venue_address',
             'map_link',
+            'date',
             'registration_link',
         ]));
     }
