@@ -1,6 +1,12 @@
 <?php
 
 return [
+
+    'meta' => [
+        'title'       => 'XTERRA Taiwan 活動',
+        'description' => 'XTERRA 舉辦各種親近山林的越野運動，讓人們在自然美景中找回如同孩子般玩耍的樂趣，並學習與環境和諧共處，守護自然永續。'
+    ],
+
     'index_intro'       => '如果你想與我們一起寫故事，這些即將舉辦的活動，將為我們創造共同的回憶。',
     'upcoming_events'   => '最新活動',
     'see_event'         => '暸解更多',

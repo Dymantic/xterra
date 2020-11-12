@@ -5,9 +5,9 @@
         </div>
 
         @if($campaign['promo_video_id'])
-            <div x-data="{ open: false}" x-cloak
-                 @keydown.window.escape="window.pausePromoVideo(); open = false">
-                <button @click="open = true; window.playPromoVideo()"
+            <div x-data="promoVideo()" x-cloak
+                 @keydown.window.escape="closeVideo()">
+                <button @click="openVideo()"
                         class="px-8 py-2 uppercase rounded-lg bg-white text-grey-700 type-h3 shadow-lg mt-12 focus:outline-none">
                     {{ trans('campaigns.watch_video') }}
                 </button>
@@ -22,10 +22,29 @@
                         </div>
                     </div>
                     <button class="absolute top-0 right-0 mr-4 type-h0 text-white hover:text-red-700"
-                            @click="window.pausePromoVideo(); open = false">&times
+                            @click="closeVideo()">&times
                     </button>
                 </div>
             </div>
         @endif
     @endif
 </div>
+<script>
+    function promoVideo() {
+        return {
+            open: false,
+            openVideo() {
+                this.open = true;
+                if(window.playPromoVideo) {
+                    window.playPromoVideo();
+                }
+            },
+            closeVideo() {
+                this.open = false;
+                if(window.pausePromoVideo()) {
+                    window.pausePromoVideo();
+                }
+            }
+        }
+    }
+</script>
