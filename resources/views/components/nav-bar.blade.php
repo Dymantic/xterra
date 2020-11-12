@@ -67,9 +67,9 @@
                              class="stroke-current h-4 ml-2 text-white hidden lg:block">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
-                        <div class="discover-subnav lg:absolute lg:top-16 bg-grey-700 lg:px-6 lg:pb-4 text-white">
+                        <div class="discover-subnav lg:absolute lg:top-16 bg-grey-700 lg:px-6 lg:pb-4 text-white leading-normal">
                             @foreach($discoverPages as $page)
-                                <a class="block my-2 font-heading font-medium text-2xl lg:text-lg lg:mx-4 text-white hover:text-red-500 uppercase" href="{{ $page['full_slug'] }}">{{ $page['menu_name'] }}</a>
+                                <a class="block lg:my-2 font-heading font-medium text-2xl lg:text-lg lg:mx-4 text-white hover:text-red-500 uppercase whitespace-no-wrap" href="{{ $page['full_slug'] }}">{{ $page['menu_name'] }}</a>
                             @endforeach
                         </div>
                     </div>
