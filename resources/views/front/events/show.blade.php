@@ -5,7 +5,8 @@
 @section('head')
     @include('front.partials.og-meta', [
         'ogTitle' => $event['name'],
-        'ogDescription' => $event['intro']
+        'ogDescription' => $event['intro'],
+        'ogImage' => url($event['banner_image']['banner']),
     ])
     <link rel="canonical" href="{{ $event['canonical_slug'] }}">
     <style>

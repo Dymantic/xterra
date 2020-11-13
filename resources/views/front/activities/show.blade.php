@@ -5,7 +5,8 @@
 @section('head')
     @include('front.partials.og-meta', [
         'ogTitle' => $activity['name'],
-        'ogDescription' => $activity['intro']
+        'ogDescription' => $activity['intro'],
+        'ogImage' => url($activity['title_image']['banner']),
     ])
     <link rel="canonical" href="{{ $activity['canonical_slug'] }}">
     <style>

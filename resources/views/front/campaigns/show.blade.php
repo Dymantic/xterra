@@ -5,7 +5,8 @@
 @section('head')
     @include('front.partials.og-meta', [
         'ogTitle' => $campaign['title'],
-        'ogDescription' => $campaign['description']
+        'ogDescription' => $campaign['description'],
+        'ogImage' => url($campaign['banner_image']['full']),
     ])
     <link rel="canonical" href="{{ $campaign['canonical_slug'] }}">
 @endsection
