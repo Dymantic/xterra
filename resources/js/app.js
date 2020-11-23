@@ -31,6 +31,7 @@ import cardRoutes from "./routes/cards";
 import homePageRoutes from "./routes/homepage";
 import instagramRoutes from "./routes/instagram";
 import pagesRoutes from "./routes/pages";
+import people from "./routes/people";
 
 const routes = [
     ...userRoutes,
@@ -46,6 +47,7 @@ const routes = [
     ...homePageRoutes,
     ...instagramRoutes,
     ...pagesRoutes,
+    ...people,
 ];
 
 const router = new VueRouter({
@@ -73,6 +75,8 @@ import cardsModule from "./stores/cards";
 import homepageModule from "./stores/homepage";
 import instagramModule from "./stores/instagram";
 import pagesModule from "./stores/pages";
+import ambassadorsModule from "./stores/ambassadors";
+import coachesModule from "./stores/coaches";
 
 const store = new Vuex.Store({
     modules: {
@@ -89,6 +93,8 @@ const store = new Vuex.Store({
         homepage: homepageModule,
         instagram: instagramModule,
         pages: pagesModule,
+        ambassadors: ambassadorsModule,
+        coaches: coachesModule,
     },
 });
 

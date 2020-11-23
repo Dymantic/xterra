@@ -46,6 +46,10 @@ import {
     setEventSponsorsOrder,
     publishEvent,
     retractEvent,
+    attachAmbassadorToEvent,
+    detachAmbassadorFromEvent,
+    attachCoachToEvent,
+    detachCoachFromEvent,
 } from "../apis/events";
 import { notify } from "../components/Messaging/notify";
 
@@ -471,6 +475,30 @@ export default {
 
         retract({ dispatch }, event_id) {
             return retractEvent(event_id).then(() => dispatch("refreshEvents"));
+        },
+
+        attachAmbassador({ dispatch }, { event_id, ambassador_id }) {
+            return attachAmbassadorToEvent(event_id, ambassador_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        detachAmbassador({ dispatch }, { event_id, ambassador_id }) {
+            return detachAmbassadorFromEvent(event_id, ambassador_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        attachCoach({ dispatch }, { event_id, coach_id }) {
+            return attachCoachToEvent(event_id, coach_id).then(() =>
+                dispatch("refreshEvents")
+            );
+        },
+
+        detachCoach({ dispatch }, { event_id, coach_id }) {
+            return detachCoachFromEvent(event_id, coach_id).then(() =>
+                dispatch("refreshEvents")
+            );
         },
     },
 };

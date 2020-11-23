@@ -52,6 +52,24 @@ function retractCampaign(campaign_id) {
     return del(`/admin/published-campaigns/${campaign_id}`);
 }
 
+function attachCoachToCampaign(campaign_id, coach_id) {
+    return post(`/admin/campaigns/${campaign_id}/coaches`, { coach_id });
+}
+
+function detachCoachFromCampaign(campaign_id, coach_id) {
+    return del(`/admin/campaigns/${campaign_id}/coaches/${coach_id}`);
+}
+
+function attachAmbassadorToCampaign(campaign_id, ambassador_id) {
+    return post(`/admin/campaigns/${campaign_id}/ambassadors`, {
+        ambassador_id,
+    });
+}
+
+function detachAmbassadorFromCampaign(campaign_id, ambassador_id) {
+    return del(`/admin/campaigns/${campaign_id}/ambassadors/${ambassador_id}`);
+}
+
 export {
     fetchCampaigns,
     createCampaign,
@@ -66,4 +84,8 @@ export {
     clearCampaignPromoVideo,
     publishCampaign,
     retractCampaign,
+    attachCoachToCampaign,
+    detachCoachFromCampaign,
+    attachAmbassadorToCampaign,
+    detachAmbassadorFromCampaign,
 };

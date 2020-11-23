@@ -35,7 +35,7 @@ class UploadCampaignNarrativeImagesTest extends TestCase
         $image = $campaign->fresh()->getFirstMedia(Campaign::NARRATIVE_IMAGES);
 
         $this->assertEquals(1, $response->json('success'));
-        $this->assertEquals(['url' => $image->getUrl()], $response->json('file'));
+        $this->assertEquals(['url' => $image->getUrl('web')], $response->json('file'));
 
         Storage::disk('media')->assertExists(Str::after($image->getUrl(), '/media'));
     }

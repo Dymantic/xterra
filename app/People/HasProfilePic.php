@@ -10,6 +10,17 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 trait HasProfilePic
 {
+
+    public function getProfilePic($default = Profile::DEFAULT_ADMIN)
+    {
+        $profile_pic = $this->getFirstMedia(Profile::AVATAR);
+
+        return [
+            'thumb' => optional($profile_pic)->getUrl('thumb') ?? $default,
+            'web' => optional($profile_pic)->getUrl('web') ?? $default,
+        ];
+    }
+
     public function setProfilePic(UploadedFile $upload): Media
     {
         $this->clearProfilePic();

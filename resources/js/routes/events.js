@@ -44,6 +44,7 @@ import SponsorCreate from "../components/Events/SponsorCreate";
 import SponsorEdit from "../components/Events/SponsorEdit";
 import SponsorsOrder from "../components/Events/SponsorsOrder";
 import EventPublishPage from "../components/Events/EventPublishPage";
+import EventPeople from "../components/Events/EventPeople";
 export default [
     { path: "/events", component: EventsIndex },
     { path: "/events/:id", component: EventShow },
@@ -127,6 +128,10 @@ export default [
             {
                 path: "images",
                 component: EventImages,
+            },
+            {
+                path: "people",
+                component: EventPeople,
             },
             {
                 path: "publish",

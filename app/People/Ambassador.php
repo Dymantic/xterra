@@ -76,4 +76,9 @@ class Ambassador extends Model implements HasMedia
              ->optimize()
              ->performOnCollections(Profile::AVATAR);
     }
+
+    public function presentForAdmin()
+    {
+        return AmbassadorPresenter::forAdmin($this);
+    }
 }

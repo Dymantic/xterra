@@ -188,6 +188,24 @@ function retractEvent(event_id) {
     return del(`/admin/published-events/${event_id}`);
 }
 
+function attachCoachToEvent(event_id, coach_id) {
+    return post(`/admin/events/${event_id}/coaches`, { coach_id });
+}
+
+function detachCoachFromEvent(event_id, coach_id) {
+    return del(`/admin/events/${event_id}/coaches/${coach_id}`);
+}
+
+function attachAmbassadorToEvent(event_id, ambassador_id) {
+    return post(`/admin/events/${event_id}/ambassadors`, {
+        ambassador_id,
+    });
+}
+
+function detachAmbassadorFromEvent(event_id, ambassador_id) {
+    return del(`/admin/events/${event_id}/ambassadors/${ambassador_id}`);
+}
+
 export {
     fetchEvents,
     createEvent,
@@ -236,4 +254,8 @@ export {
     setEventSponsorsOrder,
     publishEvent,
     retractEvent,
+    attachAmbassadorToEvent,
+    detachAmbassadorFromEvent,
+    attachCoachToEvent,
+    detachCoachFromEvent,
 };

@@ -24,7 +24,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Campaign extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasPromoVideo, HasBannerVideo;
+    use InteractsWithMedia, HasPromoVideo, HasBannerVideo, HasRepresentatives;
 
     const TITLE_IMAGE = 'title-image';
     const NARRATIVE_IMAGES = 'narrative-image';

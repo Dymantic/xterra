@@ -81,7 +81,10 @@ export default {
 
             this.$store
                 .dispatch("events/deleteYoutubeVideo", this.video.id)
-                .then(() => notify.success({ message: "Video deleted" }))
+                .then(() => {
+                    this.$emit("deleted");
+                    notify.success({ message: "Video deleted" });
+                })
                 .catch(() =>
                     notify.error({ message: "Failed to delete video" })
                 )

@@ -21,7 +21,8 @@ class NewsletterSignupTest extends TestCase
 
         $expected = [
             'subscribed' => true,
-            'message' => 'Successfully subscribed, thanks!'
+            'message' => 'You have successfully subscribed.',
+            'error' => false,
         ];
 
         $this->assertEquals($expected, $response->json());

@@ -11,6 +11,14 @@ trait IsSociable
         return $this->morphMany(SocialLink::class, 'sociable');
     }
 
+    public function getSocialLinks()
+    {
+        return $this->socialLinks->map(fn ($socialLink) => [
+            'platform' => $socialLink->platform,
+            'link' => $socialLink->link,
+        ])->values()->toArray();
+    }
+
     public function setSocialLinks(array $links)
     {
         $this->socialLinks()->delete();

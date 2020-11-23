@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class AmbassadorsController extends Controller
 {
+
+    public function index()
+    {
+        return Ambassador::latest()->get()->map->presentForAdmin();
+    }
+
     public function store(AmbassadorRequest $request)
     {
-        Ambassador::new($request->ambassadorInfo());
+        return Ambassador::new($request->ambassadorInfo());
     }
 
     public function update(Ambassador $ambassador, AmbassadorRequest $request)

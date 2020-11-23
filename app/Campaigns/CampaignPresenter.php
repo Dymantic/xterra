@@ -36,6 +36,8 @@ class CampaignPresenter
             ],
             'promo_video'    => optional($campaign->promoVideo)->getVideo(),
             'banner_video'   => $campaign->bannerVideoUrl(),
+            'ambassadors' => $campaign->ambassadors->map->presentForAdmin(),
+            'coaches' => $campaign->coaches->map->presentForAdmin(),
         ];
     }
 

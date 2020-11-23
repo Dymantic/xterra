@@ -73,6 +73,15 @@
 
                 <div class="mb-2">
                     <router-link
+                        :to="`/campaigns/${$route.params.campaign}/show/people`"
+                        class="font-bold hover:text-blue-600"
+                        active-class="text-blue-600"
+                        >People</router-link
+                    >
+                </div>
+
+                <div class="mb-2">
+                    <router-link
                         :to="`/campaigns/${$route.params.campaign}/show/publish`"
                         class="font-bold hover:text-blue-600"
                         active-class="text-blue-600"
@@ -81,7 +90,7 @@
                 </div>
             </div>
             <div class="flex-1">
-                <router-view></router-view>
+                <router-view :campaign="campaign"></router-view>
             </div>
         </div>
     </page>

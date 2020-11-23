@@ -1,9 +1,13 @@
 import {
     assignArticleToCampaign,
+    attachAmbassadorToCampaign,
     attachCampaignPromoVideo,
+    attachCoachToCampaign,
     clearCampaignPromoVideo,
     createCampaign,
     deleteCampaign,
+    detachAmbassadorFromCampaign,
+    detachCoachFromCampaign,
     fetchCampaigns,
     publishCampaign,
     removeArticleFromCampaign,
@@ -110,6 +114,32 @@ export default {
 
         retract({ dispatch }, campaign_id) {
             return retractCampaign(campaign_id).then(() => dispatch("refresh"));
+        },
+
+        attachAmbassador({ dispatch }, { ambassador_id, campaign_id }) {
+            return attachAmbassadorToCampaign(
+                campaign_id,
+                ambassador_id
+            ).then(() => dispatch("refresh"));
+        },
+
+        detachAmbassador({ dispatch }, { campaign_id, ambassador_id }) {
+            return detachAmbassadorFromCampaign(
+                campaign_id,
+                ambassador_id
+            ).then(() => dispatch("refresh"));
+        },
+
+        attachCoach({ dispatch }, { campaign_id, coach_id }) {
+            return attachCoachToCampaign(campaign_id, coach_id).then(() =>
+                dispatch("refresh")
+            );
+        },
+
+        detachCoach({ dispatch }, { campaign_id, coach_id }) {
+            return detachCoachFromCampaign(campaign_id, coach_id).then(() =>
+                dispatch("refresh")
+            );
         },
     },
 };

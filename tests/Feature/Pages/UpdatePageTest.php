@@ -26,7 +26,6 @@ class UpdatePageTest extends TestCase
             'title'       => ['en' => 'new title', 'zh' => 'zh new title'],
             'description' => ['en' => 'new description', 'zh' => 'zh new description'],
             'blurb'       => ['en' => 'new blurb', 'zh' => 'zh new blurb'],
-            'content'     => ['en' => 'new content', 'zh' => 'zh new content'],
             'menu_name'   => ['en' => 'new menu name', 'zh' => 'zh new menu name'],
         ]);
 
@@ -36,7 +35,6 @@ class UpdatePageTest extends TestCase
             'title'       => json_encode(['en' => 'new title', 'zh' => 'zh new title']),
             'description' => json_encode(['en' => 'new description', 'zh' => 'zh new description']),
             'blurb'       => json_encode(['en' => 'new blurb', 'zh' => 'zh new blurb']),
-            'content'     => json_encode(['en' => 'new content', 'zh' => 'zh new content']),
             'menu_name'   => json_encode(['en' => 'new menu name', 'zh' => 'zh new menu name']),
         ]);
     }

@@ -44,6 +44,8 @@ class EventPresenter
             'banner_image'      => $event->getBannerImage(),
             'card_image'        => $event->getCardImage(),
             'mobile_banner'     => $event->getMobileBanner(),
+            'ambassadors'       => $event->ambassadors->map->presentForAdmin()->values()->all(),
+            'coaches'           => $event->coaches->map->presentForAdmin()->values()->all(),
         ];
     }
 

@@ -9,9 +9,15 @@ use Illuminate\Http\Request;
 
 class CoachesController extends Controller
 {
+
+    public function index()
+    {
+        return Coach::with('socialLinks')->latest()->get()->map->presentForAdmin()->values()->all();
+    }
+
     public function store(CoachRequest $request)
     {
-        Coach::new($request->coachInfo());
+        return Coach::new($request->coachInfo());
     }
 
     public function update(Coach $coach, CoachRequest $request)

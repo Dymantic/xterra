@@ -49,6 +49,25 @@
 
             <dropdown-menu
                 v-cloak
+                name="People"
+                class="text-white h-12 flex items-center h-16 mx-4"
+            >
+                <div slot="dropdown_content" class="pt-3">
+                    <router-link
+                        to="/ambassadors"
+                        class="text-black no-underline hover:text-indigo-500 pb-3 block"
+                        >Ambassadors
+                    </router-link>
+                    <router-link
+                        to="/coaches"
+                        class="text-black no-underline hover:text-indigo-500 pb-3 block"
+                        >Coaches
+                    </router-link>
+                </div>
+            </dropdown-menu>
+
+            <dropdown-menu
+                v-cloak
                 name="Blog"
                 class="text-white h-12 flex items-center h-16 mx-4"
             >

@@ -75,14 +75,19 @@ class Coach extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-             ->fit(Manipulations::FIT_CROP, 400, 400)
+             ->fit(Manipulations::FIT_CROP, 600, 400)
              ->optimize()
              ->performOnCollections(Profile::AVATAR);
 
         $this->addMediaConversion('web')
-             ->fit(Manipulations::FIT_CROP, 800, 600)
+             ->fit(Manipulations::FIT_CROP, 900, 600)
              ->optimize()
              ->performOnCollections(Profile::AVATAR);
+    }
+
+    public function presentForAdmin()
+    {
+        return CoachPresenter::forAdmin($this);
     }
 
 

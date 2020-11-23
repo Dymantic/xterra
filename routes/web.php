@@ -252,6 +252,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::delete('galleries/{gallery}/images/{image}', 'GalleryImagesController@delete');
     Route::post('galleries/{gallery}/image-order', 'GalleryImagesOrderController@update');
 
+    Route::get('coaches', 'CoachesController@index');
     Route::post('coaches', 'CoachesController@store');
     Route::post('coaches/{coach}', 'CoachesController@update');
     Route::delete('coaches/{coach}', 'CoachesController@delete');
@@ -264,6 +265,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::post('coaches/{coach}/profile-pic', 'CoachProfilePicController@store');
     Route::delete('coaches/{coach}/profile-pic', 'CoachProfilePicController@destroy');
 
+    Route::get('ambassadors', 'AmbassadorsController@index');
     Route::post('ambassadors', 'AmbassadorsController@store');
     Route::post('ambassadors/{ambassador}', 'AmbassadorsController@update');
     Route::delete('ambassadors/{ambassador}', 'AmbassadorsController@delete');
@@ -275,6 +277,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
 
     Route::post('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@store');
     Route::delete('ambassadors/{ambassador}/profile-pic', 'AmbassadorProfilePicController@destroy');
+
+    Route::post('events/{event}/ambassadors', 'EventAmbassadorsController@store');
+    Route::delete('events/{event}/ambassadors/{ambassador}', 'EventAmbassadorsController@destroy');
+    Route::post('events/{event}/coaches', 'EventCoachesController@store');
+    Route::delete('events/{event}/coaches/{coach}', 'EventCoachesController@destroy');
+
+    Route::post('campaigns/{campaign}/ambassadors', 'CampaignAmbassadorsController@store');
+    Route::delete('campaigns/{campaign}/ambassadors/{ambassador}', 'CampaignAmbassadorsController@destroy');
+    Route::post('campaigns/{campaign}/coaches', 'CampaignCoachesController@store');
+    Route::delete('campaigns/{campaign}/coaches/{coach}', 'CampaignCoachesController@destroy');
 
     Route::get('promotions', 'PromotionsController@index');
     Route::post('promotions', 'PromotionsController@store');
