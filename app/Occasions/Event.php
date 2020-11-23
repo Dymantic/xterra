@@ -84,7 +84,8 @@ class Event extends Model implements HasMedia, Cardable
 
     public function scopeUpcoming($query)
     {
-        return $query->where('start', '>', now());
+        return $query;
+//        return $query->where('start', '>', now());
     }
 
     public function publish()
