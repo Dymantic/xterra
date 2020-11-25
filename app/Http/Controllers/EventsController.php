@@ -10,7 +10,18 @@ class EventsController extends Controller
 {
     public function index()
     {
-        return view('front.events.index', ['events' => Event::live()->upcoming()->latest()->get()->map->presentForLang(app()->getLocale())]);
+        return view('front.events.index', [
+            'events' => Event::live()
+                             ->upcoming()
+                             ->orderBy('start')
+                             ->get()
+                ->map->presentForLang(app()->getLocale()),
+            'past_events' => Event::live()
+                             ->past()
+                             ->orderByDesc('end')
+                             ->get()
+                ->map->presentForLang(app()->getLocale()),
+        ]);
     }
 
     public function show(Event $event)

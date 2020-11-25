@@ -9,6 +9,7 @@ return [
 
     'index_intro'       => 'These are our upcoming events to look out for.',
     'upcoming_events'   => 'Upcoming Events',
+    'past_events'       => 'Past Events',
     'see_event'         => 'View Event',
     'register_now'      => 'Register Now',
     'overview'          => 'Event Overview',

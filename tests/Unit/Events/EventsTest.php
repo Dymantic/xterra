@@ -217,4 +217,58 @@ class EventsTest extends TestCase
         $this->assertSame("/events/{$event->slug}", $cardInfo->link);
         $this->assertStringContainsString($image->getUrl(), $cardInfo->image_path);
     }
+
+    /**
+     *@test
+     */
+    public function current_events_are_included_in_upcoming_events()
+    {
+        $current = factory(Event::class)->state('public')->create([
+            'start' => now()->subDay(),
+            'end' => now()->addDay(),
+        ]);
+        $past = factory(Event::class)->state('public')->create([
+            'start' => now()->subDay(),
+            'end' => now()->subDay(),
+        ]);
+        $future = factory(Event::class)->state('public')->create([
+            'start' => now()->addWeek(),
+            'end' => now()->addWeek(),
+        ]);
+
+        $upcoming = Event::upcoming()->get();
+
+        $this->assertCount(2, $upcoming);
+
+        $this->assertTrue($upcoming->contains($current));
+        $this->assertTrue($upcoming->contains($future));
+        $this->assertFalse($upcoming->contains($past));
+    }
+
+    /**
+     *@test
+     */
+    public function events_can_be_scoped_to_past()
+    {
+        $current = factory(Event::class)->state('public')->create([
+            'start' => now()->subDay(),
+            'end' => now()->addDay(),
+        ]);
+        $past = factory(Event::class)->state('public')->create([
+            'start' => now()->subDay(),
+            'end' => now()->subDay(),
+        ]);
+        $future = factory(Event::class)->state('public')->create([
+            'start' => now()->addWeek(),
+            'end' => now()->addWeek(),
+        ]);
+
+        $upcoming = Event::past()->get();
+
+        $this->assertCount(1, $upcoming);
+
+        $this->assertFalse($upcoming->contains($current));
+        $this->assertFalse($upcoming->contains($future));
+        $this->assertTrue($upcoming->contains($past));
+    }
 }
