@@ -9,7 +9,7 @@ return [
 
     'index_intro'       => '如果你想與我們一起寫故事，這些即將舉辦的活動，將為我們創造共同的回憶。',
     'upcoming_events'   => '最新活動',
-    'past_events'       => '過去的事件',
+    'past_events'       => '已結束的活動',
     'see_event'         => '暸解更多',
     'overview'          => '活動資訊',
     'name'              => '活動名稱',
