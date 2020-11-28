@@ -46,6 +46,8 @@ class CreateAmbassadorTest extends TestCase
         $this->assertCount(1, Ambassador::all());
         $ambassador = Ambassador::first();
 
+        $this->assertNotNull($ambassador->slug);
+
         $this->assertDatabaseHas('social_links', [
             'sociable_id' => $ambassador->id,
             'sociable_type' => Ambassador::class,

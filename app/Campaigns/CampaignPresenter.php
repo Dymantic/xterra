@@ -72,6 +72,8 @@ class CampaignPresenter
         $campaign->load('event', 'promotion', 'articles');
         $titleImage = $campaign->titleImage();
         $banner_image = $campaign->getFirstMedia(Campaign::BANNER_IMAGE);
+        $ambassadors = $campaign->ambassadors->map->presentForPersonCard($lang);
+        $coaches = $campaign->coaches->map->presentForPersonCard($lang);
 
         return [
             'slug'           => $campaign->slug,
@@ -91,6 +93,7 @@ class CampaignPresenter
             ],
             'promo_video_id' => optional($campaign->promoVideo)->getVideoId(),
             'banner_video'   => $campaign->bannerVideoUrl(),
+            'people' => $ambassadors->concat($coaches)->sortByDesc('created_at')->values()->all(),
         ];
     }
 }

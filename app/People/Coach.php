@@ -5,6 +5,7 @@ namespace App\People;
 use App\HasEmbeddedVideos;
 use App\Media\EmbeddableVideo;
 use App\Translation;
+use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Spatie\Image\Manipulations;
@@ -14,10 +15,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Coach extends Model implements HasMedia
 {
-    use InteractsWithMedia, IsSociable, HasEmbeddedVideos, HasProfilePic;
+    use InteractsWithMedia, IsSociable, HasEmbeddedVideos, HasProfilePic, AttendsEvents, PresentsAsPerson;
 
     protected $fillable = [
         'name',
+        'slug',
         'location',
         'certifications',
         'experience',
@@ -39,7 +41,7 @@ class Coach extends Model implements HasMedia
 
     public static function new(CoachInfo $info): Coach
     {
-        $coach = self::create($info->toArray());
+        $coach = self::create(array_merge($info->toArray(), ['slug' => UniqueKey::for("coaches:slug", 4)]));
         $coach->setSocialLinks($info->social_links);
 
         return $coach;

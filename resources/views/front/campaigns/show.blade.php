@@ -26,6 +26,9 @@
             </div>
         </div>
     </div>
+
+    @include('front.campaigns.people', ['people' => $campaign['people']])
+
     <div class="text-center pb-20">
         <a class="type-b2 hover:text-red-700" href="{{ localUrl('/initiatives') }}">{{ trans('campaigns.all_initiatives') }} &gt;</a>
     </div>

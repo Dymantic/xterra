@@ -4,6 +4,7 @@ namespace App\People;
 
 use App\HasEmbeddedVideos;
 use App\Translation;
+use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -12,10 +13,11 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Ambassador extends Model implements HasMedia
 {
-    use IsSociable, HasEmbeddedVideos, InteractsWithMedia, HasProfilePic;
+    use IsSociable, HasEmbeddedVideos, InteractsWithMedia, HasProfilePic, AttendsEvents, PresentsAsPerson;
 
     protected $fillable = [
         'name',
+        'slug',
         'about',
         'achievements',
         'collaboration',
@@ -33,7 +35,7 @@ class Ambassador extends Model implements HasMedia
 
     public static function new(AmbassadorInfo $info): Ambassador
     {
-        $ambassador = self::create($info->toArray());
+        $ambassador = self::create(array_merge($info->toArray(), ['slug' => UniqueKey::for("ambassadors:slug", 4)]));
         $ambassador->setSocialLinks($info->social_links);
 
         return $ambassador;

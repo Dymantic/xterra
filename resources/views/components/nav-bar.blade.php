@@ -75,8 +75,10 @@
                     </div>
                     @endif
 {{--                @endauth--}}
-{{--                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"--}}
-{{--                   href="">{{ trans('navbar.friends') }}</a>--}}
+                @auth
+                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
+                   href="{{ localUrl('/friends') }}">{{ trans('navbar.friends') }}</a>
+                @endauth
 
             </div>
         <div class="flex items-center">

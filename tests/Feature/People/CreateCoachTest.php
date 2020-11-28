@@ -52,6 +52,8 @@ class CreateCoachTest extends TestCase
         $this->assertCount(1, Coach::all());
         $coach = Coach::first();
 
+        $this->assertNotNull($coach->slug);
+
         $this->assertDatabaseHas('social_links', [
             'sociable_id'   => $coach->id,
             'sociable_type' => Coach::class,

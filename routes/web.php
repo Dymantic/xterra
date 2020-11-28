@@ -43,11 +43,10 @@ Route::group([
 
         Route::get('discover/{page:slug}', 'DiscoverPagesController@show');
 
+        Route::get('friends', 'PeopleController@index');
+        Route::get('ambassadors/{ambassador:slug}/{name?}', 'AmbassadorsController@show');
+        Route::get('coaches/{coach:slug}/{name?}', 'CoachesController@show');
 
-
-//        Route::group(['middleware' => 'auth', 'prefix' => 'top-secret'], function() {
-//
-//        });
 });
 
 Route::post('newsletter/subscribe', 'NewsletterSignupController@store');
