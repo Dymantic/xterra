@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\LaravelLocalization;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -21,6 +22,19 @@ abstract class TestCase extends BaseTestCase
     public function asGuest()
     {
         return $this->assertGuest();
+    }
+
+    protected function refreshApplicationWithLocale($locale)
+    {
+        self::tearDown();
+        putenv(LaravelLocalization::ENV_ROUTE_KEY . '=' . $locale);
+        self::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        putenv(LaravelLocalization::ENV_ROUTE_KEY);
+        parent::tearDown();
     }
 
     public function fakeMediaStorage()

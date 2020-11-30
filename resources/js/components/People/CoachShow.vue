@@ -2,8 +2,8 @@
     <page v-if="coach">
         <page-header :title="coach.name[lang]">
             <router-link :to="`/coaches/${coach.id}/edit`" class="btn btn-dark"
-                >Edit</router-link
-            >
+                >Edit
+            </router-link>
         </page-header>
 
         <language-selector v-model="lang" class="my-12"></language-selector>
@@ -16,15 +16,19 @@
         <div class="my-12 p-6 shadow rounded-lg flex justify-between">
             <div class="mr-8 max-w-sm admin-edited">
                 <p class="font-bold text-lg mb-2">Contact</p>
-                <a
-                    target="_blank"
-                    rel="nofollow"
-                    :href="`mailto:${coach.email}`"
-                    >{{ coach.email }}</a
-                >
-                <a target="_blank" rel="nofollow" :href="coach.website">{{
-                    coach.website
-                }}</a>
+                <p>
+                    <a
+                        target="_blank"
+                        rel="nofollow"
+                        :href="`mailto:${coach.email}`"
+                        >{{ coach.email }}</a
+                    >
+                </p>
+                <p>
+                    <a target="_blank" rel="nofollow" :href="coach.website">{{
+                        coach.website
+                    }}</a>
+                </p>
                 <p>{{ coach.phone }}</p>
                 <p>{{ coach.line }}</p>
             </div>
@@ -96,6 +100,7 @@ import CoachPublisher from "./CoachPublisher";
 import AddYoutubeVideo from "../Events/AddYoutubeVideo";
 import EmbeddedVideo from "../EmbeddedVideo";
 import SocialLinks from "./SocialLinks";
+
 export default {
     components: {
         AddYoutubeVideo,

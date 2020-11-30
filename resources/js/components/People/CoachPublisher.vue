@@ -15,6 +15,24 @@
                 >{{ button_text }}</submit-button
             >
         </div>
+        <div class="mt-4">
+            <p class="font-bold mb-2">Preview</p>
+            <div class="flex">
+                <a
+                    :href="`/previews/coach/${coach.id}?lang=en`"
+                    target="_blank"
+                    class="text-lg hover:text-blue-600 mr-16"
+                    >English</a
+                >
+
+                <a
+                    :href="`/previews/coach/${coach.id}?lang=zh`"
+                    target="_blank"
+                    class="text-lg hover:text-blue-600 mr-16"
+                    >Chinese</a
+                >
+            </div>
+        </div>
     </div>
 </template>
 
@@ -40,9 +58,9 @@ export default {
 
         status() {
             if (this.coach.is_public) {
-                return "This ambassador profile is currently public, and can be viewed on the website by the general public.";
+                return "This coach profile is currently public, and can be viewed on the website by the general public.";
             }
-            return "This ambassador profile is currently private, and will not be shown on the website.";
+            return "This coach profile is currently private, and will not be shown on the website.";
         },
 
         status_label() {

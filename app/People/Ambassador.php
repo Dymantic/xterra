@@ -33,6 +33,11 @@ class Ambassador extends Model implements HasMedia
         'is_public'     => 'boolean',
     ];
 
+    public function scopeLive($query)
+    {
+        return $query->where('is_public', true);
+    }
+
     public static function new(AmbassadorInfo $info): Ambassador
     {
         $ambassador = self::create(array_merge($info->toArray(), ['slug' => UniqueKey::for("ambassadors:slug", 4)]));

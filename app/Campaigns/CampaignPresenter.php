@@ -72,8 +72,8 @@ class CampaignPresenter
         $campaign->load('event', 'promotion', 'articles');
         $titleImage = $campaign->titleImage();
         $banner_image = $campaign->getFirstMedia(Campaign::BANNER_IMAGE);
-        $ambassadors = $campaign->ambassadors->map->presentForPersonCard($lang);
-        $coaches = $campaign->coaches->map->presentForPersonCard($lang);
+        $ambassadors = $campaign->ambassadors()->live()->latest()->get()->map->presentForPersonCard($lang);
+        $coaches = $campaign->coaches()->live()->latest()->get()->map->presentForPersonCard($lang);
 
         return [
             'slug'           => $campaign->slug,

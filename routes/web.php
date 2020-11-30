@@ -57,6 +57,9 @@ Route::group(['prefix' => 'previews', 'middleware' => ['auth'], 'namespace' => '
     Route::get('campaigns/{campaign}', 'CampaignPreviewController@show');
 
     Route::get('discover/pages/{page}', 'PreviewPagesController@show');
+
+    Route::get('coach/{coach}', 'CoachPreviewController@show');
+    Route::get('ambassador/{ambassador}', 'AmbassadorPreviewController@show');
 });
 
 

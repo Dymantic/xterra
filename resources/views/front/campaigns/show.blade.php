@@ -27,7 +27,9 @@
         </div>
     </div>
 
+    @auth
     @include('front.campaigns.people', ['people' => $campaign['people']])
+    @endauth
 
     <div class="text-center pb-20">
         <a class="type-b2 hover:text-red-700" href="{{ localUrl('/initiatives') }}">{{ trans('campaigns.all_initiatives') }} &gt;</a>

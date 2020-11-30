@@ -39,6 +39,11 @@ class Coach extends Model implements HasMedia
         'is_public'      => 'boolean',
     ];
 
+    public function scopeLive($query)
+    {
+        return $query->where('is_public', true);
+    }
+
     public static function new(CoachInfo $info): Coach
     {
         $coach = self::create(array_merge($info->toArray(), ['slug' => UniqueKey::for("coaches:slug", 4)]));

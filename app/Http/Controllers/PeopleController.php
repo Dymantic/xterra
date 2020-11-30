@@ -11,8 +11,8 @@ class PeopleController extends Controller
 {
     public function index()
     {
-        $ambassadors = Ambassador::latest()->get();
-        $coaches = Coach::latest()->get();
+        $ambassadors = Ambassador::live()->latest()->get();
+        $coaches = Coach::live()->latest()->get();
 
         return view('front.people.index', [
             'people' => $ambassadors

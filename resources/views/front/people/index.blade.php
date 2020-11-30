@@ -11,6 +11,7 @@
 
 @section('content')
     <div class="py-20 px-8"
+         x-init="setPeopleContainerHeight"
          x-data="people()">
         <p class="max-w-2xl mx-auto text-center type-h4">{{ trans('people.index_intro') }}</p>
 
@@ -63,6 +64,11 @@
                     window.setTimeout(() => this.category = category, 300);
                 }
             }
+        }
+        function setPeopleContainerHeight() {
+            const box = this.$el.getBoundingClientRect();
+            console.log({box});
+            this.$el.style.height = `${box.height}px`;
         }
     </script>
 

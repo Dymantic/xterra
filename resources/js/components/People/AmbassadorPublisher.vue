@@ -15,6 +15,24 @@
                 >{{ button_text }}</submit-button
             >
         </div>
+        <div class="mt-4">
+            <p class="font-bold mb-2">Preview</p>
+            <div class="flex">
+                <a
+                    :href="`/previews/ambassador/${ambassador.id}?lang=en`"
+                    target="_blank"
+                    class="text-lg hover:text-blue-600 mr-16"
+                    >English</a
+                >
+
+                <a
+                    :href="`/previews/ambassador/${ambassador.id}?lang=zh`"
+                    target="_blank"
+                    class="text-lg hover:text-blue-600 mr-16"
+                    >Chinese</a
+                >
+            </div>
+        </div>
     </div>
 </template>
 

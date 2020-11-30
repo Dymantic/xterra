@@ -9,6 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Coach::class, function (Faker $faker) {
     return [
         'name'           => new Translation(['en' => $faker->name, 'zh' => $faker->name]),
+        'slug'           => \Illuminate\Support\Str::random(4),
         'location'       => new Translation(['en' => $faker->city, 'zh' => $faker->city]),
         'certifications' => new Translation(['en' => $faker->paragraph, 'zh' => $faker->paragraph]),
         'experience'     => new Translation(['en' => $faker->paragraph, 'zh' => $faker->paragraph]),
