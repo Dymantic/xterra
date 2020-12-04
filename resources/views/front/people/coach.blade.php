@@ -21,7 +21,7 @@
                 <img src="{{ $coach['profile_pic']['web'] }}"
                      alt="{{ $coach['name'] }}">
             </div>
-            <div class="p-6 bg-grey-300 flex-1 leading-tight">
+            <div class="p-6 bg-gray-100 flex-1 leading-tight">
                 <p class="type-h2 text-red-700 uppercase">{{ trans('people.coach_page.location') }}:</p>
                 <p>{{ $coach['location'] }}</p>
 
