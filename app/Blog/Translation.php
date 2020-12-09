@@ -23,7 +23,7 @@ class Translation extends Model implements HasMedia
 
     protected $casts = ['is_published' => 'boolean'];
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

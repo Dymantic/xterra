@@ -22,7 +22,7 @@ class Article extends Model implements HasMedia, Cardable
 
     const TITLE_IMAGES = 'title_images';
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

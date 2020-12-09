@@ -37,7 +37,7 @@ class Page extends Model implements HasMedia
         'is_public'   => 'boolean',
     ];
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [

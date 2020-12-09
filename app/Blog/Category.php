@@ -13,7 +13,7 @@ class Category extends Model
 
     protected $casts = ['title' => 'array', 'description' => 'array'];
 
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
