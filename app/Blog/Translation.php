@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Translation extends Model implements HasMedia
 {
-    use Sluggable, InteractsWithMedia;
+    use Sluggable, InteractsWithMedia, Searchable;
 
     const BODY_IMAGES = 'body-images';
 
@@ -31,6 +32,11 @@ class Translation extends Model implements HasMedia
                 'onUpdate' => !$this->hasBeenPublishedBefore(),
             ]
         ];
+    }
+
+    public function shouldBeSearchable()
+    {
+        return $this->is_published;
     }
 
     public function getFullSlugAttribute()
@@ -234,6 +240,31 @@ class Translation extends Model implements HasMedia
                 'share'  => $this->article->titleImage('share'),
             ],
             'categories'                => $this->article->categories->map->toArray()->all(),
+        ];
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id'                        => $this->id,
+            'title'                     => $this->title,
+            'canonical_url'             => "/{$this->language}/blog/{$this->article->slug}",
+            'intro'                     => $this->intro,
+            'description'               => $this->description,
+            'body'                      => $this->body,
+            'author_name'               => $this->author_name,
+            'tags'                      => $this->tags->map->toArray()->all(),
+            'result' => [
+                'languages' => [$this->language],
+                'title' => [
+                    'en' => $this->language === 'en' ? $this->title : '',
+                    'zh' => $this->language === 'zh' ? $this->title : ''
+                ],
+                'description' => [
+                    'en' => $this->language === 'en' ? $this->description : '',
+                    'zh' => $this->language === 'zh' ? $this->description : ''
+                ]
+            ]
         ];
     }
 

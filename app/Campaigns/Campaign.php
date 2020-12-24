@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -24,7 +25,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Campaign extends Model implements HasMedia
 {
-    use InteractsWithMedia, HasPromoVideo, HasBannerVideo, HasRepresentatives;
+    use InteractsWithMedia, HasPromoVideo, HasBannerVideo, HasRepresentatives, Searchable;
 
     const TITLE_IMAGE = 'title-image';
     const NARRATIVE_IMAGES = 'narrative-image';
@@ -45,6 +46,11 @@ class Campaign extends Model implements HasMedia
         'narrative'   => Translation::class,
         'is_public'   => 'boolean',
     ];
+
+    public function shouldBeSearchable()
+    {
+        return $this->is_public;
+    }
 
     public static function new(CampaignInfo $info): self
     {
@@ -191,6 +197,30 @@ class Campaign extends Model implements HasMedia
     public function presentForAdmin()
     {
         return CampaignPresenter::forAdmin($this);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id'             => $this->id,
+            'slug'           => $this->slug,
+            'canonical_url' => '/initiatives/' . $this->slug,
+            'title'          => $this->title->toArray(),
+            'description'    => $this->description->toArray(),
+            'intro'          => $this->intro->toArray(),
+            'narrative'      => $this->narrative->toArray(),
+            'result' => [
+                'languages' => ['en', 'zh'],
+                'title' => [
+                    'en' => $this->title->in('en'),
+                    'zh' => $this->title->in('zh')
+                ],
+                'description' => [
+                    'en' => $this->description->in('en'),
+                    'zh' => $this->description->in('zh')
+                ]
+            ]
+        ];
     }
 
 

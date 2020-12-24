@@ -15,6 +15,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -22,7 +23,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Event extends Model implements HasMedia, Cardable
 {
-    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, InteractsWithMedia, HasPromoVideo, HasSponsors, HasAttendees;
+    use HasActivities, HasSchedule, HasFees, HasTravelRoutes, HasAccommodation, HasEmbeddedVideos, InteractsWithMedia, HasPromoVideo, HasSponsors, HasAttendees, Searchable;
 
     const TRAVEL_GUIDE_DISK = 'admin_uploads';
     const BANNER_IMAGE = 'banner_image';
@@ -56,6 +57,11 @@ class Event extends Model implements HasMedia, Cardable
     ];
 
     protected $dates = ['start', 'end'];
+
+    public function shouldBeSearchable()
+    {
+        return $this->is_public;
+    }
 
     public static function createWithName($name): Event
     {
@@ -267,5 +273,30 @@ class Event extends Model implements HasMedia, Cardable
     {
         $this->activities()->delete();
         $this->delete();
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'canonical_url' => "/events/{$this->slug}",
+            'location' => $this->location,
+            'venue_name' => $this->venue_name,
+            'overview' => $this->overview->toArray(),
+            'intro' => $this->intro,
+            'result' => [
+                'languages' => ['en', 'zh'],
+                'title' => [
+                    'en' => $this->name['en'] ?? '',
+                    'zh' => $this->name['zh'] ?? ''
+                ],
+                'description' => [
+                    'en' => $this->intro['en'] ?? '',
+                    'zh' => $this->intro['zh'] ?? ''
+                ]
+            ]
+        ];
     }
 }

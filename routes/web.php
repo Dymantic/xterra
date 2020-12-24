@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::group([
     'prefix'     => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect']
@@ -48,6 +50,8 @@ Route::group([
         Route::get('coaches/{coach:slug}/{name?}', 'CoachesController@show');
 
         Route::get('privacy-policy', 'PrivacyPolicyController@show');
+        
+        Route::get('search', 'SearchController@show');
 
 });
 

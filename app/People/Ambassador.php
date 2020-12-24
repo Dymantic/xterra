@@ -6,6 +6,7 @@ use App\HasEmbeddedVideos;
 use App\Translation;
 use App\UniqueKey;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -13,7 +14,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Ambassador extends Model implements HasMedia
 {
-    use IsSociable, HasEmbeddedVideos, InteractsWithMedia, HasProfilePic, AttendsEvents, PresentsAsPerson;
+    use IsSociable, HasEmbeddedVideos, InteractsWithMedia, HasProfilePic, AttendsEvents, PresentsAsPerson, Searchable;
 
     protected $fillable = [
         'name',
@@ -32,6 +33,11 @@ class Ambassador extends Model implements HasMedia
         'philosophy'    => Translation::class,
         'is_public'     => 'boolean',
     ];
+
+    public function shouldBeSearchable()
+    {
+        return $this->is_public;
+    }
 
     public function scopeLive($query)
     {
@@ -87,5 +93,29 @@ class Ambassador extends Model implements HasMedia
     public function presentForAdmin()
     {
         return AmbassadorPresenter::forAdmin($this);
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'id'            => $this->id,
+            'canonical_url' => "/coaches/{$this->slug}",
+            'name'          => $this->name->toArray(),
+            'about'         => $this->about->toArray(),
+            'achievements'  => $this->achievements->toArray(),
+            'collaboration' => $this->collaboration->toArray(),
+            'philosophy'    => $this->philosophy->toArray(),
+            'result' => [
+                'languages' => ['en', 'zh'],
+                'title' => [
+                    'en' => $this->name->in('en'),
+                    'zh' => $this->name->in('zh')
+                ],
+                'description' => [
+                    'en' => $this->philosophy->in('en'),
+                    'zh' => $this->philosophy->in('zh')
+                ]
+            ]
+        ];
     }
 }

@@ -12,9 +12,10 @@
     <div class="flex items-center">
             <div
                 class="nav-drawer fixed lg:static top-16 left-0 w-screen min-h-screen lg:min-h-0 lg:w-auto flex flex-col lg:flex-row items-start lg:items-center bg-grey-700 z-50 pt-6 lg:pt-0">
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
+
+                <a class="order-2 font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/initiatives">{{ trans('navbar.initiatives') }}</a>
-                <div class="mx-4 event-nav lg:h-16 lg:flex lg:items-center">
+                <div class="order-2 mx-4 event-nav lg:h-16 lg:flex lg:items-center">
                     <a class="font-heading font-medium text-2xl lg:text-lg text-white hover:text-red-500 uppercase flex items-center"
                        href="/events">
                         <span>{{ trans('navbar.events') }}</span>
@@ -54,13 +55,13 @@
                     </div>
                 </div>
 
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
+                <a class="order-2 font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="https://shop.xterrataiwan.com/" target="_blank" rel="nofollow">{{ trans('navbar.shop') }}</a>
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
+                <a class="order-2 font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="/blog">{{ trans('navbar.blog') }}</a>
 {{--                @auth--}}
                     @if($discoverPages->count())
-                    <div class="discover-nav lg:flex lg:items-center mx-4 lg:h-16">
+                    <div class="order-2 discover-nav lg:flex lg:items-center mx-4 lg:h-16">
                         <a class="hidden lg:inline font-heading font-medium text-2xl lg:text-lg  text-white hover:text-red-500 uppercase"
                            href="">{{ trans('navbar.discover') }}</a>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -76,10 +77,18 @@
                     @endif
 {{--                @endauth--}}
                 @auth
-                <a class="font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
+                <a class="order-2 font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="{{ localUrl('/friends') }}">{{ trans('navbar.friends') }}</a>
                 @endauth
+                <div class="order-1 lg:order-3 mx-auto pl-4 lg:border-l border-gray-600 mb-6 lg:mb-0">
+                    <form action="/search" class="flex items-end">
+                        <input type="text" name="q" class="bg-transparent border-b border-white text-white focus:outline-none focus:border-red-700 w-64" placeholder="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-current h-5 text-white -ml-2">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
 
+                    </form>
+                </div>
             </div>
         <div class="flex items-center">
             <a class="mx-4 text-white no-underline hover:text-red-500 type-h3" href="{{ transUrl(Request::path()) }}">
