@@ -14,4 +14,5 @@ return [
     'subscribe_retry'           => '請再試一次',
     'email_placeholder'         => '您的 email 信箱',
     'name_placeholder'          => '您的大名',
+    'privacy'                   => '隱私政策',
 ];

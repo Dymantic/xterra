@@ -20,6 +20,8 @@
                    href="{{ localUrl('/blog') }}">{{ trans('navbar.blog') }}</a>
                 {{--                    <a class="type-b3 hover:text-red-700 mx-auto"--}}
                 {{--                       href="{{ localUrl('/friends') }}">{{ trans('navbar.friends') }}</a>--}}
+                <a class="type-b3 hover:text-red-700 mx-auto"
+                   href="{{ localUrl('/privacy-policy') }}">{{ trans('footer.privacy') }}</a>
             </div>
         </div>
         <div class="w-full lg:w-1/3 mb-8 lg:mb-0 order-2 lg:order-3">

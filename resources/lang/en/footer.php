@@ -14,4 +14,5 @@ return [
     'subscribe_retry'           => 'Try again',
     'email_placeholder'         => 'Your email address',
     'name_placeholder'          => 'Your name',
+    'privacy'                   => 'Privacy Policy',
 ];

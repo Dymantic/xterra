@@ -47,6 +47,8 @@ Route::group([
         Route::get('ambassadors/{ambassador:slug}/{name?}', 'AmbassadorsController@show');
         Route::get('coaches/{coach:slug}/{name?}', 'CoachesController@show');
 
+        Route::get('privacy-policy', 'PrivacyPolicyController@show');
+
 });
 
 Route::post('newsletter/subscribe', 'NewsletterSignupController@store');
