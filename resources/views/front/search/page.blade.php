@@ -5,34 +5,41 @@
 @endsection
 
 @section('content')
+
     <div x-data="meilisearch()"
          x-init="() => getIndexes()" class="px-6">
-        <div class="py-20 px-6 flex justify-center items-center">
+        <div class="pt-20 px-6 flex flex-col justify-center items-center">
+
+            <h1 class="type-h1 uppercase text-center mb-8">Search the XTERRA Taiwan website</h1>
 
             <input type="text"
                    x-model="query"
                    @input="search"
-                   placeholder="Search XTTERA Taiwan"
+                   placeholder="Search XTERRA Taiwan"
                    class="border p-2 w-full max-w-md">
         </div>
 
-        <template x-for="section in sections" :key="section.name">
-            <div class="max-w-3xl mx-auto my-12" x-show="results[section.name].length && query.length > 1">
-                <span class="inline-block px-2 py-1 my-2 bg-red-700 text-white text-xs uppercase" x-text="section.label"></span>
-                <template x-for="hit in results[section.name]"
-                          :key="hit.id">
-                    <div class="mb-3">
-                        <p
-                            class="type-h3">
-                            <a :href="hit.link" x-text="hit.title" class="hover:text-red-700"></a>
-                        </p>
-                        <p x-text="hit.description"
-                           class="type-b1"></p>
-                    </div>
+        <div style="min-height: 40vh;">
+            <template x-for="section in sections" :key="section.name">
+                <div class="max-w-3xl mx-auto my-12" x-show="results[section.name].length && query.length > 1">
+                    <span class="inline-block px-2 py-1 my-2 bg-red-700 text-white text-xs uppercase" x-text="section.label"></span>
+                    <template x-for="hit in results[section.name]"
+                              :key="hit.id">
+                        <div class="mb-3">
+                            <p
+                                class="type-h3">
+                                <a :href="hit.link" x-text="hit.title" class="hover:text-red-700"></a>
+                            </p>
+                            <p x-text="hit.description"
+                               class="type-b1"></p>
+                        </div>
 
-                </template>
-            </div>
-        </template>
+                    </template>
+                </div>
+            </template>
+        </div>
+
+
 
 
     </div>
@@ -42,7 +49,7 @@
     <script>
         function meilisearch() {
             return {
-                client: new MeiliSearch({host: 'http://127.0.0.1:7700', apiKey: ''}),
+                client: new MeiliSearch({host: "{{ config('meilisearch.host') }}", apiKey: "{{ config('meilisearch.public_key') }}"}),
                 query: '{{ $query }}',
                 indexes: [],
                 lang: "{{ app()->getLocale() }}",

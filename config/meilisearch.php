@@ -35,4 +35,6 @@ return [
 
     'key' => env('MEILISEARCH_KEY', null),
 
+    'public_key' => env('MEILISEARCH_PUBLIC', null),
+
 ];
