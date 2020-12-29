@@ -25,7 +25,7 @@
                     <span class="inline-block px-2 py-1 my-2 bg-red-700 text-white text-xs uppercase" x-text="section.label"></span>
                     <template x-for="hit in results[section.name]"
                               :key="hit.id">
-                        <div class="mb-3">
+                        <div class="mb-3 pb-3 border-b border-gray-400">
                             <p
                                 class="type-h3">
                                 <a :href="hit.link" x-text="hit.title" class="hover:text-red-700"></a>
