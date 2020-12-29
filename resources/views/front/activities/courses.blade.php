@@ -7,7 +7,7 @@
                 <div class="flex">
                     <p class="font-bold">{{ $course['name'] }}</p>
                     @if($course['gpx_file'])
-                        <a class="ml-3 text-blue-700 hover:underline" download="{{ str_replace(" ", "_", $course['name']) }}_gpx-file" href="{{ $course['gpx_file'] }}">({{ trans('activities.download_gpx') }})</a>
+                        <a class="ml-3 text-blue-700 hover:underline" download="{{ str_replace(" ", "_", $course['name']) }}_gpx-file.gpx" href="{{ $course['gpx_file'] }}">({{ trans('activities.download_gpx') }})</a>
                     @endif
                 </div>
 
