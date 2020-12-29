@@ -38,7 +38,8 @@ class Course extends Model implements HasMedia
     public function setGPXFile(UploadedFile $file)
     {
         $this->clearGPXFile();
-        $path = $file->store('gpx', self::GPX_DISK);
+        $name = sprintf("%s.gpx", $file->hashName());
+        $path = $file->storeAs('gpx', $name, self::GPX_DISK);
 
         $this->gpx_filename = $path;
         $this->gpx_disk = self::GPX_DISK;
