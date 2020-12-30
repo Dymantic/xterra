@@ -10,12 +10,12 @@
          x-init="() => getIndexes()" class="px-6">
         <div class="pt-20 px-6 flex flex-col justify-center items-center">
 
-            <h1 class="type-h1 uppercase text-center mb-8">Search the XTERRA Taiwan website</h1>
+            <h1 class="type-h1 uppercase text-center mb-8">{{ trans('search.search_website') }}</h1>
 
             <input type="text"
                    x-model="query"
                    @input="search"
-                   placeholder="Search XTERRA Taiwan"
+                   placeholder="{{ trans('search.search_xterra') }}"
                    class="border p-2 w-full max-w-md">
         </div>
 

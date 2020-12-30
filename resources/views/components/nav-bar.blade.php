@@ -80,17 +80,15 @@
                 <a class="order-2 font-heading font-medium text-2xl lg:text-lg mx-4 text-white hover:text-red-500 uppercase"
                    href="{{ localUrl('/friends') }}">{{ trans('navbar.friends') }}</a>
                 @endauth
-                @auth
                 <div class="order-1 lg:order-3 mx-auto pl-4 lg:border-l border-gray-600 mb-6 lg:mb-0">
                     <form action="/search" class="flex items-end" autocomplete="off">
-                        <input type="text" name="q" class="bg-transparent border-b border-white text-white focus:outline-none focus:border-red-700 lg:w-24 w-64 order-2" placeholder="Search">
+                        <input type="text" name="q" class="bg-transparent border-b border-white text-white focus:outline-none focus:border-red-700 lg:w-24 w-64 order-2" placeholder="{{ trans('search.search') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="fill-current h-5 text-white mr-1">
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                         </svg>
 
                     </form>
                 </div>
-                @endauth
             </div>
         <div class="flex items-center">
             <a class="mx-4 text-white no-underline hover:text-red-500 type-h3" href="{{ transUrl(Request::path()) }}">
