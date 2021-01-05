@@ -1,7 +1,7 @@
 @extends('front.base', ['all_scripts' => false,])
 
 @section('head')
-    <script src="https://cdn.jsdelivr.net/npm/meilisearch@latest/dist/bundles/meilisearch.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/meilisearch@0.17.0/dist/bundles/meilisearch.umd.min.js"></script>
 @endsection
 
 @section('content')
