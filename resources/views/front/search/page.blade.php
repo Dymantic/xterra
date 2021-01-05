@@ -72,9 +72,14 @@
                         return;
                     }
                     this.indexes.forEach(ind => {
+
                         this.client.getIndex(ind.uid)
-                            .search(this.query)
-                            .then(({hits}) => this.setHits(ind.uid, hits));
+                            .then(search_index => {
+                                search_index.search(this.query)
+                                            .then(({hits}) => this.setHits(ind.uid, hits))
+                                            .catch(() => {});
+                            })
+                            .catch(() => {});
                     })
                 },
                 setHits(index, hits) {
