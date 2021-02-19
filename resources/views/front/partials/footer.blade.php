@@ -99,7 +99,7 @@
     </div>
     <div class="pb-2">
         <p class="text-center type-b3">
-            {{ trans('footer.all_rights') }}. Beautifully Built by <a class="hover:text-red-700"
+            {{ trans('footer.all_rights') }}. Beautifully Built by <a class="hover:text-teal"
                                                                       href="https://dymanticdesign.com">Dymantic
                 Design.</a>
         </p>

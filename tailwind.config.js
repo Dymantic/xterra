@@ -58,6 +58,7 @@ module.exports = {
                 "tinted-dark": "rgba(0,0,0,0.9)",
                 "blue-700": "#20327a",
                 "blue-500": "#285ac8",
+                "teal": "#37edd3",
             },
         },
     },
