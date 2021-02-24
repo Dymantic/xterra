@@ -1,5 +1,5 @@
 <template>
-    <div v-if="race && race.is_race">
+    <div v-if="race">
         <p class="font-bold text-lg mb-6">General Schedule for this event</p>
 
         <schedule-organizer
