@@ -1,5 +1,5 @@
 <template>
-    <div v-if="article">
+    <div v-if="article" :key="$route.fullPath">
         <section class="max-w-4xl mx-auto flex justify-between items-center py-8">
             <h1 class="flex-1 text-5xl font-bold">Article #{{ article.id }}</h1>
             <div class="flex justify-end items-center">
@@ -86,19 +86,18 @@
 
         data() {
             return {
+                article: null,
             };
         },
 
         mounted() {
-            if(!this.article) {
-                this.$store.dispatch('articles/fetchAll');
-            }
+            this.$store.dispatch("articles/fetchById", this.$route.params.id)
+            .then(article => this.article = article)
+            .catch(() => notify.error("Failed to find article"))
         },
 
         computed: {
-            article() {
-                return this.$store.getters['articles/article'](this.$route.params.id);
-            },
+
 
             title_image() {
                 if (!this.article) {

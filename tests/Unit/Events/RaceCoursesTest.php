@@ -52,8 +52,9 @@ class RaceCoursesTest extends TestCase
 
         $course->setGPXFile($file);
 
-        Storage::disk('admin_uploads')->assertExists($file->hashName('gpx'));
-        $this->assertEquals($file->hashName('gpx'), $course->gpx_filename);
+
+        Storage::disk('admin_uploads')->assertExists($file->hashName('gpx') . '.gpx');
+        $this->assertEquals($file->hashName('gpx') . '.gpx', $course->gpx_filename);
         $this->assertEquals('admin_uploads', $course->gpx_disk);
     }
 

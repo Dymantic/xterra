@@ -2,7 +2,7 @@ import {notify} from "../components/Messaging/notify";
 import {sortByStringProp} from "../sorting";
 import {
     addArticleTranslation,
-    createArticle, deleteArticle,
+    createArticle, deleteArticle, fetchArticleById,
     fetchArticles,
     searchArticles,
     setArticleCategories
@@ -17,6 +17,10 @@ export default {
     namespaced: true,
 
     state: {
+
+        page: 1,
+        total_pages: 1,
+        has_next_page: false,
         articles: [],
         categories: [],
         tags: [],
@@ -44,8 +48,23 @@ export default {
     },
 
     mutations: {
-        setArticles(state, articles) {
-            state.articles = articles;
+
+        turnPage: state => {
+            if(state.has_next_page) {
+                state.page = state.page + 1;
+            }
+        },
+
+        turnBackPage: state => {
+            if(state.page > 1) {
+                state.page = state.page - 1;
+            }
+        },
+
+        setArticles(state, page) {
+            state.articles = page.articles;
+            state.total_pages = page.total_pages;
+            state.has_next_page = page.has_more;
         },
 
         setCategories(state, categories) {
@@ -60,10 +79,29 @@ export default {
 
     actions: {
 
-        fetchAll({commit}, page = 1) {
+        fetchAll({commit, state}, page = 1) {
 
-            return fetchArticles(page)
-                .then(articles => commit('setArticles', articles));
+            return fetchArticles(state.page)
+                .then(page => commit('setArticles', page));
+        },
+
+        fetchById({state, dispatch}, id) {
+            const found = state.articles.find(a => a.id === parseInt(id));
+
+            if(found) {
+                return Promise.resolve(found);
+            }
+
+            return new Promise((resolve, reject) => {
+               fetchArticleById(id).then((article) => {
+                   if(article) {
+                       return resolve(article);
+                   }
+                   return reject();
+               })
+                   .catch(() => reject());
+            });
+
         },
 
         fetchCategories({commit}) {

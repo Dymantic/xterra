@@ -3,60 +3,18 @@
         <section class="max-w-4xl mx-auto flex justify-between items-center py-8">
             <h1 class="flex-1 text-5xl font-bold">Articles</h1>
             <div class="flex justify-end items-center">
+                <router-link to="/search-articles" class="mx-4 hover:text-blue-600 font-semibold">Search</router-link>
                 <create-new-article @create-article-error="createArticleError"
                 ></create-new-article>
             </div>
         </section>
-        <div class="flex justify-between">
-            <div class="w-80 px-4 pt-8">
-                <p class="font-bold text-lg uppercase text-gray-600">Filters</p>
-                <div class="my-6">
-                    <p class="font-bold uppercase tracking-wide text-sm mb-2">Status</p>
-                    <div>
-                        <input type="checkbox"
-                               v-model="filters.status.live"
-                               id="live_articles">
-                        <label class="form-label text-sm" for="live_articles">Live</label>
-                    </div>
-                    <div>
-                        <input type="checkbox"
-                               v-model="filters.status.scheduled"
-                               id="scheduled_articles">
-                        <label class="form-label text-sm" for="scheduled_articles">Scheduled</label>
-                    </div>
-                    <div>
-                        <input type="checkbox"
-                               v-model="filters.status.draft"
-                               id="draft_articles">
-                        <label class="form-label text-sm" for="draft_articles">Drafts</label>
-                    </div>
+        <div class="max-w-4xl mx-auto pb-20">
+            <div class="">
+                <div class="flex justify-end px-6">
+                    <button class="mx-4 hover:text-blue-600" :class="{'opacity-50': !hasPreviousPage}" :disabled="!hasPreviousPage" @click="prevPage">&lt;&lt;</button>
+                    <p class="">Page {{ $store.state.articles.page}} of {{ $store.state.articles.total_pages }}</p>
+                    <button class="mx-4 hover:text-blue-600" :class="{'opacity-50': !hasNextPage}" :disabled="!hasNextPage" @click="nextPage">&gt;&gt;</button>
                 </div>
-                <div class="my-8">
-                    <p class="font-bold uppercase tracking-wide text-sm mb-2">Title</p>
-                    <input type="text"
-                           v-model="filters.title"
-                           class="form-input">
-                </div>
-                <div class="my-8">
-                    <p class="font-bold uppercase tracking-wide text-sm mb-2">Author</p>
-                    <input type="text"
-                           v-model="filters.author"
-                           class="form-input">
-                </div>
-                <div class="my-8" v-if="has_category_filters">
-                    <p class="font-bold uppercase tracking-wide text-sm mb-2">Categories</p>
-                    <div v-for="category in categories"
-                         :key="category.id">
-                        <div>
-                            <input v-model="filters.categories[category.id]"
-                                   type="checkbox"
-                                   :id="`category_${category.id}`">
-                            <label class="form-label text-sm" :for="`category_${category.id}`">{{ category.title.en }}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-1">
                 <router-link v-for="article in articles" :key="article.id" :to="`/articles/${article.id}`">
                     <article-index-card :article="article" :filters="filters">
                     </article-index-card>
@@ -99,6 +57,14 @@
                 return this.$store.state.articles.articles.filter(this.categoryFilter);
             },
 
+            hasNextPage() {
+                return this.$store.state.articles.has_next_page;
+            },
+
+            hasPreviousPage() {
+                return this.$store.state.articles.page > 1;
+            },
+
             categories() {
                 return this.$store.state.articles.categories;
             },
@@ -138,6 +104,16 @@
         },
 
         methods: {
+
+            nextPage() {
+                this.$store.commit("articles/turnPage");
+                this.$store.dispatch("articles/fetchAll");
+            },
+
+            prevPage() {
+                this.$store.commit("articles/turnBackPage");
+                this.$store.dispatch("articles/fetchAll");
+            },
 
             setupFilterCategories() {
                 this.filters.categories = this.categories.reduce((acc, cat) => {

@@ -17,7 +17,7 @@ class ArticleSearchController extends Controller
         }
 
         $articles = Article::whereHas('translations', function($query) use ($search) {
-            return $query->where('title', 'LIKE', "%{$search}%");
+            return $query->where('title', 'LIKE', "%{$search}%")->orWhere('author_name', 'LIKE', "%{$search}%");
         })->with('translations', 'categories')->get();
 
         return $articles->map->toArray();

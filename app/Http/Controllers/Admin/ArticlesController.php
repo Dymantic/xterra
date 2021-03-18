@@ -12,10 +12,20 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        return Article::with('categories', 'translations', 'translations.tags')
+        $page = Article::with('categories', 'translations', 'translations.tags')
                       ->latest()
-                      ->get()
-            ->map->toArray();
+                      ->paginate(15);
+
+        return [
+            'articles' => collect($page->items())->map->toArray(),
+            'has_more' => $page->hasMorePages(),
+            'total_pages' => $page->lastPage(),
+        ];
+    }
+
+    public function show(Article $article)
+    {
+        return $article->toArray();
     }
 
     public function store()

@@ -13,10 +13,10 @@
                 :categories="event.categories"
                 colour="text-red-700"
             ></event-category-icons>
-            <div class="w-120 h-60 mt-3 mx-auto">
+            <div class="relative w-full mt-3 mx-auto" style="padding-bottom: 50%;">
                 <img
                     :src="event.banner_image.banner"
-                    class="w-full h-full object-cover"
+                    class="w-full h-full object-cover absolute top-0 left-0"
                     alt=""
                 />
             </div>

@@ -3,7 +3,7 @@
         <page-header title="XTERRA Events">
             <create-event-form></create-event-form>
         </page-header>
-        <div class="flex flex-col items-start">
+        <div class="grid gap-12 grid-cols-2">
             <event-index-card
                 v-for="event in events_list"
                 :key="event.id"

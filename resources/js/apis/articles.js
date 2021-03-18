@@ -1,5 +1,6 @@
 import axios from "axios";
 import {notify} from "../components/Messaging/notify";
+import {get} from "./http";
 
 function fetchArticles(page = 1) {
     return new Promise((resolve, reject) => {
@@ -9,6 +10,14 @@ function fetchArticles(page = 1) {
              })
              .catch(() => reject({message: `Unable to fetch page ${page} of articles`}));
     });
+}
+
+function fetchArticleById(id) {
+    return get(`/admin/articles/${id}`);
+}
+
+function searchTranslations(query) {
+    return get(`/admin/searchtranslations?q=${query}`);
 }
 
 function setArticleCategories(article_id, category_ids) {
@@ -51,4 +60,4 @@ function deleteArticle(id) {
     });
 }
 
-export {fetchArticles, setArticleCategories, createArticle, addArticleTranslation, searchArticles, deleteArticle};
+export {fetchArticles, fetchArticleById, searchTranslations, setArticleCategories, createArticle, addArticleTranslation, searchArticles, deleteArticle};

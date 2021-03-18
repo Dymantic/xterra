@@ -8,10 +8,12 @@ import EditCategory from "../components/Blog/EditCategory";
 import TagsManagerPage from "../components/Blog/TagsManagerPage";
 import TagAndTranslationsPage from "../components/Blog/TagAndTranslationsPage";
 import PruneTagsPage from "../components/Blog/PruneTagsPage";
+import ArticlesSearch from "../components/Blog/ArticlesSearch";
 
 export default [
     {path: '/', redirect: '/articles'},
     {path: '/articles', component: ArtilcesIndex},
+    {path: '/search-articles', component: ArticlesSearch},
     {path: '/articles/:id', component: Article},
     {path: '/translations/:id/edit', component: TranslationEditor},
     {path: '/categories', component: CategoriesIndex},

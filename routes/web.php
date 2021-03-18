@@ -103,6 +103,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth'], 'namespace' => 'Adm
     Route::delete('categories/{category}', 'CategoriesController@destroy');
 
     Route::get('articles', 'ArticlesController@index');
+    Route::get('articles/{article}', 'ArticlesController@show');
     Route::post('articles', 'ArticlesController@store');
     Route::delete('articles/{article}', 'ArticlesController@destroy');
     Route::post('articles/{article}/categories', 'ArticleCategoriesController@update');

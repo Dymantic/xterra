@@ -3,6 +3,7 @@
 namespace App\Blog;
 
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -37,6 +38,12 @@ class Translation extends Model implements HasMedia
     public function shouldBeSearchable()
     {
         return $this->is_published;
+    }
+
+    public function scopeMatchingQuery(Builder $query, $search)
+    {
+        return $query->where('title', 'LIKE', "%{$search}%")
+                     ->orWhere('author_name', 'LIKE', "%{$search}%");
     }
 
     public function getFullSlugAttribute()
@@ -246,17 +253,17 @@ class Translation extends Model implements HasMedia
     public function toSearchableArray()
     {
         return [
-            'id'                        => $this->id,
-            'title'                     => $this->title,
-            'canonical_url'             => "/{$this->language}/blog/{$this->article->slug}",
-            'intro'                     => $this->intro,
-            'description'               => $this->description,
-            'body'                      => $this->body,
-            'author_name'               => $this->author_name,
-            'tags'                      => $this->tags->map->toArray()->all(),
-            'result' => [
-                'languages' => [$this->language],
-                'title' => [
+            'id'            => $this->id,
+            'title'         => $this->title,
+            'canonical_url' => "/{$this->language}/blog/{$this->article->slug}",
+            'intro'         => $this->intro,
+            'description'   => $this->description,
+            'body'          => $this->body,
+            'author_name'   => $this->author_name,
+            'tags'          => $this->tags->map->toArray()->all(),
+            'result'        => [
+                'languages'   => [$this->language],
+                'title'       => [
                     'en' => $this->language === 'en' ? $this->title : '',
                     'zh' => $this->language === 'zh' ? $this->title : ''
                 ],

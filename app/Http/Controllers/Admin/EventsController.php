@@ -11,7 +11,7 @@ class EventsController extends Controller
 
     public function index()
     {
-        return Event::all()->map->presentForAdmin();
+        return Event::latest()->get()->map->presentForAdmin();
     }
 
 
