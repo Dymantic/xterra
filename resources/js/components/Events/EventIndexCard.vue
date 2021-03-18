@@ -14,11 +14,14 @@
                 colour="text-red-700"
             ></event-category-icons>
             <div class="relative w-full mt-3 mx-auto" style="padding-bottom: 50%;">
-                <img
-                    :src="event.banner_image.banner"
-                    class="w-full h-full object-cover absolute top-0 left-0"
-                    alt=""
-                />
+                <router-link :to="`/events/${event.id}`">
+                    <img
+                        :src="event.banner_image.banner"
+                        class="w-full h-full object-cover absolute top-0 left-0"
+                        alt=""
+                    />
+                </router-link>
+
             </div>
         </div>
     </div>

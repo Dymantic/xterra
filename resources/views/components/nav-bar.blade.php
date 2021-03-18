@@ -34,7 +34,10 @@
                                     class="lg:text-center px-2 lg:px-12 mt-4 mr-6 lg:mr-0 lg:ml-0 @if(!$loop->last) lg:border-r-2 border-gray-700 @endif">
                                     <p class="font-medium font-heading text-lg lg:text-2xl uppercase border-b-2 border-red-700 pr-6 lg:pl-3">
                                         <a class="hover:text-red-700"
-                                           href="{{ $event['full_slug'] }}">{{ $event['name'] }}</a>
+                                           href="{{ $event['full_slug'] }}">
+                                            <span>{{ $event['name'] }}</span>
+                                            <span class="text-gray-600 ml-3">  [{{ $event['start'] }}]</span>
+                                        </a>
 
                                     </p>
                                     <div class="lg:pr-6 lg:pl-3">
