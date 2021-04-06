@@ -52,6 +52,7 @@
         })(window, document, 'script', 'dataLayer', 'GTM-W7XMWRB');</script>
 
     <!-- End Google Tag Manager -->
+	<meta name="facebook-domain-verification" content="wuogzyf1ragwti7erwo5h9rgtn96vv" />
 
 </head>
 
