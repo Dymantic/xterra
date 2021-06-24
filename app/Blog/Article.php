@@ -22,6 +22,8 @@ class Article extends Model implements HasMedia, Cardable
 
     const TITLE_IMAGES = 'title_images';
 
+    protected $fillable =['preview_key'];
+
     public function sluggable(): array
     {
         return [
@@ -38,7 +40,7 @@ class Article extends Model implements HasMedia, Cardable
 
     public static function makeWithTranslation($lang, $title, $author)
     {
-        $article = static::create();
+        $article = static::create(['preview_key' => Str::uuid()->toString()]);
 
         $article->addTranslation($lang, $title, $author);
 

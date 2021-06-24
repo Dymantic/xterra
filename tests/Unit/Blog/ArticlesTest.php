@@ -9,6 +9,7 @@ use App\Blog\Translation;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class ArticlesTest extends TestCase
@@ -38,7 +39,7 @@ class ArticlesTest extends TestCase
     /**
      *@test
      */
-    public function articles_mage_on_same_day_have_unique_slugs()
+    public function articles_made_on_same_day_have_unique_slugs()
     {
         $author = factory(User::class)->create(['name' => 'test author']);
         $articleA = Article::makeWithTranslation('en', 'one title', $author);
@@ -71,5 +72,16 @@ class ArticlesTest extends TestCase
         $this->assertEquals(collect(['en']), $en_only->liveTranslations());
         $this->assertEquals(collect(['zh']), $zh_only->liveTranslations());
         $this->assertEquals(collect([]), $none->liveTranslations());
+    }
+
+    /**
+     *@test
+     */
+    public function a_new_article_will_have_a_uuid_as_a_preview_key()
+    {
+        $author = factory(User::class)->create(['name' => 'test author']);
+        $article = Article::makeWithTranslation('en', 'one title', $author);
+
+        $this->assertTrue(Str::isUuid($article->fresh()->preview_key));
     }
 }

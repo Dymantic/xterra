@@ -224,6 +224,7 @@ class Translation extends Model implements HasMedia
         return [
             'id'                        => $this->id,
             'article_id'                => $this->article_id,
+            'article_preview_key'       => $this->article->preview_key,
             'language'                  => $this->language,
             'title'                     => $this->title,
             'slug'                      => $this->slug,

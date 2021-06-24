@@ -53,6 +53,9 @@ Route::group([
 
         Route::get('search', 'SearchController@show');
 
+
+        Route::get('public-preview/{article:preview_key}/{translation}', 'ArticlePreviewController@show');
+
 });
 
 Route::post('newsletter/subscribe', 'NewsletterSignupController@store');
