@@ -1,7 +1,7 @@
 <footer class="bg-grey-700 text-white">
     <div class="py-12">
         <a href="{{ localUrl("/") }}">
-            <img src="/images/logos/nav_logo.svg" alt="XTERRA Taiwan logo" class="w-48 mx-auto" width="300px"
+            <img src="/images/official_nav_logo.png" alt="XTERRA Taiwan logo" class="w-48 mx-auto" width="300px"
                  height="71px">
         </a>
 
