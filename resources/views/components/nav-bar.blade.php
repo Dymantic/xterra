@@ -4,8 +4,7 @@
      :class="{'open': show}">
     <div class="flex items-center">
         <a href="{{ localUrl("/") }}">
-            <img src="/images/official_nav_logo.png"
-                 alt="Xterra Logo" class="h-8">
+            @include('svg.xterra_wordmark', ['classes' => 'text-white h-4 hover:text-red-700'])
         </a>
     </div>
 

@@ -1,8 +1,7 @@
 <footer class="bg-grey-700 text-white">
-    <div class="py-12">
+    <div class="py-12 flex justify-center">
         <a href="{{ localUrl("/") }}">
-            <img src="/images/official_nav_logo.png" alt="XTERRA Taiwan logo" class="w-48 mx-auto" width="300px"
-                 height="71px">
+            @include('svg.xterra_wordmark', ['classes' => 'text-white h-4 hover:text-red-700'])
         </a>
 
     </div>
