@@ -179,6 +179,7 @@ import DeleteEvent from "./DeleteEvent";
 import TextareaField from "../Forms/TextareaField";
 import { clearValidationErrors, setValidationErrors } from "../../lib/forms";
 import { notify } from "../Messaging/notify";
+import {toStandardDateString} from "../../lib/dates";
 export default {
     components: {
         InputField,
@@ -200,8 +201,8 @@ export default {
                 venue_address: { en: "", zh: "" },
                 venue_maplink: "",
                 registration_link: "",
-                start: new Date(),
-                end: new Date(),
+                start: toStandardDateString(new Date()),
+                end: toStandardDateString(new Date()),
             },
             formErrors: {
                 "name.en": "",
@@ -249,8 +250,8 @@ export default {
                 },
                 venue_maplink: event.venue_maplink,
                 registration_link: event.registration_link,
-                start: event.start ? new Date(event.start) : new Date(),
-                end: event.end ? new Date(event.end) : new Date(),
+                start: toStandardDateString(event.start ? new Date(event.start) : new Date()),
+                end: toStandardDateString(event.end ? new Date(event.end) : new Date()),
             };
             this.ready = true;
         },

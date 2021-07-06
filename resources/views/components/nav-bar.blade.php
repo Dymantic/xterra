@@ -36,7 +36,7 @@
                                         <a class="hover:text-red-700"
                                            href="{{ $event['full_slug'] }}">
                                             <span>{{ $event['name'] }}</span>
-                                            <span class="text-gray-600 ml-3">  [{{ $event['start'] }}]</span>
+                                            <span class="text-gray-600 ml-3">  [{{ $event['dates'] }}]</span>
                                         </a>
 
                                     </p>

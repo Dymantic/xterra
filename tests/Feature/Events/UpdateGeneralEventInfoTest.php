@@ -89,6 +89,42 @@ class UpdateGeneralEventInfoTest extends TestCase
     /**
      *@test
      */
+    public function the_start_and_end_dates_can_be_the_same()
+    {
+        $this->withoutExceptionHandling();
+
+        $event = factory(Event::class)->state('empty')->create();
+
+        $info = [
+            'name' => ['en' => 'new test name', 'zh' => 'new zh test name'],
+            'location' => ['en' => 'test location', 'zh' => 'zh test location'],
+            'venue_name' => ['en' => 'test venue_name', 'zh' => 'zh test venue_name'],
+            'venue_address' => ['en' => 'test venue_address', 'zh' => 'zh test venue_address'],
+            'venue_maplink' => 'https://test.test/map',
+            'start' => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
+            'end' => Carbon::today()->addMonth()->format(DatePresenter::STANDARD),
+            'registration_link' => 'https://test.test/registration',
+        ];
+
+        $response = $this->asAdmin()->postJson("/admin/events/{$event->id}/general-info", $info);
+        $response->assertSuccessful();
+
+        $this->assertDatabaseHas('events', [
+            'id' => $event->id,
+            'name' => json_encode(['en' => 'new test name', 'zh' => 'new zh test name']),
+            'location' => json_encode(['en' => 'test location', 'zh' => 'zh test location']),
+            'venue_name' => json_encode(['en' => 'test venue_name', 'zh' => 'zh test venue_name']),
+            'venue_address' => json_encode(['en' => 'test venue_address', 'zh' => 'zh test venue_address']),
+            'venue_maplink' => 'https://test.test/map',
+            'start' => Carbon::today()->addMonth()->startOfDay(),
+            'end' => Carbon::today()->addMonth()->endOfDay(),
+            'registration_link' => 'https://test.test/registration',
+        ]);
+    }
+
+    /**
+     *@test
+     */
     public function the_en_name_is_required_without_zh_name()
     {
         $this->assertFieldIsInvalid(['name' => ['en' => '', 'zh' => '']], 'name.en');
