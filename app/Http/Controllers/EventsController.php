@@ -26,6 +26,9 @@ class EventsController extends Controller
 
     public function show(Event $event)
     {
+        if(!$event->is_public) {
+            abort(404);
+        }
         return view('front.events.show', ['event' => EventPresenter::forPublic($event, app()->getLocale())]);
     }
 }
