@@ -43,5 +43,5 @@ return [
      * You may set an email address below if you wish to be notified of errors when
      * attempting to refresh the Instagram feed.
      */
-    'notify_on_error' => null,
+    'notify_on_error' => 'michael@dymanticdesign.com',
 ];
