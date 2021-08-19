@@ -176,9 +176,10 @@ class TranslationsTest extends TestCase
                 'thumb'  => $article->titleImage('thumb'),
                 'web'    => $article->titleImage('web'),
                 'banner' => $article->titleImage('banner'),
-                'share' => $article->titleImage('share'),
+                'share'  => $article->titleImage('share'),
             ],
             'categories'                => $article->categories->map->toArray()->all(),
+            'article_preview_key'       => null,
 
         ];
 
