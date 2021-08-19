@@ -207,6 +207,7 @@ import SubmitButton from "../Forms/SubmitButton";
 import DateField from "../Forms/DateField";
 import { clearValidationErrors, setValidationErrors } from "../../lib/forms";
 import { notify } from "../Messaging/notify";
+import {toStandardDateString} from "../../lib/dates";
 
 export default {
     components: {
@@ -231,7 +232,7 @@ export default {
                 venue_address: { en: "", zh: "" },
                 map_link: "",
                 registration_link: "",
-                date: new Date(),
+                date: toStandardDateString(new Date()),
                 category: "",
                 race_activity: "",
             },
@@ -285,9 +286,9 @@ export default {
                     en: this.activity.venue_address.en,
                     zh: this.activity.venue_address.zh,
                 },
-                date: this.activity.date
+                date: toStandardDateString(this.activity.date
                     ? new Date(this.activity.date)
-                    : new Date(),
+                    : new Date()),
                 map_link: this.activity.map_link,
                 registration_link: this.activity.registration_link,
                 category: this.activity.category,
