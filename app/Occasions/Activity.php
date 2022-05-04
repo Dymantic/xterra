@@ -126,7 +126,7 @@ class Activity extends Model implements HasMedia
 
     public function clearRulesAndInfoDoc()
     {
-        if (Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
+        if ($this->race_rules_doc && Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
             Storage::disk($this->race_rules_disk)->delete($this->race_rules_doc);
         }
 
@@ -137,7 +137,7 @@ class Activity extends Model implements HasMedia
 
     public function clearChineseRulesAndInfoDoc()
     {
-        if (Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
+        if ($this->zh_race_rules_doc && Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
             Storage::disk($this->zh_race_rules_disk)->delete($this->zh_race_rules_doc);
         }
 
@@ -148,7 +148,7 @@ class Activity extends Model implements HasMedia
 
     public function rulesAndInfoDoc()
     {
-        if (Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
+        if ($this->race_rules_doc && Storage::disk($this->race_rules_disk)->exists($this->race_rules_doc)) {
             return sprintf("/%s/%s", $this->race_rules_disk, $this->race_rules_doc);
         }
 
@@ -157,7 +157,7 @@ class Activity extends Model implements HasMedia
 
     public function chineseRulesAndInfoDoc()
     {
-        if (Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
+        if ($this->zh_race_rules_doc && Storage::disk($this->zh_race_rules_disk)->exists($this->zh_race_rules_doc)) {
             return sprintf("/%s/%s", $this->zh_race_rules_disk, $this->zh_race_rules_doc);
         }
 
@@ -184,7 +184,7 @@ class Activity extends Model implements HasMedia
 
     public function clearAthleteGuide()
     {
-        if (Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
+        if ($this->athlete_guide && Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
             Storage::disk($this->athlete_guide_disk)->delete($this->athlete_guide);
         }
 
@@ -195,7 +195,7 @@ class Activity extends Model implements HasMedia
 
     public function clearChineseAthleteGuide()
     {
-        if (Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
+        if ($this->zh_athlete_guide && Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
             Storage::disk($this->zh_athlete_guide_disk)->delete($this->zh_athlete_guide);
         }
 
@@ -206,7 +206,7 @@ class Activity extends Model implements HasMedia
 
     public function athletesGuide()
     {
-        if (Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
+        if ($this->athlete_guide && Storage::disk($this->athlete_guide_disk)->exists($this->athlete_guide)) {
             return sprintf("/%s/%s", $this->athlete_guide_disk, $this->athlete_guide);
         }
 
@@ -215,7 +215,7 @@ class Activity extends Model implements HasMedia
 
     public function chineseAthleteGuide()
     {
-        if (Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
+        if ($this->zh_athlete_guide && Storage::disk($this->zh_athlete_guide_disk)->exists($this->zh_athlete_guide)) {
             return sprintf("/%s/%s", $this->zh_athlete_guide_disk, $this->zh_athlete_guide);
         }
 

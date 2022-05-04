@@ -48,7 +48,7 @@ class Course extends Model implements HasMedia
 
     public function clearGPXFile()
     {
-        if(Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
+        if($this->gpx_filename && Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
             Storage::disk($this->gpx_disk)->delete($this->gpx_filename);
         }
 
@@ -59,7 +59,7 @@ class Course extends Model implements HasMedia
 
     public function getGPXFileUrl(): string
     {
-        if(Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
+        if($this->gpx_filename && Storage::disk($this->gpx_disk)->exists($this->gpx_filename)) {
             return sprintf("/%s/%s", $this->gpx_disk, $this->gpx_filename);
         }
 

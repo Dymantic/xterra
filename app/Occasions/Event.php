@@ -127,7 +127,7 @@ class Event extends Model implements HasMedia, Cardable
 
     public function clearTravelGuide()
     {
-        if (Storage::disk($this->travel_guide_disk)->exists($this->travel_guide)) {
+        if ($this->travel_guide && Storage::disk($this->travel_guide_disk)->exists($this->travel_guide)) {
             Storage::disk($this->travel_guide_disk)->delete($this->travel_guide);
         }
 
@@ -138,7 +138,7 @@ class Event extends Model implements HasMedia, Cardable
 
     public function getTravelGuideUrl(): string
     {
-        if (Storage::disk($this->travel_guide_disk)->exists($this->travel_guide)) {
+        if ($this->travel_guide && Storage::disk($this->travel_guide_disk)->exists($this->travel_guide)) {
             return sprintf("/%s/%s", $this->travel_guide_disk, $this->travel_guide);
         }
 
