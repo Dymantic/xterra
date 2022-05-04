@@ -45,6 +45,10 @@
         <p class="my-6">When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
         <p class="my-6">We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.</p>
 
+        <p class="type-h3 mt-2 mb-6">Data Deletion</p>
+        <p class="my-6">Users may request their data to be fully deleted from the system. To request data deletion, please email <a href="mailto:info@xterrataiwan.com">info@xterrataiwan.com</a></p>
+
+
         <p class="type-h3 mt-2 mb-6">Tracking Technologies and Cookies</p>
         <p class="my-6">We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
         <ul class="list-disc pl-8">
