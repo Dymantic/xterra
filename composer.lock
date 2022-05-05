@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c876c00739ad2e20eb4703d8fc6b2709",
+    "content-hash": "85c67eaf777f194302171fe31998c024",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.222.4",
+            "version": "3.222.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a6ea9c9a93b35de272286f1de470eea637109415"
+                "reference": "26596820b043db985bf7c9deb98aa2234f6054cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a6ea9c9a93b35de272286f1de470eea637109415",
-                "reference": "a6ea9c9a93b35de272286f1de470eea637109415",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/26596820b043db985bf7c9deb98aa2234f6054cb",
+                "reference": "26596820b043db985bf7c9deb98aa2234f6054cb",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.222.5"
             },
-            "time": "2022-05-03T21:08:50+00:00"
+            "time": "2022-05-04T20:25:34+00:00"
         },
         {
             "name": "brick/math",
@@ -2992,35 +2992,30 @@
         },
         {
             "name": "meilisearch/meilisearch-php",
-            "version": "v0.23.1",
+            "version": "v0.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/meilisearch/meilisearch-php.git",
-                "reference": "dcd198b5f2c5e58306ba062b0e05f280bf015edd"
+                "reference": "a200a32093ae44c04523f6fd014ec888707ceb9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/dcd198b5f2c5e58306ba062b0e05f280bf015edd",
-                "reference": "dcd198b5f2c5e58306ba062b0e05f280bf015edd",
+                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/a200a32093ae44c04523f6fd014ec888707ceb9e",
+                "reference": "a200a32093ae44c04523f6fd014ec888707ceb9e",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "^7.4 || ^8.0",
+                "php": ">=7.2",
                 "php-http/client-common": "^2.0",
                 "php-http/discovery": "^1.7",
                 "php-http/httplug": "^2.1"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.0",
+                "friendsofphp/php-cs-fixer": "^2.16",
                 "guzzlehttp/guzzle": "^7.1",
                 "http-interop/http-factory-guzzle": "^1.0",
-                "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "^1.4",
-                "phpstan/phpstan-deprecation-rules": "^1.0",
-                "phpstan/phpstan-phpunit": "^1.0",
-                "phpstan/phpstan-strict-rules": "^1.1",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^8.5 || ^9.0"
             },
             "suggest": {
                 "guzzlehttp/guzzle": "Use Guzzle ^7 as HTTP client",
@@ -3042,7 +3037,7 @@
                     "email": "clementine@meilisearch.com"
                 }
             ],
-            "description": "PHP wrapper for the Meilisearch API",
+            "description": "PHP wrapper for the MeiliSearch API",
             "keywords": [
                 "api",
                 "client",
@@ -3053,9 +3048,9 @@
             ],
             "support": {
                 "issues": "https://github.com/meilisearch/meilisearch-php/issues",
-                "source": "https://github.com/meilisearch/meilisearch-php/tree/v0.23.1"
+                "source": "https://github.com/meilisearch/meilisearch-php/tree/v0.17.2"
             },
-            "time": "2022-03-17T08:16:55+00:00"
+            "time": "2021-04-26T18:31:30+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -4450,16 +4445,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.2",
+            "version": "v0.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "7f7da640d68b9c9fec819caae7c744a213df6514"
+                "reference": "6833626ee48ef9bcc8aca8f9f166760441c12573"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/7f7da640d68b9c9fec819caae7c744a213df6514",
-                "reference": "7f7da640d68b9c9fec819caae7c744a213df6514",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/6833626ee48ef9bcc8aca8f9f166760441c12573",
+                "reference": "6833626ee48ef9bcc8aca8f9f166760441c12573",
                 "shasum": ""
             },
             "require": {
@@ -4474,15 +4469,13 @@
                 "symfony/console": "4.4.37 || 5.3.14 || 5.3.15 || 5.4.3 || 5.4.4 || 6.0.3 || 6.0.4"
             },
             "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.2",
-                "hoa/console": "3.17.05.02"
+                "bamarni/composer-bin-plugin": "^1.2"
             },
             "suggest": {
                 "ext-pcntl": "Enabling the PCNTL extension makes PsySH a lot happier :)",
                 "ext-pdo-sqlite": "The doc command requires SQLite to work.",
                 "ext-posix": "If you have PCNTL, you'll want the POSIX extension as well.",
-                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history.",
-                "hoa/console": "A pure PHP readline implementation. You'll want this if your PHP install doesn't already support readline or libedit."
+                "ext-readline": "Enables support for arrow-key history navigation, and showing and manipulating command history."
             },
             "bin": [
                 "bin/psysh"
@@ -4522,9 +4515,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.2"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.3"
             },
-            "time": "2022-02-28T15:28:54+00:00"
+            "time": "2022-05-05T02:19:43+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
