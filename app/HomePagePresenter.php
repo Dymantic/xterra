@@ -9,6 +9,7 @@ use App\Media\ContentCard;
 use App\Occasions\Event;
 use App\Occasions\EventPresenter;
 use App\Shop\Promotion;
+use Dymantic\InstagramFeed\InstagramFeed;
 use Dymantic\InstagramFeed\Profile;
 
 class HomePagePresenter
@@ -20,7 +21,8 @@ class HomePagePresenter
         $promotion = $homePage->promotion;
         $promo_image = optional($promotion)->getFirstMedia(Promotion::IMAGE);
         $campaign = $homePage->campaign;
-        $ig_profile = Profile::where('username', 'xterra')->first();
+//        $ig_profile = InstagramFeed::for('xterra')->collect()->map->toArray();
+        $ig_profile = [];
 
         return [
             'banner_lg'     => $banner['full'],
@@ -50,7 +52,7 @@ class HomePagePresenter
                 'posts' => app('live-posts')->for(app()->getLocale())->getPage(1, 6)['posts'],
             ],
             'instagram'     => [
-                'posts' => optional($ig_profile)->feed() ? $ig_profile->feed()->values()->all() : [],
+                'posts' => $ig_profile,
             ],
             'banner_video' => $homePage->bannerVideoUrl(),
             'promo_video_id' => optional($homePage->promoVideo)->getVideoId(),

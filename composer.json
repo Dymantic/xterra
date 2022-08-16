@@ -8,10 +8,10 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "cviebrock/eloquent-sluggable": "^9.0",
         "doctrine/dbal": "^2.11",
-        "dymantic/laravel-instagram-feed": "^2.4",
+        "dymantic/laravel-instagram-feed": "^3.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^9.0",
