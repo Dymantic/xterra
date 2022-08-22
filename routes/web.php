@@ -18,7 +18,7 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect']
     ],
     function () {
-
+        Route::redirect('events/kaf5/xterra-taiwan-2023', 'https://xterraplanet.com/event/xterra-taiwan');
 
         Route::get('/blog', 'PagesController@home');
 
